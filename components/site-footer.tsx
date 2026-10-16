@@ -1,73 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import { WhatsAppButton } from "@/components/cta";
-import { products, solutionItems } from "@/lib/nav";
-import { site } from "@/lib/site";
-
-// harvey.ai footer: one serif line and a button, then link columns whose
-// arrow slides in on hover.
+// exa.ai-style footer: the words rise in when it scrolls into view (Reveal adds .in).
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <div className="wrap">
-        <div className="f-cta">
-          <p>Speak to a Chartered Accountant</p>
-          <WhatsAppButton text="Hello Blaze Global, I would like to speak to an accountant." />
-        </div>
-        <div className="f-cols">
-          <div className="f-brand">
-            <Image src="/brand/blaze-global-wordmark-gold-1200.png" alt="Blaze Global" width={1200} height={100} />
-            <address>
-              14 Robinson Road, #08-01A
-              <br />
-              Far East Finance Building
-              <br />
-              Singapore {site.address.postalCode}
-              <br />
-              <a href={site.phoneHref}>{site.phone}</a>
-              <br />
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </address>
-          </div>
-          <div className="f-col">
-            <h4>Products</h4>
-            <ul>
-              {products.map((g) => (
-                <li key={g.name}><Link href={g.href}>{g.name}</Link></li>
-              ))}
-            </ul>
-          </div>
-          <div className="f-col">
-            <h4>Solutions</h4>
-            <ul>
-              {solutionItems.map((s) => (
-                <li key={s.name}><Link href={s.href}>{s.name}</Link></li>
-              ))}
-            </ul>
-          </div>
-          <div className="f-col">
-            <h4>Company</h4>
-            <ul>
-              <li><Link href="/about-us">About</Link></li>
-              <li><Link href="/#team">Our team</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </div>
-          <div className="f-col">
-            <h4>Follow</h4>
-            <ul>
-              <li><a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="f-base">
-          <span>Copyright © {new Date().getFullYear()} {site.legalName} All rights reserved.</span>
-          <span>UEN {site.uen} · ACRA Registered Filing Agent {site.filingAgent}</span>
-        </div>
-      </div>
-    </footer>
+<footer className="site-footer xf">
+  <div className="wrap">
+    <p className="xf-co">Blaze Global Pte. Ltd.</p>
+    <p className="xf-st"><span className="fw" style={{"--i": "0"}}>Accounting</span> <span className="fw" style={{"--i": "1"}}>and</span> <span className="fw" style={{"--i": "2"}}>company</span> <span className="fw" style={{"--i": "3"}}>secretarial</span> <span className="fw" style={{"--i": "4"}}>in</span> <span className="fw" style={{"--i": "5"}}>Singapore</span></p>
+  </div>
+  <div className="xf-rule"></div>
+  <div className="wrap">
+    <div className="xf-cols"><div className="xf-col" style={{"--i": "0"}}><h4>Products</h4><ul><li><Link href="/services/accounting">Accounting</Link></li><li><Link href="/services/corporate-secretarial">Corporate Secretarial</Link></li></ul></div><div className="xf-col" style={{"--i": "1"}}><h4>Solutions</h4><ul><li><Link href="/start-a-business-in-singapore">Start a business</Link></li><li><Link href="/solutions/startups">Start-ups</Link></li><li><Link href="/solutions/smes">SMEs</Link></li><li><Link href="/solutions/large-companies">Large companies</Link></li><li><Link href="/compliance-deadline-calculator">Compliance deadline calculator</Link></li></ul></div><div className="xf-col" style={{"--i": "2"}}><h4>Company</h4><ul><li><Link href="/about-us">About</Link></li><li><Link href="/about-us#team">The team</Link></li><li><Link href="/#credentials">Credentials</Link></li><li><Link href="/blog">Blog</Link></li></ul></div><div className="xf-col" style={{"--i": "3"}}><h4>Connect</h4><ul><li><a href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20speak%20to%20an%20accountant." target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:contact@blazeglobal.com.sg">Email</a></li><li><a href="tel:+6598199108">+65 9819 9108</a></li><li><a href="https://www.linkedin.com/company/blaze-global-pte-ltd/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div></div>
+    <div className="xf-base"><span>© 2026 Blaze Global Pte. Ltd.</span><span>UEN 202011886G</span><span>ACRA Registered Filing Agent FA20210247</span><span>14 Robinson Road, #08-01A, Singapore 048545</span></div>
+  </div>
+</footer>
   );
 }

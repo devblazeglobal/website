@@ -1,6 +1,5 @@
 import type { Post } from "@/lib/blog";
-import type { Service } from "@/lib/services";
-import { services } from "@/lib/services";
+import { allServices, type Entry } from "@/lib/catalog";
 import { site } from "@/lib/site";
 
 // JSON-LD builders. The Wix site declared only "WebSite"; these give Google
@@ -17,8 +16,8 @@ export function organizationSchema() {
     name: site.name,
     legalName: site.legalName,
     url: site.url,
-    logo: `${site.url}/brand/blaze-global-logo.png`,
-    image: `${site.url}/brand/blaze-global-logo.png`,
+    logo: `${site.url}/brand/blaze-global-wordmark-navy-1200.png`,
+    image: `${site.url}/brand/blaze-global-wordmark-navy-1200.png`,
     telephone: site.phone,
     email: site.email,
     taxID: site.uen,
@@ -37,13 +36,13 @@ export function organizationSchema() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services",
-      itemListElement: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name, url: `${site.url}${s.path}` } })),
+      itemListElement: allServices.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name, url: `${site.url}${s.path}` } })),
     },
     sameAs: Object.values(site.social),
   };
 }
 
-export function serviceSchema(service: Service) {
+export function serviceSchema(service: Entry) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",

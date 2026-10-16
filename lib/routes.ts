@@ -1,6 +1,5 @@
 import { getPosts } from "@/lib/blog";
-import { services } from "@/lib/services";
-import { solutions } from "@/lib/solutions";
+import { accountingPages, guides, mainPages, solutionPages } from "@/lib/catalog";
 
 // Every public URL, in one list. The sitemap is generated from it, and
 // scripts/check-seo-baseline.mjs fails if any URL the Wix site had
@@ -16,12 +15,15 @@ export interface PublicRoute {
 }
 
 export function publicRoutes(): PublicRoute[] {
+  const m = (path: string, priority: number, legacy = false): PublicRoute => ({ path, changeFrequency: "monthly", priority, legacy });
   return [
-    { path: "/", changeFrequency: "monthly", priority: 1, legacy: true },
+    m("/", 1, true),
     { path: "/about-us", changeFrequency: "yearly", priority: 0.7, legacy: true },
-    { path: "/services", changeFrequency: "monthly", priority: 0.9, legacy: true },
-    ...services.map((s) => ({ path: s.path, changeFrequency: "monthly" as const, priority: 0.9, legacy: false })),
-    ...solutions.map((s) => ({ path: s.path, changeFrequency: "monthly" as const, priority: 0.8, legacy: false })),
+    m("/services", 0.9, true),
+    ...mainPages.map((p) => m(p.path, 0.9)),
+    ...accountingPages.map((p) => m(p.path, 0.8)),
+    ...solutionPages.map((p) => m(p.path, 0.8)),
+    ...guides.map((p) => m(p.path, 0.9)),
     { path: "/blog", changeFrequency: "weekly", priority: 0.6, legacy: true },
     ...getPosts().map((p) => ({ path: p.path, changeFrequency: "yearly" as const, priority: 0.5, legacy: true })),
     { path: "/contact", changeFrequency: "yearly", priority: 0.7, legacy: false },

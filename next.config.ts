@@ -21,7 +21,9 @@ const nextConfig: NextConfig = {
       { source: "/post-1", destination: "/blog", permanent: true },
       { source: "/search", destination: "/blog", permanent: true },
       { source: "/testimonials", destination: "/#reviews", permanent: true },
-      { source: "/solutions", destination: "/#solutions", permanent: false },
+      { source: "/solutions", destination: "/services", permanent: false },
+      { source: "/services/business-advisory", destination: "/services/accounting/tax-advisory", permanent: true },
+      { source: "/financial-compliance-calendar", destination: "/compliance-deadline-calculator", permanent: true },
     ];
   },
   async headers() {

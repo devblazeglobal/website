@@ -1,6 +1,6 @@
-import { ContactBlock } from "@/components/contact-block";
-import { PageHeader, Section } from "@/components/page-blocks";
+import { Credentials, Help, PageHero } from "@/components/ui";
 import { pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const metadata = pageMetadata({
   path: "/contact",
@@ -9,12 +9,20 @@ export const metadata = pageMetadata({
 });
 
 export default function ContactPage() {
+  const wa = "Hello Blaze Global, I would like to find out more about your services.";
   return (
-    <>
-      <PageHeader crumbs={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]} title="Contact us" />
-      <Section>
-        <ContactBlock />
-      </Section>
-    </>
+    <main className="view" id="view-company">
+      <PageHero h1="Contact Blaze Global" lede="WhatsApp is fastest. Phone, Telegram and email reach the same team." wa={wa} trust={false} />
+      <section className="contact-facts"><div className="wide">
+        <dl className="cf-grid">
+          <div><dt>WhatsApp and phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div>
+          <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          <div><dt>Office</dt><dd>{site.address.display}</dd></div>
+          <div><dt>Company</dt><dd>{site.legalName} · UEN {site.uen}</dd></div>
+        </dl>
+      </div></section>
+      <Help wa={wa} chat={["Can we meet at your office?", "Yes. Tell us a time that suits you and we will confirm."]} />
+      <Credentials />
+    </main>
   );
 }

@@ -1,7 +1,6 @@
 import { getPosts } from "@/lib/blog";
-import { services } from "@/lib/services";
+import { accountingPages, guides, mainPages, solutionPages } from "@/lib/catalog";
 import { site } from "@/lib/site";
-import { solutions } from "@/lib/solutions";
 
 // Plain-text facts for AI assistants, from the same sources as the pages.
 export const dynamic = "force-static";
@@ -10,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     "",
-    `> ${site.legalName} is a Singapore firm providing accounting, business advisory and corporate secretarial services.`,
+    `> ${site.legalName} is a Singapore firm providing accounting and corporate secretarial services.`,
     "",
     `- UEN: ${site.uen}`,
     `- ACRA Registered Filing Agent: ${site.filingAgent}`,
@@ -19,10 +18,13 @@ export function GET() {
     `- Email: ${site.email}`,
     "",
     "## Services",
-    ...services.map((s) => `- [${s.name}](${site.url}${s.path}): ${s.description}`),
+    ...[...mainPages, ...accountingPages].map((s) => `- [${s.name}](${site.url}${s.path}): ${s.description}`),
+    "",
+    "## Guides and tools",
+    ...guides.map((s) => `- [${s.name}](${site.url}${s.path}): ${s.description}`),
     "",
     "## By company size",
-    ...solutions.map((s) => `- [${s.name}](${site.url}${s.path}): ${s.description}`),
+    ...solutionPages.map((s) => `- [${s.name}](${site.url}${s.path}): ${s.description}`),
     "",
     "## Articles",
     ...getPosts().map((p) => `- [${p.title}](${site.url}${p.path})`),

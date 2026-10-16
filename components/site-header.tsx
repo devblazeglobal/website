@@ -5,131 +5,106 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { WhatsAppButton } from "@/components/cta";
-import { Chevron } from "@/components/icons";
-import { type NavItem, products, solutionItems } from "@/lib/nav";
+// Navy bar that follows the scroll. Products and Solutions open a panel
+// over the page: hover on desktop, click anywhere. The burger opens the
+// mobile menu. Markup ported from the approved mock-up (scripts/port).
 
 type Menu = "products" | "solutions" | null;
 
-function Item({ item }: { item: NavItem }) {
-  return (
-    <li>
-      <Link className="item" href={item.href}>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d={item.icon} />
-        </svg>
-        <div>
-          <b>{item.name}</b>
-          <span>{item.text}</span>
-        </div>
-      </Link>
-    </li>
-  );
-}
-
-// Floating navy bar: Products and Solutions mega menus left, logo centred,
-// WhatsApp right. One menu open at a time; click outside or Escape closes.
 export function SiteHeader() {
-  const pathname = usePathname();
   const [menu, setMenu] = useState<Menu>(null);
   const [mobile, setMobile] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
-
-  // Close every menu after navigation.
-  const [shownPath, setShownPath] = useState(pathname);
-  if (shownPath !== pathname) {
-    setShownPath(pathname);
-    setMenu(null);
-    setMobile(false);
-  }
+  const wrap = useRef<HTMLDivElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const pathname = usePathname();
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); }
+  const canHover = () => matchMedia("(hover: hover) and (min-width: 1101px)").matches;
+  const toggle = (m: Menu) => setMenu((cur) => (cur === m ? null : m));
+  const hover = (m: Menu) => { if (canHover()) { clearTimeout(timer.current); setMenu(m); } };
+  const leave = () => { if (canHover() && menu) timer.current = setTimeout(() => setMenu(null), 180); };
 
   useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) setMenu(null);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setMenu(null);
-        setMobile(false);
-      }
-    };
-    document.addEventListener("click", onClick);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("click", onClick);
-      document.removeEventListener("keydown", onKey);
-    };
+    const away = (e: MouseEvent) => { if (!wrap.current?.contains(e.target as Node)) setMenu(null); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") { setMenu(null); setMobile(false); } };
+    document.addEventListener("click", away);
+    document.addEventListener("keydown", esc);
+    return () => { document.removeEventListener("click", away); document.removeEventListener("keydown", esc); };
   }, []);
 
-  const tab = (id: Exclude<Menu, null>, label: string) => (
-    <button className="tab" type="button" aria-expanded={menu === id} aria-controls={`mega-${id}`} onClick={() => setMenu(menu === id ? null : id)}>
-      {label} <Chevron />
-    </button>
-  );
-
   return (
-    <header className="topbar wide">
-      <nav className="nav" aria-label="Main" ref={navRef}>
-        <div className="links">
-          {tab("products", "Products")}
-          {tab("solutions", "Solutions")}
-        </div>
-        <Link className="logo" href="/" aria-label="Blaze Global home">
-          <Image src="/brand/blaze-global-wordmark-gold-1200.png" alt="Blaze Global" width={1200} height={100} priority />
-        </Link>
-        <div className="right">
-          <WhatsAppButton />
-          <button className="burger" type="button" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((v) => !v)}>
-            <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true">
-              <path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" strokeWidth="1.6" />
-            </svg>
-          </button>
-        </div>
-
-        <div className={`mega${menu === "products" ? " open" : ""}`} id="mega-products" role="region" aria-label="Products">
-          {products.map((g) => (
-            <div key={g.name}>
-              <h4>{g.name}</h4>
-              <ul>
-                {g.items.map((it) => (
-                  <Item key={it.name} item={it} />
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className={`mega${menu === "solutions" ? " open" : ""}`} id="mega-solutions" role="region" aria-label="Solutions">
-          <div>
-            <h4>By company size</h4>
-            <ul>
-              {solutionItems.map((it) => (
-                <Item key={it.name} item={it} />
-              ))}
-            </ul>
-          </div>
-          <div className="promo">
-            <p>Not sure which applies to you?</p>
-            <WhatsAppButton text="Hello Blaze Global, I am not sure which service I need." />
-          </div>
-        </div>
-      </nav>
-
-      <div className={`mnav${mobile ? " open" : ""}`} id="mnav">
-        <h4>Products</h4>
-        {products.map((g) => (
-          <Link key={g.name} href={g.href}>{g.name}</Link>
-        ))}
-        <h4>Solutions</h4>
-        {solutionItems.map((s) => (
-          <Link key={s.name} href={s.href}>{s.name}</Link>
-        ))}
-        <h4>Company</h4>
-        <Link href="/about-us">About</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/contact">Contact</Link>
-        <WhatsAppButton style={{ marginTop: "var(--sm)", width: "100%", border: 0 }} />
+<header className="topbar wide">
+  <div className={`navwrap${menu ? " open" : ""}`} ref={wrap} onMouseLeave={leave} onMouseEnter={() => clearTimeout(timer.current)}>
+    <div className="nav">
+      <Link className="logo" href="/" aria-label="Blaze Global home"><Image src="/logos/blaze-global-gold.png" alt="Blaze Global" width={1200} height={100} priority /></Link>
+      <div className="tabs">
+        <Link className="tab" href="/about-us">About</Link>
+        <button className="tab" type="button" aria-expanded={menu === "products"} aria-controls="drop" onClick={() => toggle("products")} onMouseEnter={() => hover("products")}>Products <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
+        <button className="tab" type="button" aria-expanded={menu === "solutions"} aria-controls="drop" onClick={() => toggle("solutions")} onMouseEnter={() => hover("solutions")}>Solutions <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
+        <Link className="tab" href="/blog">Blog</Link>
       </div>
-    </header>
+      <button className="btn btn-start" type="button" data-open-start>Get started</button>
+      <a className="btn btn-wa right-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
+      <button className="burger" type="button" aria-label="Open menu" aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((o) => !o)}><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" strokeWidth="1.6" /></svg></button>
+    </div>
+
+    <div className="drop" id="drop"><div className="drop-in">
+      <div className={`dpanel${menu === "products" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
+        <div className="dcard dfeat">
+          <Image className="dimg" src="/images/consultation.jpg" alt="Three people reviewing documents at a meeting table" width={960} height={600} />
+          <h3>Speak to a Chartered Accountant</h3>
+          <a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20speak%20to%20an%20accountant." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
+        </div>
+        <div className="dcard">
+          <h4>Accounting</h4>
+          <Link className="ov" href="/services/accounting"><b>Accounting</b><span>Books, reports, GST and corporate tax, filed with ACRA and IRAS.</span><i aria-hidden="true">→</i></Link>
+          <ul>
+            <li><Link className="it" href="/services/accounting/bookkeeping"><b>Bookkeeping</b><span>Bank, card and cash records reconciled on Xero.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/management-reports"><b>Management reports</b><span>Profit and loss, balance sheet and cash flow, monthly.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/financial-statements-xbrl"><b>Financial statements and XBRL</b><span>Unaudited statements and XBRL, filed with ACRA.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/gst"><b>GST</b><span>Registration and quarterly F5 returns.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/corporate-income-tax"><b>Corporate income tax</b><span>ECI and Form C-S, filed with IRAS.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/tax-advisory"><b>Tax advisory and forecasting</b><span>Tax planning and 12-month cash forecasts.</span></Link></li>
+          </ul>
+        </div>
+        <div className="dcard">
+          <h4>Corporate Secretarial</h4>
+          <Link className="ov" href="/services/corporate-secretarial"><b>Corporate Secretarial</b><span>Company secretary, AGMs, annual returns and company changes.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/start-a-business-in-singapore"><b>Incorporation</b><span>Company name, constitution and registration on Bizfile.</span><i aria-hidden="true">→</i></Link>
+        </div>
+      </div>
+
+      <div className={`dpanel${menu === "solutions" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
+        <div className="dcard dfeat">
+          <Image className="dimg" src="/images/sg-3.jpg" alt="Shophouses in Joo Chiat, Singapore" width={960} height={600} />
+          <h3>Start a business in Singapore</h3>
+          <Link className="btn btn-navy" href="/start-a-business-in-singapore">Start your company</Link>
+        </div>
+        <div className="dcard">
+          <Link className="ov" href="/start-a-business-in-singapore"><b>Start a business in Singapore</b><span>Business structures, registration on Bizfile and the first year.</span><i aria-hidden="true">→</i></Link>
+          <h4>By company</h4>
+          <ul>
+            <li><Link className="it" href="/solutions/startups"><b>Start-ups</b><span>Incorporation, a company secretary and the first books.</span></Link></li>
+            <li><Link className="it" href="/solutions/smes"><b>SMEs</b><span>Monthly books, GST and annual compliance.</span></Link></li>
+            <li><Link className="it" href="/solutions/large-companies"><b>Large companies</b><span>Group reporting, forecasting and tax advisory.</span></Link></li>
+          </ul>
+        </div>
+        <div className="dcard">
+          <h4>Compliance</h4>
+          <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>ECI, AGM, annual return and Form C-S dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
+        </div>
+      </div>
+    </div></div>
+
+    <div className={`mnav${mobile ? " open" : ""}`} id="mnav" onClick={(e) => { if ((e.target as HTMLElement).closest("a, button")) setMobile(false); }}>
+      <Link href="/about-us">About</Link><Link href="/blog">Blog</Link>
+      <h4>Products</h4><Link href="/services/accounting">Accounting</Link><Link href="/services/corporate-secretarial">Corporate Secretarial</Link>
+      <h4>Solutions</h4><Link href="/start-a-business-in-singapore">Start a business in Singapore</Link><Link href="/solutions/startups">Start-ups</Link><Link href="/solutions/smes">SMEs</Link><Link href="/solutions/large-companies">Large companies</Link>
+      <Link href="/compliance-deadline-calculator">Compliance deadline calculator</Link>
+      <button className="btn btn-navy mstart" type="button" data-open-start>Get started</button>
+      <a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
+    </div>
+  </div>
+</header>
   );
 }
