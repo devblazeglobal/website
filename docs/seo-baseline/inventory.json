@@ -1,0 +1,8 @@
+[
+  {"url": "https://www.blazeglobal.com.sg", "source": "pages-sitemap.xml", "status": 200},
+  {"url": "https://www.blazeglobal.com.sg/about-us", "source": "pages-sitemap.xml", "status": 200},
+  {"url": "https://www.blazeglobal.com.sg/services", "source": "pages-sitemap.xml", "status": 200},
+  {"url": "https://www.blazeglobal.com.sg/blog", "source": "pages-sitemap.xml", "status": 404, "note": "listed in the Wix sitemap and menu but answered 404"},
+  {"url": "https://www.blazeglobal.com.sg/post-1/how-do-taxes-affect-business-decisions", "source": "blog-posts-sitemap.xml", "status": 200},
+  {"url": "https://www.blazeglobal.com.sg/post-1/importance-of-bookkeeping-in-your-business", "source": "blog-posts-sitemap.xml", "status": 200}
+]

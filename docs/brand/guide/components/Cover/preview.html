@@ -1,0 +1,31 @@
+<!-- @dsCard height=300 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&display=swap">
+<style>
+  .cv{position:relative;width:960px;height:300px;background:var(--paper);overflow:hidden}
+  .cv svg{position:absolute;inset:0}
+  .navy{fill:var(--navy)} .gold{fill:var(--gold)} .alt{fill:var(--surface-alt)} .raised{fill:var(--navy-raised)}
+  .rule{stroke:var(--line);stroke-width:1}
+  .rule-g{stroke:var(--gold);stroke-width:1;opacity:.55}
+  .name{position:absolute;left:32px;bottom:56px;max-width:440px;margin:0;font:400 76px/.95 var(--font-serif);letter-spacing:-.02em;color:var(--ink)}
+  .tag{position:absolute;left:32px;bottom:28px;max-width:440px;margin:0;font:400 13px/18px var(--font-sans);color:var(--muted)}
+</style>
+<div class="cv">
+  <svg width="960" height="300" viewBox="0 0 960 300" aria-hidden="true">
+    <!-- blocks: navy 352x300 slab (identity), gold 128x128 (space-xl) set into its top-left, navy-raised 128x172, surface-alt 128x64 (space-lg) -->
+    <!-- arrangement: one tall navy slab bleeding off top, right and bottom, gold square cut into it, raised slab beneath the gold -->
+    <!-- pattern: editorial serif, "hairlines, no shadows" (README) -> four hairline rules at space-lg pitch across the slab -->
+    <!-- steps: space-lg 64, space-xl 128; radius: square (radius-sm and up are for UI, the brand composes flush) -->
+    <rect class="alt" x="480" y="236" width="128" height="64"/>
+    <rect class="navy" x="608" y="0" width="352" height="300"/>
+    <rect class="gold" x="608" y="0" width="128" height="128"/>
+    <rect class="raised" x="608" y="128" width="128" height="172"/>
+    <line class="rule" x1="480" y1="64" x2="608" y2="64"/>
+    <line class="rule-g" x1="736" y1="64" x2="960" y2="64"/>
+    <line class="rule-g" x1="736" y1="128" x2="960" y2="128"/>
+    <line class="rule-g" x1="736" y1="192" x2="960" y2="192"/>
+    <line class="rule-g" x1="736" y1="256" x2="960" y2="256"/>
+  </svg>
+  <p class="name">Blaze Global</p>
+  <p class="tag">Accounting, business advisory and corporate secretarial in Singapore.</p>
+</div>
+<script></script>
