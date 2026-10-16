@@ -1993,3 +1993,46 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
   .tr-strip li{flex-direction:column;gap:8px}
   .rv-foot,.rv-foot .arrows,.cr-foot{justify-content:center!important}
 }
+/* phones: service cards centre their copy, button and status window */
+@media (max-width:640px){
+  .seg,.seg-two .seg{min-height:0!important}
+  .seg .copy{display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 24px 24px}
+  .seg .btn{align-self:center}
+  .seg .screen{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;margin:8px 20px 20px;border-radius:12px!important;transform:none!important;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  .seg .screen,.seg .screen *{text-align:left!important}
+}
+@media (max-width:640px){
+  /* tabs on one line */
+  .xs-tabs,.lg-tabs{flex-wrap:nowrap!important;justify-content:center!important;overflow-x:auto;scrollbar-width:none;max-width:100%;gap:2px!important}
+  .xs-tabs::-webkit-scrollbar,.lg-tabs::-webkit-scrollbar{display:none}
+  .xs-tabs button,.lg-tabs button{flex:none;white-space:nowrap;font-size:13px!important;padding:8px 10px!important}
+  .lg-tabs{margin-inline:auto}
+  /* calendar: label and date field centred */
+  .cal2-head .cx-mini{display:flex!important;flex-direction:column!important;align-items:center!important}
+  .cal2-head .cx-field-sm{margin-inline:auto!important}
+}
+@media (max-width:640px){
+  /* service cards (home, services, start a business): text and button left-aligned */
+  .seg .copy{align-items:flex-start!important;text-align:left!important}
+  .seg .copy h3,.seg .copy p{text-align:left!important;margin-left:0!important;margin-right:0!important}
+  .seg .btn{align-self:flex-start!important}
+  /* hero ticks: tick beside left-aligned text */
+  .trust{align-items:stretch!important}
+  .trust .ticks{margin-inline:0!important}
+  .trust .ticks li{flex-direction:row!important;align-items:flex-start!important;text-align:left!important}
+  .trust .ticks li,.trust .ticks li *{text-align:left!important}
+  /* step 1 glass card fits the screen */
+  .stp-vis{display:flex!important;justify-content:center}
+  .stp-vis .lg-card{width:100%!important;min-width:0!important;max-width:100%!important}
+  .lg-tabs{width:100%;justify-content:flex-start!important}
+  .xs-tabs button,.lg-tabs button{font-size:12px!important;padding:7px 8px!important}
+}
+
+.hp-first .hp-copy h1{font:400 clamp(40px,4.6vw,72px)/1.04 var(--serif);letter-spacing:-.03em;color:var(--ink)}
+#view-company>section.hp-first{padding-top:calc(var(--topbar-h) + var(--sec))!important}
+@media (max-width:640px){
+  .lg-tabs{display:grid!important;grid-template-columns:repeat(4,auto);justify-content:space-between!important;overflow:visible!important;width:100%!important;padding:3px!important}
+  .lg-tabs button{font-size:11.5px!important;padding:7px 6px!important}
+  .stp-vis{padding:16px!important}
+}
+@media (max-width:640px){.stp-acts{align-items:center!important}.stp-acts .stp-link{align-self:center!important}}

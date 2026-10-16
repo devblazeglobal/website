@@ -57,11 +57,11 @@ export function CtaBand({ text, wa }: { text: string; wa: string }) {
   );
 }
 
-export function Help({ wa, chat }: { wa: string; chat: Pair }) {
+export function Help({ wa, chat, first = false }: { wa: string; chat: Pair; first?: boolean }) {
   return (
-    <section className="hp"><div className="wide hp-grid">
+    <section className={`hp${first ? " hp-first pull-under" : ""}`}><div className="wide hp-grid">
       <div className="hp-copy">
-        <h2>We respond fast on WhatsApp</h2>
+        {first ? <h1>We respond fast on WhatsApp</h1> : <h2>We respond fast on WhatsApp</h2>}
         <p>Ask about your books, filings or company. A Blaze Global accountant replies.</p>
         <WaButton text={wa} className="btn hp-btn" />
       </div>
