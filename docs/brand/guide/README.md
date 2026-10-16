@@ -10,15 +10,16 @@ Design reference: harvey.ai for type, spacing and restraint. Flow reference: law
 - Use `Logos/logo-square-navy.jpeg` for the favicon, social avatars and app icons.
 - Clear space on every side: the height of the letter B. Minimum width: 120px on screen, 30mm in print.
 - Never recolour outside these three inks, stretch, outline, add a shadow, or set the name in another typeface beside the logo.
-- The wordmark's letters are an old-style serif in spaced capitals. Closest free match: Mate (Google Fonts); second: Gentium Book Plus. The exact face is unconfirmed; ask the logo's designer. The logo is artwork: never retype it in a font.
+- The wordmark is set in Maharlika (Typeezy), a display serif with one weight, Regular, in spaced capitals. The Canva licence covers designs made in Canva, including the logo files; it does not cover embedding the font on a website. Web use needs a licence bought from Typeezy in Blaze Global's name. Until then, headings use Newsreader. The logo is artwork: never retype it.
 
 ## Colour
 
 - `navy` and `gold` are the brand. Everything else supports them.
 - Page ground is `paper`. Cards and fields are `surface`. Alternate long pages with `surface-alt` bands.
 - Full-bleed `navy` sections: the header, the hero, the call-to-action band, the footer. Text on them is `on-navy` and `on-navy-muted`; accents are `gold`.
-- `gold` is a fill or a mark on `navy`, never text on light grounds (1.4:1). For gold text on light grounds use `gold-text`.
-- The primary button is `gold` with `on-gold` text. One primary button per screen area.
+- Backgrounds are navy, white and grey only: `navy`, `surface` (white), `paper` and `surface-alt` (greys).
+- Gold is a minor accent: the logo, WhatsApp buttons (`gold` fill, `on-gold` text, WhatsApp glyph), ticks on navy, eyebrow labels (`gold-text` on light), small tags. Review stars follow Google's own yellow (#FBBC04). Never a background band and never text on light grounds (1.4:1).
+- The primary button is `navy` with `on-navy` text; on navy grounds it is white with `ink` text. One primary button per screen area.
 - Hairlines (`line`) separate; shadows are not used.
 
 ## Typography

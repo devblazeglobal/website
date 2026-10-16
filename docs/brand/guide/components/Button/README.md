@@ -1,6 +1,6 @@
 Buttons start an action: open WhatsApp, place a call, send a form.
 
-- Primary: `gold` fill, `on-gold` text, `radius-md`, 14px/20px `sans` weight 500, padding `space-xs` × 20px. One per screen area.
+- Primary: `navy` fill, `on-navy` text (on navy grounds: `surface` fill, `ink` text), `radius-md`, 14px/20px `sans` weight 500, padding `space-xs` × 20px. One per screen area.
 - Secondary on light: transparent, 1px `line-strong` border, `ink` text.
 - Secondary on navy: transparent, 1px `on-navy` border at 60%, `on-navy` text.
 - Focus: 2px `focus` ring, 2px offset.

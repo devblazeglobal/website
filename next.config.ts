@@ -5,8 +5,10 @@ import type { NextConfig } from "next";
 // - Wix system pages that answered 200 with no content are redirected to
 //   the nearest real page;
 // - staging and preview builds are never indexable (robots.ts and the
-//   X-Robots-Tag header below).
-const isProduction = !process.env.NEXT_PUBLIC_SITE_ENV || process.env.NEXT_PUBLIC_SITE_ENV === "production";
+//   X-Robots-Tag header below). On Vercel only NEXT_PUBLIC_SITE_ENV=production
+//   is indexable; same rule as lib/indexable.ts.
+const env = process.env.NEXT_PUBLIC_SITE_ENV;
+const isProduction = process.env.VERCEL ? env === "production" : !env || env === "production";
 
 const nextConfig: NextConfig = {
   trailingSlash: false,
@@ -18,7 +20,8 @@ const nextConfig: NextConfig = {
       { source: "/post", destination: "/blog", permanent: true },
       { source: "/post-1", destination: "/blog", permanent: true },
       { source: "/search", destination: "/blog", permanent: true },
-      { source: "/testimonials", destination: "/#testimonials", permanent: true },
+      { source: "/testimonials", destination: "/#reviews", permanent: true },
+      { source: "/solutions", destination: "/#solutions", permanent: false },
     ];
   },
   async headers() {

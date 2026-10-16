@@ -1,7 +1,7 @@
 # Content gaps and copy edits for Blaze Global to approve
 
 ## Needed from Blaze Global
-1. Vector logo (SVG or AI) from the designer, and the name of the logo typeface (closest match: Mate).
+1. Vector logo (SVG or AI) exported from Canva. Logo typeface is Maharlika (Typeezy); a web licence from Typeezy is needed before the site can use it for headings.
 2. Team: names, qualifications (CA, ISCA), photos. The brand guide flow has a People section; it is left out until these exist.
 3. Fees to publish. The only published figures are in a 2023 article: accounting from S$125 a month, tax advice from S$250. Confirm or replace.
 4. More client reviews (one exists: Joel, Medical Clinics). Google Business Profile not found; claiming it is step 1 of reviews.

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./brand.css";
 
 /* Blaze Global brand guide (docs/brand/guide, published as the
    "Blaze Global Brand Guide" artifact). Navy #051038 and gold #FAD081 are
@@ -16,7 +17,7 @@
   --gold-text: #83641c;
   --on-navy: #ffffff;
   --on-navy-muted: #b4bacb;
-  --line: #d5dae6;
+  --line: #d9dee8;
   --line-strong: #7a84a0;
   --error: #a3261b;
 
@@ -69,7 +70,7 @@
 
 html { scroll-behavior: smooth; }
 body {
-  background: var(--paper);
+  background: #ffffff;
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -89,7 +90,6 @@ h1, h2 { text-wrap: balance; }
   .display-md { font-size: 2.5rem; }
   .quote { font-size: 2rem; line-height: 1.25; }
 }
-.label { font-size: 0.75rem; line-height: 1.33; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* Long-form text: articles. */
 .prose-bg { max-width: 675px; font-size: 1.0625rem; line-height: 1.7; }
