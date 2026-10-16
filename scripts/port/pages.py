@@ -42,7 +42,16 @@ def page(name, jsx, imports, extra=''):
     head = '\n'.join(imports).replace('\n\n\n', '\n\n').lstrip()
     return f'{head}\n\n{extra}export function {name}() {{\n  return (\n{body}\n  );\n}}\n'
 
-def read(n): return (SRC / n).read_text()
+TEAM = [('Emelia', 'https://www.linkedin.com/in/emelia-long-839a5a72/'), ('Benjamin', 'https://www.linkedin.com/in/benjaminltf/'), ('Benedict', 'https://www.linkedin.com/in/benedict-long-511929b3/')]
+
+def team(html):
+    # The three team cards: each person's LinkedIn profile and name, in order.
+    for name, url in TEAM:
+        html = html.replace('<a class="rv-card rv-%d" href="https://www.linkedin.com/company/blaze-global-pte-ltd/"' % TEAM.index((name, url)), '<a class="rv-card rv-%d" href="%s"' % (TEAM.index((name, url)), url), 1)
+        html = html.replace('<b class="rv-name">Name</b>', '<b class="rv-name">%s</b>' % name, 1)
+    return html
+
+def read(n): return team((SRC / n).read_text())
 
 # ---------- Home ----------
 h = read('chunk-home.html')

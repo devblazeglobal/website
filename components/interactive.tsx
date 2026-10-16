@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { whatsappUrl } from "@/lib/site";
@@ -46,29 +45,45 @@ export function Rail({ variant, children }: { variant: "reviews" | "creds"; chil
 // ---------- Reveal: blocks fade up as they enter the viewport ----------
 const FU = ".pc-h,.pc-cards li,.bn-row,.tl-h,.tl-grid li,.ev-h,.ev-grid li,.cx-hin>*,.stp-row,.rh-todo,.fk-h,.fk-cards li,.sp-hero h1,.sp-hero p,.hp-copy,.hp-fig,.lo-h,.lo-lead,.wh-h,.wh-tiles li,.hv-h,.hv-grid,.bl-lede,.bl-feat,.bl-grid li,.rv-cards li,.ab-ticks li,.ab-hero h1,.ab-hero p,.ab-who-copy,.ab-cr li,.team-h,.team-p,.seg,.intro,.xs-copy,.xs-vis,.cal2-head,.ap,.crc,.rvc";
 export function Reveal() {
-  const pathname = usePathname();
+  // One listener for the life of the app. New blocks (client navigation) are
+  // picked up by a MutationObserver. A block is revealed once its top passes
+  // 92% of the viewport, including blocks scrolled past quickly, so nothing
+  // is ever left hidden (site.css also has a timed fallback).
   useEffect(() => {
     if (prefersStill()) return;
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    const scan = () => document.querySelectorAll<HTMLElement>(FU).forEach((el) => {
-      if (el.classList.contains("fu")) return;
-      const r = el.getBoundingClientRect();
-      if (r.top < innerHeight * 0.92) return; // already in view on load: no animation
-      el.classList.add("fu");
-      const sib = [...(el.parentElement?.children ?? [])].filter((c) => c.matches(FU));
-      el.style.transitionDelay = `${Math.min(sib.indexOf(el), 5) * 70}ms`;
-      io.observe(el);
-    });
+    let pending: HTMLElement[] = [];
+    let queued = false;
+    const check = () => {
+      queued = false;
+      const line = innerHeight * 0.92;
+      pending = pending.filter((el) => {
+        if (!el.isConnected) return false;
+        if (el.getBoundingClientRect().top < line) { el.classList.add("in"); return false; }
+        return true;
+      });
+    };
+    const scan = () => {
+      const line = innerHeight * 0.92;
+      document.querySelectorAll<HTMLElement>(FU).forEach((el) => {
+        if (el.dataset.fu) return;
+        el.dataset.fu = "1";
+        if (el.getBoundingClientRect().top < line) return; // in view on arrival: show at once
+        el.classList.add("fu");
+        const sib = [...(el.parentElement?.children ?? [])].filter((c) => c.matches(FU));
+        el.style.transitionDelay = `${Math.min(sib.indexOf(el), 5) * 70}ms`;
+        pending.push(el);
+      });
+      document.querySelectorAll<HTMLElement>(".hp-chat:not([data-fu]), .site-footer:not([data-fu])").forEach((el) => { el.dataset.fu = "1"; el.classList.add("fu-watch"); pending.push(el); });
+      check();
+    };
+    const tick = () => { if (!queued) { queued = true; requestAnimationFrame(check); } };
     scan();
-    const mo = new MutationObserver(scan);
+    const mo = new MutationObserver(() => requestAnimationFrame(scan));
     mo.observe(document.body, { childList: true, subtree: true });
-    const chats = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); chats.unobserve(e.target); } }), { threshold: 0.3 });
-    document.querySelectorAll(".hp-chat:not(.in)").forEach((c) => chats.observe(c));
-    const foot = document.querySelector(".site-footer");
-    const fio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); fio.disconnect(); } }), { threshold: 0.2 });
-    if (foot) fio.observe(foot);
-    return () => { io.disconnect(); mo.disconnect(); chats.disconnect(); fio.disconnect(); };
-  }, [pathname]);
+    addEventListener("scroll", tick, { passive: true });
+    addEventListener("resize", tick);
+    return () => { mo.disconnect(); removeEventListener("scroll", tick); removeEventListener("resize", tick); };
+  }, []);
   return null;
 }
 

@@ -1895,3 +1895,11 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
 @media (max-width:1024px){.sia{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media (max-width:520px){.sia{grid-template-columns:minmax(0,1fr)!important}}
 .post-body{overflow-wrap:anywhere}
+
+/* Failsafe: anything still waiting to fade in becomes visible after 2.5s. */
+@keyframes fu-show{to{opacity:1;transform:none}}
+.fu:not(.in){animation:fu-show .6s ease 6s forwards}
+
+/* Overall scale: desktop 70%, tablet 85%, phones unchanged. */
+@media (min-width:1025px){html{zoom:.7}}
+@media (min-width:700px) and (max-width:1024px){html{zoom:.85}}
