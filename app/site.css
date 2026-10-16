@@ -513,8 +513,8 @@ html.locked{overflow:hidden}
    Grey band, white 28px-radius cards. The row starts on the page margin
    (same edge as the hero content) and runs off the right edge; arrows sit
    on the right margin. */
-:root{--edge:max(var(--sm),calc((100vw - 1728px)/2 + var(--sm)))}
-@media (min-width:1025px){:root{--edge:max(var(--md),calc((100vw - 1728px)/2 + var(--md)))}}
+:root{--edge:max(var(--sm),calc((100% - 1728px)/2 + var(--sm)))}
+@media (min-width:1025px){:root{--edge:max(var(--md),calc((100% - 1728px)/2 + var(--md)))}}
 .reviews{background:#f5f5f7;padding-block:var(--sec)}
 .reviews .track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 var(--edge);scroll-padding-inline:var(--edge)}
 .reviews .track::-webkit-scrollbar{display:none}
@@ -1900,6 +1900,7 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
 @keyframes fu-show{to{opacity:1;transform:none}}
 .fu:not(.in){animation:fu-show .6s ease 6s forwards}
 
-/* Overall scale: desktop 70%, tablet 85%, phones unchanged. */
-@media (min-width:1025px){html{zoom:.7}}
-@media (min-width:700px) and (max-width:1024px){html{zoom:.85}}
+/* Overall scale: desktop 77%, tablet 93.5%, phones unchanged.
+   --edge uses % (of the full-width section), not vw, so it follows the zoom. */
+@media (min-width:1025px){html{zoom:.77}}
+@media (min-width:700px) and (max-width:1024px){html{zoom:.935}}
