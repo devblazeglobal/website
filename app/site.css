@@ -1904,3 +1904,39 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
    --edge uses % (of the full-width section), not vw, so it follows the zoom. */
 @media (min-width:1025px){html{zoom:.77}}
 @media (min-width:700px) and (max-width:1024px){html{zoom:.935}}
+
+/* ---------- Touch: carousels swipe on phones and tablets ---------- */
+@media (hover:none),(max-width:1024px){
+  .reviews .track,.cr-track{overflow-x:auto!important;overflow-y:hidden!important;touch-action:pan-x pan-y!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+}
+
+/* ---------- Phones: left-aligned, 24px gutters, full-width buttons ---------- */
+@media (max-width:640px){
+  :root{--edge:24px!important}
+  .wrap,.wide{padding-inline:24px!important}
+  .rh-in,.cx-hin{padding-inline:24px!important}
+  /* left-align blocks the desktop layout centres */
+  .hero-body,.rh-in,.sp-hero .wide,.cx-hin,.ab-hero .wrap,.bl-intro .wide,.hp-copy,.intro,.cal2-head,
+  .lo-h,.lo-lead,.pc-h,.tl-h,.ev-h,.wh-h,.stp-h,.st3-h,.hv-h,.team-h,.team-p,.sx-h,.bn-top,
+  .ap,.wh-tiles a,.cx-hero h1,.cx-sub,.rh h1,.rh-sub,.sp-hero h1,.sp-hero p,.hero-body h1,.hero-sub,.ab-hero h1,.ab-hero p{text-align:left!important}
+  .hero-body,.rh-in,.sp-hero .wide,.cx-hin,.ab-hero .wrap,.hp-copy,.cal2-head,.ap,.wh-tiles a,.bn-top{align-items:flex-start!important}
+  .hero-pts,.cx-quick,.rh-pills{justify-content:flex-start!important}
+  .cal2-head .cx-mini{align-items:flex-start!important;width:100%}
+  section.cal2 .cx-mini .dp{left:0!important;transform:none!important}
+  .tr-strip li{justify-content:flex-start!important}
+  .rh-creds{justify-content:flex-start!important;padding-inline:24px!important}
+  /* every call-to-action button: full width */
+  .hero-ctas,.rh-acts,.fk-acts,.band .actions,.xs-btns,.stp-acts,.wh-acts,.st3-acts,.ev-acts,.gs-actions,.cx-acts{flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;width:100%}
+  .hero-ctas .btn,.rh-acts .btn,.fk-acts .btn,.band .actions .btn,.xs-btns .btn,.stp-acts .btn,.wh-acts .btn,.st3-acts .btn,.ev-acts .btn,.gs-actions .btn,.cx-acts .btn,.hp-btn,.askbar .btn,.creds-top .btn,.cx-go{width:100%!important;max-width:none!important;justify-content:center}
+  .stp-acts .stp-link{align-self:flex-start}
+  .band{align-items:stretch!important}
+  .band p{white-space:normal!important}
+  .creds-top{flex-direction:column;align-items:stretch!important}
+  .hp-grid{justify-items:stretch!important}
+  .hp-fig{max-width:none!important}
+}
+@media (max-width:640px){
+  .seg h3{white-space:normal!important;font-size:34px!important;line-height:1.1!important;overflow-wrap:anywhere}
+  .seg .btn{white-space:normal!important}
+  .lo-card h3,.wh-tiles h3,.stp-txt h3,.bn-txt h3{overflow-wrap:anywhere}
+}
