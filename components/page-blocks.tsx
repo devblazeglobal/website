@@ -18,14 +18,10 @@ export function Section({ children, className = "", id, tone = "paper" }: { chil
   );
 }
 
-/** Eyebrow + H2, space-md above the content that follows. */
-export function SectionHeading({ eyebrow, children, onNavy = false }: { eyebrow?: string; children: React.ReactNode; onNavy?: boolean }) {
-  return (
-    <div className="mb-md">
-      {eyebrow && <p className={`label mb-sm ${onNavy ? "text-gold" : "text-gold-text"}`}>{eyebrow}</p>}
-      <h2 className="display-md">{children}</h2>
-    </div>
-  );
+/** H2, space-md above the content that follows. No eyebrow and no
+ * description line: headings stand alone. */
+export function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <h2 className="display-md mb-md">{children}</h2>;
 }
 
 export function Breadcrumbs({ items, onNavy = false }: { items: { name: string; path: string }[]; onNavy?: boolean }) {
@@ -54,20 +50,16 @@ export function Breadcrumbs({ items, onNavy = false }: { items: { name: string; 
   );
 }
 
-/** Inner-page hero (harvey.ai split): H1 left; lead and actions right from 1025px. */
-export function PageHeader({ crumbs, title, lead, actions }: { crumbs: { name: string; path: string }[]; title: string; lead?: string; actions?: React.ReactNode }) {
+/** Inner-page hero: H1 left, actions right from 1025px. Sits under the
+ * floating nav (pull-under). No lead line. */
+export function PageHeader({ crumbs, title, actions }: { crumbs: { name: string; path: string }[]; title: string; actions?: React.ReactNode }) {
   return (
-    <div className="on-navy bg-navy text-on-navy">
+    <div className="on-navy pull-under bg-navy text-on-navy">
       <Container className="pb-lg pt-lg">
         <Breadcrumbs items={crumbs} onNavy />
         <div className="mt-md grid gap-md lg:grid-cols-[1.3fr_1fr] lg:items-end">
           <h1 className="display-lg">{title}</h1>
-          {(lead || actions) && (
-            <div className="space-y-md">
-              {lead && <p className="text-lg leading-relaxed text-on-navy-muted">{lead}</p>}
-              {actions && <div className="flex flex-wrap gap-sm">{actions}</div>}
-            </div>
-          )}
+          {actions && <div className="flex flex-wrap gap-sm lg:justify-end">{actions}</div>}
         </div>
       </Container>
     </div>

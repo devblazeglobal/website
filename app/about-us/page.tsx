@@ -17,18 +17,17 @@ export default function AboutPage() {
       <PageHeader
         crumbs={[{ name: "Home", path: "/" }, { name: "About", path: "/about-us" }]}
         title="About Blaze Global"
-        lead={about[0]}
         actions={<><WhatsAppButton /><CallButton onNavy /></>}
       />
       <Section>
         <div className="max-w-[675px] space-y-sm text-lg leading-relaxed">
-          {about.slice(1).map((p) => (
+          {about.map((p) => (
             <p key={p.slice(0, 20)}>{p}</p>
           ))}
         </div>
       </Section>
       <Section tone="alt">
-        <SectionHeading eyebrow="Accreditations">Partners and accreditations</SectionHeading>
+        <SectionHeading>Partners and accreditations</SectionHeading>
         <Accreditations />
       </Section>
     </>

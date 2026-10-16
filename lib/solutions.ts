@@ -12,13 +12,12 @@ export interface Solution {
   title: string;
   description: string;
   h1: string;
-  lead: string;
   needsHeading: string;
   needs: { title: string; text: string }[];
   services: { name: string; group: string; href: string }[];
   ctaLine: string;
   whatsappText: string;
-  /** Illustrative screen on the home card. */
+  /** Screen on the home card; an illustration, not client data. */
   screen: { title: string; rows: { label: string; status: string; tone: "done" | "next" | "todo" }[] };
 }
 
@@ -32,7 +31,6 @@ export const solutions: Solution[] = [
     title: "Accounting for Start-ups in Singapore | Blaze Global",
     description: "Company incorporation, a qualified company secretary and books on Xero for new Singapore companies. Chartered Accountants, ACRA Registered Filing Agent.",
     h1: "Accounting for start-ups in Singapore",
-    lead: "From choosing a business structure to your first annual filing. We walk you through the 5 business structures and advise you according to your needs.",
     needsHeading: "What a new company needs",
     needs: [
       { title: "Choose a business structure", text: "Sole proprietorship, partnership, LLP or private limited. We explain each and recommend one." },
@@ -68,7 +66,6 @@ export const solutions: Solution[] = [
     title: "Accounting for SMEs in Singapore | Blaze Global",
     description: "Monthly bookkeeping, management reports, GST, AGM, annual returns, financial statements and XBRL for Singapore SMEs.",
     h1: "Accounting for SMEs in Singapore",
-    lead: "Accurate books every month and every filing on time, so you can focus on running the business.",
     needsHeading: "What an established company needs",
     needs: [
       { title: "Monthly bookkeeping", text: "Bank accounts, credit cards and cash matched as the information comes through." },
@@ -104,7 +101,6 @@ export const solutions: Solution[] = [
     title: "Accounting and Advisory for Large Companies in Singapore | Blaze Global",
     description: "Management reporting, financial analysis, forecasting, tax advisory and corporate secretarial for established and multinational companies in Singapore.",
     h1: "Accounting and advisory for large companies",
-    lead: "Our team has exposure to high-growth start-ups working towards IPO and to established MNCs across varying industries.",
     needsHeading: "What a larger company needs",
     needs: [
       { title: "Management reporting", text: "Monthly management reports across the company's entities." },

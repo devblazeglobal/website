@@ -3,12 +3,19 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { solutions } from "@/lib/solutions";
+export interface RailCard {
+  key: string;
+  name: string;
+  text: string;
+  cta: string;
+  href: string;
+  screen: { title: string; rows: { label: string; status: string; tone: "done" | "next" | "todo" }[] };
+}
 
 // harvey.ai "One Platform" cards. Hovering one widens it while the other
 // two narrow and fade (CSS, desktop only). The screen inside each card
 // drifts with scroll.
-export function Segments() {
+export function CardRail({ id, title, cards }: { id: string; title: string; cards: RailCard[] }) {
   const grid = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,24 +48,23 @@ export function Segments() {
   }, []);
 
   return (
-    <section className="segments" id="solutions" aria-labelledby="seg-title">
+    <section className="segments" id={id} aria-labelledby={`${id}-title`}>
       <div className="wrap intro">
-        <h2 className="h2" id="seg-title">Accounting by company size</h2>
-        <p>What a company needs changes as it grows. Choose yours.</p>
+        <h2 className="h2" id={`${id}-title`}>{title}</h2>
       </div>
       <div className="wide">
         <div className="seg-grid" ref={grid}>
-          {solutions.map((s, k) => (
-            <Link key={s.slug} className={`seg seg-${k + 1}`} href={s.path}>
+          {cards.map((c, k) => (
+            <Link key={c.key} className={`seg seg-${k + 1}`} href={c.href}>
               <div className="copy">
-                <h3>{s.name}</h3>
-                <p>{s.card}</p>
-                <span className="btn btn-ghost">Blaze for {s.name === "SMEs" ? "SMEs" : s.name.toLowerCase()}</span>
+                <h3>{c.name}</h3>
+                <p>{c.text}</p>
+                <span className="btn btn-ghost">{c.cta}</span>
               </div>
               <div className="screen" aria-hidden="true">
-                <div className="bar"><b>{s.screen.title}</b><span className="ph ill">Illustrative</span></div>
+                <div className="bar"><b>{c.screen.title}</b></div>
                 <ul>
-                  {s.screen.rows.map((r) => (
+                  {c.screen.rows.map((r) => (
                     <li key={r.label}>{r.label}<span className={`st ${r.tone}`}>{r.status}</span></li>
                   ))}
                 </ul>

@@ -32,7 +32,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <PageHeader
         crumbs={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: s.name, path: s.path }]}
         title={`${s.name} services in Singapore`}
-        lead={s.summary}
         actions={<WhatsAppButton text={s.whatsappText} label={`Ask about ${s.name.toLowerCase()}`} />}
       />
       <Section>
@@ -56,11 +55,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
       <Section tone="alt">
-        <SectionHeading eyebrow="Contact">Contact us about {s.name.toLowerCase()}</SectionHeading>
+        <SectionHeading>Contact us about {s.name.toLowerCase()}</SectionHeading>
         <ContactBlock defaultService={s.name} />
       </Section>
       <Section>
-        <SectionHeading eyebrow="Services">Other services</SectionHeading>
+        <SectionHeading>Other services</SectionHeading>
         <ul className="flex flex-wrap gap-sm">
           {others.map((o) => (
             <li key={o.slug}>

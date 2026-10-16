@@ -28,18 +28,15 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: s.name, path: s.path }])} />
-      <section className="seg-hero">
+      <section className="seg-hero pull-under">
         <div className="wrap inner">
           <nav className="crumbs" aria-label="Breadcrumb">
             <Link href="/">Home</Link> / Solutions / <span aria-current="page">{s.name}</span>
           </nav>
           <div className="grid">
             <h1>{s.h1}</h1>
-            <div>
-              <p className="lead">{s.lead}</p>
-              <div className="actions">
-                <WhatsAppButton text={s.whatsappText} />
-              </div>
+            <div className="actions">
+              <WhatsAppButton text={s.whatsappText} />
             </div>
           </div>
         </div>
@@ -47,7 +44,6 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       <section className="needs">
         <div className="wrap">
           <div className="sec-head">
-            <p className="label">At this stage</p>
             <h2 className="h2">{s.needsHeading}</h2>
           </div>
           <ol className="steps">
@@ -64,7 +60,6 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       <section className="seg-svcs">
         <div className="wrap">
           <div className="sec-head">
-            <p className="label">Products</p>
             <h2 className="h2">Services for {s.name === "SMEs" ? "SMEs" : s.name.toLowerCase()}</h2>
           </div>
           <div className="chips">

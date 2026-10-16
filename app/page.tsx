@@ -1,12 +1,10 @@
-import Link from "next/link";
-
 import { WhatsAppButton } from "@/components/cta";
 import { AskForm } from "@/components/home/ask-form";
+import { CardRail } from "@/components/home/card-rail";
 import { Reviews } from "@/components/home/reviews";
-import { Segments } from "@/components/home/segments";
-import { Stars } from "@/components/icons";
+import { GoogleIcon, Stars } from "@/components/icons";
+import { companyCards, productCards } from "@/lib/home-cards";
 import { pageMetadata } from "@/lib/seo";
-import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -54,47 +52,44 @@ const POINTS = [
   },
 ];
 
-/** Team names and photos to be supplied by Blaze (docs/content-gaps.md). */
+/** Names and photos to be supplied by Blaze (docs/content-gaps.md). */
 const TEAM = [
-  { role: "Chartered Accountant", tags: ["Accounting", "Advisory"] },
-  { role: "Role", tags: ["Corporate Secretarial"] },
-  { role: "Role", tags: ["Accounting"] },
+  { name: "Name", role: "Chartered Accountant" },
+  { name: "Name", role: "Corporate Secretarial" },
+  { name: "Name", role: "Accounting" },
 ];
 
-const SERVICE_ORDER = ["accounting", "corporate-secretarial", "business-advisory"];
-
-// Home flow (lawhive.co.uk): hero with the question box, reviews, three
-// points, solutions by company size, team, services.
+// Home flow (lawhive.co.uk): hero and reviews on one ground, three points,
+// accounting by company, products, team.
 export default function Home() {
-  const ordered = SERVICE_ORDER.map((slug) => services.find((s) => s.slug === slug)!);
   return (
     <>
-      <div className="hero">
-        <div className="wide hero-body">
-          <h1>
-            <span>Accounting and company secretarial</span> <span>in Singapore</span>
-          </h1>
-          <p className="sub">Chartered Accountants · ACRA Registered Filing Agent {site.filingAgent}</p>
-          <AskForm />
-        </div>
-        <div className="wide">
-          <div className="trust">
-            <ul className="ticks">
-              <li>Chartered Accountant with Big Four experience</li>
-              <li>Annual returns and XBRL filed with ACRA</li>
-              <li>Books kept on Xero, Aspire and Spenmo</li>
-            </ul>
-            <div className="rating">
-              <p>
-                Google reviews <span className="ph">Placeholder</span>
-              </p>
-              <Stars label="Rating to be connected" style={{ justifyContent: "flex-end" }} />
+      <div className="stage pull-under">
+        <div className="hero">
+          <div className="wide hero-body">
+            <h1>
+              <span>Accounting and company secretarial</span> <span>in Singapore</span>
+            </h1>
+            <AskForm />
+          </div>
+          <div className="wide">
+            <div className="trust">
+              <ul className="ticks">
+                <li>Chartered Accountants with Big Four experience</li>
+                <li>ACRA Registered Filing Agent {site.filingAgent}</li>
+                <li>Annual returns and XBRL filed with ACRA</li>
+                <li>Books kept on Xero, Aspire and Spenmo</li>
+              </ul>
+              <div className="rating">
+                <GoogleIcon />
+                <span>Google reviews</span>
+                <Stars />
+              </div>
             </div>
           </div>
         </div>
+        <Reviews />
       </div>
-
-      <Reviews />
 
       <section className="points" aria-label="Why Blaze Global">
         <div className="wrap">
@@ -113,63 +108,34 @@ export default function Home() {
         </div>
       </section>
 
-      <Segments />
+      <CardRail id="solutions" title="Accounting by company" cards={companyCards} />
+      <CardRail id="products" title="Products we offer" cards={productCards} />
 
+      {/* Team, after evantolleson.com and the Alps Wills estates page:
+          a short heading, one large paragraph, three portraits centred. */}
       <section className="team" id="team" aria-labelledby="team-title">
         <div className="wrap">
-          <div className="sec-head">
-            <p className="label">Team</p>
-            <div className="row">
-              <h2 className="h2" id="team-title">Our team</h2>
-              <span className="ph">Names and photos to be supplied</span>
-            </div>
-          </div>
-          <div className="people">
+          <h2 className="team-h" id="team-title">The team</h2>
+          <p className="team-p">
+            Chartered Accountants with managerial experience in a Big Four firm, and entrepreneurs with 6 to 20 years of experience running multinational organisations.
+          </p>
+          <ul className="people">
             {TEAM.map((t, k) => (
-              <div className="person" key={k}>
+              <li className="person" key={k}>
                 <div className="photo">
-                  <span className="ph">Photo</span>
                   <svg viewBox="0 0 80 80" aria-hidden="true">
                     <circle cx="40" cy="28" r="16" />
                     <path d="M8 80c2-20 16-30 32-30s30 10 32 30z" />
                   </svg>
                 </div>
-                <p className="nm">Name</p>
+                <p className="nm">
+                  <span className="no">{String(k + 1).padStart(2, "0")}</span>
+                  {t.name}
+                </p>
                 <p className="role">{t.role}</p>
-                <div className="tags">
-                  {t.tags.map((g) => (
-                    <span key={g}>{g}</span>
-                  ))}
-                </div>
-              </div>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="services" id="services" aria-labelledby="svc-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <p className="label">Products</p>
-            <h2 className="h2" id="svc-title">Our services</h2>
-          </div>
-          <div className="svc-grid">
-            {ordered.map((s) => (
-              <div className="svc" key={s.slug}>
-                <h3>{s.name}</h3>
-                <div className="panel">
-                  <span className="big" aria-hidden="true">{s.name[0]}</span>
-                  <span className="rule" />
-                  <ul>
-                    {s.covers.slice(0, 4).map((c) => (
-                      <li key={c}>{c}</li>
-                    ))}
-                  </ul>
-                </div>
-                <Link className="more" href={s.path}>Explore {s.name.toLowerCase()} services</Link>
-              </div>
-            ))}
-          </div>
+          </ul>
         </div>
       </section>
     </>

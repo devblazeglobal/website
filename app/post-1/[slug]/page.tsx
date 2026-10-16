@@ -28,9 +28,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <JsonLd data={articleSchema(p)} />
-      <PageHeader crumbs={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: p.title, path: p.path }]} title={p.title} lead={`Blaze Global · ${date}`} />
+      <PageHeader crumbs={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: p.title, path: p.path }]} title={p.title} />
       <Section>
         <article className="prose-bg" dangerouslySetInnerHTML={{ __html: renderMarkdown(p.body) }} />
+        <p className="mt-md text-sm text-muted">
+          Published <time dateTime={p.publishedAt}>{date}</time>
+        </p>
         <div className="mt-lg">
           <WhatsAppButton text={`Hello Blaze Global, I read "${p.title}" and would like to ask a question.`} label="Ask us a question" />
         </div>

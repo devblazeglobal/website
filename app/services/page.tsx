@@ -13,10 +13,14 @@ export const metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
-      <PageHeader crumbs={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]} title="Our services" lead={intro[0]} />
+      <PageHeader crumbs={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]} title="Our services" />
       <Section>
+        <div className="mb-lg max-w-[675px] space-y-sm text-lg leading-relaxed">
+          {intro.map((p) => (
+            <p key={p.slice(0, 20)}>{p}</p>
+          ))}
+        </div>
         <ServiceCards />
-        <p className="mt-lg max-w-[675px] leading-relaxed text-muted">{intro[1]}</p>
       </Section>
     </>
   );
