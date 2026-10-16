@@ -2,7 +2,9 @@
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from html2jsx import convert
-SRC = pathlib.Path(sys.argv[1]); OUT = pathlib.Path(__file__).resolve().parents[2]
+SRC = pathlib.Path(sys.argv[1])
+MOBILE = (pathlib.Path(__file__).parent / 'mobile-menu.jsx.txt').read_text().strip()
+OUT = pathlib.Path(__file__).resolve().parents[2]
 s = convert((SRC / 'chunk-header.html').read_text())
 def rep(a, b, n=1):
     global s
@@ -11,8 +13,10 @@ rep('<div className="navwrap" id="navwrap">', '<div className={`navwrap${menu ? 
 for m in ['products', 'solutions']:
     rep(f'data-menu="{m}" aria-expanded="false" aria-controls="drop"', f'aria-expanded={{menu === "{m}"}} aria-controls="drop" onClick={{() => toggle("{m}")}} onMouseEnter={{() => hover("{m}")}}')
     rep(f'<div className="dpanel" data-panel="{m}">', f'<div className={{`dpanel${{menu === "{m}" ? " on" : ""}}`}} onClick={{(e) => {{ if ((e.target as HTMLElement).closest("a")) setMenu(null); }}}}>')
-rep('<button className="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">', '<button className="burger" type="button" aria-label="Open menu" aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((o) => !o)}>')
-rep('<div className="mnav" id="mnav">', '<div className={`mnav${mobile ? " open" : ""}`} id="mnav" onClick={(e) => { if ((e.target as HTMLElement).closest("a, button")) setMobile(false); }}>')
+rep('<button className="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">', '<button className={`burger${mobile ? " x" : ""}`} type="button" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((o) => !o)}>')
+import re as _re
+a = s.index('<div className="mnav" id="mnav">'); b = s.index('</div>', a) + len('</div>')
+s = s[:a] + MOBILE + s[b:]
 rep('alt="Blaze Global" width={1200} height={100} />', 'alt="Blaze Global" width={1200} height={100} priority />')
 s = s.replace(' style={{background: "#fff", color: "var(--navy)"}}', '')
 (OUT / 'components/site-header.tsx').write_text('''"use client";
@@ -31,11 +35,12 @@ type Menu = "products" | "solutions" | null;
 export function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobile, setMobile] = useState(false);
+  const [group, setGroup] = useState<"p" | "s" | null>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
-  if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); }
+  if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); setGroup(null); }
   const canHover = () => matchMedia("(hover: hover) and (min-width: 1101px)").matches;
   const toggle = (m: Menu) => setMenu((cur) => (cur === m ? null : m));
   const hover = (m: Menu) => { if (canHover()) { clearTimeout(timer.current); setMenu(m); } };

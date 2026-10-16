@@ -14,11 +14,12 @@ type Menu = "products" | "solutions" | null;
 export function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobile, setMobile] = useState(false);
+  const [group, setGroup] = useState<"p" | "s" | null>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
-  if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); }
+  if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); setGroup(null); }
   const canHover = () => matchMedia("(hover: hover) and (min-width: 1101px)").matches;
   const toggle = (m: Menu) => setMenu((cur) => (cur === m ? null : m));
   const hover = (m: Menu) => { if (canHover()) { clearTimeout(timer.current); setMenu(m); } };
@@ -45,7 +46,7 @@ export function SiteHeader() {
       </div>
       <button className="btn btn-start" type="button" data-open-start>Get started</button>
       <a className="btn btn-wa right-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
-      <button className="burger" type="button" aria-label="Open menu" aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((o) => !o)}><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" strokeWidth="1.6" /></svg></button>
+      <button className={`burger${mobile ? " x" : ""}`} type="button" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={mobile} aria-controls="mnav" onClick={() => setMobile((o) => !o)}><svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 2h20M1 8h20M1 14h20" stroke="currentColor" strokeWidth="1.6" /></svg></button>
     </div>
 
     <div className="drop" id="drop"><div className="drop-in">
@@ -96,13 +97,41 @@ export function SiteHeader() {
       </div>
     </div></div>
 
-    <div className={`mnav${mobile ? " open" : ""}`} id="mnav" onClick={(e) => { if ((e.target as HTMLElement).closest("a, button")) setMobile(false); }}>
-      <Link href="/about-us">About</Link><Link href="/blog">Blog</Link>
-      <h4>Products</h4><Link href="/services/accounting">Accounting</Link><Link href="/services/corporate-secretarial">Corporate Secretarial</Link>
-      <h4>Solutions</h4><Link href="/start-a-business-in-singapore">Start a business in Singapore</Link><Link href="/solutions/startups">Start-ups</Link><Link href="/solutions/smes">SMEs</Link><Link href="/solutions/large-companies">Large companies</Link>
-      <Link href="/compliance-deadline-calculator">Compliance deadline calculator</Link>
-      <button className="btn btn-navy mstart" type="button" data-open-start>Get started</button>
-      <a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
+    <div className={`mnav${mobile ? " open" : ""}`} id="mnav" onClick={(e) => { if ((e.target as HTMLElement).closest("a, [data-open-start]")) setMobile(false); }}>
+      <div className="mn-in">
+        <nav className="mn-list" aria-label="Mobile">
+          <Link className="mn-row" href="/about-us">About</Link>
+          <div className={`mn-grp${group === "p" ? " on" : ""}`}>
+            <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}>Products<i aria-hidden="true" /></button>
+            <div className="mn-sub"><div>
+              <Link className="mn-head" href="/services/accounting">Accounting <span aria-hidden="true">→</span></Link>
+              <Link href="/services/accounting/bookkeeping">Bookkeeping</Link>
+              <Link href="/services/accounting/management-reports">Management reports</Link>
+              <Link href="/services/accounting/financial-statements-xbrl">Financial statements and XBRL</Link>
+              <Link href="/services/accounting/gst">GST</Link>
+              <Link href="/services/accounting/corporate-income-tax">Corporate income tax</Link>
+              <Link href="/services/accounting/tax-advisory">Tax advisory and forecasting</Link>
+              <Link className="mn-head" href="/services/corporate-secretarial">Corporate Secretarial <span aria-hidden="true">→</span></Link>
+            </div></div>
+          </div>
+          <div className={`mn-grp${group === "s" ? " on" : ""}`}>
+            <button type="button" className="mn-row" aria-expanded={group === "s"} onClick={() => setGroup((g) => (g === "s" ? null : "s"))}>Solutions<i aria-hidden="true" /></button>
+            <div className="mn-sub"><div>
+              <Link className="mn-head" href="/start-a-business-in-singapore">Start a business in Singapore <span aria-hidden="true">→</span></Link>
+              <Link href="/solutions/startups">Start-ups</Link>
+              <Link href="/solutions/smes">SMEs</Link>
+              <Link href="/solutions/large-companies">Large companies</Link>
+              <Link className="mn-head" href="/compliance-deadline-calculator">Compliance deadline calculator <span aria-hidden="true">→</span></Link>
+            </div></div>
+          </div>
+          <Link className="mn-row" href="/blog">Blog</Link>
+          <Link className="mn-row" href="/contact">Contact</Link>
+        </nav>
+        <div className="mn-acts">
+          <button className="btn mstart" type="button" data-open-start>Get started</button>
+          <a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
+        </div>
+      </div>
     </div>
   </div>
 </header>

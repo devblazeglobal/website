@@ -1915,16 +1915,20 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
   :root{--edge:24px!important}
   .wrap,.wide{padding-inline:24px!important}
   .rh-in,.cx-hin{padding-inline:24px!important}
-  /* left-align blocks the desktop layout centres */
-  .hero-body,.rh-in,.sp-hero .wide,.cx-hin,.ab-hero .wrap,.bl-intro .wide,.hp-copy,.intro,.cal2-head,
-  .lo-h,.lo-lead,.pc-h,.tl-h,.ev-h,.wh-h,.stp-h,.st3-h,.hv-h,.team-h,.team-p,.sx-h,.bn-top,
-  .ap,.wh-tiles a,.cx-hero h1,.cx-sub,.rh h1,.rh-sub,.sp-hero h1,.sp-hero p,.hero-body h1,.hero-sub,.ab-hero h1,.ab-hero p{text-align:left!important}
-  .hero-body,.rh-in,.sp-hero .wide,.cx-hin,.ab-hero .wrap,.hp-copy,.cal2-head,.ap,.wh-tiles a,.bn-top{align-items:flex-start!important}
-  .hero-pts,.cx-quick,.rh-pills{justify-content:flex-start!important}
-  .cal2-head .cx-mini{align-items:flex-start!important;width:100%}
-  section.cal2 .cx-mini .dp{left:0!important;transform:none!important}
-  .tr-strip li{justify-content:flex-start!important}
-  .rh-creds{justify-content:flex-start!important;padding-inline:24px!important}
+  /* phones: every block centred */
+  main h1,main h2,main h3,main p,main dt,main dd,main li,main label,.hero-body,.rh-in,.sp-hero .wide,.cx-hin,.hp-copy,.intro,.cal2-head,.xs-copy,.trust,.proof,.ap,.wh-tiles a,.bn-txt,.stp-txt,.lo-card,.tl-grid li,.pc-cards li,.team .wide,.creds-top,.ab-who-copy,.bl-intro .wide{text-align:center!important}
+  .hero-body,.rh-in,.sp-hero .wide,.cx-hin,.hp-copy,.cal2-head,.xs-copy,.trust,.proof,.ap,.wh-tiles a,.bn-txt,.stp-txt,.creds-top,.cal2-head .cx-mini{align-items:center!important}
+  .hero-pts,.cx-quick,.rh-pills,.xs-facts,.xs-tabs,.tr-strip li,.rh-creds,.stp-acts,.ev-acts,.fk-acts,.trust .ticks li,.proof .rating,.cal2-more{justify-content:center!important}
+  .trust,.proof{display:flex;flex-direction:column}
+  .proof .stat{align-items:center!important;text-align:center}
+  .trust .ticks li{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .cal2-head .cx-mini{width:100%}
+  section.cal2 .cx-mini .dp{left:50%!important;transform:translateX(-50%)!important}
+  .tl-grid li .ev-i,.pc-cards li .ev-i{margin-inline:auto!important;display:block}
+  .ev-grid li>a,.ev-grid li>div{flex-direction:column;align-items:center;text-align:center}
+  .lg-card,.lg-card *{text-align:left!important}
+  .cx-body,.cx-body *,.faq summary,.faq p,.hv-list *,.hv-rows *,.td-list li,.gs-panel *,.screen *,.rm *{text-align:left!important}
+  .stp-acts .stp-link{align-self:center}
   /* every call-to-action button: full width */
   .hero-ctas,.rh-acts,.fk-acts,.band .actions,.xs-btns,.stp-acts,.wh-acts,.st3-acts,.ev-acts,.gs-actions,.cx-acts{flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;width:100%}
   .hero-ctas .btn,.rh-acts .btn,.fk-acts .btn,.band .actions .btn,.xs-btns .btn,.stp-acts .btn,.wh-acts .btn,.st3-acts .btn,.ev-acts .btn,.gs-actions .btn,.cx-acts .btn,.hp-btn,.askbar .btn,.creds-top .btn,.cx-go{width:100%!important;max-width:none!important;justify-content:center}
@@ -1939,4 +1943,53 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
   .seg h3{white-space:normal!important;font-size:34px!important;line-height:1.1!important;overflow-wrap:anywhere}
   .seg .btn{white-space:normal!important}
   .lo-card h3,.wh-tiles h3,.stp-txt h3,.bn-txt h3{overflow-wrap:anywhere}
+}
+
+/* ---------- Phone and tablet menu ---------- */
+@media (max-width:1100px){
+  .nav{padding-left:8px!important}
+  .nav .burger{order:-1;margin-right:6px;width:44px;height:44px;display:grid!important;place-items:center;border-radius:10px}
+  .nav .logo{margin-right:auto}
+  .burger svg path{transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .mnav{display:grid!important;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.7,.2,1);padding:0!important}
+  .mnav.open{grid-template-rows:1fr}
+  .mn-in{overflow:hidden;min-height:0;padding:0 18px;opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s}
+  .mnav.open .mn-in{opacity:1;transform:none;padding-bottom:18px}
+  .mn-list{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.1);margin-top:2px}
+  .mnav .mn-row{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.1);padding:16px 2px;font:400 18px/1.2 var(--sans);color:#fff;text-decoration:none;cursor:pointer;text-align:left}
+  .mn-row i{width:10px;height:10px;border-right:1.6px solid var(--gold);border-bottom:1.6px solid var(--gold);transform:rotate(45deg) translateY(-3px);transition:transform .3s}
+  .mn-grp.on .mn-row i{transform:rotate(-135deg) translateY(-1px)}
+  .mn-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}
+  .mn-sub>div{overflow:hidden;min-height:0;display:flex;flex-direction:column}
+  .mn-grp.on .mn-sub{grid-template-rows:1fr}
+  .mn-grp.on .mn-sub>div{padding:6px 0 12px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .mnav .mn-sub a{display:block;border:0;padding:10px 14px;font:400 16px/1.3 var(--sans);color:var(--on-navy-muted);text-decoration:none;border-radius:8px}
+  .mnav .mn-sub a:hover{background:rgba(255,255,255,.06);color:#fff}
+  .mnav .mn-sub a.mn-head{color:#fff;font-weight:500;margin-top:4px}
+  .mn-head span{color:var(--gold)}
+  .mn-acts{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .mnav .mn-acts .btn{display:flex;width:100%;margin:0;justify-content:center;padding:14px 20px;border-radius:10px}
+  .mnav .mn-acts .mstart{background:#fff;color:var(--navy)}
+}
+/* phones: centred blocks sit in the middle, not just their text */
+@media (max-width:640px){
+  main h1,main h2,main h3,main p,.hero-sub,.rh-sub,.cx-sub,.sp-hero p,.xs-p,.team-p,.lo-lead{margin-left:auto!important;margin-right:auto!important}
+  .trust .ticks{margin-inline:auto}
+  .lg-card p,.cx-body p,.faq p,.hv-list p,.screen p,.gs-panel p{margin-left:0!important;margin-right:0!important}
+}
+@media (max-width:1100px){
+  .navwrap{position:relative}
+  .mnav{position:absolute;left:0;right:0;top:calc(100% - 12px);background:var(--navy);border-radius:0 0 12px 12px;box-shadow:0 24px 50px rgba(5,16,56,.28);max-height:calc(100svh - 96px);overflow:auto;z-index:5}
+  .mnav:not(.open){box-shadow:none;pointer-events:none}
+  .mn-in{padding-top:12px}
+}
+@media (max-width:640px){
+  .site-footer,.site-footer *{text-align:center!important}
+  .xf-cols{justify-items:center;justify-content:center!important}
+  .xf-base{justify-content:center!important;flex-direction:column;align-items:center}
+  .post-body,.post-body *{text-align:left!important}
+}
+@media (max-width:640px){
+  .tr-strip li{flex-direction:column;gap:8px}
+  .rv-foot,.rv-foot .arrows,.cr-foot{justify-content:center!important}
 }
