@@ -10,8 +10,9 @@ export const mainPages: Entry[] = [
   { name: "Tax", path: "/services/tax", description: MAIN_PAGES.tax.sub },
   { name: "Corporate Secretarial", path: "/services/corporate-secretarial", description: MAIN_PAGES["corporate-secretarial"].sub },
   { name: "Payroll", path: "/services/payroll", description: MAIN_PAGES.payroll.sub },
-  { name: "Fractional CFO", path: "/services/fractional-cfo", description: MAIN_PAGES["fractional-cfo"].sub },
+  { name: "Outsourced CFO", path: "/services/outsourced-cfo", description: MAIN_PAGES["outsourced-cfo"].sub },
   { name: "Nominee Directorship", path: "/services/nominee-directorship", description: MAIN_PAGES["nominee-directorship"].sub },
+  { name: "Digitalisation, Automation and Dashboarding", path: "/services/digitalisation-automation", description: MAIN_PAGES["digitalisation-automation"].sub },
 ];
 
 // Sub pages of all three service lines: /services/{accounting|tax|corporate-secretarial}/{slug}.

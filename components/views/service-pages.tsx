@@ -2,6 +2,8 @@
 import { Acts, Benefits, Credentials, EvGrid, ExploreLinks, Faq, FlankCards, Help, Icon, MoreFrom, PageHero, PhotoHero, Reviews } from "@/components/ui";
 import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Card, type Parent, type Product } from "@/lib/content-data";
 import { PRODUCTS } from "@/lib/products";
+import { GetStartedSteps } from "@/components/steps";
+import Link from "next/link";
 import { whatsappUrl } from "@/lib/site";
 
 const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
@@ -13,11 +15,25 @@ export const subPath = (slug: string) => `/services/${SUB_PAGES[slug].par}/${slu
 
 export function MainServiceView({ slug }: { slug: Product }) {
   const p = MAIN_PAGES[slug];
-  const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug).map((x): [string, string] => [x.name, x.href]), slug === "corporate-secretarial" || slug === "nominee-directorship" ? INC : CALC];
+  const group = PRODUCTS.find((x) => x.key === slug)?.group;
+  const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug && x.group === group && x.key !== "incorporation").map((x): [string, string] => [x.name, x.href]), group === "set-up" ? INC : CALC];
   return (
     <main className="view" id="view-company">
       <PhotoHero className="rh-main" img={p.img} title={p.heading} sub={p.sub} wa={p.wa} />
+      {slug === "corporate-secretarial" && (
+        <section className="inc-band"><div className="wide"><div className="inc-in">
+          <div><h2>Starting a company?</h2><p>Incorporation first: we register the company on Bizfile, then appoint the company secretary.</p></div>
+          <Link className="btn btn-start" href="/start-a-business-in-singapore">Incorporation →</Link>
+        </div></div></section>
+      )}
+      {p.delivers && (
+        <section className="dlv"><div className="wide">
+          <h2 className="dlv-h">{p.delivers.h}</h2>
+          <ul className="dlv-grid">{p.delivers.items.map(([k, t, d]) => <li key={t}><Icon k={k} /><h3>{t}</h3><p>{d}</p></li>)}</ul>
+        </div></section>
+      )}
       <Benefits rows={p.benefits} />
+      <GetStartedSteps wa={p.wa} />
       <section className="fk fk-top"><div className="wide">
         <h2 className="fk-h">{p.gridHeading}</h2>
         <div className="fk-grid">

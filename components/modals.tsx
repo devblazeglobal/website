@@ -19,22 +19,26 @@ const Q: Record<string, Question> = {
   sec: { label: "Company secretary", q: "Does the company have a company secretary?", type: "one", opts: [["yes", "Yes"], ["no", "No"]], next: () => "staff" },
   staff: { label: "Team", q: "How many employees?", type: "one", opts: [["0", "None"], ["1-4", "1 to 4"], ["5+", "5 or more"]], next: () => "revenue" },
   revenue: { label: "Revenue", q: "Annual revenue, or expected revenue?", type: "one", opts: [["Under S$1 million"], ["S$1 million to S$5 million"], ["Over S$5 million"]], next: () => "finance" },
-  finance: { label: "Finance", q: "Anything else you need?", type: "many", opts: [["Budgets and forecasts"], ["Board or investor reporting"], ["Raising funds"], ["None of these"]], next: () => "name" },
+  finance: { label: "Also needed", q: "Anything else you need?", type: "many", opts: [["Financial models or cash flow visibility"], ["Budgets and forecasts"], ["Less manual work, or dashboards"], ["None of these"]], next: () => "name" },
   name: { label: "Contact", q: "What is your name?", type: "text", key: "name", ph: "Full name", next: () => "company" },
   company: { label: "Contact", q: "Company name", type: "text", key: "company", ph: "Registered or proposed company name", next: () => "done" },
 };
 const steps = (a: Answers) => (a.stage === "existing" ? 8 : 7);
 
-/** The products a company needs from its answers: (a) to (f). */
+/** The products a company needs from its answers: (a) up to all 8. */
 export function bundle(a: Answers): [string, string, string][] {
-  const fin = ((a.finance as string[]) ?? []).filter((x) => x !== "None of these");
+  const more = ((a.finance as string[]) ?? []).filter((x) => x !== "None of these");
+  const cfo = more.filter((x) => !x.startsWith("Less manual"));
+  const isNew = a.stage !== "existing";
   const r: [string, string, string][] = [];
-  if (a.stage !== "existing" || a.sec === "no") r.push(["Corporate Secretarial", a.stage !== "existing" ? "Incorporation and a company secretary" : "A named company secretary", "/services/corporate-secretarial"]);
+  if (isNew) r.push(["Incorporation", "Company registered on Bizfile", "/start-a-business-in-singapore"]);
+  if (a.dir === "overseas") r.push(["Nominee Directorship", "Resident director required by ACRA", "/services/nominee-directorship"]);
+  if (isNew || a.sec === "no") r.push(["Corporate Secretarial", "A named company secretary", "/services/corporate-secretarial"]);
   r.push(["Accounting", "Books, statements and XBRL each year", "/services/accounting"]);
   r.push(["Tax", "ECI and Form C-S or C each year", "/services/tax"]);
-  if (a.staff && a.staff !== "0") r.push(["Payroll", `Salaries, CPF and IR8A for ${a.staff === "5+" ? "5 or more" : "1 to 4"} employees`, "/services/payroll"]);
-  if (a.dir === "overseas") r.push(["Nominee Directorship", "Resident director required by ACRA", "/services/nominee-directorship"]);
-  if (a.revenue === "Over S$5 million" || fin.length) r.push(["Fractional CFO", fin.length ? fin.join(", ") : "Revenue above S$5 million", "/services/fractional-cfo"]);
+  if (a.staff && a.staff !== "0") r.push(["Payroll", `Salaries, CPF, SHG and IR8A for ${a.staff === "5+" ? "5 or more" : "1 to 4"} employees`, "/services/payroll"]);
+  if (a.revenue === "Over S$5 million" || cfo.length) r.push(["Outsourced CFO", cfo.length ? cfo.join(", ") : "Revenue above S$5 million", "/services/outsourced-cfo"]);
+  if (more.some((x) => x.startsWith("Less manual"))) r.push(["Digitalisation, Automation and Dashboarding", "Less manual work, live dashboards", "/services/digitalisation-automation"]);
   return r;
 }
 
@@ -133,7 +137,7 @@ export function GetStarted() {
     const msg = `Hello Blaze Global, I am ${ans.name}${ans.company ? ` from ${ans.company}` : ""}.\nBased on the questionnaire, we need:\n${need.map((r, k) => `(${String.fromCharCode(97 + k)}) ${r[0]}: ${r[1]}`).join("\n")}`;
     content = (
       <>
-        <p className="gs-label">Your products · {need.length === 6 ? "all 6" : `${need.length} of 6`}</p>
+        <p className="gs-label">Your products · {need.length} of 8</p>
         <h2 id="gs-q" className="gs-q">Based on your answers, you need</h2>
         <ol className="gs-bundle">{need.map((r) => <li key={r[0]}><div><a href={r[2]} onClick={close}>{r[0]}</a><span>{r[1]}</span></div></li>)}</ol>
         <div className="gs-actions">

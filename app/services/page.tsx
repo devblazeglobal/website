@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services",
   title: "Services | Accounting, Tax, Corporate Secretarial, Payroll, CFO | Blaze Global",
-  description: "Accounting, GST, payroll, corporate tax, a fractional CFO and corporate secretarial services for Singapore companies, from one team of Chartered Accountants.",
+  description: "Accounting, GST, payroll, corporate tax, a outsourced CFO and corporate secretarial services for Singapore companies, from one team of Chartered Accountants.",
 });
 
 
@@ -15,7 +15,7 @@ export default function ServicesPage() {
   const wa = "Hello Blaze Global, I would like to find out more about your services.";
   return (
     <main className="view" id="view-company">
-      <PageHero h1="Every service, one team" lede="Accounting, tax, corporate secretarial, payroll, fractional CFO and nominee director services for Singapore companies, by Chartered Accountants and an ACRA Registered Filing Agent." wa={wa} />
+      <PageHero h1="Every service, one team" lede="Accounting, tax, corporate secretarial, payroll, outsourced CFO and nominee director services for Singapore companies, by Chartered Accountants and an ACRA Registered Filing Agent." wa={wa} />
       <section className="segments"><div className="wide"><ProductCards /></div></section>
       <section className="fk fk-top"><div className="wide">
         <h2 className="fk-h">Accounting and tax services</h2>

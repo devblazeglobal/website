@@ -26,7 +26,8 @@ const nextConfig: NextConfig = {
       { source: "/services/accounting/corporate-income-tax", destination: "/services/tax/corporate-income-tax", permanent: true },
       { source: "/services/accounting/tax-advisory", destination: "/services/tax/tax-advisory", permanent: true },
       { source: "/services/accounting/payroll", destination: "/services/payroll", permanent: true },
-      { source: "/services/tax/fractional-cfo", destination: "/services/fractional-cfo", permanent: true },
+      { source: "/services/tax/fractional-cfo", destination: "/services/outsourced-cfo", permanent: true },
+      { source: "/services/fractional-cfo", destination: "/services/outsourced-cfo", permanent: true },
       { source: "/services/corporate-secretarial/nominee-directorship", destination: "/services/nominee-directorship", permanent: true },
       { source: "/financial-compliance-calendar", destination: "/compliance-deadline-calculator", permanent: true },
     ];

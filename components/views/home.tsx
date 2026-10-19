@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AskBar, CountUp } from "@/components/interactive";
 import { ProductCards } from "@/components/product-cards";
+import { GetStartedSteps } from "@/components/steps";
 import { Credentials, Reviews, Stars } from "@/components/ui";
 import { ComplianceCalendar, StructureChecklist } from "@/components/widgets";
 
@@ -15,7 +16,7 @@ export function HomeView() {
         <h1>We are here so you may focus on what truly matters</h1>
         <p className="hero-sub">We do the hard work to make things simple.</p>
         <AskBar />
-        <ul className="hero-pts" aria-label="Services"><li><Link href="/start-a-business-in-singapore"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Incorporation</Link></li><li><Link href="/services/accounting"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Accounting</Link></li><li><Link href="/services/tax"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Tax</Link></li><li><Link href="/services/payroll"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Payroll</Link></li><li><Link href="/services/fractional-cfo"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Fractional CFO</Link></li><li><Link href="/services/nominee-directorship"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Nominee director</Link></li></ul>
+        <ul className="hero-pts" aria-label="Services"><li><Link href="/start-a-business-in-singapore"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Incorporation</Link></li><li><Link href="/services/accounting"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Accounting</Link></li><li><Link href="/services/tax"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Tax</Link></li><li><Link href="/services/payroll"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Payroll</Link></li><li><Link href="/services/outsourced-cfo"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Outsourced CFO</Link></li><li><Link href="/services/nominee-directorship"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Nominee director</Link></li></ul>
         <div className="hero-ctas">
           <button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button>
         </div>
@@ -39,6 +40,8 @@ export function HomeView() {
     <div className="wrap intro"><h2 className="h2" id="svc-title">One place for your business needs</h2></div>
     <div className="wide"><ProductCards /></div>
   </section>
+
+  <GetStartedSteps />
 
   <section className="xs" aria-labelledby="sab-title"><div className="wide xs-grid">
     <div className="xs-copy">

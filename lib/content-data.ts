@@ -1,6 +1,6 @@
 // Generated from the approved mock-up (docs/brand/home-mockup.html) by
 // scripts/port. Copy lives here so pages render it, never retype it.
-import { CFO_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE } from "@/lib/content-new";
+import { CFO_PAGE, DIGITAL_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE } from "@/lib/content-new";
 
 export type Pair = [title: string, text: string];
 export type Card = [title: string, text: string, art: ArtKind, chip: string, href: string];
@@ -9,9 +9,9 @@ export type IconKey = keyof typeof ICONS;
 export type Status = "ok" | "wait" | "todo";
 export interface Benefit { h: string; p: string; img: string; card: [string, [string, string, Status][]] }
 export type Parent = "accounting" | "tax" | "corporate-secretarial";
-export type Product = Parent | "payroll" | "fractional-cfo" | "nominee-directorship";
+export type Product = Parent | "payroll" | "outsourced-cfo" | "nominee-directorship" | "digitalisation-automation";
 export interface SubPage { par: Parent; slug: string; name: string; line: string; art: [ArtKind, string]; h1: string; lede: string; why: Pair[] }
-export interface MainPage { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[] }
+export interface MainPage { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[]; delivers?: { h: string; items: [IconKey, string, string][] } }
 export interface SegmentPage { slug: string; name: string; line: string; h1: string; lede: string; wa: string; bandHeading: string; bandIcons: IconKey[]; why: Pair[]; needHeading: string; needs: [IconKey, string, string, string][]; chat: Pair }
 export interface Review { n: string; role: string; head: string; body: string[] }
 
@@ -524,7 +524,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
    ],
    [
     "Tax",
-    "Corporate tax, tax planning and a fractional CFO.",
+    "Corporate tax, tax planning and a outsourced CFO.",
     "route",
     "Tax services",
     "/services/tax"
@@ -1102,20 +1102,20 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    ],
    [
     "doc",
-    "Fractional CFO",
+    "Outsourced CFO",
     "Budgets, forecasts and board packs, part-time",
-    "/services/fractional-cfo"
+    "/services/outsourced-cfo"
    ],
    [
     "clock",
     "Cash forecast",
     "Rolling 12 months for each entity",
-    "/services/fractional-cfo"
+    "/services/outsourced-cfo"
    ],
    [
     "scale",
     "Scenario models",
-    "Expansion, hiring and pricing modelled before you commit", "/services/fractional-cfo"
+    "Expansion, hiring and pricing modelled before you commit", "/services/outsourced-cfo"
    ],
    [
     "percent",
@@ -1238,4 +1238,4 @@ export const REVIEWS: Review[] = [
 ];
 
 // Added after the client review (lib/content-new.ts).
-Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "fractional-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE });
+Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "outsourced-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE, "digitalisation-automation": DIGITAL_PAGE });

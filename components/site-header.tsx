@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState } from "react";
 
-import { PRODUCTS } from "@/lib/products";
+import { GROUPS, inGroup } from "@/lib/products";
 
 // Navy bar that follows the scroll. Products and Solutions open a panel
 // over the page: hover on desktop, click anywhere. The burger opens the
@@ -54,10 +54,10 @@ export function SiteHeader() {
 
     <div className="drop" id="drop"><div className="drop-in">
       <div className={`dpanel dp-products${menu === "products" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
-        {PRODUCTS.map((p) => (
-          <div className="dcard" key={p.key}>
-            <Link className="ov" href={p.href}><b>{p.name}</b><span>{p.line}</span><i aria-hidden="true">→</i></Link>
-            <ul>{p.services.filter(([, h]) => h !== p.href).map(([t, h]) => <li key={t}><Link className="it" href={h}><b>{t}</b></Link></li>)}</ul>
+        {GROUPS.map((g) => (
+          <div className="dcard" key={g.key}>
+            <h4>{g.name}</h4>
+            {inGroup(g.key).map((p) => <Link key={p.key} className="ov" href={p.href}><b>{p.name}</b><span>{p.line}</span><i aria-hidden="true">→</i></Link>)}
           </div>
         ))}
       </div>
@@ -91,10 +91,10 @@ export function SiteHeader() {
           <div className={`mn-grp${group === "p" ? " on" : ""}`}>
             <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}>Products<i aria-hidden="true" /></button>
             <div className="mn-sub"><div>
-              {PRODUCTS.map((p) => (
-                <Fragment key={p.key}>
-                  <Link className="mn-head" href={p.href}>{p.name} <span aria-hidden="true">→</span></Link>
-                  {p.services.filter(([, h]) => h !== p.href).map(([t, h]) => <Link key={t} href={h}>{t}</Link>)}
+              {GROUPS.map((g) => (
+                <Fragment key={g.key}>
+                  <span className="mn-grp-l">{g.name}</span>
+                  {inGroup(g.key).map((p) => <Link key={p.key} className="mn-head" href={p.href}>{p.name} <span aria-hidden="true">→</span></Link>)}
                 </Fragment>
               ))}
             </div></div>
