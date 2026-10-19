@@ -2191,3 +2191,9 @@ section.cal2 .ce-r .cal2-more{display:inline-flex;justify-content:flex-start;mar
 .req-st{display:none}
 @media (max-width:520px){.req-lt{display:none}.req-st{display:inline}.req-tabs{gap:2px;padding:4px}.req-tabs button{font-size:12.5px;padding:8px 9px}}
 @media (max-width:360px){.req-tabs button{font-size:12px;padding:7px 8px}}
+
+/* Navbar: logo centred; links left, actions right (desktop); hamburger left (phone/tablet) */
+.nav{position:relative}
+.nav .logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0!important}
+@media (min-width:1101px){.nav .tabs{margin-right:auto!important}}
+@media (max-width:1100px){.nav .right-wa{margin-left:auto!important}}
