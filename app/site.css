@@ -2197,3 +2197,7 @@ section.cal2 .ce-r .cal2-more{display:inline-flex;justify-content:flex-start;mar
 .nav .logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0!important}
 @media (min-width:1101px){.nav .tabs{margin-right:auto!important}}
 @media (max-width:1100px){.nav .right-wa{margin-left:auto!important}}
+/* Status key: solid fills, text in the matching hue */
+.ce-key li.k-red{background:#f7e0d9;color:#8f3a26}
+.ce-key li.k-amb{background:#f6ead2;color:#7a540e}
+.ce-key li.k-grn{background:#dcece2;color:#24603f}
