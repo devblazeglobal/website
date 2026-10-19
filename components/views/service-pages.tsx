@@ -2,8 +2,8 @@
 import { Acts, Benefits, Credentials, EvGrid, ExploreLinks, Faq, FlankCards, Help, Icon, MoreFrom, PageHero, PhotoHero, Reviews } from "@/components/ui";
 import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Card, type Parent, type Product } from "@/lib/content-data";
 import { PRODUCTS } from "@/lib/products";
-import { GetStartedSteps } from "@/components/steps";
-import Link from "next/link";
+import { DeliverPanels, IncorporationBand } from "@/components/deliver-panels";
+import { HowItWorks } from "@/components/how-it-works";
 import { whatsappUrl } from "@/lib/site";
 
 const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
@@ -20,20 +20,10 @@ export function MainServiceView({ slug }: { slug: Product }) {
   return (
     <main className="view" id="view-company">
       <PhotoHero className="rh-main" img={p.img} title={p.heading} sub={p.sub} wa={p.wa} />
-      {slug === "corporate-secretarial" && (
-        <section className="inc-band"><div className="wide"><div className="inc-in">
-          <div><h2>Starting a company?</h2><p>Incorporation first: we register the company on Bizfile, then appoint the company secretary.</p></div>
-          <Link className="btn btn-start" href="/start-a-business-in-singapore">Incorporation →</Link>
-        </div></div></section>
-      )}
-      {p.delivers && (
-        <section className="dlv"><div className="wide">
-          <h2 className="dlv-h">{p.delivers.h}</h2>
-          <ul className="dlv-grid">{p.delivers.items.map(([k, t, d]) => <li key={t}><Icon k={k} /><h3>{t}</h3><p>{d}</p></li>)}</ul>
-        </div></section>
-      )}
+      {slug === "corporate-secretarial" && <IncorporationBand />}
+      {p.delivers && <DeliverPanels h={p.delivers.h} items={p.delivers.items} />}
       <Benefits rows={p.benefits} />
-      <GetStartedSteps wa={p.wa} />
+      <HowItWorks />
       <section className="fk fk-top"><div className="wide">
         <h2 className="fk-h">{p.gridHeading}</h2>
         <div className="fk-grid">
@@ -63,7 +53,7 @@ export function SubServiceView({ slug }: { slug: string }) {
       <PageHero h1={d.h1} lede={d.lede} wa={wa} />
       <section className="tl"><div className="wide">
         <h2 className="tl-h">What&apos;s included</h2>
-        <ul className="tl-grid">{TILES[slug].map(([k, t, s]) => <li key={t}><Icon k={k} /><h3>{t}</h3><p>{s}</p></li>)}</ul>
+        <ul className="tl-grid tl-cards">{TILES[slug].map(([k, t, s]) => <li key={t}><span className="tl-ib"><Icon k={k} /></span><h3>{t}</h3><p>{s}</p></li>)}</ul>
       </div></section>
       <Reviews heading="What our clients say" />
       <MoreFrom title={`More from ${LINES[par][0]}`} cards={siblings} links={[LINES[par], ...others]} wa={wa} />

@@ -1,7 +1,7 @@
 // Products added after the 19 Oct 2026 client review: Tax, Payroll,
 // Outsourced CFO and Nominee Directorship, each its own product page.
 // Draft copy: Blaze to confirm the scope of each before launch.
-import type { MainPage } from "@/lib/content-data";
+import type { IconKey, MainPage } from "@/lib/content-data";
 
 export const TAX_PAGE: MainPage = {
   slug: "tax",
@@ -157,5 +157,76 @@ export const DIGITAL_PAGE: MainPage = {
     { h: "Practical, cost-effective solutions", p: "Built on your existing systems, not new software for its own sake.", img: "/images/sme.jpg", card: ["Workflow review", [["Current process", "Mapped", "ok"], ["Manual steps", "Found", "ok"], ["Automation plan", "Agreed", "ok"], ["Build", "Next", "todo"]]] },
     { h: "Live figures, not month-old reports", p: "Dashboards that update as transactions arrive.", img: "/images/help-1.jpg", card: ["Dashboard", [["Revenue", "Live", "ok"], ["Margin", "Live", "ok"], ["Cash", "Live", "ok"], ["Targets", "Set", "ok"]]] },
     { h: "Less re-keying", p: "Systems connected so data is entered once.", img: "/images/cs-2.jpg", card: ["Integration", [["Xero", "Connected", "ok"], ["Google Sheets", "Connected", "ok"], ["Bank feeds", "Connected", "ok"], ["CRM", "Planned", "todo"]]] },
+  ],
+};
+
+// Sub-page "What's included": two to three lines per item, what we do, how,
+// and what the company gets. Replaces the one-line tiles (20 Oct 2026).
+export const TILES_LONG: Record<string, [IconKey, string, string][]> = {
+  bookkeeping: [
+    ["link", "Xero bank feeds", "Every bank account and card connected to Xero, so transactions arrive daily without anyone keying them in."],
+    ["bank", "Bank reconciliation", "Each transaction matched to an invoice, bill or receipt every week. Unmatched items are listed and cleared before the month closes."],
+    ["receipt", "Receipts on every expense", "Snap a photo or forward an email. The receipt is attached to its transaction, so every expense has its evidence for IRAS."],
+    ["doc", "Sales invoices", "Invoices recorded against the right customer and revenue account, and matched to payments as they arrive. Overdue balances shown each month."],
+    ["clock", "Bills and payables", "Supplier bills entered with due dates and GST treatment, so payables are complete and payment runs can be planned around cash."],
+    ["layers", "Recurring entries", "Rent, subscriptions and repeat suppliers coded once by rule, so the same entries post the same way every month."],
+    ["percent", "GST coding", "Every line coded standard-rated, zero-rated or exempt, so the quarterly F5 return comes straight from the books."],
+    ["chat", "Questions on WhatsApp", "Unclear items sent to you as one short list each week, answered in one go instead of a long email thread."],
+    ["check", "Ready for year end", "Books kept to SFRS and reconciled at year end, ready for financial statements, ECI and Form C-S without rework."],
+  ],
+  "management-reports": [
+    ["chart", "Profit and loss", "Revenue, costs and margin for the month and year to date, with gross and net margin shown as a percentage."],
+    ["layers", "Balance sheet", "Assets, liabilities and equity at each month end, so receivables, payables and cash can be checked at a glance."],
+    ["bank", "Cash flow", "Where cash came from and where it went, split into operating, investing and financing, with the closing balance reconciled."],
+    ["clock", "Monthly close", "Books closed in the first week of each month on a fixed checklist, so reports arrive on the same date every month."],
+    ["scale", "Month-on-month comparison", "Each line set against last month and the same month last year, so seasonal swings and real changes are easy to tell apart."],
+    ["doc", "Variance list", "Lines that move are listed with the transactions behind them, so questions are answered before the report reaches you."],
+    ["cal", "12-month cash forecast", "A rolling forecast updated with every close, showing the month cash runs short while there is still time to act."],
+    ["user", "Board-ready format", "Laid out for directors, investors and lenders, with a one-page summary in front of the detailed statements."],
+    ["check", "SFRS basis", "Prepared under the Singapore Financial Reporting Standards, so monthly figures carry straight into the year-end statements."],
+  ],
+  "financial-statements-xbrl": [
+    ["doc", "Statement of financial position", "Assets, liabilities and equity at year end, prepared from reconciled books and tied back to bank and loan statements."],
+    ["chart", "Statement of profit or loss", "Revenue and expenses for the financial year, classified the way SFRS requires and compared with the prior year."],
+    ["layers", "Changes in equity", "Share capital, retained earnings and dividends for the year, matched to the company's registers and resolutions."],
+    ["bank", "Statement of cash flows", "Operating, investing and financing cash flows for the year, reconciled to the opening and closing cash balances."],
+    ["receipt", "Notes to the accounts", "Accounting policies and the disclosures SFRS requires, written for your company rather than copied from a template."],
+    ["user", "Directors' statement", "Prepared for the directors to sign with the financial statements, as the Companies Act requires."],
+    ["shield", "Audit exemption check", "Small company status confirmed: at least two of revenue up to S$10 million, assets up to S$10 million and 50 employees or fewer."],
+    ["globe", "XBRL conversion", "Financial statements converted into the XBRL format ACRA requires, with every figure checked against the signed statements."],
+    ["building", "Filed with the annual return", "Lodged on Bizfile with the annual return by our ACRA Registered Filing Agent, and the filing receipt sent to you."],
+  ],
+  gst: [
+    ["check", "Registration check", "Taxable turnover watched against the S$1 million threshold every quarter, looking back 12 months and forward 12 months."],
+    ["doc", "GST registration", "Application prepared and filed with IRAS, with the effective date and first return period confirmed to you."],
+    ["percent", "Quarterly F5 returns", "Prepared from the books and filed within 1 month of each quarter end, with the figures reconciled before submission."],
+    ["receipt", "Input tax claims", "Input tax claimed only against valid tax invoices, so every claim holds up if IRAS asks for the evidence."],
+    ["layers", "Tax codes", "Standard-rated, zero-rated and exempt supplies coded correctly, including exports and international services."],
+    ["globe", "Imported services", "Overseas services and low-value goods reviewed for reverse charge, so GST is accounted for where the rules apply."],
+    ["bank", "GST payments", "Amount due confirmed before each payment date, and refunds tracked until IRAS pays them."],
+    ["scale", "Voluntary registration", "Advice on registering below the threshold: what you can claim back, and what registering commits you to for 2 years."],
+    ["cal", "Deadline calendar", "Every F5 date for the year mapped from your accounting periods, with reminders before each one."],
+  ],
+  "corporate-income-tax": [
+    ["check", "ECI", "Estimated Chargeable Income filed within 3 months of year end, or waived when revenue is S$5 million or below and ECI is nil."],
+    ["doc", "Tax computation", "Accounting profit adjusted to chargeable income line by line, with every adjustment explained in the working papers."],
+    ["scale", "The right return", "Form C-S (Lite) for revenue up to S$200,000, Form C-S up to S$5 million, Form C above that, chosen from your figures."],
+    ["percent", "Partial tax exemption", "75% exemption on the first S$10,000 of chargeable income and 50% on the next S$190,000, applied every year."],
+    ["building", "Start-up tax exemption", "For qualifying new companies, 75% on the first S$100,000 and 50% on the next S$100,000, for the first 3 Years of Assessment."],
+    ["layers", "Capital allowances", "Claimed on qualifying plant, equipment and software, including the options to write off assets in 1 or 3 years."],
+    ["receipt", "Non-deductible expenses", "Private, capital and other non-deductible costs identified and added back before filing, so the return stands up to review."],
+    ["cal", "Filed by 30 November", "Each return lodged on myTax Portal before 30 November of the Year of Assessment, with the notice of assessment checked when it arrives."],
+    ["chat", "IRAS queries", "Questions from IRAS answered on your behalf, with the supporting schedules already prepared from the computation."],
+  ],
+  "tax-advisory": [
+    ["percent", "Tax planning", "Savings identified from your reconciled figures before year end, while there is still time to act on them."],
+    ["clock", "12-month cash forecast", "A rolling forecast updated after each close, so tax payments and other large outflows are planned months ahead."],
+    ["scale", "Scenario models", "Hiring, expansion and pricing modelled before you commit, with the tax effect of each option shown side by side."],
+    ["chart", "Financial analysis", "Margin, cost and cash trends from your own books, so decisions rest on figures rather than estimates."],
+    ["layers", "Group relief", "Losses transferred between qualifying Singapore companies in the same group, to reduce the group's total tax."],
+    ["user", "Director remuneration", "The mix of salary, bonus and dividends reviewed for tax and CPF, for the company and for the directors."],
+    ["building", "Sustainability review", "Cash runway and break-even point reviewed, so you know how long the business can run on current figures."],
+    ["shield", "Key person insurance", "Advice on cover for the people the business depends on, arranged through our partners."],
+    ["check", "Big Four experience", "Advice from Chartered Accountants with managerial experience in a Big Four firm, applied to companies of your size."],
   ],
 };

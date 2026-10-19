@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { AskBar, CountUp } from "@/components/interactive";
 import { ProductCards } from "@/components/product-cards";
-import { GetStartedSteps } from "@/components/steps";
+import { HowItWorks } from "@/components/how-it-works";
 import { Credentials, Reviews, Stars } from "@/components/ui";
 import { ComplianceCalendar, StructureChecklist } from "@/components/widgets";
 
@@ -41,7 +41,7 @@ export function HomeView() {
     <div className="wide"><ProductCards /></div>
   </section>
 
-  <GetStartedSteps />
+  <HowItWorks />
 
   <section className="xs" aria-labelledby="sab-title"><div className="wide xs-grid">
     <div className="xs-copy">

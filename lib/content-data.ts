@@ -1,6 +1,6 @@
 // Generated from the approved mock-up (docs/brand/home-mockup.html) by
 // scripts/port. Copy lives here so pages render it, never retype it.
-import { CFO_PAGE, DIGITAL_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE } from "@/lib/content-new";
+import { CFO_PAGE, DIGITAL_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE, TILES_LONG } from "@/lib/content-new";
 
 export type Pair = [title: string, text: string];
 export type Card = [title: string, text: string, art: ArtKind, chip: string, href: string];
@@ -1239,3 +1239,4 @@ export const REVIEWS: Review[] = [
 
 // Added after the client review (lib/content-new.ts).
 Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "outsourced-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE, "digitalisation-automation": DIGITAL_PAGE });
+Object.assign(TILES, TILES_LONG);
