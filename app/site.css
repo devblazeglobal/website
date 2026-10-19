@@ -2201,3 +2201,9 @@ section.cal2 .ce-r .cal2-more{display:inline-flex;justify-content:flex-start;mar
 .ce-key li.k-red{background:#f7e0d9;color:#8f3a26}
 .ce-key li.k-amb{background:#f6ead2;color:#7a540e}
 .ce-key li.k-grn{background:#dcece2;color:#24603f}
+/* Logo 40% larger (17px → 24px); stepped down on narrow phones to clear the hamburger */
+.nav .logo img{height:24px}
+@media (max-width:420px){.nav .logo img{height:21px}}
+@media (max-width:350px){.nav .logo img{height:18px}}
+.nav .logo{width:max-content}.nav .logo img{max-width:none}
+@media (max-width:420px){.nav .logo img{height:auto!important;width:min(204px,calc(100vw - 168px))}}
