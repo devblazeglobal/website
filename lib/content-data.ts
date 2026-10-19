@@ -1,5 +1,6 @@
 // Generated from the approved mock-up (docs/brand/home-mockup.html) by
 // scripts/port. Copy lives here so pages render it, never retype it.
+import { NEW_SUB_PAGES, NEW_TILES, TAX_PAGE } from "@/lib/content-new";
 
 export type Pair = [title: string, text: string];
 export type Card = [title: string, text: string, art: ArtKind, chip: string, href: string];
@@ -7,7 +8,8 @@ export type ArtKind = "doc" | "bars" | "toggles" | "cal" | "ring" | "stamp" | "r
 export type IconKey = keyof typeof ICONS;
 export type Status = "ok" | "wait" | "todo";
 export interface Benefit { h: string; p: string; img: string; card: [string, [string, string, Status][]] }
-export interface SubPage { slug: string; name: string; line: string; art: [ArtKind, string]; h1: string; lede: string; why: Pair[] }
+export type Parent = "accounting" | "tax" | "corporate-secretarial";
+export interface SubPage { par: Parent; slug: string; name: string; line: string; art: [ArtKind, string]; h1: string; lede: string; why: Pair[] }
 export interface MainPage { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[] }
 export interface SegmentPage { slug: string; name: string; line: string; h1: string; lede: string; wa: string; bandHeading: string; bandIcons: IconKey[]; why: Pair[]; needHeading: string; needs: [IconKey, string, string, string][]; chat: Pair }
 export interface Review { n: string; role: string; head: string; body: string[] }
@@ -33,6 +35,7 @@ export const ICONS = {
 
 export const SUB_PAGES: Record<string, SubPage> = {
  "bookkeeping": {
+  "par": "accounting",
   "slug": "bookkeeping",
   "name": "Bookkeeping",
   "line": "Bank, card and cash records reconciled on Xero every week.",
@@ -58,6 +61,7 @@ export const SUB_PAGES: Record<string, SubPage> = {
   ]
  },
  "management-reports": {
+  "par": "accounting",
   "slug": "management-reports",
   "name": "Management reports",
   "line": "Profit and loss, balance sheet and cash flow, closed every month.",
@@ -83,6 +87,7 @@ export const SUB_PAGES: Record<string, SubPage> = {
   ]
  },
  "financial-statements-xbrl": {
+  "par": "accounting",
   "slug": "financial-statements-xbrl",
   "name": "Financial statements and XBRL",
   "line": "Unaudited financial statements and XBRL, filed with ACRA.",
@@ -108,6 +113,7 @@ export const SUB_PAGES: Record<string, SubPage> = {
   ]
  },
  "gst": {
+  "par": "accounting",
   "slug": "gst",
   "name": "GST",
   "line": "Registration and quarterly F5 returns, filed with IRAS.",
@@ -133,6 +139,7 @@ export const SUB_PAGES: Record<string, SubPage> = {
   ]
  },
  "corporate-income-tax": {
+  "par": "tax",
   "slug": "corporate-income-tax",
   "name": "Corporate income tax",
   "line": "ECI and Form C-S, C-S (Lite) or C, filed with IRAS.",
@@ -158,6 +165,7 @@ export const SUB_PAGES: Record<string, SubPage> = {
   ]
  },
  "tax-advisory": {
+  "par": "tax",
   "slug": "tax-advisory",
   "name": "Tax advisory and forecasting",
   "line": "Tax planning and cash forecasts from your own numbers.",
@@ -469,7 +477,7 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
  ]
 } as Record<string, [IconKey, string, string][]>;
 
-export const MAIN_PAGES: Record<"accounting" | "corporate-secretarial", MainPage> = {
+export const MAIN_PAGES: Record<Parent, MainPage> = {
  "accounting": {
   "slug": "accounting",
   "img": "/images/sg-2.jpg",
@@ -507,18 +515,18 @@ export const MAIN_PAGES: Record<"accounting" | "corporate-secretarial", MainPage
     "/services/accounting/gst"
    ],
    [
-    "Corporate income tax",
-    "ECI and Form C-S, C-S (Lite) or C, filed with IRAS.",
+    "Payroll",
+    "Monthly payroll, CPF and IR8A, prepared and filed on time.",
     "cal",
-    "Due 30 Nov",
-    "/services/accounting/corporate-income-tax"
+    "Paid on time",
+    "/services/accounting/payroll"
    ],
    [
-    "Tax advisory and forecasting",
-    "Tax planning and cash forecasts from your own numbers.",
+    "Tax",
+    "Corporate tax, tax planning and a fractional CFO.",
     "route",
-    "Scenario",
-    "/services/accounting/tax-advisory"
+    "Tax services",
+    "/services/tax"
    ]
   ],
   "faq": [
@@ -680,11 +688,11 @@ export const MAIN_PAGES: Record<"accounting" | "corporate-secretarial", MainPage
     ""
    ],
    [
-    "Reminders",
-    "Every ACRA date mapped from your financial year end.",
-    "toggles",
-    "Reminders on",
-    ""
+    "Nominee Directorship",
+    "A locally resident director to meet the ACRA requirement.",
+    "ring",
+    "Resident director",
+    "/services/corporate-secretarial/nominee-directorship"
    ]
   ],
   "faq": [
@@ -797,7 +805,7 @@ export const MAIN_PAGES: Record<"accounting" | "corporate-secretarial", MainPage
    }
   ]
  }
-} as Record<"accounting" | "corporate-secretarial", MainPage>;
+} as Record<Parent, MainPage>;
 
 export const SEGMENT_PAGES: Record<string, SegmentPage> = {
  "startups": {
@@ -881,13 +889,13 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
     "check",
     "Start-up tax exemption",
     "Claimed in the first 3 Years of Assessment where eligible",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "doc",
     "ECI and Form C-S",
     "Prepared and filed with IRAS",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "chart",
@@ -1000,19 +1008,19 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
     "check",
     "ECI",
     "Filed or waived within 3 months of year end",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "doc",
     "Form C-S",
     "Prepared from your accounts, filed by 30 November",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "scale",
     "Capital allowances",
     "Claimed on qualifying assets",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "layers",
@@ -1101,31 +1109,31 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
     "clock",
     "Cash forecast",
     "Rolling 12 months for each entity",
-    "/services/accounting/tax-advisory"
+    "/services/tax/tax-advisory"
    ],
    [
     "scale",
     "Scenario models",
     "Expansion, hiring and pricing modelled before you commit",
-    "/services/accounting/tax-advisory"
+    "/services/tax/tax-advisory"
    ],
    [
     "percent",
     "Tax advisory",
     "Savings identified from your financials each year",
-    "/services/accounting/tax-advisory"
+    "/services/tax/tax-advisory"
    ],
    [
     "check",
     "Group relief",
     "Losses transferred between qualifying companies",
-    "/services/accounting/tax-advisory"
+    "/services/tax/tax-advisory"
    ],
    [
     "doc",
     "Form C",
     "Prepared and filed for each Singapore entity",
-    "/services/accounting/corporate-income-tax"
+    "/services/tax/corporate-income-tax"
    ],
    [
     "receipt",
@@ -1228,3 +1236,8 @@ export const REVIEWS: Review[] = [
   ]
  }
 ];
+
+// Added after the client review (lib/content-new.ts).
+Object.assign(SUB_PAGES, NEW_SUB_PAGES);
+Object.assign(TILES, NEW_TILES);
+MAIN_PAGES.tax = TAX_PAGE;

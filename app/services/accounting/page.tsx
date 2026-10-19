@@ -11,5 +11,5 @@ export const metadata = pageMetadata({
 });
 
 export default function AccountingPage() {
-  return (<><JsonLd data={serviceSchema(mainPages[0])} /><MainServiceView slug="accounting" /></>);
+  return (<><JsonLd data={serviceSchema(mainPages.find((p) => p.path === "/services/accounting")!)} /><MainServiceView slug="accounting" /></>);
 }

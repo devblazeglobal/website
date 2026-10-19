@@ -1,18 +1,30 @@
 // Statutory deadlines counted from a financial year end (FYE).
 // Rules: ECI 3 months (IRAS); AGM 6 months, 4 if listed (Companies Act s175);
-// annual return 7 months, 5 if listed (s197); Form C-S/C 30 November of the
-// Year of Assessment. A year end on the last day of a month moves deadlines
+// annual return 7 months, 5 if listed (s197); IR8A 1 March after the
+// calendar year (IRAS AIS); Form C-S/C 30 November of the Year of Assessment. A year end on the last day of a month moves deadlines
 // to the last day of the target month, as ACRA counts them.
 
 export interface Deadline {
   date: Date;
   name: string;
+  /** Short timing line, e.g. "3 months after year end". */
+  when: string;
   agency: string;
   rule: string;
   note: string;
   href: string;
   link: string;
+  /** The exact ACRA or IRAS page for this filing. */
+  url: string;
 }
+
+const URL = {
+  eci: "https://www.iras.gov.sg/taxes/corporate-income-tax/estimated-chargeable-income-(eci)-filing",
+  agm: "https://www.acra.gov.sg/manage/companies/legal-requirements-common-offences/holding-annual-general-meetings/due-dates-requirements/",
+  ar: "https://www.acra.gov.sg/manage/companies/legal-requirements-common-offences/filing-annual-returns-companies/deadline-requirements/",
+  ir8a: "https://www.iras.gov.sg/taxes/individual-income-tax/employers/auto-inclusion-scheme-(ais)-for-employment-income/reporting-employee-earnings-(ir8a-appendix-8a-appendix-8b)",
+  tax: "https://www.iras.gov.sg/taxes/corporate-income-tax/form-c-s-form-c-s-(lite)-form-c-filing/overview-of-form-c-s-form-c-s-(lite)-form-c",
+};
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const SHORT = MONTHS.map((m) => m.slice(0, 3));
@@ -59,47 +71,47 @@ export function deadlines(fye: Date, listed = false): Deadline[] {
   const y = fye.getFullYear();
   const rows: Deadline[] = [
     {
-      date: addMonths(fye, 3), name: "Estimated Chargeable Income", agency: "IRAS",
+      date: addMonths(fye, 3), name: "Estimated Chargeable Income", when: "3 months after year end", agency: "IRAS",
       rule: "Within 3 months after the financial year end",
       note: "No ECI filing is needed if annual revenue is S$5 million or below and ECI is nil, before deducting the partial or start-up tax exemption. You self-assess the waiver; there is no need to inform IRAS.",
-      href: "/services/accounting/corporate-income-tax", link: "Corporate income tax",
+      href: "/services/tax/corporate-income-tax", link: "Corporate income tax", url: URL.eci,
     },
   ];
   if (!listed) rows.push({
-    date: addMonths(fye, 5), name: "Send financial statements to members", agency: "ACRA",
+    date: addMonths(fye, 5), name: "Send financial statements to members", when: "5 months after year end", agency: "ACRA",
     rule: "Within 5 months after the financial year end, if not holding an AGM (Companies Act 1967 s175A)",
     note: "A private company that sends its financial statements to all members within 5 months does not need to hold an AGM. Members may still ask for one up to 14 days before the 6-month deadline.",
-    href: "/services/corporate-secretarial", link: "Corporate Secretarial",
+    href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.agm,
   });
   rows.push(
     {
-      date: addMonths(fye, listed ? 4 : 6), name: "Annual General Meeting", agency: "ACRA",
+      date: addMonths(fye, listed ? 4 : 6), name: "Annual General Meeting", when: `${listed ? 4 : 6} months after year end`, agency: "ACRA",
       rule: `${listed ? "Listed" : "Non-listed"} company: within ${listed ? 4 : 6} months after the financial year end (Companies Act 1967 s175)`,
       note: listed
         ? "Listed companies must hold an AGM each year."
         : "A private company may dispense with AGMs if all members pass a resolution (s175A), or is exempt if it sends financial statements within 5 months. A dormant non-listed private company with total assets of S$500,000 or less is also exempt. AGM details are still declared in the annual return.",
-      href: "/services/corporate-secretarial", link: "Corporate Secretarial",
+      href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.agm,
     },
     {
-      date: addMonths(fye, listed ? 5 : 7), name: "Annual return", agency: "ACRA",
+      date: addMonths(fye, listed ? 5 : 7), name: "Annual return", when: `${listed ? 5 : 7} months after year end`, agency: "ACRA",
       rule: `${listed ? "Listed" : "Non-listed"} company: within ${listed ? 5 : 7} months after the financial year end (Companies Act 1967 s197)`,
-      note: `Companies with a share capital that keep a branch register outside Singapore have one extra month (${formatLong(addMonths(fye, listed ? 6 : 8))}). The annual return must be filed even if the company is dormant.`,
-      href: "/services/corporate-secretarial", link: "Corporate Secretarial",
+      note: `Companies with a share capital that keep a branch register outside Singapore have one extra month (${formatLong(addMonths(fye, listed ? 6 : 8))}). The annual return must be filed even if the company is dormant. Financial statements in XBRL are filed with it.`,
+      href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.ar,
     },
     {
-      date: addMonths(fye, listed ? 5 : 7), name: "Financial statements in XBRL", agency: "ACRA",
-      rule: "Filed together with the annual return",
-      note: "Most Singapore companies file financial statements in XBRL with the annual return. Solvent exempt private companies need not file, and dormant relevant companies meeting s201A need not prepare or file them.",
-      href: "/services/accounting/financial-statements-xbrl", link: "Financial statements and XBRL",
+      date: new Date(y + 1, 2, 1), name: "IR8A employee income", when: "1 March each year", agency: "IRAS",
+      rule: `1 March ${y + 1}, for employment income paid in ${y}`,
+      note: "Employers in the Auto-Inclusion Scheme submit IR8A, Appendix 8A and Appendix 8B to IRAS electronically. AIS is compulsory for employers with 5 or more employees.",
+      href: "/services/accounting/payroll", link: "Payroll", url: URL.ir8a,
     },
     {
-      date: new Date(y + 1, 10, 30), name: `Form C-S, C-S (Lite) or C for YA ${y + 1}`, agency: "IRAS",
-      rule: `30 November of the Year of Assessment (YA ${y + 1} covers the financial year ending in ${y}), filed at mytax.iras.gov.sg`,
-      note: "C-S (Lite) for revenue of S$200,000 or below, C-S up to S$5 million, Form C above. A first financial period longer than 12 months may straddle two YAs.",
-      href: "/services/accounting/corporate-income-tax", link: "Corporate income tax",
+      date: new Date(y + 1, 10, 30), name: "Corporate tax", when: "30 November each year", agency: "IRAS",
+      rule: `30 November ${y + 1}, for Year of Assessment ${y + 1} (the financial year ending in ${y}), filed at mytax.iras.gov.sg`,
+      note: "Form C-S (Lite) for revenue of S$200,000 or below, Form C-S up to S$5 million, Form C above. A first financial period longer than 12 months may straddle two Years of Assessment.",
+      href: "/services/tax/corporate-income-tax", link: "Corporate income tax", url: URL.tax,
     },
   );
-  return rows;
+  return rows.sort((a, b) => +a.date - +b.date);
 }
 
 export function daysUntil(date: Date, today = new Date()) {

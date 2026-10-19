@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { DateField } from "@/components/date-field";
-import { DeadlineStats, useMonthEnd } from "@/components/widgets";
+import { FilingRegister, useMonthEnd } from "@/components/widgets";
 import { daysUntil, deadlines, formatLong, formatShort, parseDate, toIcs } from "@/lib/deadlines";
 
-// One question, then the page opens out: four dates, then a storyboard
+// One question, then the page opens out: the filings register, then a storyboard
 // that fills as you scroll. Server-rendered sections arrive as `after`.
 
 export function Calculator({ after }: { after: React.ReactNode }) {
@@ -68,7 +68,7 @@ export function Calculator({ after }: { after: React.ReactNode }) {
       <section className="cx-hero pull-under" aria-labelledby="cx-h1">
         <div className="wide cx-hin">
           <h1 id="cx-h1">Singapore compliance deadline calculator</h1>
-          <p className="cx-sub">Enter your financial year end.<br />Six deadlines follow, from ECI to Form C-S.</p>
+          <p className="cx-sub">Enter your financial year end.<br />Six deadlines follow, from ECI to corporate tax.</p>
           <form className="cx-form" noValidate onSubmit={(e) => {
             e.preventDefault();
             // Read the box directly: a typed date may not have been committed yet.
@@ -105,7 +105,7 @@ export function Calculator({ after }: { after: React.ReactNode }) {
                   </button>
                 </div>
               </div>
-              <div id="cx-sia"><DeadlineStats rows={rows} /></div>
+              <div id="cx-sia" className="ce ce-solo"><FilingRegister key={`${+shown}-${listed}`} rows={rows} /></div>
               <ol className="cx-story" ref={story}>
                 <span className="cx-rail" aria-hidden="true" ref={rail}><i ref={fill} /></span>
                 {rows.map((r, i) => {

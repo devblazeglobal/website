@@ -21,7 +21,8 @@ export function SiteHeader() {
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) { setLastPath(pathname); setMenu(null); setMobile(false); setGroup(null); }
   const canHover = () => matchMedia("(hover: hover) and (min-width: 1101px)").matches;
-  const toggle = (m: Menu) => setMenu((cur) => (cur === m ? null : m));
+  // With a mouse, hover already opened the menu: a click keeps it open rather than closing it.
+  const toggle = (m: Menu) => setMenu((cur) => (cur === m && !canHover() ? null : m));
   const hover = (m: Menu) => { if (canHover()) { clearTimeout(timer.current); setMenu(m); } };
   const leave = () => { if (canHover() && menu) timer.current = setTimeout(() => setMenu(null), 180); };
 
@@ -58,20 +59,31 @@ export function SiteHeader() {
         </div>
         <div className="dcard">
           <h4>Accounting</h4>
-          <Link className="ov" href="/services/accounting"><b>Accounting</b><span>Books, reports, GST and corporate tax, filed with ACRA and IRAS.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/services/accounting"><b>Accounting</b><span>Books, reports, GST and payroll, filed with ACRA and IRAS.</span><i aria-hidden="true">→</i></Link>
           <ul>
             <li><Link className="it" href="/services/accounting/bookkeeping"><b>Bookkeeping</b><span>Bank, card and cash records reconciled on Xero.</span></Link></li>
             <li><Link className="it" href="/services/accounting/management-reports"><b>Management reports</b><span>Profit and loss, balance sheet and cash flow, monthly.</span></Link></li>
             <li><Link className="it" href="/services/accounting/financial-statements-xbrl"><b>Financial statements and XBRL</b><span>Unaudited statements and XBRL, filed with ACRA.</span></Link></li>
             <li><Link className="it" href="/services/accounting/gst"><b>GST</b><span>Registration and quarterly F5 returns.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/corporate-income-tax"><b>Corporate income tax</b><span>ECI and Form C-S, filed with IRAS.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/tax-advisory"><b>Tax advisory and forecasting</b><span>Tax planning and 12-month cash forecasts.</span></Link></li>
+            <li><Link className="it" href="/services/accounting/payroll"><b>Payroll</b><span>Monthly payroll, CPF and IR8A.</span></Link></li>
+          </ul>
+        </div>
+        <div className="dcard">
+          <h4>Tax</h4>
+          <Link className="ov" href="/services/tax"><b>Tax</b><span>Corporate tax, tax planning and a fractional CFO.</span><i aria-hidden="true">→</i></Link>
+          <ul>
+            <li><Link className="it" href="/services/tax/corporate-income-tax"><b>Corporate income tax</b><span>ECI and Form C-S, filed with IRAS.</span></Link></li>
+            <li><Link className="it" href="/services/tax/tax-advisory"><b>Tax advisory and forecasting</b><span>Tax planning and 12-month cash forecasts.</span></Link></li>
+            <li><Link className="it" href="/services/tax/fractional-cfo"><b>Fractional CFO</b><span>Budgets, forecasts and board reporting.</span></Link></li>
           </ul>
         </div>
         <div className="dcard">
           <h4>Corporate Secretarial</h4>
           <Link className="ov" href="/services/corporate-secretarial"><b>Corporate Secretarial</b><span>Company secretary, AGMs, annual returns and company changes.</span><i aria-hidden="true">→</i></Link>
-          <Link className="ov" href="/start-a-business-in-singapore"><b>Incorporation</b><span>Company name, constitution and registration on Bizfile.</span><i aria-hidden="true">→</i></Link>
+          <ul>
+            <li><Link className="it" href="/start-a-business-in-singapore"><b>Incorporation</b><span>Company name, constitution and registration on Bizfile.</span></Link></li>
+            <li><Link className="it" href="/services/corporate-secretarial/nominee-directorship"><b>Nominee Directorship</b><span>A locally resident director for ACRA.</span></Link></li>
+          </ul>
         </div>
       </div>
 
@@ -92,7 +104,7 @@ export function SiteHeader() {
         </div>
         <div className="dcard">
           <h4>Compliance</h4>
-          <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>ECI, AGM, annual return and Form C-S dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>ECI, AGM, annual return, IR8A and corporate tax dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
         </div>
       </div>
     </div></div>
@@ -109,9 +121,14 @@ export function SiteHeader() {
               <Link href="/services/accounting/management-reports">Management reports</Link>
               <Link href="/services/accounting/financial-statements-xbrl">Financial statements and XBRL</Link>
               <Link href="/services/accounting/gst">GST</Link>
-              <Link href="/services/accounting/corporate-income-tax">Corporate income tax</Link>
-              <Link href="/services/accounting/tax-advisory">Tax advisory and forecasting</Link>
+              <Link href="/services/accounting/payroll">Payroll</Link>
+              <Link className="mn-head" href="/services/tax">Tax <span aria-hidden="true">→</span></Link>
+              <Link href="/services/tax/corporate-income-tax">Corporate income tax</Link>
+              <Link href="/services/tax/tax-advisory">Tax advisory and forecasting</Link>
+              <Link href="/services/tax/fractional-cfo">Fractional CFO</Link>
               <Link className="mn-head" href="/services/corporate-secretarial">Corporate Secretarial <span aria-hidden="true">→</span></Link>
+              <Link href="/start-a-business-in-singapore">Incorporation</Link>
+              <Link href="/services/corporate-secretarial/nominee-directorship">Nominee Directorship</Link>
             </div></div>
           </div>
           <div className={`mn-grp${group === "s" ? " on" : ""}`}>

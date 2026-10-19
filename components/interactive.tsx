@@ -43,7 +43,7 @@ export function Rail({ variant, children }: { variant: "reviews" | "creds"; chil
 }
 
 // ---------- Reveal: blocks fade up as they enter the viewport ----------
-const FU = ".pc-h,.pc-cards li,.bn-row,.tl-h,.tl-grid li,.ev-h,.ev-grid li,.cx-hin>*,.stp-row,.rh-todo,.fk-h,.fk-cards li,.sp-hero h1,.sp-hero p,.hp-copy,.hp-fig,.lo-h,.lo-lead,.wh-h,.wh-tiles li,.hv-h,.hv-grid,.bl-lede,.bl-feat,.bl-grid li,.rv-cards li,.ab-ticks li,.ab-hero h1,.ab-hero p,.ab-who-copy,.ab-cr li,.team-h,.team-p,.seg,.intro,.xs-copy,.xs-vis,.cal2-head,.ap,.crc,.rvc";
+const FU = ".pc-h,.pc-cards li,.bn-row,.tl-h,.tl-grid li,.ev-h,.ev-grid li,.cx-hin>*,.stp-row,.rh-todo,.fk-h,.fk-cards li,.sp-hero h1,.sp-hero p,.hp-copy,.hp-fig,.lo-h,.lo-lead,.wh-h,.wh-tiles li,.hv-h,.hv-grid,.bl-lede,.bl-feat,.bl-grid li,.rv-cards li,.ab-ticks li,.ab-hero h1,.ab-hero p,.ab-who-copy,.ab-cr li,.team-h,.team-p,.seg,.intro,.xs-copy,.xs-vis,.ce,.crc,.rvc";
 export function Reveal() {
   // One listener for the life of the app. New blocks (client navigation) are
   // picked up by a MutationObserver. A block is revealed once its top passes
@@ -152,7 +152,7 @@ export function SegCards({ items }: { items: SegItem[] }) {
     return () => removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className="seg-grid seg-two" ref={root}>
+    <div className={`seg-grid seg-two${items.length === 3 ? " seg-three" : ""}`} ref={root}>
       {items.map((c, k) => (
         <Seg key={c.name} c={c} className={`seg seg-${k + 1}`}>
           <div className="copy"><h3>{c.name}</h3><p>{c.card}</p><span className="btn btn-ghost">{c.cta}</span></div>

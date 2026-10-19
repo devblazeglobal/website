@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 
-import { DateField } from "@/components/date-field";
-import { daysUntil, deadlines, defaultYearEnd, dueLabel, formatShort, type Deadline } from "@/lib/deadlines";
+import { MONTHS, daysUntil, deadlines, defaultYearEnd, formatShort, type Deadline } from "@/lib/deadlines";
 
 // The last day of this month, read on the client (null while server rendering).
 let cachedEnd: { key: string; date: Date } | null = null;
@@ -15,87 +15,95 @@ const monthEndSnapshot = () => {
 };
 export const useMonthEnd = () => useSyncExternalStore(() => () => {}, monthEndSnapshot, () => null);
 
-// ---------- Business structures: one editorial chart per structure ----------
-const COLS = ["#051038", "#5b74c8", "#c9a24a", "#b9c3e3"];
-const STRUCTURES: { tab: string; title: string; kind: "bar" | "line"; parts?: [string, number][] }[] = [
-  { tab: "Private limited", title: "Private limited company", kind: "bar", parts: [["Founder A", 60], ["Founder B", 30], ["Option pool", 10]] },
-  { tab: "Sole proprietorship", title: "Sole proprietorship", kind: "line" },
-  { tab: "LLP", title: "Limited liability partnership", kind: "bar", parts: [["Partner A", 50], ["Partner B", 50]] },
-  { tab: "Partnership", title: "Partnership", kind: "bar", parts: [["A", 25], ["B", 25], ["C", 25], ["D", 25]] },
+// ---------- Business structures: ACRA's requirements, ticked ----------
+// All four lists share one grid cell, so the card keeps the tallest height.
+const REQS: [string, string, [string, string][]][] = [
+  ["Private limited", "Private limited company", [["At least 1 director", "Ordinarily resident in Singapore, 18 or older"], ["1 to 50 shareholders", "Individuals or companies"], ["Company secretary", "Within 6 months; not the sole director"], ["Registered office address", "In Singapore"], ["Paid-up capital", "From S$1"], ["Separate legal entity", "Shareholders have limited liability"], ["Annual return", "Filed with ACRA every year"]]],
+  ["Sole proprietorship", "Sole proprietorship", [["1 owner", "18 or older"], ["Local authorised representative", "If the owner is not resident"], ["Company secretary", "Not required"], ["Not a separate entity", "Unlimited personal liability"], ["Registered on Bizfile", "With ACRA"], ["Tax", "Owner\u2019s personal income tax"], ["Renew registration", "Every 1 to 3 years"]]],
+  ["Partnership", "Partnership", [["2 to 20 partners", "Individuals, companies or LLPs, 18 or older"], ["Local authorised representative", "If partners are not resident"], ["Company secretary", "Not required"], ["Not a separate entity", "Unlimited liability for every partner"], ["Registered on Bizfile", "With ACRA"], ["Tax", "Each partner\u2019s personal income tax"], ["Renew registration", "Every 1 to 3 years"]]],
+  ["LLP", "Limited liability partnership", [["2 or more partners", "18 or older"], ["At least 1 manager", "Meets local residency requirements"], ["Separate legal entity", "Can sue, be sued and own property"], ["Limited liability", "Not liable for other partners\u2019 debts"], ["Registered on Bizfile", "With ACRA"], ["Tax", "Each partner\u2019s personal income tax"], ["Annual declaration", "Filed with ACRA every year"]]],
 ];
+const SHORT_TAB = ["Pte Ltd", "Sole prop.", "Partnership", "LLP"];
+const Tick = () => <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
-function Bar({ parts }: { parts: [string, number][] }) {
-  const W = 472, gap = 4, tw = W - gap * (parts.length - 1);
-  const starts = parts.map((_, i) => 24 + parts.slice(0, i).reduce((sum, [, p]) => sum + (tw * p) / 100 + gap, 0));
-  return (
-    <>
-      {parts.map(([label, pct], i) => {
-        const w = (tw * pct) / 100, at = starts[i], end = i === parts.length - 1 && parts.length > 1;
-        const tx = end ? at + w : at;
-        return (
-          <g key={label}>
-            <rect x={at} y={128} width={w} height={10} rx={5} fill={COLS[i % 4]} />
-            <text x={tx} y={112} textAnchor={end ? "end" : "start"} className="ed-v">{pct}%</text>
-            <text x={tx} y={164} textAnchor={end ? "end" : "start"} className="ed-k">{label}</text>
-          </g>
-        );
-      })}
-    </>
-  );
-}
-
-function Line() {
-  const pts = [[24, 170], [142, 150], [260, 134], [378, 112], [496, 92]];
-  return (
-    <>
-      <path d="M24 170 L142 150 L260 134 L378 112 L496 92 L496 180 L24 180Z" fill="#051038" opacity=".06" />
-      <path d="M24 170 L142 150 L260 134 L378 112 L496 92" fill="none" stroke="#051038" strokeWidth="2" />
-      {pts.slice(0, 4).map(([x, y]) => <circle key={x} cx={x} cy={y} r={3} fill="#051038" />)}
-      <circle cx={496} cy={92} r={5} fill="#c9a24a" />
-      <text x={490} y={80} textAnchor="end" className="ed-k">Owner&apos;s income</text>
-      {["Y1", "Y2", "Y3", "Y4", "Y5"].map((y, i) => <text key={y} x={24 + i * 118} y={200} textAnchor={i === 0 ? "start" : i === 4 ? "end" : "middle"} className="ed-k">{y}</text>)}
-    </>
-  );
-}
-
-export function StructureChart() {
+export function StructureChecklist() {
   const [k, setK] = useState(0);
-  const s = STRUCTURES[k];
   return (
-    <div className="xs-vis">
-      <div className="xs-frame">
-        <div className="xg"><div className="lg-card">
-          <svg viewBox="0 0 520 215" role="img" aria-label={`${s.title} chart`}>
-            <text x="24" y="50" className="ed-t">{s.title}</text>
-            {s.kind === "bar" ? <Bar parts={s.parts!} /> : <Line />}
-          </svg>
-        </div></div>
+    <div className="xs-vis req">
+      <div className="req-tabs" role="tablist" aria-label="Business structure">
+        {REQS.map(([tab, title], i) => <button key={tab} id={`req-tab-${i}`} role="tab" type="button" aria-label={title} aria-selected={i === k} aria-controls={`req-p-${i}`} onClick={() => setK(i)}><span className="req-lt">{tab}</span><span className="req-st" aria-hidden="true">{SHORT_TAB[i]}</span></button>)}
       </div>
-      <div className="xs-tabs" role="tablist" aria-label="Business structure">
-        {STRUCTURES.map((t, i) => <button key={t.tab} role="tab" type="button" aria-selected={i === k} onClick={() => setK(i)}>{t.tab}</button>)}
+      <div className="req-card">
+        {REQS.map(([tab, title, rows], i) => (
+          <div key={tab} id={`req-p-${i}`} role="tabpanel" aria-labelledby={`req-tab-${i}`} className="req-p" hidden={i !== k} data-on={i === k}>
+            <h3>{title}</h3>
+            <ul className="req-list">{rows.map(([b, t]) => <li key={b}><i className="req-box"><Tick /></i><b>{b}</b><span>{t}</span></li>)}</ul>
+          </div>
+        ))}
+        <p className="req-src">Source: <a href="https://www.acra.gov.sg/register/" target="_blank" rel="noopener">ACRA, registering a business</a></p>
       </div>
     </div>
   );
 }
 
-// ---------- Deadlines: four dates in a row, iPhone-spec style ----------
-export function DeadlineStats({ rows }: { rows: Deadline[] }) {
+// ---------- Deadlines: filings register (Harvey-style rows) ----------
+const LOGO: Record<string, [string, number, number]> = { ACRA: ["/logos/acra-square.png", 191, 82], IRAS: ["/logos/iras.png", 295, 341] };
+const hue = (d: number) => (d < 0 ? "past" : d < 30 ? "red" : d <= 90 ? "amb" : "grn");
+const left = (d: number) => (d < 0 ? `Passed ${-d} days ago` : d === 0 ? "Due today" : `${d} days left`);
+
+export function FilingRegister({ rows }: { rows: Deadline[] }) {
+  const [open, setOpen] = useState(0);
   return (
-    <div className="sia">
-      {rows.map((r) => {
-        const d = daysUntil(r.date);
+    <ul className="ce-list">
+      {rows.map((r, i) => {
+        const d = daysUntil(r.date), on = i === open, [src, w, h] = LOGO[r.agency];
         return (
-          <Link key={r.name} className="ap" href={r.href}>
-            <span className={`ap-k${d < 0 ? " past" : ""}`}>{dueLabel(d)}</span>
-            <b className="ap-d">{formatShort(r.date)}</b>
-            <span className="ap-n">{r.name}</span>
-            <span className="ap-a">{r.agency}</span>
-          </Link>
+          <li key={r.name} className={`ce-row h-${hue(d)}${on ? " open" : ""}`}>
+            <button type="button" aria-expanded={on} aria-controls={`ce-x-${i}`} onClick={() => setOpen(on ? -1 : i)}>
+              <span className="ce-lg"><Image src={src} alt={r.agency} width={w} height={h} /></span>
+              <span className="ce-t"><strong>{r.name}</strong><small>{r.when}</small></span>
+              <span className="ce-d"><small>Due</small><b>{formatShort(r.date)}</b><span className="hue">{left(d)}</span></span>
+              <i className="chev" aria-hidden="true" />
+            </button>
+            <div className="ce-x" id={`ce-x-${i}`}><div>
+              <dl>
+                <dt>Rule</dt><dd>{r.rule}</dd>
+                <dt>Note</dt><dd>{r.note}</dd>
+                <dt>Official page</dt><dd><a className="ce-src" href={r.url} target="_blank" rel="noopener" tabIndex={on ? 0 : -1}>{r.agency === "ACRA" ? "acra.gov.sg" : "iras.gov.sg"} <span aria-hidden="true">↗</span></a></dd>
+              </dl>
+            </div></div>
+          </li>
         );
       })}
+    </ul>
+  );
+}
+
+const WD = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+function MonthCalendar({ value, onChange }: { value: Date; onChange: (d: Date) => void }) {
+  const [view, setView] = useState(() => new Date(value.getFullYear(), value.getMonth(), 1));
+  const y = view.getFullYear(), m = view.getMonth(), first = (new Date(y, m, 1).getDay() + 6) % 7;
+  const days = Array.from({ length: 42 }, (_, i) => new Date(y, m, 1 - first + i));
+  return (
+    <div className="mc" role="group" aria-label="Financial year end">
+      <div className="mc-h">
+        <button type="button" aria-label="Previous month" onClick={() => setView(new Date(y, m - 1, 1))}>‹</button>
+        <b aria-live="polite">{MONTHS[m]} {y}</b>
+        <button type="button" aria-label="Next month" onClick={() => setView(new Date(y, m + 1, 1))}>›</button>
+      </div>
+      <div className="mc-w" aria-hidden="true">{WD.map((w) => <span key={w}>{w}</span>)}</div>
+      <div className="mc-g">
+        {days.map((d) => {
+          const on = +d === +value;
+          return <button key={+d} type="button" className={`${d.getMonth() !== m ? "o" : ""}${on ? " on" : ""}`} aria-pressed={on} aria-label={formatShort(d)} onClick={() => { onChange(d); if (d.getMonth() !== m) setView(new Date(d.getFullYear(), d.getMonth(), 1)); }}>{d.getDate()}</button>;
+        })}
+      </div>
+      <p className="mc-sel">Financial year end <b>{formatShort(value)}</b></p>
     </div>
   );
 }
+
+const WA_FILING = "https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20need%20help%20with%20an%20upcoming%20filing.";
 
 export function ComplianceCalendar() {
   // Dates depend on today, so the default renders in the browser only.
@@ -104,14 +112,19 @@ export function ComplianceCalendar() {
   const fye = picked ?? monthEnd;
   const rows = useMemo(() => (fye ? deadlines(fye) : null), [fye]);
   return (
-    <>
-      <div className="cal2-head">
+    <div className="ce">
+      <div className="ce-l">
         <h2 className="h2" id="cal2-title">Annual compliance calendar</h2>
-        <DateField label="Financial year end" value={fye} onChange={setFye} />
+        <p>Pick your financial year end.</p>
+        {fye ? <MonthCalendar value={fye} onChange={setFye} /> : <div className="mc" aria-busy="true" style={{ minHeight: 330 }} />}
+        <a className="btn btn-wa ce-wa" href={WA_FILING} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us now</a>
+        <ul className="ce-key" aria-label="Status"><li className="k-red">Under 30 days</li><li className="k-amb">30 to 90 days</li><li className="k-grn">Over 90 days</li></ul>
       </div>
-      {rows ? <DeadlineStats rows={rows} /> : <div className="sia" aria-busy="true" style={{ minHeight: 132 }} />}
-      <Link className="cal2-more" href="/compliance-deadline-calculator">Learn more <span aria-hidden="true">→</span></Link>
-    </>
+      <div className="ce-r">
+        {rows ? <FilingRegister key={+fye!} rows={rows} /> : <ul className="ce-list" aria-busy="true" style={{ minHeight: 720 }} />}
+        <Link className="cal2-more" href="/compliance-deadline-calculator">Compliance deadline calculator <span aria-hidden="true">→</span></Link>
+      </div>
+    </div>
   );
 }
 

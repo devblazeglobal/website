@@ -22,7 +22,9 @@ const nextConfig: NextConfig = {
       { source: "/search", destination: "/blog", permanent: true },
       { source: "/testimonials", destination: "/#reviews", permanent: true },
       { source: "/solutions", destination: "/services", permanent: false },
-      { source: "/services/business-advisory", destination: "/services/accounting/tax-advisory", permanent: true },
+      { source: "/services/business-advisory", destination: "/services/tax/tax-advisory", permanent: true },
+      { source: "/services/accounting/corporate-income-tax", destination: "/services/tax/corporate-income-tax", permanent: true },
+      { source: "/services/accounting/tax-advisory", destination: "/services/tax/tax-advisory", permanent: true },
       { source: "/financial-compliance-calendar", destination: "/compliance-deadline-calculator", permanent: true },
     ];
   },

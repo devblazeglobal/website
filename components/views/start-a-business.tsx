@@ -11,7 +11,7 @@ const CHECKLIST: [string, boolean][] = [["Business structure chosen", true], ["C
 const FOUNDERS: SegItem[] = [
   { name: "For local founders", card: "Citizens, permanent residents and pass holders. Incorporation, company secretary and books from day one.", cta: "Incorporate as a local founder", href: "#get-started", openStart: true,
     screen: ["Bizfile application", [["Company name", "Approved", "done"], ["Directors and shareholders", "Singpass verified", "done"], ["Constitution", "Ready", "done"], ["Registration", "Submitted", "next"]]] },
-  { name: "For overseas founders", card: "Founders outside Singapore. Identity checks, signing and filing online. No visit needed.", cta: "Incorporate from overseas", external: true,
+  { name: "For overseas founders", card: "Founders outside Singapore. Identity checks, signing and filing online. Remote onboarding is available.", cta: "Incorporate from overseas", external: true,
     href: whatsappUrl("Hello Blaze Global, I am an overseas founder and would like to register a company in Singapore."),
     screen: ["Overseas founder", [["Identity verified", "Online", "done"], ["Resident director", "Options sent", "next"], ["Registered address", "Confirmed", "done"], ["Documents", "To sign", "todo"]]] },
 ];
@@ -20,13 +20,13 @@ export function StartBusinessView() {
   return (
 <main className="view" id="view-start-a-business">
   <section className="rh pull-under" aria-labelledby="sb-h1">
-    <div className="rh-imgs" aria-hidden="true"><Image className="on" src="/images/sg-1.jpg" alt="" fill priority sizes="100vw" /></div>
+    <div className="rh-imgs rh-core" aria-hidden="true" />
     <div className="rh-in">
       <h1 id="sb-h1">Register your company in Singapore</h1>
-      <p className="rh-sub">Company incorporation, filed by an ACRA Registered Filing Agent. Most companies are registered within 1 working day.</p>
+      <p className="rh-sub">Company incorporation, filed by an ACRA Registered Filing Agent.</p>
       <p className="rh-fine">ACRA charges S$15 for the name application and S$300 for registration, paid on Bizfile. Blaze Global&apos;s fees are quoted separately. Approval times depend on ACRA and any referral to another agency.</p>
       <div className="rh-acts"><button className="btn rh-btn" type="button" data-open-start>Get started</button><a className="btn rh-btn-ghost" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
-      <div className="rh-todo" aria-live="polite">
+      <div className="rh-todo rh-glass" aria-live="polite">
         <div className="td-h"><b>Incorporation checklist</b><span>5 of 7 done</span></div>
         <ul className="td-list">{CHECKLIST.map(([t, done], j) => <li key={t} className={done ? "done" : undefined} style={{ "--d": `${j * 70}ms` }}><span className="td-c">{done ? <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg> : null}</span>{t}</li>)}</ul>
       </div>
@@ -41,7 +41,6 @@ export function StartBusinessView() {
   <section className="lo" aria-labelledby="lo-h">
     <div className="wide">
       <h2 className="lo-h" id="lo-h">Help for every founder, here or abroad</h2>
-      <p className="lo-lead">Singapore residents incorporate with Singpass. Overseas founders incorporate online through us, as their Registered Filing Agent.</p>
       <SegCards items={FOUNDERS} />
     </div>
   </section>
@@ -58,7 +57,7 @@ export function StartBusinessView() {
         <div className="stp-vis stp-blue"><div className="lg-card"><div className="lg-t">Bizfile application</div><ul className="lg-list"><li><span>Company name</span><em className="ok">Approved</em></li><li><span>Identity checks</span><em className="ok">Done</em></li><li><span>Constitution</span><em className="ok">Ready</em></li><li><span>Consent forms</span><em className="wait">Signing online</em></li><li><span>Incorporation</span><em className="todo">Filing</em></li></ul></div></div>
       </article>
       <article className="stp-row">
-        <div className="stp-txt"><h3>Step 3: Your company is ready to trade</h3><p>The UEN and business profile are issued, usually within 1 working day. We prepare your bank account documents and open your books on Xero.</p><div className="stp-acts"><button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button><Link className="stp-link" href="/services/accounting/bookkeeping">Bookkeeping →</Link></div></div>
+        <div className="stp-txt"><h3>Step 3: Your company is ready to trade</h3><p>The UEN and business profile are issued by ACRA. We prepare your bank account documents and open your books on Xero.</p><div className="stp-acts"><button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button><Link className="stp-link" href="/services/accounting/bookkeeping">Bookkeeping →</Link></div></div>
         <div className="stp-vis stp-gold"><div className="lg-card"><div className="lg-t">Ready to trade</div><ul className="lg-list"><li><span>UEN</span><em className="ok">Issued</em></li><li><span>Business profile</span><em className="ok">Issued</em></li><li><span>Bank account documents</span><em className="ok">Sent</em></li><li><span>Xero and bank feeds</span><em className="wait">Connecting</em></li><li><span>Company secretary</span><em className="ok">Appointed</em></li></ul></div></div>
       </article>
     </div>
@@ -84,7 +83,7 @@ export function StartBusinessView() {
           <li className="on"><button type="button" aria-expanded="true">Legal requirements</button><div className="hv-body"><p>Every Singapore company needs a resident director, a company secretary and a registered address. Each is confirmed before filing.</p><Link href="/services/corporate-secretarial">Corporate Secretarial <i aria-hidden="true">→</i></Link></div></li>
           <li><button type="button" aria-expanded="false">Documents and filing</button><div className="hv-body"><p>Identities verified, constitution and consent forms prepared, application filed on Bizfile.</p><Link href="/services/corporate-secretarial">Corporate Secretarial <i aria-hidden="true">→</i></Link></div></li>
           <li><button type="button" aria-expanded="false">Bank account and set-up</button><div className="hv-body"><p>Documents banks ask for prepared. Books opened on Xero, bank feeds connected. Account approval is the bank&apos;s decision.</p><Link href="/services/accounting/bookkeeping">Bookkeeping <i aria-hidden="true">→</i></Link></div></li>
-          <li><button type="button" aria-expanded="false">Ongoing compliance</button><div className="hv-body"><p>ECI, AGM, annual return, XBRL and Form C-S, each filed before its deadline.</p><Link href="/compliance-deadline-calculator">Compliance deadline calculator <i aria-hidden="true">→</i></Link></div></li>
+          <li><button type="button" aria-expanded="false">Ongoing compliance</button><div className="hv-body"><p>ECI, AGM, annual return, XBRL, IR8A and corporate tax, each filed before its deadline.</p><Link href="/compliance-deadline-calculator">Compliance deadline calculator <i aria-hidden="true">→</i></Link></div></li>
         </ul>
         <div className="hv-panel">
           <div className="hv-win on"><div className="hv-wt">Requirements</div><ul className="hv-rows"><li><b>Resident director</b><span>At least 1</span><em className="ok">Confirmed</em></li><li><b>Shareholders</b><span>1 to 50</span><em className="ok">Confirmed</em></li><li><b>Company secretary</b><span>Within 6 months</span><em className="ok">Appointed</em></li><li><b>Registered address</b><span>Singapore</span><em className="ok">Confirmed</em></li><li><b>Paid-up capital</b><span>From S$1</span><em className="ok">Confirmed</em></li></ul></div>
@@ -114,7 +113,7 @@ export function StartBusinessView() {
     </div>
   </div></section>
 
-  <Credentials /><Help wa="Hello Blaze Global, I would like to register a company in Singapore." chat={["Can you register my company this week?", "Yes. Send the company name and director details. Most companies are registered within 1 working day."]} />
+  <Credentials /><Help wa="Hello Blaze Global, I would like to register a company in Singapore." chat={["Can you register my company this week?", "Yes. Send the company name and director details. We file on Bizfile as soon as the documents are signed."]} />
   <section className="seg-cta"><div className="wide"><div className="band"><p>Start your company</p><div className="actions"><button className="btn btn-start-light" type="button" data-open-start>Get started</button><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div></div></div></section>
 </main>
   );

@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/start-a-business-in-singapore",
   title: "Register a Company in Singapore | Blaze Global",
-  description: "Company incorporation in Singapore by an ACRA Registered Filing Agent. Most companies are registered within 1 working day. Local and overseas founders.",
+  description: "Company incorporation in Singapore by an ACRA Registered Filing Agent. Local and overseas founders.",
 });
 
 const faq = {

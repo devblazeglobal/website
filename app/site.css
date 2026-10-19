@@ -2057,3 +2057,137 @@ section.cal2 .cal2-more{display:flex;justify-content:center;margin-top:56px!impo
 @media (max-width:380px){
   .xs-tabs{display:grid!important;grid-template-columns:repeat(2,auto);justify-content:center!important;overflow:visible!important}
 }
+
+/* ===== 19 Oct 2026 client review ===== */
+/* Navbar: navy, softer than abyss */
+.navwrap,.navwrap .drop{background:#071436}
+
+/* Products menu: feature + Accounting + Tax + Corporate Secretarial */
+.dpanel{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr)}
+.dpanel .dcard{padding:24px}
+.dpanel .dcard ul+ul,.dcard .ov+ul{margin-top:4px}
+
+/* Home: three service cards */
+.seg-three .seg h3{font-size:clamp(30px,2.4vw,38px)}
+.seg-three .seg-2{--seg-bg:radial-gradient(50% 40% at 82% 10%,rgba(120,146,220,.55),rgba(120,146,220,0) 70%),radial-gradient(40% 30% at 12% 82%,rgba(250,208,129,.18),rgba(250,208,129,0) 70%),linear-gradient(165deg,#24398a 0%,#16297a 55%,#0e1d55 100%)}
+.seg-three .seg-3{--seg-bg:radial-gradient(70% 50% at 88% 6%,rgba(40,62,140,.7),rgba(40,62,140,0) 70%),linear-gradient(165deg,#0b1850 0%,#051038 60%,#030a2a 100%)}
+@media (min-width:1025px) and (max-width:1366px){.seg-three .seg h3{white-space:normal}}
+
+/* Home hero: deeper navy, soft blue swells, white highlights */
+.stage .hero::before{
+  background:
+   radial-gradient(22% 14% at 58% 52%,rgba(236,242,255,.30),rgba(236,242,255,0) 70%),
+   radial-gradient(30% 18% at 70% 40%,rgba(190,208,240,.22),rgba(190,208,240,0) 70%),
+   radial-gradient(26% 18% at 14% 44%,rgba(250,208,129,.16),rgba(250,208,129,0) 70%),
+   radial-gradient(55% 40% at 82% 22%,rgba(40,74,140,.70),rgba(40,74,140,0) 70%),
+   radial-gradient(60% 42% at 40% 96%,rgba(22,52,110,.65),rgba(22,52,110,0) 70%),
+   radial-gradient(70% 55% at 26% 4%,rgba(10,26,72,.95),rgba(10,26,72,0) 70%),
+   linear-gradient(162deg,rgba(255,255,255,0) 40%,rgba(226,236,255,.16) 47%,rgba(255,255,255,0) 53%),
+   linear-gradient(170deg,rgba(255,255,255,0) 60%,rgba(214,226,252,.10) 66%,rgba(255,255,255,0) 72%),
+   linear-gradient(172deg,#040a1c 0%,#0a1a46 48%,#061232 100%);
+  filter:blur(30px)}
+.stage .hero .hero-sub,.stage .hero .ticks li{color:#fff}
+.stage .hero .ticks li::before{background-color:rgba(255,255,255,.14)}
+
+/* Business structures: ACRA requirements checklist */
+.req{display:grid;gap:18px;min-width:0}
+.req-tabs{display:flex;gap:4px;background:var(--grey);border-radius:999px;padding:5px;width:fit-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.req-tabs::-webkit-scrollbar{display:none}
+.req-tabs button{flex:none;font:500 14px var(--sans);color:var(--muted);background:none;border:0;border-radius:999px;padding:9px 16px;cursor:pointer;white-space:nowrap}
+.req-tabs button[aria-selected=true]{background:var(--ink);color:#fff}
+.req-tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.req-card{display:grid;background:#f4f4f6;border-radius:22px;padding:28px 30px}
+.req-p{grid-area:1/1;min-width:0}
+.req-p[hidden]{display:block!important;visibility:hidden;pointer-events:none}
+.req-src{grid-area:2/1}
+.req-card h3{font:400 26px/1.15 var(--serif);color:var(--ink)}
+.req-list{list-style:none;margin:18px 0 0;padding:0}
+.req-list li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid #e3e6ec;font-size:15px}
+.req-box{width:22px;height:22px;border-radius:6px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+.req-box svg{width:14px;height:14px}
+.req-list b{font-weight:500;color:var(--ink)}
+.req-list span{color:var(--muted);font-size:14px;text-align:right}
+.req-src{margin-top:16px;font-size:13px;color:var(--muted)}
+.req-src a{color:inherit;text-underline-offset:3px}
+@media (max-width:620px){.req-card{padding:22px 20px}.req-list li{grid-template-columns:26px minmax(0,1fr)}.req-list span{grid-column:2;text-align:left!important}}
+
+/* Compliance calendar: open calendar left, filings register right */
+.ce{background:#f4f4f6;border-radius:24px;padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(28px,5vw,72px);color:var(--ink)}
+.ce-l h2{line-height:1.1}
+.ce-l>p{margin-top:12px;color:var(--muted)}
+.mc{margin-top:26px;background:#fff;border:1px solid #e6e8ee;border-radius:16px;padding:16px;max-width:340px}
+.mc-h{display:flex;align-items:center;justify-content:space-between}
+.mc-h b{font:500 15px var(--sans)}
+.mc-h button{width:32px;height:32px;border-radius:8px;border:1px solid #dfe3ea;background:none;color:var(--ink);font-size:18px;cursor:pointer}
+.mc-w,.mc-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.mc-w{margin:12px 0 4px;font-size:11px;color:#8a91a8}
+.mc-g button{aspect-ratio:1;border:0;border-radius:8px;background:none;color:var(--ink);font:14px var(--sans);cursor:pointer;padding:0}
+.mc-g button:hover{background:#f1f3f8}
+.mc-g button.o{color:#b9bdca}
+.mc-g button.on{background:var(--ink);color:#fff;font-weight:600}
+.mc-g button:focus-visible,.mc-h button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.mc-sel{margin-top:12px;font-size:13px;color:var(--muted)}
+.mc-sel b{color:var(--ink);font-weight:600}
+.ce .ce-wa{margin-top:22px}
+.ce-key{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ce-key li{font-size:12px;padding:5px 11px;border-radius:999px;color:var(--ink)}
+.ce-key li.k-red{background:linear-gradient(90deg,#fff,rgba(214,92,64,.16))}
+.ce-key li.k-amb{background:linear-gradient(90deg,#fff,rgba(214,160,62,.2))}
+.ce-key li.k-grn{background:linear-gradient(90deg,#fff,rgba(62,150,104,.16))}
+.ce-r{min-width:0}
+.ce-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ce-row{border-radius:20px;background:#fff;box-shadow:0 1px 2px rgba(5,16,56,.04),0 10px 28px -14px rgba(5,16,56,.14);overflow:hidden;position:relative}
+.ce-row::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit}
+.h-red::before{background:linear-gradient(90deg,rgba(255,255,255,0) 52%,rgba(214,92,64,.13) 100%)}
+.h-amb::before{background:linear-gradient(90deg,rgba(255,255,255,0) 52%,rgba(214,160,62,.16) 100%)}
+.h-grn::before{background:linear-gradient(90deg,rgba(255,255,255,0) 52%,rgba(62,150,104,.13) 100%)}
+.h-past::before{background:linear-gradient(90deg,rgba(255,255,255,0) 52%,rgba(120,128,150,.10) 100%)}
+.ce-row>button{position:relative;width:100%;display:grid;grid-template-columns:72px minmax(0,1fr) 160px 16px;gap:18px;align-items:center;min-height:108px;padding:18px 22px;background:none;border:0;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
+.ce-row>button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:20px}
+.ce-lg{display:flex;align-items:center;justify-content:center;height:52px}
+.ce-lg img{max-height:52px;max-width:72px;width:auto;height:auto;object-fit:contain}
+.ce-t strong{display:block;font:500 17px/1.3 var(--sans);color:var(--ink)}
+.ce-t small{display:block;margin-top:4px;font:400 13px var(--sans);color:#7a8099}
+.ce-d{text-align:right}
+.ce-d small{display:block;margin-bottom:2px;font-size:11px;color:#9aa0b2;letter-spacing:.02em}
+.ce-d b{display:block;font:400 22px/1.15 var(--serif);color:var(--ink);white-space:nowrap}
+.ce-d .hue{display:block;margin-top:2px;font:500 12.5px var(--sans);white-space:nowrap}
+.h-red .hue{color:#b24a33}.h-amb .hue{color:#9a6a12}.h-grn .hue{color:#2f7a52}.h-past .hue{color:#6a7086}
+.ce-row .chev{width:8px;height:8px;border-right:1.6px solid #9aa0b2;border-bottom:1.6px solid #9aa0b2;transform:rotate(45deg) translateY(-3px);transition:transform .3s}
+.ce-row.open .chev{transform:rotate(-135deg)}
+.ce-x{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}
+.ce-row.open .ce-x{grid-template-rows:1fr}
+.ce-x>div{overflow:hidden;min-height:0}
+.ce-x dl{margin:0 22px 20px 112px;padding-top:14px;border-top:1px solid #eef0f4;display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 16px;font-size:14px}
+.ce-x dt{color:#6a7086}.ce-x dd{margin:0;color:var(--ink)}
+.ce-src{color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+section.cal2 .ce-r .cal2-more{display:inline-flex;justify-content:flex-start;margin-top:24px!important}
+.ce-solo{display:block;padding:clamp(16px,3vw,32px);margin-bottom:56px}
+@media (max-width:1100px){.ce{grid-template-columns:minmax(0,1fr)}.mc{max-width:none}}
+@media (max-width:560px){
+  .ce{padding:20px 16px;border-radius:20px}
+  .ce-row>button{grid-template-columns:48px minmax(0,1fr) 12px;padding:16px;gap:14px}
+  .ce-d{grid-column:2;text-align:left!important}
+  .ce-row .chev{grid-row:1;grid-column:3}
+  .ce-lg{height:40px}.ce-lg img{max-width:48px;max-height:40px}
+  .ce-x dl{margin:0 16px 16px;grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .ce-r,.ce-r *,.req-card,.req-card *{text-align:left!important}
+  .ce-l .mc *{text-align:center!important}
+  .ce-key{justify-content:center}
+  .ce .ce-wa{width:100%;justify-content:center}
+  .req-tabs{margin-inline:auto}
+}
+@media (prefers-reduced-motion:reduce){.ce-x,.ce-row .chev{transition:none}}
+
+/* Credentials: OCBC by visual weight */
+.crc-logo img[alt="OCBC"]{height:48px}
+
+/* Start a business hero: blue core fading to black, liquid-glass checklist */
+.rh-core{background:radial-gradient(ellipse 60% 65% at 50% 56%,#3a63d6 0%,#2147a8 14%,#12307a 30%,#081a4a 48%,#030a22 66%,#01030a 84%,#000 100%)}
+.rh-core::after{content:"";position:absolute;inset:0;opacity:.16;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.rh-todo.rh-glass{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 30px 70px rgba(0,0,0,.45)}
+.req-st{display:none}
+@media (max-width:520px){.req-lt{display:none}.req-st{display:inline}.req-tabs{gap:2px;padding:4px}.req-tabs button{font-size:12.5px;padding:8px 9px}}
+@media (max-width:360px){.req-tabs button{font-size:12px;padding:7px 8px}}

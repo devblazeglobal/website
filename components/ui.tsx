@@ -83,12 +83,13 @@ const CREDENTIALS: { logo: string; alt: string; name: string; meta: string; text
   { logo: "/logos/caw.png", alt: "Chartered Accountants Worldwide", name: "Chartered Accountants Worldwide", meta: "Network member", text: "Part of a global network of chartered accountancy institutes and their members." },
   { logo: "/logos/xero.svg", alt: "Xero", name: "Xero", meta: "Cloud accounting", text: "Books kept on Xero. Bank feeds, invoices and reports online, open to you at any time." },
   { logo: "/logos/aspire.svg", alt: "Aspire", name: "Aspire", meta: "Business accounts", text: "Business accounts and cards for Singapore companies, connected to your books." },
+  { logo: "/logos/ocbc.png", alt: "OCBC", name: "OCBC", meta: "Qualified Introducer and Channel Partner", text: "Introductions to OCBC business banking for Singapore companies." },
 ];
 
 export function Credentials({ id }: { id?: string }) {
   return (
-    <section className="creds" id={id} aria-labelledby={id ? "cred-title" : undefined} aria-label={id ? undefined : "Credentials"}>
-      <div className="wide creds-top"><h2 className="h2" id={id ? "cred-title" : undefined}>Credentials</h2><Link className="btn btn-ghost" href="/about-us">About Blaze Global</Link></div>
+    <section className="creds" id={id} aria-labelledby={id ? "cred-title" : undefined} aria-label={id ? undefined : "Credentials and partnerships"}>
+      <div className="wide creds-top"><h2 className="h2" id={id ? "cred-title" : undefined}>Credentials &amp; Partnerships</h2><Link className="btn btn-ghost" href="/about-us">About Blaze Global</Link></div>
       <Rail variant="creds">
         {CREDENTIALS.map((c) => (
           <article className="crc" key={c.name}>

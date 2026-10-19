@@ -11,5 +11,5 @@ export const metadata = pageMetadata({
 });
 
 export default function CorporateSecretarialPage() {
-  return (<><JsonLd data={serviceSchema(mainPages[1])} /><MainServiceView slug="corporate-secretarial" /></>);
+  return (<><JsonLd data={serviceSchema(mainPages.find((p) => p.path === "/services/corporate-secretarial")!)} /><MainServiceView slug="corporate-secretarial" /></>);
 }
