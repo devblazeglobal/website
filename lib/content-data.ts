@@ -1,6 +1,6 @@
 // Generated from the approved mock-up (docs/brand/home-mockup.html) by
 // scripts/port. Copy lives here so pages render it, never retype it.
-import { NEW_SUB_PAGES, NEW_TILES, TAX_PAGE } from "@/lib/content-new";
+import { CFO_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE } from "@/lib/content-new";
 
 export type Pair = [title: string, text: string];
 export type Card = [title: string, text: string, art: ArtKind, chip: string, href: string];
@@ -9,6 +9,7 @@ export type IconKey = keyof typeof ICONS;
 export type Status = "ok" | "wait" | "todo";
 export interface Benefit { h: string; p: string; img: string; card: [string, [string, string, Status][]] }
 export type Parent = "accounting" | "tax" | "corporate-secretarial";
+export type Product = Parent | "payroll" | "fractional-cfo" | "nominee-directorship";
 export interface SubPage { par: Parent; slug: string; name: string; line: string; art: [ArtKind, string]; h1: string; lede: string; why: Pair[] }
 export interface MainPage { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[] }
 export interface SegmentPage { slug: string; name: string; line: string; h1: string; lede: string; wa: string; bandHeading: string; bandIcons: IconKey[]; why: Pair[]; needHeading: string; needs: [IconKey, string, string, string][]; chat: Pair }
@@ -477,7 +478,7 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
  ]
 } as Record<string, [IconKey, string, string][]>;
 
-export const MAIN_PAGES: Record<Parent, MainPage> = {
+export const MAIN_PAGES: Record<Product, MainPage> = {
  "accounting": {
   "slug": "accounting",
   "img": "/images/sg-2.jpg",
@@ -519,7 +520,7 @@ export const MAIN_PAGES: Record<Parent, MainPage> = {
     "Monthly payroll, CPF and IR8A, prepared and filed on time.",
     "cal",
     "Paid on time",
-    "/services/accounting/payroll"
+    "/services/payroll"
    ],
    [
     "Tax",
@@ -692,7 +693,7 @@ export const MAIN_PAGES: Record<Parent, MainPage> = {
     "A locally resident director to meet the ACRA requirement.",
     "ring",
     "Resident director",
-    "/services/corporate-secretarial/nominee-directorship"
+    "/services/nominee-directorship"
    ]
   ],
   "faq": [
@@ -805,7 +806,7 @@ export const MAIN_PAGES: Record<Parent, MainPage> = {
    }
   ]
  }
-} as Record<Parent, MainPage>;
+} as Record<Product, MainPage>;
 
 export const SEGMENT_PAGES: Record<string, SegmentPage> = {
  "startups": {
@@ -850,10 +851,10 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
     "/services/corporate-secretarial"
    ],
    [
-    "shield",
-    "Registered filing agent",
-    "Filings lodged directly with ACRA",
-    "/services/corporate-secretarial"
+    "globe",
+    "Nominee director",
+    "A resident director for overseas founders",
+    "/services/nominee-directorship"
    ],
    [
     "layers",
@@ -969,10 +970,10 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
     "/services/accounting/bookkeeping"
    ],
    [
-    "bank",
-    "Bank reconciliation",
-    "Every account matched each week",
-    "/services/accounting/bookkeeping"
+    "user",
+    "Payroll",
+    "Salaries, CPF and IR8A every month",
+    "/services/payroll"
    ],
    [
     "receipt",
@@ -1101,21 +1102,20 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    ],
    [
     "doc",
-    "Board packs",
-    "Reports prepared for directors and investors",
-    "/services/accounting/management-reports"
+    "Fractional CFO",
+    "Budgets, forecasts and board packs, part-time",
+    "/services/fractional-cfo"
    ],
    [
     "clock",
     "Cash forecast",
     "Rolling 12 months for each entity",
-    "/services/tax/tax-advisory"
+    "/services/fractional-cfo"
    ],
    [
     "scale",
     "Scenario models",
-    "Expansion, hiring and pricing modelled before you commit",
-    "/services/tax/tax-advisory"
+    "Expansion, hiring and pricing modelled before you commit", "/services/fractional-cfo"
    ],
    [
     "percent",
@@ -1238,6 +1238,4 @@ export const REVIEWS: Review[] = [
 ];
 
 // Added after the client review (lib/content-new.ts).
-Object.assign(SUB_PAGES, NEW_SUB_PAGES);
-Object.assign(TILES, NEW_TILES);
-MAIN_PAGES.tax = TAX_PAGE;
+Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "fractional-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE });

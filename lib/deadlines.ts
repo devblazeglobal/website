@@ -102,7 +102,7 @@ export function deadlines(fye: Date, listed = false): Deadline[] {
       date: new Date(y + 1, 2, 1), name: "IR8A employee income", when: "1 March each year", agency: "IRAS",
       rule: `1 March ${y + 1}, for employment income paid in ${y}`,
       note: "Employers in the Auto-Inclusion Scheme submit IR8A, Appendix 8A and Appendix 8B to IRAS electronically. AIS is compulsory for employers with 5 or more employees.",
-      href: "/services/accounting/payroll", link: "Payroll", url: URL.ir8a,
+      href: "/services/payroll", link: "Payroll", url: URL.ir8a,
     },
     {
       date: new Date(y + 1, 10, 30), name: "Corporate tax", when: "30 November each year", agency: "IRAS",

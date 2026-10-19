@@ -14,11 +14,8 @@ const TITLES: Record<string, string> = {
   "management-reports": "Monthly Management Reports",
   "financial-statements-xbrl": "Financial Statements and XBRL Filing",
   gst: "GST Registration and Filing in Singapore",
-  payroll: "Payroll Services in Singapore",
   "corporate-income-tax": "Corporate Income Tax Filing in Singapore",
   "tax-advisory": "Tax Advisory and Forecasting",
-  "fractional-cfo": "Fractional CFO Services in Singapore",
-  "nominee-directorship": "Nominee Director Services in Singapore",
 };
 const PARENT_NAME: Record<Parent, string> = { accounting: "Accounting", tax: "Tax", "corporate-secretarial": "Corporate Secretarial" };
 type Props = { params: Promise<{ slug: string }> };

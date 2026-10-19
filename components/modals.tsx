@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { REVIEWS } from "@/lib/content-data";
@@ -15,30 +14,28 @@ interface Question { label: string; q: string; type: Kind; opts?: [string, strin
 type Answers = Record<string, string | string[] | undefined>;
 
 const Q: Record<string, Question> = {
-  kind: { label: "Your business", q: "Is this a new or an existing business?", type: "one", opts: [["new", "New business", "Not registered yet"], ["existing", "Existing business", "Already registered with ACRA"]], next: (a) => (a.kind === "new" ? "newbiz" : "revenue") },
-  revenue: { label: "Existing business", q: "What is the company's annual revenue?", type: "one", opts: [["Below S$1 million"], ["S$1 million to S$5 million"], ["Above S$5 million"]], next: () => "staff" },
-  staff: { label: "Existing business", q: "How many employees?", type: "one", opts: [["1 to 10"], ["11 to 50"], ["More than 50"]], next: () => "books" },
-  books: { label: "Existing business", q: "Who keeps the books today?", type: "one", opts: [["In-house"], ["Another accounting firm"], ["No one yet"]], next: () => "needOld" },
-  needOld: { label: "Existing business", q: "What do you need?", type: "many", opts: [["Bookkeeping"], ["Financial statements and XBRL"], ["Company secretary"], ["AGM and annual return"], ["GST returns"], ["Tax advisory"], ["Forecasting"]], next: () => "name" },
+  stage: { label: "Your company", q: "Where is the company today?", type: "one", opts: [["new", "Starting a new company", "Not registered yet"], ["existing", "Already registered in Singapore"]], next: () => "dir" },
+  dir: { label: "Directors", q: "Where do the directors live?", type: "one", opts: [["local", "At least one in Singapore"], ["overseas", "None in Singapore", "ACRA requires one resident director"]], next: (a) => (a.stage === "existing" ? "sec" : "staff") },
+  sec: { label: "Company secretary", q: "Does the company have a company secretary?", type: "one", opts: [["yes", "Yes"], ["no", "No"]], next: () => "staff" },
+  staff: { label: "Team", q: "How many employees?", type: "one", opts: [["0", "None"], ["1-4", "1 to 4"], ["5+", "5 or more"]], next: () => "revenue" },
+  revenue: { label: "Revenue", q: "Annual revenue, or expected revenue?", type: "one", opts: [["Under S$1 million"], ["S$1 million to S$5 million"], ["Over S$5 million"]], next: () => "finance" },
+  finance: { label: "Finance", q: "Anything else you need?", type: "many", opts: [["Budgets and forecasts"], ["Board or investor reporting"], ["Raising funds"], ["None of these"]], next: () => "name" },
   name: { label: "Contact", q: "What is your name?", type: "text", key: "name", ph: "Full name", next: () => "company" },
-  company: { label: "Contact", q: "Company name", type: "text", key: "company", ph: "Registered company name", next: () => "done" },
+  company: { label: "Contact", q: "Company name", type: "text", key: "company", ph: "Registered or proposed company name", next: () => "done" },
 };
-const STEPS = 7;
+const steps = (a: Answers) => (a.stage === "existing" ? 8 : 7);
 
-function segment(a: Answers): [string, string] {
-  if (a.kind !== "existing") return ["start-ups", "/solutions/startups"];
-  if (a.revenue === "Above S$5 million" || a.staff === "More than 50") return ["large companies", "/solutions/large-companies"];
-  return ["SMEs", "/solutions/smes"];
-}
-function summary(a: Answers): [string, string][] {
-  const rows: [string, string][] = [["Business", a.kind === "new" ? "New business" : "Existing business"]];
-  if (a.revenue) rows.push(["Annual revenue", a.revenue as string]);
-  if (a.staff) rows.push(["Employees", a.staff as string]);
-  if (a.books) rows.push(["Books kept by", a.books as string]);
-  const need = a.needOld as string[] | undefined;
-  if (need?.length) rows.push(["Needs", need.join(", ")]);
-  if (a.company) rows.push(["Company", a.company as string]);
-  return rows;
+/** The products a company needs from its answers: (a) to (f). */
+export function bundle(a: Answers): [string, string, string][] {
+  const fin = ((a.finance as string[]) ?? []).filter((x) => x !== "None of these");
+  const r: [string, string, string][] = [];
+  if (a.stage !== "existing" || a.sec === "no") r.push(["Corporate Secretarial", a.stage !== "existing" ? "Incorporation and a company secretary" : "A named company secretary", "/services/corporate-secretarial"]);
+  r.push(["Accounting", "Books, statements and XBRL each year", "/services/accounting"]);
+  r.push(["Tax", "ECI and Form C-S or C each year", "/services/tax"]);
+  if (a.staff && a.staff !== "0") r.push(["Payroll", `Salaries, CPF and IR8A for ${a.staff === "5+" ? "5 or more" : "1 to 4"} employees`, "/services/payroll"]);
+  if (a.dir === "overseas") r.push(["Nominee Directorship", "Resident director required by ACRA", "/services/nominee-directorship"]);
+  if (a.revenue === "Over S$5 million" || fin.length) r.push(["Fractional CFO", fin.length ? fin.join(", ") : "Revenue above S$5 million", "/services/fractional-cfo"]);
+  return r;
 }
 
 function useLock(open: boolean) {
@@ -53,9 +50,8 @@ const Close = ({ onClick }: { onClick: () => void }) => (
 );
 
 export function GetStarted() {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [path, setPath] = useState<string[]>(["kind"]);
+  const [path, setPath] = useState<string[]>(["stage"]);
   const [ans, setAns] = useState<Answers>({});
   const [dir, setDir] = useState<"f" | "b">("f");
   const [text, setText] = useState("");
@@ -64,7 +60,7 @@ export function GetStarted() {
   const body = useRef<HTMLDivElement>(null);
   useLock(open);
 
-  const start = useCallback(() => { last.current = document.activeElement as HTMLElement; setAns({}); setPath(["kind"]); setDir("f"); setOpen(true); }, []);
+  const start = useCallback(() => { last.current = document.activeElement as HTMLElement; setAns({}); setPath(["stage"]); setDir("f"); setOpen(true); }, []);
   const close = useCallback(() => { setOpen(false); last.current?.focus?.(); }, []);
 
   useEffect(() => {
@@ -83,17 +79,22 @@ export function GetStarted() {
   const q = Q[id];
 
   const go = useCallback((next: string, a: Answers) => {
-    if (next === "newbiz") { close(); router.push("/start-a-business-in-singapore"); return; }
     setDir("f"); setPath((p) => [...p, next]); setText(next === "name" || next === "company" ? (a[next] as string) ?? "" : ""); setErr(false);
-  }, [close, router]);
+  }, []);
 
   const pick = useCallback((v: string) => {
     if (!q) return;
     if (q.type === "many") {
-      setAns((a) => { const s = new Set((a[id] as string[]) ?? []); if (s.has(v)) s.delete(v); else s.add(v); return { ...a, [id]: [...s] }; });
+      setAns((a) => {
+        const s = new Set((a[id] as string[]) ?? []);
+        if (v === "None of these") return { ...a, [id]: s.has(v) ? [] : [v] };
+        s.delete("None of these");
+        if (s.has(v)) s.delete(v); else s.add(v);
+        return { ...a, [id]: [...s] };
+      });
       return;
     }
-    const nextA = id === "kind" && ans.kind !== v ? { kind: v, name: ans.name, company: ans.company } : { ...ans, [id]: v };
+    const nextA = id === "stage" && ans.stage !== v ? { stage: v, name: ans.name, company: ans.company } : { ...ans, [id]: v };
     setAns(nextA);
     setTimeout(() => go(q.next(nextA), nextA), matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 260);
   }, [q, id, ans, go]);
@@ -128,23 +129,23 @@ export function GetStarted() {
   let content: React.ReactNode;
   let hint: React.ReactNode = "";
   if (id === "done") {
-    const rows = summary(ans), seg = segment(ans);
-    const msg = `Hello Blaze Global, I am ${ans.name}.\n${rows.map((r) => `${r[0]}: ${r[1]}`).join("\n")}`;
+    const need = bundle(ans);
+    const msg = `Hello Blaze Global, I am ${ans.name}${ans.company ? ` from ${ans.company}` : ""}.\nBased on the questionnaire, we need:\n${need.map((r, k) => `(${String.fromCharCode(97 + k)}) ${r[0]}: ${r[1]}`).join("\n")}`;
     content = (
       <>
-        <p className="gs-label">Get started</p>
-        <h2 id="gs-q" className="gs-q">Thank you, {ans.name as string}.</h2>
-        <dl className="gs-sum">{rows.map((r) => <div key={r[0]}><dt>{r[0]}</dt><dd>{r[1]}</dd></div>)}</dl>
+        <p className="gs-label">Your products · {need.length === 6 ? "all 6" : `${need.length} of 6`}</p>
+        <h2 id="gs-q" className="gs-q">Based on your answers, you need</h2>
+        <ol className="gs-bundle">{need.map((r) => <li key={r[0]}><div><a href={r[2]} onClick={close}>{r[0]}</a><span>{r[1]}</span></div></li>)}</ol>
         <div className="gs-actions">
           <a className="btn btn-wa btn-lg" href={whatsappUrl(msg)} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Send on WhatsApp</a>
-          <a className="gs-link" href={seg[1]} onClick={close}>Blaze for {seg[0]} ›</a>
+          <button className="gs-link" type="button" onClick={start}>Start again</button>
         </div>
       </>
     );
   } else if (q.type === "text") {
     content = (
       <>
-        <p className="gs-label">{q.label} · {n} of {STEPS}</p>
+        <p className="gs-label">{q.label} · {n} of {steps(ans)}</p>
         <h2 id="gs-q" className="gs-q">{q.q}</h2>
         <form className="gs-text" onSubmit={(e) => { e.preventDefault(); const v = text.trim(); if (!v) { setErr(true); return; } const a = { ...ans, [q.key!]: v }; setAns(a); go(q.next(a), a); }}>
           <input className={err ? "err" : undefined} autoComplete={q.key === "name" ? "name" : "organization"} maxLength={80} placeholder={q.ph} value={text} onChange={(e) => { setText(e.target.value); setErr(false); }} />
@@ -157,7 +158,7 @@ export function GetStarted() {
     const sel = q.type === "many" ? ((ans[id] as string[]) ?? []) : [ans[id] as string];
     content = (
       <>
-        <p className="gs-label">{q.label} · {n} of {STEPS}</p>
+        <p className="gs-label">{q.label} · {n} of {steps(ans)}</p>
         <h2 id="gs-q" className="gs-q">{q.q}</h2>
         <div className="gs-opts" role={q.type === "many" ? "group" : "radiogroup"}>
           {q.opts!.map((o, k) => {
@@ -179,7 +180,7 @@ export function GetStarted() {
     <div className={`gs${open ? " open" : ""}`} role="dialog" aria-modal="true" aria-labelledby="gs-q" aria-hidden={!open}>
       <div className="gs-bg" onClick={close} />
       <div className="gs-panel">
-        <div className="gs-bar"><i style={{ width: id === "done" ? "100%" : `${Math.round((n / (STEPS + 1)) * 100)}%` }} /></div>
+        <div className="gs-bar"><i style={{ width: id === "done" ? "100%" : `${Math.round((n / (steps(ans) + 1)) * 100)}%` }} /></div>
         <Close onClick={close} />
         <div className="gs-body in" data-dir={dir} key={id} ref={body}>{open && content}</div>
         <div className="gs-foot">

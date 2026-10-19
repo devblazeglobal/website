@@ -1,17 +1,10 @@
 import Link from "next/link";
 
-import { AskBar, CountUp, SegCards, type SegItem } from "@/components/interactive";
+import { AskBar, CountUp } from "@/components/interactive";
+import { ProductCards } from "@/components/product-cards";
 import { Credentials, Reviews, Stars } from "@/components/ui";
 import { ComplianceCalendar, StructureChecklist } from "@/components/widgets";
 
-const HOME_SERVICES: SegItem[] = [
-  { name: "Accounting", card: "Bookkeeping, management reports, GST returns, payroll, unaudited financial statements and XBRL, filed with ACRA and IRAS.", cta: "Accounting services", href: "/services/accounting",
-    screen: ["Year-end close", [["Bank, card and cash reconciled", "Done", "done"], ["Management report", "Ready", "done"], ["Unaudited financial statements", "In review", "next"], ["XBRL", "Next", "todo"], ["Filed with ACRA and IRAS", "Next", "todo"]]] },
-  { name: "Tax", card: "Corporate income tax, tax advisory and a fractional CFO, from Chartered Accountants who also keep your books.", cta: "Tax services", href: "/services/tax",
-    screen: ["Tax year", [["ECI filed with IRAS", "Done", "done"], ["Exemptions applied", "Done", "done"], ["Tax computation", "In review", "next"], ["Form C-S", "Next", "todo"], ["Cash forecast updated", "Next", "todo"]]] },
-  { name: "Corporate Secretarial", card: "Incorporation, a qualified company secretary, AGMs, annual returns, registers and changes to directors and shareholders.", cta: "Corporate secretarial services", href: "/services/corporate-secretarial",
-    screen: ["Annual compliance", [["Company secretary appointed", "Done", "done"], ["Company registers updated", "Done", "done"], ["AGM documents", "Ready", "next"], ["Annual return filed with ACRA", "Scheduled", "todo"], ["Directors' resolutions", "Scheduled", "todo"]]] },
-];
 
 export function HomeView() {
   return (
@@ -22,7 +15,7 @@ export function HomeView() {
         <h1>We are here so you may focus on what truly matters</h1>
         <p className="hero-sub">We do the hard work to make things simple.</p>
         <AskBar />
-        <ul className="hero-pts" aria-label="Services"><li><Link href="/start-a-business-in-singapore"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Incorporation</Link></li><li><Link href="/services/accounting"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Accounting</Link></li><li><Link href="/services/corporate-secretarial"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Company secretary</Link></li><li><Link href="/services/tax"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Tax filing</Link></li></ul>
+        <ul className="hero-pts" aria-label="Services"><li><Link href="/start-a-business-in-singapore"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Incorporation</Link></li><li><Link href="/services/accounting"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Accounting</Link></li><li><Link href="/services/tax"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Tax</Link></li><li><Link href="/services/payroll"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Payroll</Link></li><li><Link href="/services/fractional-cfo"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Fractional CFO</Link></li><li><Link href="/services/nominee-directorship"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Nominee director</Link></li></ul>
         <div className="hero-ctas">
           <button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button>
         </div>
@@ -44,7 +37,7 @@ export function HomeView() {
 
   <section className="segments" id="services" aria-labelledby="svc-title">
     <div className="wrap intro"><h2 className="h2" id="svc-title">One place for your business needs</h2></div>
-    <div className="wide"><SegCards items={HOME_SERVICES} /></div>
+    <div className="wide"><ProductCards /></div>
   </section>
 
   <section className="xs" aria-labelledby="sab-title"><div className="wide xs-grid">

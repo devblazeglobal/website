@@ -1,19 +1,19 @@
 // Page templates for services and solutions, filled from lib/content-data.
 import { Acts, Benefits, Credentials, EvGrid, ExploreLinks, Faq, FlankCards, Help, Icon, MoreFrom, PageHero, PhotoHero, Reviews } from "@/components/ui";
-import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Card, type Parent } from "@/lib/content-data";
+import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Card, type Parent, type Product } from "@/lib/content-data";
+import { PRODUCTS } from "@/lib/products";
 import { whatsappUrl } from "@/lib/site";
 
 const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
 const INC: [string, string] = ["Incorporation", "/start-a-business-in-singapore"];
 
-/** Accounting or Corporate Secretarial: photo hero, benefits, services, FAQ. */
+/** A product page: photo hero, benefits, services, FAQ. */
 const LINES: Record<Parent, [string, string]> = { accounting: ["Accounting", "/services/accounting"], tax: ["Tax", "/services/tax"], "corporate-secretarial": ["Corporate Secretarial", "/services/corporate-secretarial"] };
 export const subPath = (slug: string) => `/services/${SUB_PAGES[slug].par}/${slug}`;
 
-export function MainServiceView({ slug }: { slug: Parent }) {
+export function MainServiceView({ slug }: { slug: Product }) {
   const p = MAIN_PAGES[slug];
-  const others = (Object.keys(LINES) as Parent[]).filter((k) => k !== slug).map((k) => LINES[k]);
-  const links: [string, string][] = [...others, slug === "corporate-secretarial" ? INC : CALC];
+  const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug).map((x): [string, string] => [x.name, x.href]), slug === "corporate-secretarial" || slug === "nominee-directorship" ? INC : CALC];
   return (
     <main className="view" id="view-company">
       <PhotoHero className="rh-main" img={p.img} title={p.heading} sub={p.sub} wa={p.wa} />

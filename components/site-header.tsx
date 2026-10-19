@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+
+import { PRODUCTS } from "@/lib/products";
 
 // Navy bar that follows the scroll. Products and Solutions open a panel
 // over the page: hover on desktop, click anywhere. The burger opens the
@@ -51,40 +53,13 @@ export function SiteHeader() {
     </div>
 
     <div className="drop" id="drop"><div className="drop-in">
-      <div className={`dpanel${menu === "products" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
-        <div className="dcard dfeat">
-          <Image className="dimg" src="/images/consultation.jpg" alt="Three people reviewing documents at a meeting table" width={960} height={600} />
-          <h3>Speak to a Chartered Accountant</h3>
-          <a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20speak%20to%20an%20accountant." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
-        </div>
-        <div className="dcard">
-          <h4>Accounting</h4>
-          <Link className="ov" href="/services/accounting"><b>Accounting</b><span>Books, reports, GST and payroll, filed with ACRA and IRAS.</span><i aria-hidden="true">→</i></Link>
-          <ul>
-            <li><Link className="it" href="/services/accounting/bookkeeping"><b>Bookkeeping</b><span>Bank, card and cash records reconciled on Xero.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/management-reports"><b>Management reports</b><span>Profit and loss, balance sheet and cash flow, monthly.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/financial-statements-xbrl"><b>Financial statements and XBRL</b><span>Unaudited statements and XBRL, filed with ACRA.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/gst"><b>GST</b><span>Registration and quarterly F5 returns.</span></Link></li>
-            <li><Link className="it" href="/services/accounting/payroll"><b>Payroll</b><span>Monthly payroll, CPF and IR8A.</span></Link></li>
-          </ul>
-        </div>
-        <div className="dcard">
-          <h4>Tax</h4>
-          <Link className="ov" href="/services/tax"><b>Tax</b><span>Corporate tax, tax planning and a fractional CFO.</span><i aria-hidden="true">→</i></Link>
-          <ul>
-            <li><Link className="it" href="/services/tax/corporate-income-tax"><b>Corporate income tax</b><span>ECI and Form C-S, filed with IRAS.</span></Link></li>
-            <li><Link className="it" href="/services/tax/tax-advisory"><b>Tax advisory and forecasting</b><span>Tax planning and 12-month cash forecasts.</span></Link></li>
-            <li><Link className="it" href="/services/tax/fractional-cfo"><b>Fractional CFO</b><span>Budgets, forecasts and board reporting.</span></Link></li>
-          </ul>
-        </div>
-        <div className="dcard">
-          <h4>Corporate Secretarial</h4>
-          <Link className="ov" href="/services/corporate-secretarial"><b>Corporate Secretarial</b><span>Company secretary, AGMs, annual returns and company changes.</span><i aria-hidden="true">→</i></Link>
-          <ul>
-            <li><Link className="it" href="/start-a-business-in-singapore"><b>Incorporation</b><span>Company name, constitution and registration on Bizfile.</span></Link></li>
-            <li><Link className="it" href="/services/corporate-secretarial/nominee-directorship"><b>Nominee Directorship</b><span>A locally resident director for ACRA.</span></Link></li>
-          </ul>
-        </div>
+      <div className={`dpanel dp-products${menu === "products" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
+        {PRODUCTS.map((p) => (
+          <div className="dcard" key={p.key}>
+            <Link className="ov" href={p.href}><b>{p.name}</b><span>{p.line}</span><i aria-hidden="true">→</i></Link>
+            <ul>{p.services.filter(([, h]) => h !== p.href).map(([t, h]) => <li key={t}><Link className="it" href={h}><b>{t}</b></Link></li>)}</ul>
+          </div>
+        ))}
       </div>
 
       <div className={`dpanel${menu === "solutions" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
@@ -116,19 +91,12 @@ export function SiteHeader() {
           <div className={`mn-grp${group === "p" ? " on" : ""}`}>
             <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}>Products<i aria-hidden="true" /></button>
             <div className="mn-sub"><div>
-              <Link className="mn-head" href="/services/accounting">Accounting <span aria-hidden="true">→</span></Link>
-              <Link href="/services/accounting/bookkeeping">Bookkeeping</Link>
-              <Link href="/services/accounting/management-reports">Management reports</Link>
-              <Link href="/services/accounting/financial-statements-xbrl">Financial statements and XBRL</Link>
-              <Link href="/services/accounting/gst">GST</Link>
-              <Link href="/services/accounting/payroll">Payroll</Link>
-              <Link className="mn-head" href="/services/tax">Tax <span aria-hidden="true">→</span></Link>
-              <Link href="/services/tax/corporate-income-tax">Corporate income tax</Link>
-              <Link href="/services/tax/tax-advisory">Tax advisory and forecasting</Link>
-              <Link href="/services/tax/fractional-cfo">Fractional CFO</Link>
-              <Link className="mn-head" href="/services/corporate-secretarial">Corporate Secretarial <span aria-hidden="true">→</span></Link>
-              <Link href="/start-a-business-in-singapore">Incorporation</Link>
-              <Link href="/services/corporate-secretarial/nominee-directorship">Nominee Directorship</Link>
+              {PRODUCTS.map((p) => (
+                <Fragment key={p.key}>
+                  <Link className="mn-head" href={p.href}>{p.name} <span aria-hidden="true">→</span></Link>
+                  {p.services.filter(([, h]) => h !== p.href).map(([t, h]) => <Link key={t} href={h}>{t}</Link>)}
+                </Fragment>
+              ))}
             </div></div>
           </div>
           <div className={`mn-grp${group === "s" ? " on" : ""}`}>

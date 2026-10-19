@@ -11,9 +11,9 @@ const CHECKLIST: [string, boolean][] = [["Business structure chosen", true], ["C
 const FOUNDERS: SegItem[] = [
   { name: "For local founders", card: "Citizens, permanent residents and pass holders. Incorporation, company secretary and books from day one.", cta: "Incorporate as a local founder", href: "#get-started", openStart: true,
     screen: ["Bizfile application", [["Company name", "Approved", "done"], ["Directors and shareholders", "Singpass verified", "done"], ["Constitution", "Ready", "done"], ["Registration", "Submitted", "next"]]] },
-  { name: "For overseas founders", card: "Founders outside Singapore. Identity checks, signing and filing online. Remote onboarding is available.", cta: "Incorporate from overseas", external: true,
+  { name: "For overseas founders", card: "Founders outside Singapore. Identity checks, signing and filing online. Remote onboarding is available. A nominee director meets the resident director rule.", cta: "Incorporate from overseas", external: true,
     href: whatsappUrl("Hello Blaze Global, I am an overseas founder and would like to register a company in Singapore."),
-    screen: ["Overseas founder", [["Identity verified", "Online", "done"], ["Resident director", "Options sent", "next"], ["Registered address", "Confirmed", "done"], ["Documents", "To sign", "todo"]]] },
+    screen: ["Overseas founder", [["Identity verified", "Online", "done"], ["Nominee director", "Appointed", "next"], ["Registered address", "Confirmed", "done"], ["Documents", "To sign", "todo"]]] },
 ];
 
 export function StartBusinessView() {

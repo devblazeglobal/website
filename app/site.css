@@ -2207,3 +2207,46 @@ section.cal2 .ce-r .cal2-more{display:inline-flex;justify-content:flex-start;mar
 @media (max-width:350px){.nav .logo img{height:18px}}
 .nav .logo{width:max-content}.nav .logo img{max-width:none}
 @media (max-width:420px){.nav .logo img{height:auto!important;width:min(204px,calc(100vw - 168px))}}
+
+/* ===== Six product cards (home, /services) ===== */
+.pcx{display:grid;gap:var(--sm)}
+.pcx-row{display:flex;gap:var(--sm)}
+.pcx-card{flex:1 1 0;min-width:0;position:relative;overflow:hidden;isolation:isolate;border-radius:14px;padding:36px 36px 104px;min-height:400px;color:#fff;text-decoration:none;display:flex;flex-direction:column;gap:18px;transition:flex-grow .6s cubic-bezier(.2,.7,.2,1),opacity .45s,filter .45s}
+.pcx-card::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(60% 45% at 88% 8%,rgba(214,226,255,.30),rgba(214,226,255,0) 70%),radial-gradient(45% 35% at 10% 92%,rgba(250,208,129,.14),rgba(250,208,129,0) 70%),linear-gradient(160deg,var(--c1),var(--c2))}
+.pcx-card::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pcx-card h3{font:400 38px/1.05 var(--serif);letter-spacing:-.015em;color:#fff;white-space:nowrap}
+.pcx-card ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pcx-card li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:12px;font-size:17px;line-height:1.35;color:rgba(255,255,255,.9)}
+.pcx-card li svg{width:15px;height:15px;margin-top:3px;color:var(--gold)}
+.pcx-go{position:absolute;right:28px;bottom:28px;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.45);color:#fff;display:grid;place-items:center;transition:background .3s,color .3s,transform .3s}
+.pcx-go svg{width:22px;height:22px}
+.pcx-card:hover .pcx-go,.pcx-card:focus-visible .pcx-go{background:#fff;color:var(--navy);transform:translateX(4px)}
+.pcx-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (hover:hover) and (min-width:1025px){
+  .pcx-row:hover .pcx-card{flex-grow:.8;opacity:.6;filter:saturate(.5) brightness(1.15)}
+  .pcx-row:hover .pcx-card:hover{flex-grow:1.45;opacity:1;filter:none}
+}
+@media (max-width:1366px){.pcx-card h3{white-space:normal;font-size:34px}}
+@media (max-width:1024px){.pcx-row{flex-direction:column}.pcx-card{min-height:0;padding:28px 28px 96px}}
+@media (max-width:640px){.pcx-card{padding:26px 24px 92px}.pcx-card h3{font-size:30px}.pcx-card,.pcx-card *{text-align:left!important}.pcx-go{right:22px;bottom:22px}}
+@media (prefers-reduced-motion:reduce){.pcx-card,.pcx-go{transition:none}}
+.pcx-1{--c1:#7a90d6;--c2:#5c76c4}.pcx-2{--c1:#5c76c4;--c2:#4460b2}.pcx-3{--c1:#4460b2;--c2:#2f4a9c}
+.pcx-4{--c1:#2f4a9c;--c2:#203884}.pcx-5{--c1:#203884;--c2:#14276a}.pcx-6{--c1:#14276a;--c2:#0a184a}
+
+/* Products menu: six blocks, two rows of three */
+.dpanel.dp-products{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dp-products .dcard{padding:22px 24px}
+.dp-products .dcard .ov{margin-bottom:6px}
+.dp-products .dcard a.it{padding:6px 0}
+.dp-products .dcard a.it b{font-size:16px}
+/* Get started: bundle result */
+.gs-bundle{list-style:none;margin:var(--md) 0 0;padding:0;display:grid;gap:8px;counter-reset:g}
+.gs-bundle li{counter-increment:g;display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;background:#f1f3f8;border-radius:12px;padding:12px 16px}
+.gs-bundle li::before{content:"(" counter(g,lower-alpha) ")";font:600 15px/1.5 var(--sans);color:var(--navy)}
+.gs-bundle a{display:block;font:500 17px/1.3 var(--sans);color:var(--ink);text-decoration:none}
+.gs-bundle a:hover{text-decoration:underline;text-underline-offset:3px}
+.gs-bundle span{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
+button.gs-link{background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans)}
+@media (max-width:1024px){.pcx-card{flex:none}}
+@media (max-width:640px){.pcx-card h3,.pcx-card ul,.pcx-card li{margin-left:0!important;margin-right:0!important}}
+@media (max-width:1024px){.pcx{grid-auto-rows:1fr}.pcx-row{display:contents}}
