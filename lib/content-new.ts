@@ -127,7 +127,7 @@ export const NOMINEE_PAGE: MainPage = {
 
 export const DIGITAL_PAGE: MainPage = {
   slug: "digitalisation-automation",
-  img: "/images/acc-1.jpg",
+  img: "radial",
   heading: "Less manual work. Better data.",
   sub: "Technology, AI and automation that cut manual work and show how the business is performing, built on the systems you already use.",
   gridHeading: "Examples of what we automate",

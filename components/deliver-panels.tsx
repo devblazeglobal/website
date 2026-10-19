@@ -59,12 +59,14 @@ const CARDS: Record<string, React.ReactNode> = {
   ),
   "AI-powered automation": (
     <>
-      <div className="axc-h"><span>Supplier bill · read by AI</span><span className="live"><i />Live</span></div>
-      <div className="axk r1"><span>Supplier</span><b>Acme Office Supplies</b></div>
-      <div className="axk r2"><span>Invoice date</span><b>14 Oct 2026</b></div>
-      <div className="axk r3"><span>Amount</span><b>S$1,090.00</b></div>
-      <div className="axk r4"><span>GST 9%</span><b>S$90.00</b></div>
-      <div className="axr ok r5"><i /><span>Posted to Xero for review</span><span className="tk">✓</span></div>
+      <div className="axc-h"><span>Supplier bill · automated</span><span className="live"><i />Live</span></div>
+      <ol className="axflow">
+        <li className="r1"><span className="nd" /><div><b>Bill received</b><small>Email from Acme Office Supplies · PDF</small></div><em>09:02</em></li>
+        <li className="r2"><span className="nd" /><div><b>Read by AI</b><small>Supplier, date, amount and GST extracted</small></div><em>09:02</em></li>
+        <li className="r3"><span className="nd" /><div><b>Checked</b><small>S$1,090.00 incl. GST 9% · matches purchase order</small></div><em>09:03</em></li>
+        <li className="r4"><span className="nd" /><div><b>Coded</b><small>Office supplies · standard-rated</small></div><em>09:03</em></li>
+        <li className="r5 end"><span className="nd" /><div><b>Posted to Xero for review</b><small>Waiting for approval</small></div><Tk /></li>
+      </ol>
     </>
   ),
   "Dashboards and reporting": (

@@ -2421,3 +2421,21 @@ button.gs-link{background:none;border:0;padding:0;cursor:pointer;font-family:var
 .view > section.tl{padding-top:var(--sec)!important}
 .ax-dlv .ax-h{max-width:24ch}
 #view-company > section.tl{padding-top:var(--sec)!important}
+/* AI automation: nodes start to end */
+.axflow{list-style:none;margin:4px 0 0;padding:0 0 0 4px;position:relative;display:grid;gap:14px}
+.axflow::before{content:"";position:absolute;left:13px;top:12px;bottom:12px;width:2px;background:#d3d9e6}
+.axflow::after{content:"";position:absolute;left:10px;top:12px;width:8px;height:8px;border-radius:50%;background:#2f4a9c;box-shadow:0 0 0 4px rgba(47,74,156,.18);animation:travel 3.2s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes travel{0%{top:12px;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:calc(100% - 20px);opacity:0}}
+.axflow li{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:14px;align-items:center}
+.axflow .nd{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--ink);position:relative;z-index:1}
+.axflow .nd::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--ink)}
+.axflow li.end .nd{border-color:#1f7a4a}.axflow li.end .nd::after{background:#2fb36b}
+.axflow b{display:block;font:500 15.5px var(--sans)}
+.axflow small{display:block;color:#5a6684;font-size:13px;margin-top:2px}
+.axflow em{font-style:normal;font-size:12.5px;color:#8a92a8;font-variant-numeric:tabular-nums}
+.axflow li.end{background:#eef7f1;border-radius:10px;padding:10px 12px;margin-left:-12px;grid-template-columns:20px minmax(0,1fr) auto}
+.axp.play .axflow .nd{animation:ndon .5s cubic-bezier(.2,.7,.2,1) both}
+.axp.play .axflow .r2 .nd{animation-delay:.35s}.axp.play .axflow .r3 .nd{animation-delay:.7s}.axp.play .axflow .r4 .nd{animation-delay:1.05s}.axp.play .axflow .r5 .nd{animation-delay:1.4s}
+@keyframes ndon{from{transform:scale(.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){.axflow::after{animation:none;display:none}}
+.axflow .tk{color:#1f7a4a;font-weight:600}

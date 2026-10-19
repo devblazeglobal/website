@@ -231,7 +231,7 @@ export function Benefits({ rows }: { rows: Benefit[] }) {
 export function PhotoHero({ img, title, sub, wa, children, className = "" }: { img: string; title: string; sub: string; wa: string; children?: React.ReactNode; className?: string }) {
   return (
     <section className={`rh pull-under ${className}`}>
-      <div className="rh-imgs" aria-hidden="true"><Image className="on" src={img} alt="" fill priority sizes="100vw" /></div>
+      {img === "radial" ? <div className="rh-imgs rh-core" aria-hidden="true" /> : <div className="rh-imgs" aria-hidden="true"><Image className="on" src={img} alt="" fill priority sizes="100vw" /></div>}
       <div className="rh-in">
         <h1>{title}</h1>
         <p className="rh-sub">{sub}</p>
