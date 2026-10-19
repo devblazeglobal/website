@@ -5,7 +5,7 @@ import { AxPlay } from "@/components/ax-play";
 // Outsourced CFO and Digitalisation: four tinted panels, each ending in a
 // live card (alex.com style). Figures in the cards are examples.
 const Tk = () => <span className="tk">✓</span>;
-const CARDS: Record<string, React.ReactNode> = {
+export const CARDS: Record<string, React.ReactNode> = {
   "Financial models": (
     <>
       <div className="axc-h"><span>Scenarios · FY2027</span><span className="syn">Example</span></div>
@@ -67,6 +67,42 @@ const CARDS: Record<string, React.ReactNode> = {
         <li className="r4"><span className="nd" /><div><b>Coded</b><small>Office supplies · standard-rated</small></div><em>09:03</em></li>
         <li className="r5 end"><span className="nd" /><div><b>Posted to Xero for review</b><small>Waiting for approval</small></div><Tk /></li>
       </ol>
+    </>
+  ),
+  "Sales and customers": (
+    <>
+      <div className="axc-h"><span>Sales · October</span><span className="live"><i />Live</span></div>
+      <div className="axt r1"><span>Customer</span><span>Sales</span><span>Paid in</span></div>
+      <div className="axt r2"><span>Customer A</span><b>S$32k</b><b>28 days</b></div>
+      <div className="axt r3 on"><span>Customer B</span><b>S$21k</b><b className="dn">48 days</b></div>
+      <div className="axt r4"><span>Customer C</span><b>S$14k</b><b>30 days</b></div>
+      <div className="axfoot r5">From Xero and your CRM <Tk /></div>
+    </>
+  ),
+  "Margin by product": (
+    <>
+      <div className="axc-h"><span>Gross margin by product</span><span className="syn">Example</span></div>
+      <div className="axk r1"><span>Product line 1</span><b>48%</b></div>
+      <div className="axk r2"><span>Product line 2</span><b>39%</b></div>
+      <div className="axk r3"><span>Product line 3</span><b className="dn" style={{ color: "#b4430e" }}>22%</b></div>
+      <div className="axr ok warn r4"><i /><span>Line 3 below 30% for 2 months</span><span className="tk">!</span></div>
+    </>
+  ),
+  "Cash and forecast": (
+    <>
+      <div className="axc-h"><span>Cash · next 6 months</span><span className="live"><i />Live</span></div>
+      <div className="axbars r1">{[66, 62, 48, 30, 44, 58].map((h, i) => <span key={i} className={i === 3 ? "low" : i > 0 ? "fc" : ""} style={{ "--h": `${h}%` } as React.CSSProperties}><i /></span>)}</div>
+      <div className="axbl r2"><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span></div>
+      <div className="axfoot r3">Forecast from receivables and bills <Tk /></div>
+    </>
+  ),
+  "Compliance dates": (
+    <>
+      <div className="axc-h"><span>Upcoming filings</span><span className="syn">Synced</span></div>
+      <div className="axf r1"><div><b>GST F5</b><small>IRAS</small></div><em className="sch">31 Oct</em></div>
+      <div className="axf r2"><div><b>CPF and SHG</b><small>CPF Board</small></div><em className="sch">14 Nov</em></div>
+      <div className="axf r3"><div><b>Annual return</b><small>ACRA</small></div><em>Filed</em></div>
+      <div className="axfoot r4">From your compliance calendar <Tk /></div>
     </>
   ),
   "Dashboards and reporting": (

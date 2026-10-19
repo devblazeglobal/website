@@ -24,7 +24,7 @@ export const PRODUCTS: ProductEntry[] = [
     services: [["Payroll and payslips", ""], ["CPF and SDL", ""], ["SHG contributions", ""], ["IR8A", ""]] },
   { key: "outsourced-cfo", group: "scale", name: "Outsourced CFO", href: "/services/outsourced-cfo", line: "A CFO for your numbers, without a full-time hire.",
     services: [["Financial models", ""], ["Cash flow visibility", ""], ["Budgets and forecasts", ""], ["Process streamlining", ""]] },
-  { key: "digitalisation-automation", group: "scale", name: "Digitalisation, Automation and Dashboarding", href: "/services/digitalisation-automation", line: "Less manual work and live figures, on the systems you already use.",
-    services: [["Process improvement", ""], ["AI automation", ""], ["Dashboards", ""], ["Systems integration", ""]] },
+  { key: "blazeos", group: "scale", name: "BlazeOS", href: "/services/blazeos", line: "Live dashboards on your Xero, Google Sheets and CRM data, with AI analysis.",
+    services: [["Live dashboards", ""], ["AI analysis", ""], ["Xero, Google Sheets and CRM", ""], ["Monthly review", ""]] },
 ];
 export const inGroup = (g: Group) => PRODUCTS.filter((p) => p.group === g);

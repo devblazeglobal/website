@@ -19,7 +19,7 @@ const Q: Record<string, Question> = {
   sec: { label: "Company secretary", q: "Does the company have a company secretary?", type: "one", opts: [["yes", "Yes"], ["no", "No"]], next: () => "staff" },
   staff: { label: "Team", q: "How many employees?", type: "one", opts: [["0", "None"], ["1-4", "1 to 4"], ["5+", "5 or more"]], next: () => "revenue" },
   revenue: { label: "Revenue", q: "Annual revenue, or expected revenue?", type: "one", opts: [["Under S$1 million"], ["S$1 million to S$5 million"], ["Over S$5 million"]], next: () => "finance" },
-  finance: { label: "Also needed", q: "Anything else you need?", type: "many", opts: [["Financial models or cash flow visibility"], ["Budgets and forecasts"], ["Less manual work, or dashboards"], ["None of these"]], next: () => "name" },
+  finance: { label: "Also needed", q: "Anything else you need?", type: "many", opts: [["Financial models or cash flow visibility"], ["Budgets and forecasts"], ["Live dashboards of our numbers"], ["None of these"]], next: () => "name" },
   name: { label: "Contact", q: "What is your name?", type: "text", key: "name", ph: "Full name", next: () => "company" },
   company: { label: "Contact", q: "Company name", type: "text", key: "company", ph: "Registered or proposed company name", next: () => "done" },
 };
@@ -28,7 +28,7 @@ const steps = (a: Answers) => (a.stage === "existing" ? 8 : 7);
 /** The products a company needs from its answers: (a) up to all 8. */
 export function bundle(a: Answers): [string, string, string][] {
   const more = ((a.finance as string[]) ?? []).filter((x) => x !== "None of these");
-  const cfo = more.filter((x) => !x.startsWith("Less manual"));
+  const cfo = more.filter((x) => !x.startsWith("Live dashboards"));
   const isNew = a.stage !== "existing";
   const r: [string, string, string][] = [];
   if (isNew) r.push(["Incorporation", "Company registered on Bizfile", "/start-a-business-in-singapore"]);
@@ -38,7 +38,7 @@ export function bundle(a: Answers): [string, string, string][] {
   r.push(["Tax", "ECI and Form C-S or C each year", "/services/tax"]);
   if (a.staff && a.staff !== "0") r.push(["Payroll", `Salaries, CPF, SHG and IR8A for ${a.staff === "5+" ? "5 or more" : "1 to 4"} employees`, "/services/payroll"]);
   if (a.revenue === "Over S$5 million" || cfo.length) r.push(["Outsourced CFO", cfo.length ? cfo.join(", ") : "Revenue above S$5 million", "/services/outsourced-cfo"]);
-  if (more.some((x) => x.startsWith("Less manual"))) r.push(["Digitalisation, Automation and Dashboarding", "Less manual work, live dashboards", "/services/digitalisation-automation"]);
+  if (more.some((x) => x.startsWith("Live dashboards"))) r.push(["BlazeOS", "Live dashboards on your Xero, Google Sheets and CRM data", "/services/blazeos"]);
   return r;
 }
 

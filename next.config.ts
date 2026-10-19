@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
       { source: "/services/accounting/payroll", destination: "/services/payroll", permanent: true },
       { source: "/services/tax/fractional-cfo", destination: "/services/outsourced-cfo", permanent: true },
       { source: "/services/fractional-cfo", destination: "/services/outsourced-cfo", permanent: true },
+      { source: "/services/digitalisation-automation", destination: "/services/blazeos", permanent: true },
       { source: "/services/corporate-secretarial/nominee-directorship", destination: "/services/nominee-directorship", permanent: true },
       { source: "/financial-compliance-calendar", destination: "/compliance-deadline-calculator", permanent: true },
     ];

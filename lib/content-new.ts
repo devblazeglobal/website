@@ -1,7 +1,7 @@
 // Products added after the 19 Oct 2026 client review: Tax, Payroll,
 // Outsourced CFO and Nominee Directorship, each its own product page.
 // Draft copy: Blaze to confirm the scope of each before launch.
-import type { IconKey, MainPage } from "@/lib/content-data";
+import type { IconKey, MainPage, PageExtras, Pair } from "@/lib/content-data";
 
 export const TAX_PAGE: MainPage = {
   slug: "tax",
@@ -126,38 +126,25 @@ export const NOMINEE_PAGE: MainPage = {
 };
 
 export const DIGITAL_PAGE: MainPage = {
-  slug: "digitalisation-automation",
+  slug: "blazeos",
   img: "radial",
-  heading: "Less manual work. Better data.",
-  sub: "Technology, AI and automation that cut manual work and show how the business is performing, built on the systems you already use.",
-  gridHeading: "Examples of what we automate",
-  wa: "Hello Blaze Global, I would like to ask about digitalisation and automation.",
-  delivers: { h: "What we do", items: [
-    ["layers", "Digitalisation and process improvement", "Workflows reviewed, gaps found, digital tools put in to simplify day-to-day operations."],
-    ["chat", "AI-powered automation", "AI tools such as Claude automate repetitive tasks, extract data and process documents."],
-    ["chart", "Dashboards and reporting", "Interactive dashboards that combine several sources into live financial and operating figures."],
-    ["link", "Systems integration", "Xero, Google Sheets and other applications connected, so data flows without re-keying."],
-  ] },
-  cards: [
-    ["Bills and receipts", "Supplier bills and receipts read and posted to Xero.", "doc", "Automated", ""],
-    ["Bank feeds", "Bank and card transactions matched automatically.", "toggles", "Matched", ""],
-    ["Management dashboard", "Revenue, margin and cash on one live screen.", "bars", "Live", ""],
-    ["Approval flows", "Purchases and claims approved online, with a record.", "route", "Approved", ""],
-    ["Sheets to Xero", "Google Sheets connected to Xero, no re-keying.", "cal", "Synced", ""],
-    ["Document extraction", "Contracts and forms read and filed by AI.", "stamp", "Extracted", ""],
-  ],
+  heading: "BlazeOS: your business numbers, live and explained",
+  sub: "Live dashboards on your Xero, Google Sheets and CRM data, with AI that flags what needs attention. Checked by Chartered Accountants.",
+  gridHeading: "What BlazeOS shows",
+  wa: "Hello Blaze Global, I would like to see a BlazeOS demo.",
+  cards: [],
   faq: [
-    ["Do we need to change our systems?", "No. We work with the systems you already use, such as Xero and Google Sheets."],
-    ["Which AI tools do you use?", "Tools such as Claude, chosen for the task and your data."],
-    ["How do you start?", "A review of current workflows, then a short list of changes with cost and time saved."],
-    ["Can you build dashboards on our own data?", "Yes. Dashboards combine accounting, sales and operating data in one place."],
+    ["Who owns the data?", "Your company does. It is stored in a database set up for your company alone, and you can take a full copy if you leave."],
+    ["Where is the data stored?", "In a secure cloud database (Supabase), kept separate from every other client's data."],
+    ["Who can see the dashboards?", "The people you choose. Access is set per person and can be removed at any time."],
+    ["Which systems can you connect?", "Xero, Google Sheets and most CRM platforms. Other systems are reviewed case by case."],
+    ["What powers the dashboards?", "Retool, on top of the database. You see the dashboards in a browser; nothing to install."],
+    ["Does AI make decisions for us?", "No. AI reads the numbers and flags exceptions. A Chartered Accountant checks each flag, and you decide."],
+    ["How long does set-up take?", "Connecting systems and building the first dashboards is planned with you after a first call."],
+    ["How much does it cost?", "Fees depend on the systems connected and the dashboards needed. Message us on WhatsApp for a quote."],
   ],
-  chat: ["Can you automate our receipt processing?", "Yes. Send us a sample month and we will show what can be read and posted automatically."],
-  benefits: [
-    { h: "Practical, cost-effective solutions", p: "Built on your existing systems, not new software for its own sake.", img: "/images/sme.jpg", card: ["Workflow review", [["Current process", "Mapped", "ok"], ["Manual steps", "Found", "ok"], ["Automation plan", "Agreed", "ok"], ["Build", "Next", "todo"]]] },
-    { h: "Live figures, not month-old reports", p: "Dashboards that update as transactions arrive.", img: "/images/help-1.jpg", card: ["Dashboard", [["Revenue", "Live", "ok"], ["Margin", "Live", "ok"], ["Cash", "Live", "ok"], ["Targets", "Set", "ok"]]] },
-    { h: "Less re-keying", p: "Systems connected so data is entered once.", img: "/images/cs-2.jpg", card: ["Integration", [["Xero", "Connected", "ok"], ["Google Sheets", "Connected", "ok"], ["Bank feeds", "Connected", "ok"], ["CRM", "Planned", "todo"]]] },
-  ],
+  chat: ["Can I see BlazeOS on our own numbers?", "Yes. Message us and we will set up a short demo on a sample of your data."],
+  benefits: [],
 };
 
 // Sub-page "What's included": two to three lines per item, what we do, how,
@@ -229,4 +216,143 @@ export const TILES_LONG: Record<string, [IconKey, string, string][]> = {
     ["shield", "Key person insurance", "Advice on cover for the people the business depends on, arranged through our partners."],
     ["check", "Big Four experience", "Advice from Chartered Accountants with managerial experience in a Big Four firm, applied to companies of your size."],
   ],
+};
+
+// Storyboard sections per product, from the competitor review (20 Oct 2026).
+// Prices are not published: plan sections point to WhatsApp.
+export const EXTRAS: Record<string, PageExtras & { faq?: Pair[] }> = {
+  accounting: {
+    h1: "Accounting Services in Singapore",
+    ai: { q: "Revenue, margin and receivables, analysed every day", metrics: [["Gross margin", "41%"], ["Receivables over 60 days", "S$24k"], ["Expenses above trend", "3 lines"]] },
+  },
+  tax: {
+    h1: "Tax Services in Singapore",
+    rules: { h: "What IRAS requires", rows: [
+      ["Estimated Chargeable Income (ECI)", "Within 3 months after the financial year end"],
+      ["ECI waiver", "Revenue S$5 million or below and ECI nil"],
+      ["Form C-S, C-S (Lite) or C", "By 30 November of the Year of Assessment"],
+      ["Form C-S (Lite)", "Revenue S$200,000 or below"],
+      ["Form C-S", "Revenue S$5 million or below"],
+      ["Late or missing returns", "IRAS may estimate the tax and impose penalties"],
+    ] },
+    ai: { q: "Tax estimated from the books before year end", metrics: [["Estimated tax YA 2027", "S$31k"], ["Exemptions applied", "Partial"], ["Capital allowances to claim", "S$12k"]] },
+  },
+  payroll: {
+    h1: "Payroll Services in Singapore",
+    rules: { h: "What employers must file", rows: [
+      ["CPF contributions", "By the 14th of the following month"],
+      ["Late CPF", "Interest of 1.5% a month on the amount due"],
+      ["Skills Development Levy", "Paid with CPF for every employee"],
+      ["Self-Help Group contributions", "CDAC, ECF, MBMF or SINDA, deducted and paid with CPF"],
+      ["IR8A employee income", "By 1 March for the previous calendar year"],
+      ["Auto-Inclusion Scheme", "Compulsory with 5 or more employees"],
+    ] },
+    ai: { q: "Staff cost tracked against revenue", metrics: [["Payroll this month", "S$54k"], ["Staff cost % of revenue", "42%"], ["CPF and SHG due", "14 Nov"]] },
+  },
+  "outsourced-cfo": {
+    h1: "Outsourced CFO Services in Singapore",
+    compare: { h: "Outsourced CFO or a full-time hire", cols: ["", "Outsourced CFO", "Full-time CFO"], rows: [
+      ["Cost", "A monthly fee, agreed with you", "A full-time salary, bonus and CPF"],
+      ["Start", "After a first review of your numbers", "After recruitment and notice period"],
+      ["Commitment", "Scaled up or down as you grow", "An employment contract"],
+      ["Team behind it", "Accounting, tax and corporate secretarial in one firm", "One person"],
+      ["Data", "Built on your Xero data, with live dashboards", "Depends on the hire"],
+    ] },
+    ai: { q: "Runway and budget, updated after each close", metrics: [["Cash runway", "18 months"], ["Budget variance", "+3.2%"], ["Forecast cash low", "Feb"]] },
+  },
+  "corporate-secretarial": {
+    h1: "Corporate Secretarial Services in Singapore",
+    chips: ["ACRA Filing Agent FA20210247", "AGM and annual return filed for you", "Signed online"],
+    who: { h: "Who needs a company secretary", items: [
+      ["building", "New companies", "Every Singapore company must appoint a company secretary within 6 months of incorporation."],
+      ["user", "Sole directors", "A sole director cannot also act as company secretary, so a second person must be appointed."],
+      ["globe", "Overseas founders", "The secretary must be ordinarily resident in Singapore. We act as your resident company secretary."],
+      ["link", "Companies switching provider", "We collect your records from the current secretary and take over every filing."],
+    ] },
+    rules: { h: "What the law requires", rows: [
+      ["Appoint a company secretary", "Within 6 months of incorporation (Companies Act, section 171)"],
+      ["Who can act", "A natural person ordinarily resident in Singapore"],
+      ["Sole director", "Cannot also be the company secretary"],
+      ["Annual General Meeting", "Within 6 months after the financial year end, unless dispensed with"],
+      ["Annual return", "Filed with ACRA within 7 months after the financial year end"],
+      ["Late annual return", "Late lodgement fee of S$300 within 3 months, S$600 after"],
+    ] },
+    plans: { h: "What the service includes", included: [
+      "A named company secretary, resident in Singapore",
+      "AGM documents, or written resolutions in place of an AGM",
+      "Annual return filed on Bizfile",
+      "Registers of members, directors and controllers kept",
+      "Changes of directors, address and business activity",
+      "Share allotments and transfers",
+      "Directors' and members' resolutions",
+      "Documents signed online",
+    ], note: "Fees depend on the number of shareholders and the changes in a year. Message us on WhatsApp for a quote." },
+    steps: { h: "Switch in 3 steps", items: [
+      ["Tell us your company", "Send the UEN and your current secretary's details on WhatsApp."],
+      ["We collect your records", "We request the registers, minutes and filings from your current secretary."],
+      ["We take over", "The change of secretary is filed on Bizfile and we handle every filing from then on."],
+    ] },
+    calendar: true,
+    ai: { q: "Every filing tracked against its deadline", metrics: [["Next filing", "AGM"], ["Days left", "48"], ["Registers up to date", "Yes"]] },
+    skip: ["benefits", "how", "grid"],
+    faq: [
+      ["Does every Singapore company need a company secretary?", "Yes. A company must appoint a company secretary within 6 months of incorporation."],
+      ["Who can be a company secretary?", "A natural person ordinarily resident in Singapore. Public companies need a qualified secretary."],
+      ["Can a director also be the company secretary?", "Yes, unless the director is the company's only director."],
+      ["Is a company secretary the same as a corporate secretary?", "Yes. Both terms describe the same role under the Companies Act."],
+      ["What happens if the annual return is late?", "ACRA charges a late lodgement fee of S$300 within 3 months of the due date and S$600 after that. Repeated breaches can lead to prosecution of the directors."],
+      ["Do you hold AGMs for us?", "We prepare the AGM documents, or written resolutions where the company dispenses with AGMs."],
+      ["How do I switch company secretary?", "Send us your UEN on WhatsApp. We collect your records, file the change on Bizfile and take over the filings."],
+      ["Can foreign-owned companies use Blaze Global?", "Yes. If no director lives in Singapore, our Nominee Directorship service provides the resident director."],
+      ["How much does it cost?", "Fees depend on the number of shareholders and the changes in a year. Message us on WhatsApp for a quote."],
+    ],
+  },
+  "nominee-directorship": {
+    h1: "Nominee Director Services in Singapore",
+    chips: ["Written nominee agreement", "ACRA Registered Filing Agent", "Remote onboarding"],
+    who: { h: "Who needs a nominee director", items: [
+      ["globe", "Foreign founders", "Every Singapore company needs at least one director ordinarily resident in Singapore."],
+      ["clock", "Founders waiting for an Employment Pass", "A nominee meets the requirement until your pass is approved and you can act as resident director."],
+      ["user", "Companies that lost their resident director", "A replacement keeps the company compliant while you find a permanent director."],
+      ["layers", "Holding companies and subsidiaries", "Group entities with no resident staff use a nominee to meet the rule."],
+    ] },
+    rules: { h: "What ACRA requires", rows: [
+      ["Resident director", "At least one director ordinarily resident in Singapore"],
+      ["Who can act", "A natural person, 18 or older, not disqualified from acting as a director"],
+      ["Appointment", "Filed with ACRA within 14 days"],
+      ["Paid nominee directors", "Arranged through an ACRA-registered filing agent"],
+      ["Nominee status", "Recorded in the company's register of nominee directors"],
+      ["Duties", "A nominee keeps the full duties of a director"],
+    ] },
+    does: { h: "What the nominee does, and what stays with you", yes: ["The nominee", ["Meets the resident director requirement", "Signs statutory filings with ACRA", "Receives official notices", "Reviews annual filings with your company secretary"]], no: ["Stays with you", ["Running the business", "Signing commercial contracts", "Bank accounts and payments", "Ownership of the shares"]] },
+    safeguards: { h: "Safeguards", items: [
+      ["shield", "Due diligence first", "Identity, source of funds and business checks before any appointment."],
+      ["doc", "Written agreement", "Duties, limits and indemnity agreed in writing before appointment."],
+      ["check", "Annual review", "Filings and company records reviewed each year with your company secretary."],
+      ["link", "Replacement before removal", "A new resident director is in place before the nominee resigns."],
+    ] },
+    plans: { h: "Fees and terms", included: [
+      "Annual fee",
+      "Minimum term",
+      "Any deposit",
+      "Services required alongside, such as corporate secretarial",
+      "Notice to end the arrangement",
+    ], note: "Each is confirmed in writing before appointment. Message us on WhatsApp for the fees and terms." },
+    steps: { h: "Appointment in 4 steps", items: [
+      ["Due diligence", "We verify the founders, shareholders and the business."],
+      ["Agreement signed", "The nominee agreement is signed online."],
+      ["Appointed on Bizfile", "The appointment is filed with ACRA within 14 days."],
+      ["Annual compliance", "Filings tracked with your company secretary every year."],
+    ] },
+    skip: ["benefits", "how", "grid"],
+    faq: [
+      ["Is a nominee director legal in Singapore?", "Yes. The nominee must be disclosed in the company's register of nominee directors, and paid nominees must be arranged through an ACRA-registered filing agent."],
+      ["Does the nominee control my company?", "No. You run the business, sign contracts and control the bank accounts. The nominee meets the residency requirement and signs statutory filings."],
+      ["What risks does a nominee director carry?", "A nominee keeps the full duties of a director, which is why due diligence and a written agreement come before appointment."],
+      ["How long do I need a nominee director?", "Until a director ordinarily resident in Singapore is appointed, for example after your Employment Pass is approved."],
+      ["Can a foreigner be a director of a Singapore company?", "Yes, but at least one director must be ordinarily resident in Singapore."],
+      ["How do I replace the nominee?", "Appoint your own resident director. We file the change on Bizfile and the nominee resigns."],
+      ["How much does it cost?", "Fees and terms are confirmed in writing before appointment. Message us on WhatsApp for details."],
+    ],
+  },
 };

@@ -4,6 +4,9 @@ import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Card, type Parent, ty
 import { PRODUCTS } from "@/lib/products";
 import { DeliverPanels, IncorporationBand } from "@/components/deliver-panels";
 import { HowItWorks } from "@/components/how-it-works";
+import { JsonLd } from "@/components/json-ld";
+import { AiAnalysis, CardGrid, CompareTable, DoesTable, PlanCard, RulesTable, StepRow, TrustRow } from "@/components/product-sections";
+import { ComplianceCalendar } from "@/components/widgets";
 import { whatsappUrl } from "@/lib/site";
 
 const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
@@ -15,22 +18,40 @@ export const subPath = (slug: string) => `/services/${SUB_PAGES[slug].par}/${slu
 
 export function MainServiceView({ slug }: { slug: Product }) {
   const p = MAIN_PAGES[slug];
-  const group = PRODUCTS.find((x) => x.key === slug)?.group;
+  const entry = PRODUCTS.find((x) => x.key === slug);
+  const group = entry?.group;
+  const skip = new Set(p.skip ?? []);
   const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug && x.group === group && x.key !== "incorporation").map((x): [string, string] => [x.name, x.href]), group === "set-up" ? INC : CALC];
+  const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
   return (
     <main className="view" id="view-company">
-      <PhotoHero className="rh-main" img={p.img} title={p.heading} sub={p.sub} wa={p.wa} />
+      <JsonLd data={faqLd} />
+      <PhotoHero className="rh-main" img={p.img} title={p.h1 ?? p.heading} sub={p.h1 ? `${/[.!?]$/.test(p.heading) ? p.heading : `${p.heading}.`} ${p.sub}` : p.sub} wa={p.wa}>
+        {p.chips && <ul className="rh-chips">{p.chips.map((c) => <li key={c}>{c}</li>)}</ul>}
+      </PhotoHero>
+      {p.h1 && <TrustRow />}
       {slug === "corporate-secretarial" && <IncorporationBand />}
+      {p.who && <CardGrid h={p.who.h} items={p.who.items} />}
+      {p.rules && <RulesTable h={p.rules.h} rows={p.rules.rows} />}
       {p.delivers && <DeliverPanels h={p.delivers.h} items={p.delivers.items} />}
-      <Benefits rows={p.benefits} />
-      <HowItWorks />
-      <section className="fk fk-top"><div className="wide">
-        <h2 className="fk-h">{p.gridHeading}</h2>
-        <div className="fk-grid">
-          <div className="fk-side"><Acts wa={p.wa} /><ExploreLinks links={links} /></div>
-          <FlankCards cards={p.cards} />
-        </div>
-      </div></section>
+      {p.does && <DoesTable {...p.does} />}
+      {p.safeguards && <CardGrid h={p.safeguards.h} items={p.safeguards.items} tone="white" />}
+      {p.plans && <PlanCard {...p.plans} wa={p.wa} />}
+      {p.steps && <StepRow h={p.steps.h} items={p.steps.items} />}
+      {!skip.has("benefits") && <Benefits rows={p.benefits} />}
+      {p.calendar && <section className="cal2" aria-labelledby="cal2-title"><div className="wide"><ComplianceCalendar /></div></section>}
+      {p.ai && entry && <AiAnalysis product={entry.name} q={p.ai.q} metrics={p.ai.metrics} />}
+      {!skip.has("how") && <HowItWorks />}
+      {!skip.has("grid") && (
+        <section className="fk fk-top"><div className="wide">
+          <h2 className="fk-h">{p.gridHeading}</h2>
+          <div className="fk-grid">
+            <div className="fk-side"><Acts wa={p.wa} /><ExploreLinks links={links} /></div>
+            <FlankCards cards={p.cards} />
+          </div>
+        </div></section>
+      )}
+      {p.compare && <CompareTable {...p.compare} />}
       <Faq items={p.faq} />
       <Credentials />
       <Help wa={p.wa} chat={p.chat} />

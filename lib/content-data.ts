@@ -1,6 +1,6 @@
 // Generated from the approved mock-up (docs/brand/home-mockup.html) by
 // scripts/port. Copy lives here so pages render it, never retype it.
-import { CFO_PAGE, DIGITAL_PAGE, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE, TILES_LONG } from "@/lib/content-new";
+import { CFO_PAGE, DIGITAL_PAGE, EXTRAS, NOMINEE_PAGE, PAYROLL_PAGE, TAX_PAGE, TILES_LONG } from "@/lib/content-new";
 
 export type Pair = [title: string, text: string];
 export type Card = [title: string, text: string, art: ArtKind, chip: string, href: string];
@@ -9,9 +9,24 @@ export type IconKey = keyof typeof ICONS;
 export type Status = "ok" | "wait" | "todo";
 export interface Benefit { h: string; p: string; img: string; card: [string, [string, string, Status][]] }
 export type Parent = "accounting" | "tax" | "corporate-secretarial";
-export type Product = Parent | "payroll" | "outsourced-cfo" | "nominee-directorship" | "digitalisation-automation";
+export type Product = Parent | "payroll" | "outsourced-cfo" | "nominee-directorship" | "blazeos";
+/** Optional storyboard sections (20 Oct 2026). Rendered in a fixed order when present. */
+export interface PageExtras {
+  h1?: string;
+  chips?: string[];
+  who?: { h: string; items: [IconKey, string, string][] };
+  rules?: { h: string; rows: [string, string][] };
+  does?: { h: string; yes: [string, string[]]; no: [string, string[]] };
+  plans?: { h: string; included: string[]; note: string };
+  steps?: { h: string; items: [string, string][] };
+  safeguards?: { h: string; items: [IconKey, string, string][] };
+  compare?: { h: string; cols: [string, string, string]; rows: [string, string, string][] };
+  ai?: { q: string; metrics: [string, string][] };
+  calendar?: boolean;
+  skip?: ("benefits" | "how" | "grid")[];
+}
 export interface SubPage { par: Parent; slug: string; name: string; line: string; art: [ArtKind, string]; h1: string; lede: string; why: Pair[] }
-export interface MainPage { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[]; delivers?: { h: string; items: [IconKey, string, string][] } }
+export interface MainPage extends PageExtras { slug: string; img: string; heading: string; sub: string; gridHeading: string; wa: string; cards: Card[]; faq: Pair[]; chat: Pair; benefits: Benefit[]; delivers?: { h: string; items: [IconKey, string, string][] } }
 export interface SegmentPage { slug: string; name: string; line: string; h1: string; lede: string; wa: string; bandHeading: string; bandIcons: IconKey[]; why: Pair[]; needHeading: string; needs: [IconKey, string, string, string][]; chat: Pair }
 export interface Review { n: string; role: string; head: string; body: string[] }
 
@@ -1238,5 +1253,6 @@ export const REVIEWS: Review[] = [
 ];
 
 // Added after the client review (lib/content-new.ts).
-Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "outsourced-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE, "digitalisation-automation": DIGITAL_PAGE });
+Object.assign(MAIN_PAGES, { tax: TAX_PAGE, payroll: PAYROLL_PAGE, "outsourced-cfo": CFO_PAGE, "nominee-directorship": NOMINEE_PAGE, blazeos: DIGITAL_PAGE });
+for (const [k, v] of Object.entries(EXTRAS)) Object.assign(MAIN_PAGES[k as Product], v);
 Object.assign(TILES, TILES_LONG);
