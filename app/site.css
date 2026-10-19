@@ -2439,3 +2439,5 @@ button.gs-link{background:none;border:0;padding:0;cursor:pointer;font-family:var
 @keyframes ndon{from{transform:scale(.4);opacity:0}}
 @media (prefers-reduced-motion:reduce){.axflow::after{animation:none;display:none}}
 .axflow .tk{color:#1f7a4a;font-weight:600}
+/* One button shape everywhere: the navbar's 6px rounded rectangle (20 Oct 2026) */
+.btn,.rh-btn,.rh-btn-ghost,.hp-btn,.nx-btn,.btn-gold,a.btn,button.btn{border-radius:6px!important}
