@@ -73,14 +73,14 @@ export function deadlines(fye: Date, listed = false): Deadline[] {
     {
       date: addMonths(fye, 3), name: "Estimated Chargeable Income", when: "3 months after year end", agency: "IRAS",
       rule: "Within 3 months after the financial year end",
-      note: "No ECI filing is needed if annual revenue is S$5 million or below and ECI is nil, before deducting the partial or start-up tax exemption. You self-assess the waiver; there is no need to inform IRAS.",
+      note: "No ECI filing is needed if annual revenue is S$5 million or below and ECI is nil, before deducting the partial or start-up tax exemption. The waiver is self-assessed, so there is no need to inform IRAS.",
       href: "/services/tax/corporate-income-tax", link: "Corporate income tax", url: URL.eci,
     },
   ];
   if (!listed) rows.push({
     date: addMonths(fye, 5), name: "Send financial statements to members", when: "5 months after year end", agency: "ACRA",
     rule: "Within 5 months after the financial year end, if not holding an AGM (Companies Act 1967 s175A)",
-    note: "A private company that sends its financial statements to all members within 5 months does not need to hold an AGM. Members may still ask for one up to 14 days before the 6-month deadline.",
+    note: "A private company that sends its financial statements to all members within 5 months does not need to hold an AGM. Members may still request one up to 14 days before the 6-month deadline.",
     href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.agm,
   });
   rows.push(
@@ -89,13 +89,13 @@ export function deadlines(fye: Date, listed = false): Deadline[] {
       rule: `${listed ? "Listed" : "Non-listed"} company: within ${listed ? 4 : 6} months after the financial year end (Companies Act 1967 s175)`,
       note: listed
         ? "Listed companies must hold an AGM each year."
-        : "A private company may dispense with AGMs if all members pass a resolution (s175A), or is exempt if it sends financial statements within 5 months. A dormant non-listed private company with total assets of S$500,000 or less is also exempt. AGM details are still declared in the annual return.",
+        : "A private company may dispense with AGMs if all members pass a resolution (s175A), or is exempt if it sends financial statements within 5 months. A dormant non-listed private company with total assets of S$500,000 or less is also exempt. AGM details must still be declared in the annual return.",
       href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.agm,
     },
     {
       date: addMonths(fye, listed ? 5 : 7), name: "Annual return", when: `${listed ? 5 : 7} months after year end`, agency: "ACRA",
       rule: `${listed ? "Listed" : "Non-listed"} company: within ${listed ? 5 : 7} months after the financial year end (Companies Act 1967 s197)`,
-      note: `Companies with a share capital that keep a branch register outside Singapore have one extra month (${formatLong(addMonths(fye, listed ? 6 : 8))}). The annual return must be filed even if the company is dormant. Financial statements in XBRL are filed with it.`,
+      note: `Companies with a share capital that keep a branch register outside Singapore have one extra month (${formatLong(addMonths(fye, listed ? 6 : 8))}). The annual return must be filed even if the company is dormant, together with financial statements in XBRL.`,
       href: "/services/corporate-secretarial", link: "Corporate Secretarial", url: URL.ar,
     },
     {
@@ -107,7 +107,7 @@ export function deadlines(fye: Date, listed = false): Deadline[] {
     {
       date: new Date(y + 1, 10, 30), name: "Corporate tax", when: "30 November each year", agency: "IRAS",
       rule: `30 November ${y + 1}, for Year of Assessment ${y + 1} (the financial year ending in ${y}), filed at mytax.iras.gov.sg`,
-      note: "Form C-S (Lite) for revenue of S$200,000 or below, Form C-S up to S$5 million, Form C above. A first financial period longer than 12 months may straddle two Years of Assessment.",
+      note: "Form C-S (Lite) applies to revenue of S$200,000 or below, Form C-S up to S$5 million and Form C above that. A first financial period longer than 12 months may straddle two Years of Assessment.",
       href: "/services/tax/corporate-income-tax", link: "Corporate income tax", url: URL.tax,
     },
   );

@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/nominee-directorship",
   title: "Nominee Director Services in Singapore | Blaze Global",
-  description: "A locally resident nominee director for overseas founders, with due diligence, a written agreement and ACRA filing.",
+  description: "Nominee director services in Singapore for overseas founders: a locally resident director, due diligence, a written agreement and ACRA filing.",
 });
 
 export default function Page() {

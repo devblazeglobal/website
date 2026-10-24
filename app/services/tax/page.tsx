@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/tax",
   title: "Tax Services in Singapore | Blaze Global",
-  description: "Corporate income tax filing, tax advisory and a outsourced CFO for Singapore companies, by Chartered Accountants.",
+  description: "Tax services in Singapore: corporate income tax filing, practical tax advice and outsourced CFO support for your company, from Chartered Accountants.",
 });
 
 export default function TaxPage() {

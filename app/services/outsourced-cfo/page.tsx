@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/outsourced-cfo",
   title: "Outsourced CFO Services in Singapore | Blaze Global",
-  description: "Financial models, cash flow visibility, budgets and forecasts, and process streamlining from a part-time Chartered Accountant CFO in Singapore.",
+  description: "Outsourced CFO services in Singapore: financial models, cash flow visibility, budgets, forecasts and leaner processes from a Chartered Accountant CFO.",
 });
 
 export default function Page() {

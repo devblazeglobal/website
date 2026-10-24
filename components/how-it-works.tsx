@@ -17,10 +17,10 @@ export function HowItWorks() {
   return (
     <section className="ax-sec" aria-labelledby="ax-h"><div className="wide" ref={root}>
       <p className="ax-k">How it works</p>
-      <h2 className="ax-h" id="ax-h">From first call to every filing, one team</h2>
+      <h2 className="ax-h" id="ax-h">One team, from your first call to every filing</h2>
       <div className="ax">
         <article className="axp a1">
-          <span className="ax-n" aria-hidden="true">1</span><h3>Book a call</h3><p>Message us on WhatsApp or pick a time. A Chartered Accountant is assigned to the company from the first message.</p>
+          <span className="ax-n" aria-hidden="true">1</span><h3>Book a call</h3><p>Message us on WhatsApp or choose a time that suits you. A Chartered Accountant is assigned to your business from your first message.</p>
           <div className="axc" aria-hidden="true">
             <div className="axc-h"><span>Consultation request</span><span className="live"><i />Live</span></div>
             <div className="axr box r1"><span className="av">TW</span><div><b>Tan W.</b><small>New company · Pte Ltd</small></div><em>New</em></div>
@@ -30,7 +30,7 @@ export function HowItWorks() {
           </div>
         </article>
         <article className="axp a2">
-          <span className="ax-n" aria-hidden="true">2</span><h3>Share your requirements</h3><p>We send the exact list of documents. You upload or message them, and each item is checked off as it arrives.</p>
+          <span className="ax-n" aria-hidden="true">2</span><h3>Share your requirements</h3><p>We send you a clear list of the documents we need. Upload or message them to us, and we check off each item as it arrives.</p>
           <div className="axc" aria-hidden="true">
             <div className="axc-h"><span>Requirements · Pte Ltd</span><span className="live"><i />Live</span></div>
             <ul className="axl">
@@ -44,7 +44,7 @@ export function HowItWorks() {
           </div>
         </article>
         <article className="axp a3">
-          <span className="ax-n" aria-hidden="true">3</span><h3>We handle the rest</h3><p>Filings, books and deadlines run on one calendar. Every filing confirmed on WhatsApp and recorded in Xero.</p>
+          <span className="ax-n" aria-hidden="true">3</span><h3>We handle the rest</h3><p>We keep your filings, books and deadlines on one calendar. Every filing is confirmed on WhatsApp and recorded in Xero, so you can focus on running your business.</p>
           <div className="axc" aria-hidden="true">
             <div className="axc-h"><span>Filings · FYE 31 Dec 2026</span><span className="syn">Synced</span></div>
             <div className="axf r1"><div><b>Estimated Chargeable Income</b><small>IRAS</small></div><em>Filed</em></div>

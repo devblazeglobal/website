@@ -1,122 +1,126 @@
-import { AxPlay } from "@/components/ax-play";
-import { CARDS } from "@/components/deliver-panels";
-import { CompareTable, StepRow, TrustRow } from "@/components/product-sections";
-import { Credentials, Faq, Help } from "@/components/ui";
-import { JsonLd } from "@/components/json-ld";
-import { MAIN_PAGES } from "@/lib/content-data";
-import { whatsappUrl } from "@/lib/site";
-
-// BlazeOS: data integration, dashboards and business intelligence on the
-// client's own data. Not reconciliation or bookkeeping automation. Sales storyboard: the screen,
-// the problem, how it works, what they see, what the AI does, before/after,
-// set-up, fees, data and security.
-const p = MAIN_PAGES.blazeos;
-
-// Three pillars, as agreed with Blaze (24 Oct 2026). Icons: database, chart, bulb.
-const PIPE: [string, string, string][] = [
-  ["Connect", "Bring your business data together", '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>'],
-  ["Visualise", "Turn raw data into clear dashboards", '<path d="M4 4v16h16"/><path d="M9 16v-4M13 16V9M17 16v-6"/>'],
-  ["Understand", "Discover insights that guide decisions", '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/>'],
-];
-const SEE = ["Sales and customers", "Margin by product", "Cash and forecast", "Connected sources"];
-const SEE_TXT: Record<string, string> = {
-  "Sales and customers": "Sales by customer and how long each takes to pay, from Xero and your CRM.",
-  "Margin by product": "Gross margin by product or service, with lines that slip below target flagged.",
-  "Cash and forecast": "Today's cash and the next six months, built from receivables, bills and payroll.",
-  "Connected sources": "Xero, spreadsheets and your CRM in one central view, instead of switching between them.",
-};
-
-function Dash() {
-  return (
-    <div className="bos-dash" aria-label="Example BlazeOS dashboard">
-      <div className="bos-dh"><span>BlazeOS · Example Pte Ltd</span><span>Updated 08:00 · Example figures</span></div>
-      <div className="bos-kpis">
-        <div><small>Revenue · month</small><b>S$128k</b><em>+6.7% vs Sep</em></div>
-        <div><small>Gross margin</small><b>41%</b><em>+2.1 pts</em></div>
-        <div><small>Cash</small><b>S$212k</b><em className="dn">−S$18k</em></div>
-        <div><small>Over 60 days</small><b>S$24k</b><em className="dn">5 customers</em></div>
-      </div>
-      <div className="bos-row">
-        <div className="bos-chart"><small>Revenue, 6 months and 3 forecast</small><div className="bos-bars">{[52, 58, 55, 63, 60, 70, 72, 66, 75].map((h, i) => <i key={i} className={i > 5 ? "fc" : ""} style={{ height: `${h}%`, animationDelay: `${i * 0.06}s` }} />)}</div></div>
-        <div className="bos-ai"><small>Flagged by AI for review</small><div><b>Marketing over budget</b><span>+S$3k</span></div><div><b>Customer B paying slower</b><span>48 days</span></div><div><b>Cash below S$150k</b><span>Feb</span></div></div>
-      </div>
-    </div>
-  );
-}
-
+// BlazeOS: ported from the approved mock-up (claude.ai artifact GPzCjkcXQCMh7WwDfoiAGT, 24 Oct 2026).
+// Data integration, dashboards and insights: consolidation, visibility and
+// actionable insights. Styles are the b2-* block at the end of app/site.css.
 export function BlazeOSView() {
-  const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
   return (
-    <main className="view" id="view-company">
-      <JsonLd data={faqLd} />
-      <section className="rh pull-under bos-hero" aria-labelledby="bos-h1">
-        <div className="rh-imgs rh-core" aria-hidden="true" />
-        <div className="rh-in">
-          <h1 id="bos-h1">{p.heading}</h1>
-          <p className="rh-sub">{p.sub}</p>
-          <div className="rh-acts"><a className="btn rh-btn" href={whatsappUrl(p.wa)} target="_blank" rel="noopener">Book a demo</a><a className="btn btn-wa rh-btn-ghost" href={whatsappUrl(p.wa)} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
-          <Dash />
+    <main className="view b2-root" id="view-blazeos">
+      <section className="b2-hero" aria-labelledby="h1"><div className="b2-in">
+        <h1 id="h1">BlazeOS</h1>
+        <div className="b2-hero-line">
+          <p>The agentic operating system for your business data</p>
         </div>
-      </section>
-      <TrustRow />
-
-      <section className="ps"><div className="wide">
-        <h2 className="ps-h">Why the numbers are hard to see today</h2>
-        <ul className="bos-prob">
-          <li><b>Spread across systems</b><span>Sales in the CRM, costs in Xero, plans in spreadsheets. No single view.</span></li>
-          <li><b>Reports arrive late</b><span>Month-end figures come weeks after the month ends, too late to act on.</span></li>
-          <li><b>Hours pulling figures</b><span>Someone exports, pastes and checks numbers before every meeting.</span></li>
-        </ul>
+        <p className="b2-hero-sub">All your data. One clear view. Smarter decisions.</p>
       </div></section>
 
-      <section className="ps ps-alt"><div className="wide">
-        <h2 className="ps-h">How BlazeOS works</h2>
-        <ol className="bos-pipe bos-pillars">{PIPE.map(([k, d, icon], i) => <li key={k}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: icon }} /><b>{k}</b><p>{d}</p>{i < PIPE.length - 1 && <i className="bos-flow" aria-hidden="true" />}</li>)}</ol>
-      </div></section>
-
-      <section className="ax-sec ax-dlv" aria-labelledby="see-h">
-        <AxPlay className="wide">
-          <h2 className="ax-h" id="see-h">What you see</h2>
-          <div className="ax c2">{SEE.map((t, i) => <article key={t} className={`axp a${i + 1}`}><h3>{t}</h3><p>{SEE_TXT[t]}</p><div className="axc" aria-hidden="true">{CARDS[t]}</div></article>)}</div>
-        </AxPlay>
-      </section>
-
-      <section className="ax-sec ax-inc" aria-labelledby="ai-h">
-        <AxPlay className="wide">
-          <article className="axp a3 axp-wide">
-            <div className="axw-copy">
-              <p className="ax-k">Insights</p>
-              <h2 className="ax-h" id="ai-h">Trends and anomalies, surfaced</h2>
-              <p>AI-assisted analysis reads across your connected data and surfaces changes: slower payers, spending above plan, margins moving. A Chartered Accountant reviews each one before it reaches you.</p>
+      <section className="b2-band" aria-label="Example BlazeOS dashboard"><div className="b2-in">
+        <div className="b2-dash b2-rv">
+          <div className="b2-dh"><span>BlazeOS · Example Pte Ltd</span><span>Updated 08:00 · Example figures</span></div>
+          <div className="b2-kpis">
+            <div><small>Operating cash flow · Oct</small><b>S$96k</b><em>+8.0% vs Sep</em></div>
+            <div><small>Free cash flow · Oct</small><b>S$74k</b><em>+11.0% vs Sep</em></div>
+            <div><small>Debt service cover</small><b>4.4x</b><em>Serviceable</em></div>
+            <div><small>Available to reinvest</small><b className="b2-gd">S$43k</b><em>After debt and tax</em></div>
+          </div>
+          <div className="b2-drow">
+            <div className="b2-chart"><div className="b2-ch"><small>Cash flow and free cash flow, S$k</small><span className="b2-lg"><i className="b2-l1"></i>Cash flow<i className="b2-l2"></i>Free cash flow</span></div>
+              <div className="b2-cf" role="img" aria-label="Operating cash flow and free cash flow, May to October. October: cash flow S$96k, free cash flow S$74k.">
+                <div><span><i className="b2-o" style={{"--h": "68%", "--n": "0"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "48%", "--n": "0"} as React.CSSProperties}></i></span><em>May</em></div>
+                <div><span><i className="b2-o" style={{"--h": "72%", "--n": "1"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "50%", "--n": "1"} as React.CSSProperties}></i></span><em>Jun</em></div>
+                <div><span><i className="b2-o" style={{"--h": "66%", "--n": "2"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "44%", "--n": "2"} as React.CSSProperties}></i></span><em>Jul</em></div>
+                <div><span><i className="b2-o" style={{"--h": "78%", "--n": "3"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "56%", "--n": "3"} as React.CSSProperties}></i></span><em>Aug</em></div>
+                <div><span><i className="b2-o" style={{"--h": "84%", "--n": "4"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "63%", "--n": "4"} as React.CSSProperties}></i></span><em>Sep</em></div>
+                <div><span><i className="b2-o" style={{"--h": "92%", "--n": "5"} as React.CSSProperties}></i><i className="b2-f" style={{"--h": "71%", "--n": "5"} as React.CSSProperties}></i></span><em>Oct</em></div>
+              </div>
             </div>
-            <div className="axc" aria-hidden="true">{CARDS["Trends and anomalies"]}</div>
-          </article>
-        </AxPlay>
-      </section>
-
-      <CompareTable h="Before and after BlazeOS" cols={["", "Today", "With BlazeOS"]} rows={[
-        ["Reporting", "Manual reports compiled periodically", "Dashboards with regularly refreshed data"],
-        ["Data sources", "Scattered across different systems", "Brought together in one central view"],
-        ["Visibility", "Switching between spreadsheets and platforms", "Key business metrics at a glance"],
-        ["Insights", "Time spent interpreting disconnected numbers", "AI-assisted analysis that surfaces trends and anomalies"],
-      ]} />
-
-      <StepRow h="Set-up in 3 steps" items={[
-        ["Connect your systems", "We connect Xero, Google Sheets and your CRM with read-only access."],
-        ["Build your dashboards", "We agree the figures that matter and build them on your data."],
-        ["Monthly review", "A call each month to go through the numbers and what was flagged."],
-      ]} />
-
-      <section className="ps ps-alt"><div className="wide">
-        <div className="ps-plan">
-          <div><h2 className="ps-h">Fees</h2><p className="ps-note">Fees depend on the systems connected and the dashboards you need. Message us on WhatsApp for a quote or a demo on your own numbers.</p><a className="btn btn-wa btn-lg" href={whatsappUrl(p.wa)} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Ask for fees on WhatsApp</a></div>
-          <ul>{["Connection to Xero, Google Sheets and CRM", "Your own secure database", "Live dashboards for your team", "AI analysis, checked by an accountant", "Monthly review call"].map((x) => <li key={x}><span aria-hidden="true">✓</span>{x}</li>)}</ul>
+            <div className="b2-flags"><small>Reinvestment capacity · October</small>
+              <ul className="b2-wf"><li><span>Free cash flow</span><span>S$74k</span></li><li><span>Debt service</span><span className="b2-m">−S$22k</span></li><li><span>Tax reserve</span><span className="b2-m">−S$9k</span></li><li className="b2-tot"><span>Available to reinvest</span><span>S$43k</span></li></ul>
+            </div>
+          </div>
         </div>
       </div></section>
 
-      <Faq items={p.faq} heading="Data and security" />
-      <Credentials />
-      <Help wa={p.wa} chat={p.chat} />
+      <section className="b2-trust" aria-label="Credentials"><div className="b2-in">
+        <ul><li><b>ACRA Registered Filing Agent</b><span>FA20210247</span></li><li><b>Chartered Accountants</b><span>Members of ISCA</span></li><li><b>120+</b><span>Businesses served</span></li><li><b>OCBC</b><span>Qualified Introducer and Channel Partner</span></li></ul>
+      </div></section>
+
+      <section className="b2-sec" aria-labelledby="how-h"><div className="b2-in">
+        <div className="b2-sec-head b2-c b2-full b2-rv"><p className="b2-eyebrow">How BlazeOS works</p><h2 className="b2-h2 b2-one" id="how-h">From scattered data to actionable insights</h2></div>
+        <div className="b2-flow">
+          <article className="b2-stage b2-rv">
+            <p className="b2-k">1 · Connect</p>
+            <h3>Consolidation</h3>
+            <p>Financial and operational data from your accounting, sales and operations systems, brought together in one place.</p>
+            <div className="b2-chips"><span>Xero</span><span>Google Sheets</span><span>CRM</span><span>Bank feeds</span><span>Invoices and bills</span></div>
+          </article>
+          <div className="b2-pipe" aria-hidden="true"></div>
+          <article className="b2-stage b2-core b2-rv">
+            <p className="b2-k">2 · Configure</p>
+            <h3>Rules and proprietary AI</h3>
+            <p>Your metrics, rules and thresholds, set up with our own AI configuration around how your business runs.</p>
+            <div className="b2-rules"><div><span>Revenue mapped by product</span><b>Rule</b></div><div><span>Sales grouped by customer</span><b>Rule</b></div><div><span>Trends and anomalies</span><b>AI</b></div></div>
+          </article>
+          <div className="b2-pipe" aria-hidden="true"></div>
+          <article className="b2-stage b2-rv">
+            <p className="b2-k">3 · Understand</p>
+            <h3>Visibility and actionable insights</h3>
+            <p>Key metrics at a glance, and insights that point to the next decision. Reviewed by Chartered Accountants.</p>
+            <div className="b2-outs"><div>Cash flow and free cash flow</div><div>Capacity to reinvest</div><div>Trends and anomalies flagged</div></div>
+          </article>
+        </div>
+        <div className="b2-flow-cta b2-rv"><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20see%20a%20BlazeOS%20demo." target="_blank" rel="noopener"><svg><use href="#wa"></use></svg>WhatsApp us</a></div>
+      </div></section>
+
+      <section className="b2-sec" style={{paddingTop: "0"} as React.CSSProperties} aria-labelledby="cg-h"><div className="b2-in">
+        <div className="b2-sec-head b2-rv"><p className="b2-eyebrow">Capabilities</p><h2 className="b2-h2" id="cg-h">Your business, connected. Your numbers, explained.</h2><p className="b2-lead">Your business runs on multiple systems. BlazeOS brings your financial and operational data together into interactive dashboards, from Xero and spreadsheets to your CRM, so you can track performance, identify trends and make better-informed decisions.</p></div>
+        <div className="b2-cg">
+          <article className="b2-big b2-rv">
+            <div className="b2-scene" aria-hidden="true">
+              <div className="b2-glass"><div className="b2-glass b2-sub"><small>Xero · Sheets · CRM</small></div><small>BlazeOS · Monthly report</small><p>October report ready. Revenue S$128k, up 6.7% on September. Gross margin 41%.</p></div>
+            </div>
+            <h3>Turn scattered data into one connected view</h3>
+            <p>Xero, spreadsheets, your CRM and bank feeds land in one database set up for your company alone. Every report draws on the same figures, so every team works from one version.</p>
+          </article>
+          <article className="b2-big b2-rv">
+            <div className="b2-scene b2-b" aria-hidden="true">
+              <div className="b2-glass"><small>BlazeOS AI · Flagged for review</small><p>Customer B is paying in 48 days, up from 36. Marketing spend is S$3k above plan this month.</p></div>
+            </div>
+            <h3>Go beyond reports and act on what changes</h3>
+            <p>Rules-based checks and our proprietary AI watch the numbers every day. Trends and anomalies are flagged, reviewed by a Chartered Accountant, then sent to you.</p>
+          </article>
+          <article className="b2-rv">
+            <div className="b2-tiles" aria-hidden="true"><span>Xero</span><span>Google Sheets</span><span>CRM</span><span>Bank feeds</span></div>
+            <h3>Connect the systems you already use</h3>
+          </article>
+          <article className="b2-rv">
+            <div className="b2-tags" aria-hidden="true"><span style={{"--p": "80%"} as React.CSSProperties}>P&amp;L</span><span style={{"--p": "60%"} as React.CSSProperties}>Cash flow</span><span style={{"--p": "45%"} as React.CSSProperties}>Margin</span><span style={{"--p": "70%"} as React.CSSProperties}>Receivables</span><span style={{"--p": "55%"} as React.CSSProperties}>Budget</span><span style={{"--p": "35%"} as React.CSSProperties}>KPIs</span></div>
+            <h3>Report on what management reads every month</h3>
+          </article>
+          <article className="b2-rv">
+            <div className="b2-sliders" aria-hidden="true">
+              <div className="b2-sl"><span>Margin floor</span><span className="b2-tr"><i style={{"--v": "60%", "--c": "var(--royal)"} as React.CSSProperties}></i></span><b>30%</b></div>
+              <div className="b2-sl"><span>Days to pay</span><span className="b2-tr"><i style={{"--v": "45%", "--c": "var(--gold)"} as React.CSSProperties}></i></span><b>45</b></div>
+              <div className="b2-sl"><span>Spend vs plan</span><span className="b2-tr"><i style={{"--v": "30%", "--c": "#4e6bd6"} as React.CSSProperties}></i></span><b>+10%</b></div>
+            </div>
+            <h3>Set the rules to match how you run the business</h3>
+          </article>
+        </div>
+      </div></section>
+
+      <section className="b2-sec b2-val" aria-labelledby="val-h"><div className="b2-in">
+        <h2 id="val-h" className="b2-rv">BlazeOS brings every system into one view, so management sees the business clearly and knows what it can reinvest.</h2>
+        <div className="b2-val-g">
+          <div className="b2-lights b2-rv" role="img" aria-label="Evening light through a row of office windows"></div>
+          <div className="b2-val-list">
+            <div className="b2-rv"><h3>Consolidation</h3><p>From Xero and spreadsheets to CRM and other business platforms, we transform disconnected data into meaningful insights, helping you track performance, identify trends and make better-informed decisions.</p></div>
+            <div className="b2-rv"><h3>Visibility</h3><p>Dynamic dashboards with regularly refreshed data. Revenue, margin, cash flow and free cash flow at a glance, without compiling a report.</p></div>
+            <div className="b2-rv"><h3>Actionable insights</h3><p>AI-assisted analysis surfaces trends and anomalies, and shows how much cash is free after debt and tax, so you know what you can reinvest. A Chartered Accountant reviews each insight.</p></div>
+          </div>
+        </div>
+      </div></section>
+
+      <section className="b2-cta" id="cta" aria-label="Book a demo"><div className="b2-in">
+        <div className="b2-bar2 b2-rv"><div className="b2-bt"><p>Deploy the BlazeOS AI layer</p><small>Powered by technology. Backed by financial expertise.</small></div><div className="b2-b"><button className="btn btn-white" type="button" data-open-start>Get started</button><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20see%20a%20BlazeOS%20demo." target="_blank" rel="noopener"><svg><use href="#wa"></use></svg>WhatsApp us</a></div></div>
+      </div></section>
     </main>
   );
 }

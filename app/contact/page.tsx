@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/contact",
   title: "Contact Blaze Global | +65 9819 9108 | Robinson Road, Singapore",
-  description: "Reach Blaze Global on WhatsApp, phone, Telegram or email. 14 Robinson Road, #08-01A Far East Finance Building, Singapore 048545.",
+  description: "Speak to Blaze Global on WhatsApp, phone, Telegram or email, or visit us at 14 Robinson Road, #08-01A Far East Finance Building, Singapore 048545.",
 });
 
 export default function ContactPage() {

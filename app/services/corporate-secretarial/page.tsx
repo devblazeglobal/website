@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/corporate-secretarial",
   title: "Corporate Secretarial Services in Singapore | Blaze Global",
-  description: "A qualified company secretary, AGMs, annual returns, registers and company changes, filed with ACRA by a Registered Filing Agent.",
+  description: "Corporate secretarial services in Singapore: a qualified company secretary, AGMs, annual returns and registers, filed with ACRA by a Registered Filing Agent.",
 });
 
 export default function CorporateSecretarialPage() {

@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/accounting",
   title: "Accounting Services in Singapore | Blaze Global",
-  description: "Bookkeeping on Xero, monthly management reports, GST, financial statements, XBRL and corporate tax, by Chartered Accountants in Singapore.",
+  description: "Accounting services in Singapore from Chartered Accountants: bookkeeping on Xero, management reports, GST, financial statements, XBRL and corporate tax.",
 });
 
 export default function AccountingPage() {

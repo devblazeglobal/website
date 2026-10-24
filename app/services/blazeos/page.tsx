@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/blazeos",
   title: "BlazeOS | Business Dashboards on Xero, Google Sheets and CRM Data | Blaze Global",
-  description: "BlazeOS brings your Xero, Google Sheets and CRM data together in interactive dashboards, with AI-assisted insights reviewed by Chartered Accountants.",
+  description: "BlazeOS brings your Xero, Google Sheets and CRM data together in clear, interactive dashboards, with insights reviewed by Chartered Accountants.",
 });
 
 export default function Page() {

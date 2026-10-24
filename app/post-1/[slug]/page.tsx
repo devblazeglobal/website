@@ -32,7 +32,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <article className="post-body" dangerouslySetInnerHTML={{ __html: renderMarkdown(p.body) }} />
       </div></section>
       <Credentials />
-      <Help wa={`Hello Blaze Global, I read "${p.title}" and would like to ask a question.`} chat={["Does this apply to my company?", "Send us your revenue and year end. We will tell you what applies."]} />
+      <Help wa={`Hello Blaze Global, I read "${p.title}" and would like to ask a question.`} chat={["Does this apply to my company?", "Send us your revenue and year end, and we will tell you what applies to your company."]} />
     </main>
   );
 }

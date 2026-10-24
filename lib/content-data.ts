@@ -54,25 +54,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "accounting",
   "slug": "bookkeeping",
   "name": "Bookkeeping",
-  "line": "Bank, card and cash records reconciled on Xero every week.",
+  "line": "Bank, card and cash records reconciled on Xero every week, so your books stay current.",
   "art": [
    "doc",
    "Reconciled"
   ],
   "h1": "Bookkeeping, reconciled every week",
-  "lede": "Bookkeeping services in Singapore by Chartered Accountants. Bank, card and cash matched on Xero every week, so your books are always current.",
+  "lede": "Bookkeeping services in Singapore by Chartered Accountants. We match your bank, card and cash transactions on Xero every week, so your books are always current and you can focus on running the business.",
   "why": [
    [
     "Reconciled weekly",
-    "Transactions matched as they land, not rebuilt at year end."
+    "We match transactions as they come in, so nothing needs rebuilding at year end."
    ],
    [
     "Questions on WhatsApp",
-    "Unclear items sent to you in one message, with the receipt we need."
+    "Any unclear items come to you in one message, together with the receipt we need."
    ],
    [
     "Ready for every filing",
-    "Records kept to the Singapore Financial Reporting Standards, ready for GST, ECI and Form C-S."
+    "Your records are kept to the Singapore Financial Reporting Standards, ready for GST, ECI and Form C-S."
    ]
   ]
  },
@@ -80,25 +80,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "accounting",
   "slug": "management-reports",
   "name": "Management reports",
-  "line": "Profit and loss, balance sheet and cash flow, closed every month.",
+  "line": "Profit and loss, balance sheet and cash flow, closed every month for a clear view of performance.",
   "art": [
    "bars",
    "Closed"
   ],
   "h1": "Know your numbers by the first week",
-  "lede": "Monthly management reports: profit and loss, balance sheet and cash flow, with a rolling 12-month cash forecast.",
+  "lede": "Monthly management reports covering profit and loss, balance sheet and cash flow, with a rolling 12-month cash forecast to help you make better-informed decisions.",
   "why": [
    [
     "Closed on a fixed timetable",
-    "The same close checklist every month, so figures compare month to month."
+    "We follow the same close checklist every month, so your figures compare reliably from one month to the next."
    ],
    [
     "Variances listed",
-    "Lines that move against last month are listed with the transactions behind them."
+    "Any line that moves against last month is listed with the transactions behind it, so you can see what changed."
    ],
    [
     "Forecast included",
-    "A 12-month cash forecast updated with each close."
+    "A 12-month cash forecast, updated with each close, so you can plan ahead with confidence."
    ]
   ]
  },
@@ -106,25 +106,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "accounting",
   "slug": "financial-statements-xbrl",
   "name": "Financial statements and XBRL",
-  "line": "Unaudited financial statements and XBRL, filed with ACRA.",
+  "line": "Unaudited financial statements and XBRL, prepared and filed with ACRA on your behalf.",
   "art": [
    "stamp",
    "Filed with ACRA"
   ],
   "h1": "Year-end statements, filed with ACRA",
-  "lede": "Unaudited financial statements prepared to SFRS and lodged in XBRL with your annual return, by an ACRA Registered Filing Agent.",
+  "lede": "Unaudited financial statements prepared to SFRS and lodged in XBRL with your annual return by an ACRA Registered Filing Agent, so your year end is handled in one place.",
   "why": [
    [
     "Filed directly",
-    "ACRA Registered Filing Agent FA20210247. No third party in between."
+    "As ACRA Registered Filing Agent FA20210247, we file for you directly, with no third party in between."
    ],
    [
     "Audit exemption checked",
-    "Small company status confirmed from revenue, assets and headcount."
+    "We confirm your small company status from revenue, assets and headcount."
    ],
    [
     "One team for year end",
-    "Statements, AGM and annual return prepared together."
+    "Your statements, AGM and annual return are prepared together by one team."
    ]
   ]
  },
@@ -132,25 +132,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "accounting",
   "slug": "gst",
   "name": "GST",
-  "line": "Registration and quarterly F5 returns, filed with IRAS.",
+  "line": "GST registration and quarterly F5 returns, prepared and filed with IRAS.",
   "art": [
    "toggles",
    "GST registered"
   ],
   "h1": "GST returns, filed every quarter",
-  "lede": "GST registration and quarterly F5 filing in Singapore, prepared from reconciled books and lodged with IRAS before each deadline.",
+  "lede": "GST registration and quarterly F5 filing in Singapore, prepared from your reconciled books and lodged with IRAS before each deadline, so you stay compliant every quarter.",
   "why": [
    [
     "Registration checked",
-    "Taxable turnover watched against the S$1 million threshold every quarter."
+    "We monitor your taxable turnover against the S$1 million threshold every quarter."
    ],
    [
     "Returns from reconciled books",
-    "Input tax claimed only against valid tax invoices."
+    "We claim input tax only against valid tax invoices, keeping your returns accurate."
    ],
    [
     "Filed by the due date",
-    "Each F5 filed within 1 month of the quarter end."
+    "Each F5 return is filed within 1 month of the quarter end."
    ]
   ]
  },
@@ -158,25 +158,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "tax",
   "slug": "corporate-income-tax",
   "name": "Corporate income tax",
-  "line": "ECI and Form C-S, C-S (Lite) or C, filed with IRAS.",
+  "line": "ECI and Form C-S, C-S (Lite) or C, prepared and filed with IRAS for you.",
   "art": [
    "cal",
    "Due 30 Nov"
   ],
   "h1": "Corporate tax, computed and filed",
-  "lede": "ECI and Form C-S, C-S (Lite) or C, prepared from your accounts with the exemptions you qualify for, and filed with IRAS.",
+  "lede": "We prepare your ECI and Form C-S, C-S (Lite) or C from your accounts, apply the exemptions you qualify for and file with IRAS.",
   "why": [
    [
     "The right form",
-    "Form chosen from revenue: C-S (Lite), C-S or C."
+    "We select the right form from your revenue: C-S (Lite), C-S or C."
    ],
    [
     "Exemptions applied",
-    "Start-up and partial tax exemptions and capital allowances claimed where they qualify."
+    "We claim start-up and partial tax exemptions and capital allowances wherever you qualify."
    ],
    [
-    "No late filing",
-    "ECI within 3 months of year end. Form C-S by 30 November."
+    "Filed on time",
+    "Your ECI is filed within 3 months of year end and Form C-S by 30 November."
    ]
   ]
  },
@@ -184,25 +184,25 @@ export const SUB_PAGES: Record<string, SubPage> = {
   "par": "tax",
   "slug": "tax-advisory",
   "name": "Tax advisory and forecasting",
-  "line": "Tax planning and cash forecasts from your own numbers.",
+  "line": "Tax planning and cash forecasts built from your own numbers, so you can plan with confidence.",
   "art": [
    "route",
    "Scenario"
   ],
   "h1": "Decide with your numbers, not estimates",
-  "lede": "Tax planning, scenario models and 12-month cash forecasts, built from your reconciled books.",
+  "lede": "Tax planning, scenario models and 12-month cash forecasts, built from your reconciled books to help you make better-informed decisions.",
   "why": [
    [
     "From your accounts",
-    "Advice based on reconciled figures, not estimates."
+    "Practical advice grounded in your reconciled figures, not estimates."
    ],
    [
     "Scenarios before decisions",
-    "Hiring, expansion and pricing modelled before you commit."
+    "We model hiring, expansion and pricing before you commit, so you can see the impact first."
    ],
    [
     "Big Four experience",
-    "Managerial experience in a Big Four firm."
+    "Our team brings managerial experience from a Big Four firm to your business."
    ]
   ]
  }
@@ -213,94 +213,94 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "link",
    "Xero bank feeds",
-   "Every bank account and card connected, so transactions arrive daily."
+   "We connect every bank account and card, so your transactions arrive daily."
   ],
   [
    "bank",
    "Weekly reconciliation",
-   "Each transaction matched to an invoice, bill or receipt every week."
+   "We match each transaction to an invoice, bill or receipt every week."
   ],
   [
    "receipt",
    "Receipts on every expense",
-   "Snap a photo or forward an email. We attach it to the transaction."
+   "Snap a photo or forward an email, and we attach it to the right transaction."
   ],
   [
    "doc",
    "Sales invoices",
-   "Recorded and matched to payments as they arrive."
+   "Your sales invoices recorded and matched to payments as they arrive."
   ],
   [
    "clock",
    "Bills and payables",
-   "Supplier bills recorded with due dates, so nothing is paid late."
+   "Supplier bills recorded with their due dates, so nothing is paid late."
   ],
   [
    "layers",
    "Recurring entries",
-   "Rent, subscriptions and repeat suppliers coded once by rule."
+   "Rent, subscriptions and regular suppliers coded once by rule, saving you time every month."
   ],
   [
    "percent",
    "GST coding",
-   "Each line coded with the right GST treatment for your F5 return."
+   "Every line coded with the correct GST treatment, ready for your F5 return."
   ],
   [
    "chat",
    "Questions on WhatsApp",
-   "Unclear items sent to you in one message each week."
+   "Any unclear items come to you in one message each week."
   ],
   [
    "check",
    "Ready for year end",
-   "Books kept to SFRS, ready for financial statements, ECI and Form C-S."
+   "Your books kept to SFRS, ready for financial statements, ECI and Form C-S."
   ]
  ],
  "management-reports": [
   [
    "chart",
    "Profit and loss",
-   "Revenue, costs and margin for the month and year to date."
+   "Your revenue, costs and margin for the month and year to date."
   ],
   [
    "layers",
    "Balance sheet",
-   "Assets, liabilities and equity at each month end."
+   "Your assets, liabilities and equity at each month end."
   ],
   [
    "bank",
    "Cash flow",
-   "Where cash came from and where it went."
+   "A clear view of where your cash came from and where it went."
   ],
   [
    "clock",
    "Monthly close",
-   "Closed in the first week of each month on a fixed checklist."
+   "Your books closed in the first week of each month on a fixed checklist."
   ],
   [
    "scale",
    "Month-on-month comparison",
-   "Each line set against last month and last year."
+   "Each line compared with last month and last year, so trends are easy to see."
   ],
   [
    "doc",
    "Variance list",
-   "Lines that move are listed with the transactions behind them."
+   "Any line that moves is listed with the transactions behind it."
   ],
   [
    "cal",
    "12-month cash forecast",
-   "Updated with every close."
+   "Updated with every close to support your planning."
   ],
   [
    "user",
    "Board-ready format",
-   "Laid out for directors, investors and lenders."
+   "Laid out clearly for directors, investors and lenders."
   ],
   [
    "check",
    "SFRS basis",
-   "Prepared under the Singapore Financial Reporting Standards."
+   "Prepared in line with the Singapore Financial Reporting Standards."
   ]
  ],
  "financial-statements-xbrl": [
@@ -332,44 +332,44 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "user",
    "Directors' statement",
-   "Prepared for directors to sign with the statements."
+   "Prepared for your directors to sign alongside the statements."
   ],
   [
    "shield",
    "Audit exemption check",
-   "Small company status confirmed from revenue, assets and headcount."
+   "We confirm your small company status from revenue, assets and headcount."
   ],
   [
    "globe",
    "XBRL conversion",
-   "Statements prepared in the format ACRA requires."
+   "Your statements prepared in the format ACRA requires."
   ],
   [
    "building",
    "Filed with the annual return",
-   "Lodged on Bizfile as your Registered Filing Agent."
+   "Lodged on Bizfile by us as your Registered Filing Agent."
   ]
  ],
  "gst": [
   [
    "check",
    "Registration check",
-   "Turnover watched against the S$1 million threshold every quarter."
+   "We monitor your turnover against the S$1 million threshold every quarter."
   ],
   [
    "doc",
    "GST registration",
-   "Application prepared and filed with IRAS."
+   "Your application prepared and filed with IRAS."
   ],
   [
    "percent",
    "Quarterly F5 returns",
-   "Filed within 1 month of each quarter end."
+   "Prepared and filed within 1 month of each quarter end."
   ],
   [
    "receipt",
    "Input tax claims",
-   "Claimed only against valid tax invoices."
+   "Claimed only against valid tax invoices, keeping your returns accurate."
   ],
   [
    "layers",
@@ -379,29 +379,29 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "globe",
    "Imported services",
-   "Reviewed for reverse charge."
+   "Imported services reviewed for reverse charge."
   ],
   [
    "bank",
    "GST payments",
-   "Amount due confirmed before each payment date."
+   "The amount due confirmed with you before each payment date."
   ],
   [
    "scale",
    "Voluntary registration",
-   "Advice on registering below the threshold."
+   "Practical advice on whether to register below the threshold."
   ],
   [
    "cal",
    "Deadline calendar",
-   "Every F5 date mapped for the year."
+   "Every F5 date mapped out for the year ahead."
   ]
  ],
  "corporate-income-tax": [
   [
    "check",
    "ECI",
-   "Filed or waived within 3 months of year end."
+   "Your ECI filed or waived within 3 months of year end."
   ],
   [
    "doc",
@@ -411,7 +411,7 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "scale",
    "The right return",
-   "Form C-S (Lite), C-S or C, chosen from your revenue."
+   "Form C-S (Lite), C-S or C, selected to match your revenue."
   ],
   [
    "percent",
@@ -436,34 +436,34 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "cal",
    "Filed by 30 November",
-   "Each return lodged on myTax Portal before the due date."
+   "Each return lodged on myTax Portal ahead of the due date."
   ],
   [
    "chat",
    "IRAS queries",
-   "Questions from IRAS answered on your behalf."
+   "We answer questions from IRAS on your behalf."
   ]
  ],
  "tax-advisory": [
   [
    "percent",
    "Tax planning",
-   "Savings identified from your reconciled figures each year."
+   "Tax savings identified from your reconciled figures each year."
   ],
   [
    "clock",
    "12-month cash forecast",
-   "Rolling forecast updated after each close."
+   "A rolling forecast, updated after each close, to help you plan ahead."
   ],
   [
    "scale",
    "Scenario models",
-   "Hiring, expansion and pricing modelled before you commit."
+   "We model hiring, expansion and pricing before you commit, so you can see the impact first."
   ],
   [
    "chart",
    "Financial analysis",
-   "Margin, cost and cash trends from your own books."
+   "Margin, cost and cash trends drawn from your own books, for meaningful insight."
   ],
   [
    "layers",
@@ -473,22 +473,22 @@ export const TILES: Record<string, [IconKey, string, string][]> = {
   [
    "user",
    "Director remuneration",
-   "Salary and dividend mix reviewed for tax."
+   "Your salary and dividend mix reviewed for tax efficiency."
   ],
   [
    "building",
    "Sustainability review",
-   "Cash runway and break-even reviewed."
+   "Your cash runway and break-even point reviewed."
   ],
   [
    "shield",
    "Key person insurance",
-   "Advice through our partners."
+   "Practical advice through our partners."
   ],
   [
    "check",
    "Big Four experience",
-   "Managerial experience in a Big Four firm."
+   "Our team brings managerial experience from a Big Four firm to your business."
   ]
  ]
 } as Record<string, [IconKey, string, string][]>;
@@ -498,48 +498,48 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
   "slug": "accounting",
   "img": "/images/sg-2.jpg",
   "heading": "Close faster. File on time.",
-  "sub": "Accounting for Singapore companies, run by Chartered Accountants on Xero. Books closed in the first week of every month. Every filing lodged before its deadline.",
-  "gridHeading": "Every accounting service, one team",
+  "sub": "Expert accounting for Singapore companies, delivered by Chartered Accountants on Xero. We close your books in the first week of every month and lodge every filing before its deadline, so you can focus on growing the business.",
+  "gridHeading": "Every accounting service, one partner",
   "wa": "Hello Blaze Global, I would like help with accounting.",
   "cards": [
    [
     "Bookkeeping",
-    "Bank, card and cash records reconciled on Xero every week.",
+    "Bank, card and cash records reconciled on Xero every week, so your books stay current.",
     "doc",
     "Reconciled",
     "/services/accounting/bookkeeping"
    ],
    [
     "Management reports",
-    "Profit and loss, balance sheet and cash flow, closed every month.",
+    "Profit and loss, balance sheet and cash flow, closed every month for a clear view of performance.",
     "bars",
     "Closed",
     "/services/accounting/management-reports"
    ],
    [
     "Financial statements and XBRL",
-    "Unaudited financial statements and XBRL, filed with ACRA.",
+    "Unaudited financial statements and XBRL, prepared and filed with ACRA on your behalf.",
     "stamp",
     "Filed with ACRA",
     "/services/accounting/financial-statements-xbrl"
    ],
    [
     "GST",
-    "Registration and quarterly F5 returns, filed with IRAS.",
+    "GST registration and quarterly F5 returns, prepared and filed with IRAS.",
     "toggles",
     "GST registered",
     "/services/accounting/gst"
    ],
    [
     "Payroll",
-    "Monthly payroll, CPF and IR8A, prepared and filed on time.",
+    "Monthly payroll, CPF and IR8A, prepared and filed on time so your team is paid correctly.",
     "cal",
     "Paid on time",
     "/services/payroll"
    ],
    [
     "Tax",
-    "Corporate tax, tax planning and a outsourced CFO.",
+    "Corporate tax, tax planning and outsourced CFO support.",
     "route",
     "Tax services",
     "/services/tax"
@@ -548,11 +548,11 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
   "faq": [
    [
     "Which accounting software do you use?",
-    "Xero, with bank feeds and Aspire connected."
+    "We use Xero, with your bank feeds and Aspire connected."
    ],
    [
     "Do I need an audit?",
-    "Most small private companies are exempt. We confirm your status from revenue, assets and headcount."
+    "Most small private companies are exempt. We confirm your status from your revenue, assets and headcount."
    ],
    [
     "When must the annual tax return be filed?",
@@ -570,7 +570,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
   "benefits": [
    {
     "h": "Receipts, matched weekly",
-    "p": "Snap a photo or forward an email. We attach it to the transaction and list anything missing.",
+    "p": "Snap a photo or forward an email. We attach it to the right transaction and let you know if anything is missing.",
     "img": "/images/acc-1.jpg",
     "card": [
      "Receipts this week",
@@ -600,7 +600,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
    },
    {
     "h": "Your numbers by the first week",
-    "p": "Profit and loss, balance sheet and cash flow every month, with a 12-month cash forecast.",
+    "p": "Your profit and loss, balance sheet and cash flow every month, with a 12-month cash forecast to guide your decisions.",
     "img": "/images/acc-2.jpg",
     "card": [
      "September close",
@@ -630,7 +630,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
    },
    {
     "h": "Filed before every deadline",
-    "p": "GST, ECI, financial statements, XBRL and Form C-S, prepared and filed with ACRA and IRAS.",
+    "p": "GST, ECI, financial statements, XBRL and Form C-S, prepared and filed with ACRA and IRAS so you stay compliant.",
     "img": "/images/acc-3.jpg",
     "card": [
      "Filings this year",
@@ -664,48 +664,48 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
   "slug": "corporate-secretarial",
   "img": "/images/sg-4.jpg",
   "heading": "Your company, always in good standing",
-  "sub": "A qualified company secretary, registers kept current and annual returns filed within 7 months, every year.",
+  "sub": "A qualified company secretary, statutory registers kept current and annual returns filed within 7 months, every year, so your company stays compliant while you focus on the business.",
   "gridHeading": "Corporate secretarial, handled end to end",
   "wa": "Hello Blaze Global, I would like help with corporate secretarial work.",
   "cards": [
    [
     "Company secretary",
-    "A qualified secretary, appointed within 6 months of incorporation.",
+    "A qualified company secretary, appointed within 6 months of incorporation.",
     "ring",
     "Appointed",
     ""
    ],
    [
     "AGM and annual returns",
-    "AGM documents prepared and annual returns filed on Bizfile.",
+    "We prepare your AGM documents and file annual returns on Bizfile.",
     "cal",
     "Due 31 Jul",
     ""
    ],
    [
     "Registers and minutes",
-    "Statutory registers, minutes and resolutions kept current.",
+    "Your statutory registers, minutes and resolutions kept accurate and current.",
     "doc",
     "Updated",
     ""
    ],
    [
     "Company changes",
-    "Directors, shareholders, share transfers, address and activity.",
+    "Changes to directors, shareholders, share transfers, address and business activity, filed for you.",
     "route",
     "Filed",
     ""
    ],
    [
     "Registered address",
-    "A Singapore registered office for notices and filings.",
+    "A Singapore registered office address for your notices and filings.",
     "stamp",
     "Registered",
     ""
    ],
    [
     "Nominee Directorship",
-    "A locally resident director to meet the ACRA requirement.",
+    "A locally resident director, so you meet the ACRA requirement.",
     "ring",
     "Resident director",
     "/services/nominee-directorship"
@@ -731,12 +731,12 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
   ],
   "chat": [
    "Can we add a new director?",
-   "Yes. Send the passport and address. We file it on Bizfile once the consent is signed."
+   "Yes. Send us the passport and address, and we file it on Bizfile once the consent is signed."
   ],
   "benefits": [
    {
     "h": "A company secretary from day one",
-    "p": "Appointed within the 6 months the Companies Act allows, and ordinarily resident in Singapore.",
+    "p": "Your company secretary is appointed within the 6 months the Companies Act allows, and is ordinarily resident in Singapore.",
     "img": "/images/cs-1.jpg",
     "card": [
      "Company officers",
@@ -766,7 +766,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
    },
    {
     "h": "Registers, always current",
-    "p": "Members, directors and controllers updated after every change, with resolutions drafted for online signing.",
+    "p": "Your registers of members, directors and controllers updated after every change, with resolutions drafted for convenient online signing.",
     "img": "/images/cs-2.jpg",
     "card": [
      "Registers",
@@ -796,7 +796,7 @@ export const MAIN_PAGES: Record<Product, MainPage> = {
    },
    {
     "h": "AGMs and annual returns, on schedule",
-    "p": "AGM documents prepared and the annual return filed on Bizfile, with reminders from your financial year end.",
+    "p": "We prepare your AGM documents and file the annual return on Bizfile, with reminders set from your financial year end.",
     "img": "/images/cs-3.jpg",
     "card": [
      "Annual compliance",
@@ -827,9 +827,9 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
  "startups": {
   "slug": "startups",
   "name": "Start-ups",
-  "line": "Incorporation, a company secretary and the first books.",
+  "line": "Incorporation, a company secretary and your first set of books, handled by one team.",
   "h1": "From incorporation to first close",
-  "lede": "Accounting and incorporation for start-ups in Singapore. Company registered, secretary appointed and books live on Xero, in one go.",
+  "lede": "Accounting and incorporation for start-ups in Singapore. We register your company, appoint your secretary and set up your books on Xero in one go, so you can focus on building the business.",
   "wa": "Hello Blaze Global, I am starting a company and would like help.",
   "bandHeading": "Set up once. Ready to raise.",
   "bandIcons": [
@@ -839,16 +839,16 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
   ],
   "why": [
    [
-    "One team from day one",
-    "Incorporation, company secretary and books without hand-offs between providers."
+    "One partner from day one",
+    "Incorporation, company secretary and bookkeeping in one place, with no hand-offs between providers."
    ],
    [
     "Books before the first invoice",
-    "Xero and bank feeds set up before you trade."
+    "Xero and bank feeds set up before you start trading."
    ],
    [
     "Ready for investors",
-    "Registers, share allotments and statements in the shape investors ask for."
+    "Registers, share allotments and statements prepared the way investors expect to see them."
    ]
   ],
   "needHeading": "Everything a start-up needs",
@@ -928,19 +928,19 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    [
     "cal",
     "Deadline calendar",
-    "Every date from your financial year end",
+    "Every date mapped from your financial year end",
     "/compliance-deadline-calculator"
    ],
    [
     "scale",
     "Investor-ready records",
-    "Cap table, registers and accounts in order",
+    "Cap table, registers and accounts kept in order",
     "/services/corporate-secretarial"
    ],
    [
     "chat",
     "WhatsApp support",
-    "Questions answered by the team",
+    "Clear, practical answers from the team",
     ""
    ]
   ],
@@ -952,9 +952,9 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
  "smes": {
   "slug": "smes",
   "name": "SMEs",
-  "line": "Monthly books, GST and annual compliance.",
+  "line": "Monthly books, GST and annual compliance, handled by one team.",
   "h1": "You run the business. We run the books.",
-  "lede": "Accounting for SMEs in Singapore: monthly books, reports, GST and every annual filing, with one team.",
+  "lede": "Accounting for SMEs in Singapore: monthly books, reports, GST and every annual filing, handled by one team that understands how your business operates.",
   "wa": "Hello Blaze Global, I run an SME and would like help with accounting.",
   "bandHeading": "Close monthly. File on time.",
   "bandIcons": [
@@ -965,15 +965,15 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
   "why": [
    [
     "A monthly close",
-    "Bank, card and cash reconciled and a report ready every month."
+    "Your bank, card and cash reconciled, with a management report ready every month."
    ],
    [
     "GST every quarter",
-    "Returns prepared from reconciled books and filed on time."
+    "Returns prepared from your reconciled books and filed on time."
    ],
    [
     "Year end, filed",
-    "AGM, annual return, XBRL and Form C-S with one team."
+    "AGM, annual return, XBRL and Form C-S, all handled by one team."
    ]
   ],
   "needHeading": "Everything an SME needs",
@@ -1059,13 +1059,13 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    [
     "cal",
     "Deadline calendar",
-    "Every date from your financial year end",
+    "Every date mapped from your financial year end",
     "/compliance-deadline-calculator"
    ],
    [
     "chat",
     "WhatsApp support",
-    "Questions answered by the team",
+    "Clear, practical answers from the team",
     ""
    ]
   ],
@@ -1077,9 +1077,9 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
  "large-companies": {
   "slug": "large-companies",
   "name": "Large companies",
-  "line": "Group reporting, forecasting and tax advisory.",
+  "line": "Group reporting, forecasting and tax advisory across every entity.",
   "h1": "One close for every entity",
-  "lede": "Accounting and advisory for groups in Singapore: multi-entity reporting, forecasting, tax and corporate secretarial.",
+  "lede": "Accounting and advisory for groups in Singapore: multi-entity reporting, forecasting, tax and corporate secretarial, delivered with professional rigour.",
   "wa": "Hello Blaze Global, I would like to discuss accounting and advisory for a larger company.",
   "bandHeading": "Every entity. One timetable.",
   "bandIcons": [
@@ -1090,15 +1090,15 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
   "why": [
    [
     "Every entity, one timetable",
-    "Each company closed on the same monthly schedule."
+    "Each company closed on the same monthly schedule, giving you a consistent view across the group."
    ],
    [
     "Board-ready packs",
-    "Reports and forecasts prepared for directors and investors."
+    "Reports and forecasts prepared clearly for directors and investors."
    ],
    [
     "Big Four experience",
-    "Managerial experience in a Big Four firm."
+    "Our team brings managerial experience from a Big Four firm to your business."
    ]
   ],
   "needHeading": "Everything a group needs",
@@ -1177,7 +1177,7 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    [
     "shield",
     "Key person insurance",
-    "Advice through our partners",
+    "Practical advice through our partners",
     ""
    ],
    [
@@ -1189,7 +1189,7 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
    [
     "chat",
     "WhatsApp support",
-    "Questions answered by the team",
+    "Clear, practical answers from the team",
     ""
    ]
   ],

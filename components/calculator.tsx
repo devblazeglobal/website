@@ -68,7 +68,7 @@ export function Calculator({ after }: { after: React.ReactNode }) {
       <section className="cx-hero pull-under" aria-labelledby="cx-h1">
         <div className="wide cx-hin">
           <h1 id="cx-h1">Singapore compliance deadline calculator</h1>
-          <p className="cx-sub">Enter your financial year end.<br />Six deadlines follow, from ECI to corporate tax.</p>
+          <p className="cx-sub">Enter your financial year end.<br />We show your six deadlines, from ECI to corporate tax.</p>
           <form className="cx-form" noValidate onSubmit={(e) => {
             e.preventDefault();
             // Read the box directly: a typed date may not have been committed yet.

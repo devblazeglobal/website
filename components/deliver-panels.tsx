@@ -168,8 +168,8 @@ export function IncorporationBand() {
         <article className="axp a1 axp-wide">
           <div className="axw-copy">
             <p className="ax-k">Starting a company?</p>
-            <h2 className="ax-h" id="inc-h">Incorporation first</h2>
-            <p>We register the company on Bizfile as your ACRA Registered Filing Agent, then appoint the company secretary.</p>
+            <h2 className="ax-h" id="inc-h">Start with incorporation</h2>
+            <p>As your ACRA Registered Filing Agent, we register your company on Bizfile and appoint your company secretary, so you are set up correctly from day one.</p>
             <Link className="btn btn-navy btn-lg" href="/start-a-business-in-singapore">Explore Incorporation</Link>
           </div>
           <div className="axc" aria-hidden="true">

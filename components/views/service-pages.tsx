@@ -110,7 +110,7 @@ export function SubServiceView({ slug }: { slug: string }) {
       </div></section>
 
       <section className="jb-blk" aria-labelledby="jb-faq"><div className="wrap jb-narrow">
-        <h2 className="jb-h2" id="jb-faq">Questions</h2>
+        <h2 className="jb-h2" id="jb-faq">Frequently asked questions</h2>
         <div className="jb-faq">{t.faq.map(([q, a]) => <details key={q}><summary>{q}<i aria-hidden="true">+</i></summary><p>{a}</p></details>)}</div>
       </div></section>
 
@@ -128,9 +128,9 @@ export function SubServiceView({ slug }: { slug: string }) {
 }
 
 const APART: [string, string, string][] = [
-  ["Chartered Accountants", "Every file handled by ISCA members trained in Big Four practice.", '<circle cx="28" cy="20" r="9" stroke="currentColor"/><path d="M12 46c2-9 8-14 16-14s14 5 16 14" stroke="currentColor"/><circle cx="40" cy="14" r="6" class="g"/><path d="M37.5 14l2 2 3.5-4" class="gs"/>'],
-  ["Filed directly", "ACRA Registered Filing Agent. We lodge with ACRA and IRAS ourselves.", '<rect x="12" y="10" width="28" height="36" rx="2" stroke="currentColor"/><path d="M18 20h16M18 27h16M18 34h10" stroke="currentColor"/><circle cx="40" cy="40" r="8" class="g"/><path d="M36.5 40l2.5 2.5 4.5-5" class="gs"/>'],
-  ["One team on WhatsApp", "Accountant, company secretary and tax adviser in one thread.", '<path d="M10 14h26a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H22l-8 6v-6h-4a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z" stroke="currentColor"/><rect x="30" y="26" width="20" height="14" rx="3" class="g"/><path d="M35 33h10" class="gs"/>'],
+  ["Chartered Accountants", "Your work is handled by ISCA members with Big Four experience and a personal approach.", '<circle cx="28" cy="20" r="9" stroke="currentColor"/><path d="M12 46c2-9 8-14 16-14s14 5 16 14" stroke="currentColor"/><circle cx="40" cy="14" r="6" class="g"/><path d="M37.5 14l2 2 3.5-4" class="gs"/>'],
+  ["Registered and reliable", "As an ACRA Registered Filing Agent, we lodge your filings with ACRA and IRAS ourselves.", '<rect x="12" y="10" width="28" height="36" rx="2" stroke="currentColor"/><path d="M18 20h16M18 27h16M18 34h10" stroke="currentColor"/><circle cx="40" cy="40" r="8" class="g"/><path d="M36.5 40l2.5 2.5 4.5-5" class="gs"/>'],
+  ["One partner, every stage", "Your accountant, company secretary and tax adviser, together in one WhatsApp thread.", '<path d="M10 14h26a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H22l-8 6v-6h-4a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z" stroke="currentColor"/><rect x="30" y="26" width="20" height="14" rx="3" class="g"/><path d="M35 33h10" class="gs"/>'],
 ];
 
 /** Start-ups, SMEs, large companies: reasons, then everything they need. */

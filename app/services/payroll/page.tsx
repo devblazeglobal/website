@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/services/payroll",
   title: "Payroll Services in Singapore | Blaze Global",
-  description: "Monthly payroll, payslips, CPF and SDL by the 14th and IR8A by 1 March, from Chartered Accountants in Singapore.",
+  description: "Payroll services in Singapore: monthly payroll, payslips, CPF and SDL by the 14th and IR8A by 1 March, handled for you by Chartered Accountants.",
 });
 
 export default function Page() {

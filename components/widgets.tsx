@@ -115,9 +115,9 @@ export function ComplianceCalendar() {
     <div className="ce">
       <div className="ce-l">
         <h2 className="h2" id="cal2-title">Annual compliance calendar</h2>
-        <p>Pick your financial year end.</p>
+        <p>Select your financial year end to see your filing deadlines.</p>
         {fye ? <MonthCalendar value={fye} onChange={setFye} /> : <div className="mc" aria-busy="true" style={{ minHeight: 330 }} />}
-        <a className="btn btn-wa ce-wa" href={WA_FILING} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us now</a>
+        <a className="btn btn-wa ce-wa" href={WA_FILING} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
         <ul className="ce-key" aria-label="Status"><li className="k-red">Under 30 days</li><li className="k-amb">30 to 90 days</li><li className="k-grn">Over 90 days</li></ul>
       </div>
       <div className="ce-r">

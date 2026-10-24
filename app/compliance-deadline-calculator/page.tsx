@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/compliance-deadline-calculator",
   title: "Singapore Compliance Deadline Calculator | ECI, AGM, Annual Return",
-  description: "Enter your financial year end to see ECI, AGM, annual return, IR8A and corporate tax deadlines for your Singapore company, with the rules and sources behind each date.",
+  description: "Enter your financial year end to see your Singapore company's ECI, AGM, annual return, IR8A and corporate tax deadlines, with the rules behind each date.",
 });
 
 const KNOW: [IconKey, string, string][] = [

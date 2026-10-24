@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/about-us",
   title: "About Blaze Global | Chartered Accountants in Singapore",
-  description: "One team for accounting, company secretary and tax. Chartered Accountants with Big Four experience and an ACRA Registered Filing Agent.",
+  description: "Chartered Accountants with Big Four expertise and over 60 years of combined experience. One partner for accounting, tax and corporate secretarial in Singapore.",
 });
 
 export default function AboutPage() {

@@ -82,7 +82,7 @@ export function AiAnalysis({ product, q, metrics }: { product: string; q: string
           <div className="axw-copy">
             <p className="ax-k">Insights with BlazeOS</p>
             <h2 className="ax-h" id="ai-h">{q}</h2>
-            <p>BlazeOS brings your {product.toLowerCase()} data together on one dashboard, refreshed daily. AI-assisted analysis surfaces trends and anomalies for a Chartered Accountant to review.</p>
+            <p>BlazeOS brings your {product.toLowerCase()} data together in one clear view, refreshed daily. AI-assisted analysis highlights trends and anomalies, reviewed by a Chartered Accountant, so you can make smarter decisions.</p>
             <Link className="btn btn-navy btn-lg" href="/services/blazeos">Explore BlazeOS</Link>
           </div>
           <div className="axc" aria-hidden="true">

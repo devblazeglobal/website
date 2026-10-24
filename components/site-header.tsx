@@ -45,6 +45,7 @@ export function SiteHeader() {
         <Link className="tab" href="/about-us">About</Link>
         <button className="tab" type="button" aria-expanded={menu === "products"} aria-controls="drop" onClick={() => toggle("products")} onMouseEnter={() => hover("products")}>Products <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
         <button className="tab" type="button" aria-expanded={menu === "solutions"} aria-controls="drop" onClick={() => toggle("solutions")} onMouseEnter={() => hover("solutions")}>Solutions <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
+        <Link className="tab" href="/services/blazeos">BlazeOS</Link>
         <Link className="tab" href="/blog">Blog</Link>
       </div>
       <button className="btn btn-start" type="button" data-open-start>Get started</button>
@@ -69,17 +70,17 @@ export function SiteHeader() {
           <Link className="btn btn-navy" href="/start-a-business-in-singapore">Start your company</Link>
         </div>
         <div className="dcard">
-          <Link className="ov" href="/start-a-business-in-singapore"><b>Start a business in Singapore</b><span>Business structures, registration on Bizfile and the first year.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/start-a-business-in-singapore"><b>Start a business in Singapore</b><span>Choose your business structure, register on Bizfile and plan your first year.</span><i aria-hidden="true">→</i></Link>
           <h4>By company</h4>
           <ul>
-            <li><Link className="it" href="/solutions/startups"><b>Start-ups</b><span>Incorporation, a company secretary and the first books.</span></Link></li>
-            <li><Link className="it" href="/solutions/smes"><b>SMEs</b><span>Monthly books, GST and annual compliance.</span></Link></li>
-            <li><Link className="it" href="/solutions/large-companies"><b>Large companies</b><span>Group reporting, forecasting and tax advisory.</span></Link></li>
+            <li><Link className="it" href="/solutions/startups"><b>Start-ups</b><span>Incorporate, appoint a company secretary and set up your first books.</span></Link></li>
+            <li><Link className="it" href="/solutions/smes"><b>SMEs</b><span>Monthly books, GST and annual compliance, handled by one partner.</span></Link></li>
+            <li><Link className="it" href="/solutions/large-companies"><b>Large companies</b><span>Group reporting, forecasting and tax advice for growing businesses.</span></Link></li>
           </ul>
         </div>
         <div className="dcard">
           <h4>Compliance</h4>
-          <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>ECI, AGM, annual return, IR8A and corporate tax dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>See your ECI, AGM, annual return, IR8A and corporate tax dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
         </div>
       </div>
     </div></div>
@@ -109,6 +110,7 @@ export function SiteHeader() {
               <Link className="mn-head" href="/compliance-deadline-calculator">Compliance deadline calculator <span aria-hidden="true">→</span></Link>
             </div></div>
           </div>
+          <Link className="mn-row" href="/services/blazeos">BlazeOS</Link>
           <Link className="mn-row" href="/blog">Blog</Link>
           <Link className="mn-row" href="/contact">Contact</Link>
         </nav>

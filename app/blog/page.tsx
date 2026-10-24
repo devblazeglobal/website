@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata = pageMetadata({
   path: "/blog",
   title: "Blog | Tax and Accounting Articles | Blaze Global",
-  description: "Articles on tax, bookkeeping and running a company in Singapore, from Blaze Global.",
+  description: "Practical articles on tax, bookkeeping and running a company in Singapore, written by the Chartered Accountants at Blaze Global.",
 });
 
 const fmt = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-SG", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -22,7 +22,7 @@ export default function BlogIndex() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Blog", name: "Blaze Global blog", url: `${site.url}/blog`, publisher: { "@type": "Organization", name: site.legalName }, blogPost: getPosts().map((p) => ({ "@type": "BlogPosting", headline: p.title, url: `${site.url}${p.path}`, datePublished: p.publishedAt })) }} />
       <section className="bl-intro pull-under"><div className="wide">
         <h1>Blog</h1>
-        <p className="bl-lede">Blaze Global writes about the work of running a company in Singapore: <Link href="/start-a-business-in-singapore">registering a company</Link>, <Link href="/services/accounting/bookkeeping">keeping the books</Link>, <Link href="/services/accounting/gst">GST</Link>, <Link href="/services/accounting/financial-statements-xbrl">XBRL and annual returns</Link> and <Link href="/services/tax/corporate-income-tax">corporate tax</Link>.</p>
+        <p className="bl-lede">Practical guidance from our Chartered Accountants on running a company in Singapore: <Link href="/start-a-business-in-singapore">registering a company</Link>, <Link href="/services/accounting/bookkeeping">keeping the books</Link>, <Link href="/services/accounting/gst">GST</Link>, <Link href="/services/accounting/financial-statements-xbrl">XBRL and annual returns</Link> and <Link href="/services/tax/corporate-income-tax">corporate tax</Link>.</p>
       </div></section>
       {feat && (
         <section className="bl-sec"><div className="wide"><article className="bl-feat"><Link href={feat.path}>
@@ -41,7 +41,7 @@ export default function BlogIndex() {
           ))}</ul>
         </div></section>
       )}
-      <CtaBand text="Questions about your company" wa="Hello Blaze Global, I have a question about my company." />
+      <CtaBand text="Have a question about your company? Speak to us." wa="Hello Blaze Global, I have a question about my company." />
     </main>
   );
 }

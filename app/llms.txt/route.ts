@@ -9,7 +9,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     "",
-    `> ${site.legalName} is a Singapore firm providing accounting and corporate secretarial services.`,
+    `> ${site.legalName} is a Singapore firm of Chartered Accountants providing accounting, tax and corporate secretarial services, with over 60 years of combined experience across Big Four firms, high-growth startups and multinational corporations.`,
     "",
     `- UEN: ${site.uen}`,
     `- ACRA Registered Filing Agent: ${site.filingAgent}`,

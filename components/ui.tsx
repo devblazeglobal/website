@@ -61,8 +61,8 @@ export function Help({ wa, chat, first = false, label }: { wa: string; chat: Pai
   return (
     <section className={`hp${first ? " hp-first pull-under" : ""}`}><div className="wide hp-grid">
       <div className="hp-copy">
-        {first ? <h1>We respond fast on WhatsApp</h1> : <h2>We respond fast on WhatsApp</h2>}
-        <p>Ask about your books, filings or company. A Blaze Global accountant replies.</p>
+        {first ? <h1>Speak to a real accountant on WhatsApp</h1> : <h2>Speak to a real accountant on WhatsApp</h2>}
+        <p>Ask us about your books, filings or company. A Blaze Global accountant will reply with clear, practical advice for your business.</p>
         <WaButton text={wa} label={label} className="btn hp-btn" />
       </div>
       <figure className="hp-fig">
@@ -78,12 +78,12 @@ export function Help({ wa, chat, first = false, label }: { wa: string; chat: Pai
 }
 
 const CREDENTIALS: { logo: string; alt: string; name: string; meta: string; text: string }[] = [
-  { logo: "/logos/acra.svg", alt: "ACRA Registered Filing Agent", name: "ACRA Registered Filing Agent", meta: `Filing agent no. ${site.filingAgent}`, text: "Registered to file incorporations, annual returns and other transactions on Bizfile for clients." },
-  { logo: "/logos/isca.svg", alt: "ISCA", name: "ISCA", meta: "Member", text: "Our accountants are members of the Institute of Singapore Chartered Accountants, the national accountancy body." },
-  { logo: "/logos/caw.png", alt: "Chartered Accountants Worldwide", name: "Chartered Accountants Worldwide", meta: "Network member", text: "Part of a global network of chartered accountancy institutes and their members." },
-  { logo: "/logos/xero.svg", alt: "Xero", name: "Xero", meta: "Cloud accounting", text: "Books kept on Xero. Bank feeds, invoices and reports online, open to you at any time." },
-  { logo: "/logos/aspire.svg", alt: "Aspire", name: "Aspire", meta: "Business accounts", text: "Business accounts and cards for Singapore companies, connected to your books." },
-  { logo: "/logos/ocbc.png", alt: "OCBC", name: "OCBC", meta: "Qualified Introducer and Channel Partner", text: "Introductions to OCBC business banking for Singapore companies." },
+  { logo: "/logos/acra.svg", alt: "ACRA Registered Filing Agent", name: "ACRA Registered Filing Agent", meta: `Filing agent no. ${site.filingAgent}`, text: "As a registered filing agent, we file your incorporation, annual returns and other transactions on Bizfile for you." },
+  { logo: "/logos/isca.svg", alt: "ISCA", name: "ISCA", meta: "Member", text: "Our accountants are members of the Institute of Singapore Chartered Accountants, the national accountancy body, and bring that professional rigour to your work." },
+  { logo: "/logos/caw.png", alt: "Chartered Accountants Worldwide", name: "Chartered Accountants Worldwide", meta: "Network member", text: "We are part of a global network of chartered accountancy institutes and their members." },
+  { logo: "/logos/xero.svg", alt: "Xero", name: "Xero", meta: "Cloud accounting", text: "We keep your books on Xero, with bank feeds, invoices and reports online and open to you at any time." },
+  { logo: "/logos/aspire.svg", alt: "Aspire", name: "Aspire", meta: "Business accounts", text: "Business accounts and cards for Singapore companies, connected directly to your books." },
+  { logo: "/logos/ocbc.png", alt: "OCBC", name: "OCBC", meta: "Qualified Introducer and Channel Partner", text: "We can introduce your company to OCBC business banking." },
 ];
 
 export function Credentials({ id }: { id?: string }) {
