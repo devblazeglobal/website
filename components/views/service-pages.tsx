@@ -1,7 +1,7 @@
 // Page templates for services and solutions, filled from lib/content-data.
 import Link from "next/link";
 
-import { Acts, Credentials, EvGrid, Help, Icon, PageHero, WaButton } from "@/components/ui";
+import { WaButton } from "@/components/ui";
 import { MAIN_PAGES, REVIEWS, SEGMENT_PAGES, SUB_PAGES, TILES, type Parent, type Product } from "@/lib/content-data";
 import { JsonLd } from "@/components/json-ld";
 import { ComplianceCalendar } from "@/components/widgets";
@@ -161,23 +161,48 @@ const APART: [string, string, string][] = [
   ["One partner, every stage", "Your accountant, company secretary and tax adviser, together in one WhatsApp thread.", '<path d="M10 14h26a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H22l-8 6v-6h-4a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z" stroke="currentColor"/><rect x="30" y="26" width="20" height="14" rx="3" class="g"/><path d="M35 33h10" class="gs"/>'],
 ];
 
-/** Start-ups, SMEs, large companies: reasons, then everything they need. */
+/** Start-ups, SMEs, large companies, in the sub pages' juliusbaer.com
+ * structure: breadcrumb and title, reasons, everything they need, what sets
+ * us apart, closing bar with credentials. */
 export function SegmentView({ slug }: { slug: string }) {
   const p = SEGMENT_PAGES[slug];
+  const talk = "WhatsApp us";
   return (
-    <main className="view" id="view-company">
-      <PageHero h1={p.h1} lede={p.lede} wa={p.wa} />
-      <section className="pc"><div className="wide">
-        <h2 className="pc-h">{p.bandHeading}</h2>
-        <ul className="pc-cards">{p.why.map(([t, s], i) => <li key={t}><Icon k={p.bandIcons[i]} /><h3>{t}</h3><p>{s}</p></li>)}</ul>
+    <main className="view jb pull-under" id="view-company">
+      <div className="wrap">
+        <nav className="jb-crumb" aria-label="Breadcrumb"><Link href="/services">Solutions</Link><i aria-hidden="true">·</i><span aria-current="page">{p.name}</span></nav>
+        <div className="jb-title">
+          <h1>{p.h1}</h1>
+          <p>{p.lede}</p>
+          <div className="jb-acts"><button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div>
+        </div>
+      </div>
+
+      <section className="jb-blk" aria-labelledby="jb-why"><div className="wide">
+        <h2 className="jb-h2" id="jb-why">{p.bandHeading}</h2>
+        <div className="jb-cards">{p.why.map(([h, d]) => <div className="jb-c" key={h}><h3>{h}</h3><p>{d}</p></div>)}</div>
       </div></section>
-      <section className="ev" aria-label={p.needHeading}><div className="wide">
-        <h2 className="ev-h">{p.needHeading}</h2>
-        <EvGrid items={p.needs.map(([k, t, s, h]) => [k, t, s, h || (t === "WhatsApp support" ? whatsappUrl(p.wa) : undefined)])} />
-        <div className="ev-acts"><Acts wa={p.wa} /></div>
+
+      <section className="jb-blk" aria-labelledby="jb-need"><div className="wide">
+        <h2 className="jb-h2" id="jb-need">{p.needHeading}</h2>
+        <div className="jb-cards">{p.needs.map(([, h, d, href]) => {
+          const to = href || (h === "WhatsApp support" ? whatsappUrl(p.wa) : "");
+          if (!to) return <div className="jb-c" key={h}><h3>{h}</h3><p>{d}</p></div>;
+          return to.startsWith("/")
+            ? <Link className="jb-c" key={h} href={to}><h3>{h}</h3><p>{d}</p><span className="jb-go">Discover more</span></Link>
+            : <a className="jb-c" key={h} href={to} target="_blank" rel="noopener"><h3>{h}</h3><p>{d}</p><span className="jb-go">Message us</span></a>;
+        })}</div>
       </div></section>
-      <Credentials />
-      <Help wa={p.wa} chat={p.chat} />
+
+      <section className="jb-blk" aria-labelledby="jb-apart"><div className="wide">
+        <h2 className="jb-lbl" id="jb-apart">What sets us apart</h2>
+        <div className="jb-apart">{APART.map(([h, d, icon]) => <div key={h}><svg viewBox="0 0 56 56" fill="none" strokeWidth="1.3" aria-hidden="true" dangerouslySetInnerHTML={{ __html: icon }} /><h3>{h}</h3><p>{d}</p></div>)}</div>
+      </div></section>
+
+      <section className="jb-blk" aria-label="Work with Blaze Global"><div className="wide">
+        <div className="jb-close"><p>Work with Blaze Global</p><div className="jb-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div></div>
+        <ul className="jb-creds"><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>120+</b> businesses served</li></ul>
+      </div></section>
     </main>
   );
 }
