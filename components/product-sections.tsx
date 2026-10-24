@@ -80,9 +80,9 @@ export function AiAnalysis({ product, q, metrics }: { product: string; q: string
       <AxPlay className="wide">
         <article className="axp a2 axp-wide">
           <div className="axw-copy">
-            <p className="ax-k">AI analysis with BlazeOS</p>
+            <p className="ax-k">Insights with BlazeOS</p>
             <h2 className="ax-h" id="ai-h">{q}</h2>
-            <p>AI reads your {product.toLowerCase()} figures every day and puts them on one live dashboard. No one has to pull the numbers together, and a Chartered Accountant checks what it flags.</p>
+            <p>BlazeOS brings your {product.toLowerCase()} data together on one dashboard, refreshed daily. AI-assisted analysis surfaces trends and anomalies for a Chartered Accountant to review.</p>
             <Link className="btn btn-navy btn-lg" href="/services/blazeos">Explore BlazeOS</Link>
           </div>
           <div className="axc" aria-hidden="true">

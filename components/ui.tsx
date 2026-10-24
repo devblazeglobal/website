@@ -21,11 +21,11 @@ export function WaButton({ text, label = "WhatsApp us", className = "btn btn-wa"
   return <a className={className} href={whatsappUrl(text)} target="_blank" rel="noopener"><svg><use href="#wa" /></svg>{label}</a>;
 }
 
-export function Acts({ wa }: { wa: string }) {
+export function Acts({ wa, label }: { wa: string; label?: string }) {
   return (
     <div className="fk-acts">
       <button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button>
-      <WaButton text={wa} className="btn btn-wa btn-lg" />
+      <WaButton text={wa} label={label} className="btn btn-wa btn-lg" />
     </div>
   );
 }
@@ -57,13 +57,13 @@ export function CtaBand({ text, wa }: { text: string; wa: string }) {
   );
 }
 
-export function Help({ wa, chat, first = false }: { wa: string; chat: Pair; first?: boolean }) {
+export function Help({ wa, chat, first = false, label }: { wa: string; chat: Pair; first?: boolean; label?: string }) {
   return (
     <section className={`hp${first ? " hp-first pull-under" : ""}`}><div className="wide hp-grid">
       <div className="hp-copy">
         {first ? <h1>We respond fast on WhatsApp</h1> : <h2>We respond fast on WhatsApp</h2>}
         <p>Ask about your books, filings or company. A Blaze Global accountant replies.</p>
-        <WaButton text={wa} className="btn hp-btn" />
+        <WaButton text={wa} label={label} className="btn hp-btn" />
       </div>
       <figure className="hp-fig">
         <Image src="/images/help-1.jpg" alt="A person typing a message on a phone" fill sizes="(max-width: 860px) 460px, 520px" />
@@ -192,10 +192,10 @@ export function ExploreLinks({ links }: { links: [string, string][] }) {
   return <ul className="fk-x">{links.map(([t, h]) => <li key={h}><Link href={h}>Explore {t} <i aria-hidden="true">→</i></Link></li>)}</ul>;
 }
 
-export function MoreFrom({ title, cards, links, wa }: { title: string; cards: Card[]; links: [string, string][]; wa: string }) {
+export function MoreFrom({ title, cards, links, wa, label }: { title: string; cards: Card[]; links: [string, string][]; wa: string; label?: string }) {
   return (
     <section className="fk fk-more"><div className="wide"><div className="fk-grid">
-      <div className="fk-side"><h2 className="fk-mh">{title}</h2><ExploreLinks links={links} /><Acts wa={wa} /></div>
+      <div className="fk-side"><h2 className="fk-mh">{title}</h2><ExploreLinks links={links} /><Acts wa={wa} label={label} /></div>
       <FlankCards cards={cards} />
     </div></div></section>
   );
@@ -228,14 +228,14 @@ export function Benefits({ rows }: { rows: Benefit[] }) {
   );
 }
 
-export function PhotoHero({ img, title, sub, wa, children, className = "" }: { img: string; title: string; sub: string; wa: string; children?: React.ReactNode; className?: string }) {
+export function PhotoHero({ img, title, sub, wa, label, children, className = "" }: { img: string; title: string; sub: string; wa: string; label?: string; children?: React.ReactNode; className?: string }) {
   return (
     <section className={`rh pull-under ${className}`}>
       {img === "radial" ? <div className="rh-imgs rh-core" aria-hidden="true" /> : <div className="rh-imgs" aria-hidden="true"><Image className="on" src={img} alt="" fill priority sizes="100vw" /></div>}
       <div className="rh-in">
         <h1>{title}</h1>
         <p className="rh-sub">{sub}</p>
-        <div className="rh-acts"><button className="btn rh-btn" type="button" data-open-start>Get started</button><WaButton text={wa} className="btn btn-wa rh-btn-ghost" /></div>
+        <div className="rh-acts"><button className="btn rh-btn" type="button" data-open-start>Get started</button><WaButton text={wa} label={label} className="btn btn-wa rh-btn-ghost" /></div>
         {children}
       </div>
       <ul className="rh-creds" aria-label="Credentials">
@@ -246,10 +246,10 @@ export function PhotoHero({ img, title, sub, wa, children, className = "" }: { i
   );
 }
 
-export function PageHero({ h1, lede, wa, trust = true }: { h1: string; lede: string; wa: string; trust?: boolean }) {
+export function PageHero({ h1, lede, wa, label, trust = true }: { h1: string; lede: string; wa: string; label?: string; trust?: boolean }) {
   return (
     <section className="sp-hero pull-under"><div className="wide">
-      <h1>{h1}</h1><p>{lede}</p><Acts wa={wa} />{trust && <TrustStrip />}
+      <h1>{h1}</h1><p>{lede}</p><Acts wa={wa} label={label} />{trust && <TrustStrip />}
     </div></section>
   );
 }

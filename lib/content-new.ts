@@ -128,8 +128,8 @@ export const NOMINEE_PAGE: MainPage = {
 export const DIGITAL_PAGE: MainPage = {
   slug: "blazeos",
   img: "radial",
-  heading: "BlazeOS: your business numbers, live and explained",
-  sub: "Live dashboards on your Xero, Google Sheets and CRM data, with AI that flags what needs attention. Checked by Chartered Accountants.",
+  heading: "BlazeOS: your business, connected. Your numbers, explained.",
+  sub: "All your data in one clear view. Financial and operational data from Xero, spreadsheets and your CRM, in interactive dashboards. Powered by technology, backed by financial expertise.",
   gridHeading: "What BlazeOS shows",
   wa: "Hello Blaze Global, I would like to see a BlazeOS demo.",
   cards: [],
@@ -293,7 +293,6 @@ export const EXTRAS: Record<string, PageExtras & { faq?: Pair[] }> = {
       ["We take over", "The change of secretary is filed on Bizfile and we handle every filing from then on."],
     ] },
     calendar: true,
-    ai: { q: "Every filing tracked against its deadline", metrics: [["Next filing", "AGM"], ["Days left", "48"], ["Registers up to date", "Yes"]] },
     skip: ["benefits", "how", "grid"],
     faq: [
       ["Does every Singapore company need a company secretary?", "Yes. A company must appoint a company secretary within 6 months of incorporation."],

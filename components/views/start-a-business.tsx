@@ -25,7 +25,7 @@ export function StartBusinessView() {
       <h1 id="sb-h1">Register your company in Singapore</h1>
       <p className="rh-sub">Company incorporation, filed by an ACRA Registered Filing Agent.</p>
       <p className="rh-fine">ACRA charges S$15 for the name application and S$300 for registration, paid on Bizfile. Blaze Global&apos;s fees are quoted separately. Approval times depend on ACRA and any referral to another agency.</p>
-      <div className="rh-acts"><button className="btn rh-btn" type="button" data-open-start>Get started</button><a className="btn rh-btn-ghost" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
+      <div className="rh-acts"><button className="btn rh-btn" type="button" data-open-start>Get started</button><a className="btn rh-btn-ghost" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Talk to a corporate secretary</a></div>
       <div className="rh-todo rh-glass" aria-live="polite">
         <div className="td-h"><b>Incorporation checklist</b><span>5 of 7 done</span></div>
         <ul className="td-list">{CHECKLIST.map(([t, done], j) => <li key={t} className={done ? "done" : undefined} style={{ "--d": `${j * 70}ms` }}><span className="td-c">{done ? <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg> : null}</span>{t}</li>)}</ul>
@@ -53,7 +53,7 @@ export function StartBusinessView() {
         <div className="stp-vis stp-photo"><Image sizes="(max-width: 900px) 90vw, 33vw" src="/images/sg-3.jpg" alt="" width={1200} height={600} /><StructureTabs /></div>
       </article>
       <article className="stp-row flip">
-        <div className="stp-txt"><h3>Step 2: We prepare and file with ACRA</h3><p>Constitution, consent forms and identity checks prepared. You sign online. We file on Bizfile as your Registered Filing Agent.</p><div className="stp-acts"><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a><Link className="stp-link" href="/services/corporate-secretarial">Corporate Secretarial →</Link></div></div>
+        <div className="stp-txt"><h3>Step 2: We prepare and file with ACRA</h3><p>Constitution, consent forms and identity checks prepared. You sign online. We file on Bizfile as your Registered Filing Agent.</p><div className="stp-acts"><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Talk to a corporate secretary</a><Link className="stp-link" href="/services/corporate-secretarial">Corporate Secretarial →</Link></div></div>
         <div className="stp-vis stp-blue"><div className="lg-card"><div className="lg-t">Bizfile application</div><ul className="lg-list"><li><span>Company name</span><em className="ok">Approved</em></li><li><span>Identity checks</span><em className="ok">Done</em></li><li><span>Constitution</span><em className="ok">Ready</em></li><li><span>Consent forms</span><em className="wait">Signing online</em></li><li><span>Incorporation</span><em className="todo">Filing</em></li></ul></div></div>
       </article>
       <article className="stp-row">
@@ -71,7 +71,7 @@ export function StartBusinessView() {
         <li><Link href="/solutions/smes"><Image sizes="(max-width: 900px) 90vw, 33vw" src="/images/sme.jpg" alt="A team meeting around a table" width={1200} height={1600} /><h3>SMEs</h3><p>Monthly books, GST and annual filings, prepared before each deadline.</p><span className="wh-more">SMEs <i aria-hidden="true">→</i></span></Link></li>
         <li><Link href="/solutions/large-companies"><Image sizes="(max-width: 900px) 90vw, 33vw" src="/images/large.jpg" alt="A company town hall" width={1200} height={1600} /><h3>Large companies</h3><p>Group reporting, tax advisory and secretarial work for every Singapore entity.</p><span className="wh-more">Large companies <i aria-hidden="true">→</i></span></Link></li>
       </ul>
-      <div className="wh-acts"><button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
+      <div className="wh-acts"><button className="btn btn-navy btn-lg" type="button" data-open-start>Get started</button><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Talk to a corporate secretary</a></div>
     </div>
   </section>
 
@@ -113,8 +113,8 @@ export function StartBusinessView() {
     </div>
   </div></section>
 
-  <Credentials /><Help wa="Hello Blaze Global, I would like to register a company in Singapore." chat={["Can you register my company this week?", "Yes. Send the company name and director details. We file on Bizfile as soon as the documents are signed."]} />
-  <section className="seg-cta"><div className="wide"><div className="band"><p>Start your company</p><div className="actions"><button className="btn btn-start-light" type="button" data-open-start>Get started</button><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div></div></div></section>
+  <Credentials /><Help wa="Hello Blaze Global, I would like to register a company in Singapore." chat={["Can you register my company this week?", "Yes. Send the company name and director details. We file on Bizfile as soon as the documents are signed."]} label="Talk to a corporate secretary" />
+  <section className="seg-cta"><div className="wide"><div className="band"><p>Start your company</p><div className="actions"><button className="btn btn-start-light" type="button" data-open-start>Get started</button><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20register%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>Talk to a corporate secretary</a></div></div></div></section>
 </main>
   );
 }

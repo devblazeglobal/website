@@ -31,3 +31,17 @@ export const site = {
 export function whatsappUrl(text = "Hello Blaze Global, I would like to find out more about your services.") {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
+
+// WhatsApp button label per service: the person the client reaches.
+const TALK: Record<string, string> = {
+  incorporation: "Talk to a corporate secretary",
+  "corporate-secretarial": "Talk to a corporate secretary",
+  "nominee-directorship": "Talk to a corporate secretary",
+  accounting: "Talk to an accountant",
+  payroll: "Talk to an accountant",
+  tax: "Talk to a tax specialist",
+  "outsourced-cfo": "Talk to a tax specialist",
+};
+
+/** WhatsApp button label for a product or parent slug; "WhatsApp us" elsewhere. */
+export const talkLabel = (key?: string) => (key && TALK[key]) || "WhatsApp us";

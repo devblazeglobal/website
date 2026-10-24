@@ -6,23 +6,23 @@ import { JsonLd } from "@/components/json-ld";
 import { MAIN_PAGES } from "@/lib/content-data";
 import { whatsappUrl } from "@/lib/site";
 
-// BlazeOS: dashboards on the client's own data. Sales storyboard: the screen,
+// BlazeOS: data integration, dashboards and business intelligence on the
+// client's own data. Not reconciliation or bookkeeping automation. Sales storyboard: the screen,
 // the problem, how it works, what they see, what the AI does, before/after,
 // set-up, fees, data and security.
 const p = MAIN_PAGES.blazeos;
 
 const PIPE: [string, string, string, string[]][] = [
-  ["Connect", "Your systems", "We connect the tools you already use. Nothing new to learn.", ["Xero", "Google Sheets", "CRM", "Bank feeds"]],
-  ["Store", "Your own secure database", "Data copied every day into a database set up for your company alone.", []],
-  ["Analyse", "AI reads the numbers", "Trends and exceptions flagged for a Chartered Accountant to check.", []],
-  ["See", "Live dashboards", "Revenue, margin, cash and customers on one screen, updated daily.", []],
+  ["Connect", "Your data, together", "Xero, spreadsheets, your CRM and other platforms, brought into one secure database for your company alone.", ["Xero", "Google Sheets", "CRM"]],
+  ["Visualise", "Interactive dashboards", "Raw data turned into dashboards on performance, customers and cash, refreshed daily.", []],
+  ["Understand", "Insights for decisions", "AI-assisted analysis surfaces trends and anomalies. A Chartered Accountant reviews them with you.", []],
 ];
-const SEE = ["Sales and customers", "Margin by product", "Cash and forecast", "Compliance dates"];
+const SEE = ["Sales and customers", "Margin by product", "Cash and forecast", "Connected sources"];
 const SEE_TXT: Record<string, string> = {
   "Sales and customers": "Sales by customer and how long each takes to pay, from Xero and your CRM.",
   "Margin by product": "Gross margin by product or service, with lines that slip below target flagged.",
   "Cash and forecast": "Today's cash and the next six months, built from receivables, bills and payroll.",
-  "Compliance dates": "GST, CPF, ACRA and IRAS dates from your compliance calendar, on the same screen.",
+  "Connected sources": "Xero, spreadsheets and your CRM in one central view, instead of switching between them.",
 };
 
 function Dash() {
@@ -70,7 +70,7 @@ export function BlazeOSView() {
 
       <section className="ps ps-alt"><div className="wide">
         <h2 className="ps-h">How BlazeOS works</h2>
-        <ol className="bos-pipe">{PIPE.map(([k, t, d, chips], i) => <li key={k}><small>{i + 1} · {k}</small><b>{t}</b><p>{d}</p>{chips.length > 0 && <div className="bos-chips">{chips.map((c) => <span key={c}>{c}</span>)}</div>}{i < 3 && <i className="bos-flow" aria-hidden="true" />}</li>)}</ol>
+        <ol className="bos-pipe">{PIPE.map(([k, t, d, chips], i) => <li key={k}><small>{i + 1} · {k}</small><b>{t}</b><p>{d}</p>{chips.length > 0 && <div className="bos-chips">{chips.map((c) => <span key={c}>{c}</span>)}</div>}{i < PIPE.length - 1 && <i className="bos-flow" aria-hidden="true" />}</li>)}</ol>
       </div></section>
 
       <section className="ax-sec ax-dlv" aria-labelledby="see-h">
@@ -84,21 +84,20 @@ export function BlazeOSView() {
         <AxPlay className="wide">
           <article className="axp a3 axp-wide">
             <div className="axw-copy">
-              <p className="ax-k">What the AI does</p>
-              <h2 className="ax-h" id="ai-h">Reads every transaction, flags what matters</h2>
-              <p>AI tools such as Claude read bills, invoices and transactions, extract the data and flag exceptions: late payers, overspends, cash dips. A Chartered Accountant checks every flag before it reaches you.</p>
+              <p className="ax-k">Insights</p>
+              <h2 className="ax-h" id="ai-h">Trends and anomalies, surfaced</h2>
+              <p>AI-assisted analysis reads across your connected data and surfaces changes: slower payers, spending above plan, margins moving. A Chartered Accountant reviews each one before it reaches you.</p>
             </div>
-            <div className="axc" aria-hidden="true">{CARDS["AI-powered automation"]}</div>
+            <div className="axc" aria-hidden="true">{CARDS["Trends and anomalies"]}</div>
           </article>
         </AxPlay>
       </section>
 
       <CompareTable h="Before and after BlazeOS" cols={["", "Today", "With BlazeOS"]} rows={[
-        ["Reports", "Weeks after month end", "Updated daily"],
-        ["Effort", "Hours exporting and pasting", "None on your side"],
-        ["Sources", "Separate systems", "One screen"],
-        ["Exceptions", "Found at year end", "Flagged as they happen"],
-        ["Checked by", "Whoever built the spreadsheet", "Chartered Accountants"],
+        ["Reporting", "Manual reports compiled periodically", "Dashboards with regularly refreshed data"],
+        ["Data sources", "Scattered across different systems", "Brought together in one central view"],
+        ["Visibility", "Switching between spreadsheets and platforms", "Key business metrics at a glance"],
+        ["Insights", "Time spent interpreting disconnected numbers", "AI-assisted analysis that surfaces trends and anomalies"],
       ]} />
 
       <StepRow h="Set-up in 3 steps" items={[

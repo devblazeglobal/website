@@ -7,7 +7,7 @@ import { HowItWorks } from "@/components/how-it-works";
 import { JsonLd } from "@/components/json-ld";
 import { AiAnalysis, CardGrid, CompareTable, DoesTable, PlanCard, RulesTable, StepRow, TrustRow } from "@/components/product-sections";
 import { ComplianceCalendar } from "@/components/widgets";
-import { whatsappUrl } from "@/lib/site";
+import { talkLabel, whatsappUrl } from "@/lib/site";
 
 const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
 const INC: [string, string] = ["Incorporation", "/start-a-business-in-singapore"];
@@ -23,10 +23,11 @@ export function MainServiceView({ slug }: { slug: Product }) {
   const skip = new Set(p.skip ?? []);
   const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug && x.group === group && x.key !== "incorporation").map((x): [string, string] => [x.name, x.href]), group === "set-up" ? INC : CALC];
   const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  const talk = talkLabel(slug);
   return (
     <main className="view" id="view-company">
       <JsonLd data={faqLd} />
-      <PhotoHero className="rh-main" img={p.img} title={p.h1 ?? p.heading} sub={p.h1 ? `${/[.!?]$/.test(p.heading) ? p.heading : `${p.heading}.`} ${p.sub}` : p.sub} wa={p.wa}>
+      <PhotoHero className="rh-main" img={p.img} title={p.h1 ?? p.heading} sub={p.h1 ? `${/[.!?]$/.test(p.heading) ? p.heading : `${p.heading}.`} ${p.sub}` : p.sub} wa={p.wa} label={talk}>
         {p.chips && <ul className="rh-chips">{p.chips.map((c) => <li key={c}>{c}</li>)}</ul>}
       </PhotoHero>
       {p.h1 && <TrustRow />}
@@ -46,7 +47,7 @@ export function MainServiceView({ slug }: { slug: Product }) {
         <section className="fk fk-top"><div className="wide">
           <h2 className="fk-h">{p.gridHeading}</h2>
           <div className="fk-grid">
-            <div className="fk-side"><Acts wa={p.wa} /><ExploreLinks links={links} /></div>
+            <div className="fk-side"><Acts wa={p.wa} label={talk} /><ExploreLinks links={links} /></div>
             <FlankCards cards={p.cards} />
           </div>
         </div></section>
@@ -54,7 +55,7 @@ export function MainServiceView({ slug }: { slug: Product }) {
       {p.compare && <CompareTable {...p.compare} />}
       <Faq items={p.faq} />
       <Credentials />
-      <Help wa={p.wa} chat={p.chat} />
+      <Help wa={p.wa} chat={p.chat} label={talk} />
     </main>
   );
 }
@@ -66,20 +67,21 @@ export function SubServiceView({ slug }: { slug: string }) {
   const d = SUB_PAGES[slug];
   const wa = `Hello Blaze Global, I would like help with ${d.name.toLowerCase()}.`;
   const par = d.par;
+  const talk = talkLabel(par);
   const pool = Object.keys(SUB_PAGES).filter((k) => k !== slug);
   const siblings = [...pool.filter((k) => SUB_PAGES[k].par === par), ...pool.filter((k) => SUB_PAGES[k].par !== par)].slice(0, 6).map(subCard);
   const others = (Object.keys(LINES) as Parent[]).filter((k) => k !== par).map((k) => LINES[k]);
   return (
     <main className="view" id="view-company">
-      <PageHero h1={d.h1} lede={d.lede} wa={wa} />
+      <PageHero h1={d.h1} lede={d.lede} wa={wa} label={talk} />
       <section className="tl"><div className="wide">
         <h2 className="tl-h">What&apos;s included</h2>
         <ul className="tl-grid tl-cards">{TILES[slug].map(([k, t, s]) => <li key={t}><span className="tl-ib"><Icon k={k} /></span><h3>{t}</h3><p>{s}</p></li>)}</ul>
       </div></section>
       <Reviews heading="What our clients say" />
-      <MoreFrom title={`More from ${LINES[par][0]}`} cards={siblings} links={[LINES[par], ...others]} wa={wa} />
+      <MoreFrom title={`More from ${LINES[par][0]}`} cards={siblings} links={[LINES[par], ...others]} wa={wa} label={talk} />
       <Credentials />
-      <Help wa={wa} chat={MAIN_PAGES[par].chat} />
+      <Help wa={wa} chat={MAIN_PAGES[par].chat} label={talk} />
     </main>
   );
 }

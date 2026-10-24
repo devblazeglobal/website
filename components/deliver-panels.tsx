@@ -113,6 +113,25 @@ export const CARDS: Record<string, React.ReactNode> = {
       <div className="axfoot r3">Updated as transactions arrive <Tk /></div>
     </>
   ),
+  "Connected sources": (
+    <>
+      <div className="axc-h"><span>Connections</span><span className="syn">Synced</span></div>
+      <div className="axs r1"><b>Xero</b><span className="ln" /><b>BlazeOS</b></div>
+      <div className="axs r2"><b>Google Sheets</b><span className="ln" /><b>BlazeOS</b></div>
+      <div className="axs r3"><b>CRM</b><span className="ln" /><b>BlazeOS</b></div>
+      <div className="axr ok r4"><i /><span>Refreshed daily</span><span className="tk">✓</span></div>
+    </>
+  ),
+  "Trends and anomalies": (
+    <>
+      <div className="axc-h"><span>Trends and anomalies · October</span><span className="syn">Example</span></div>
+      <div className="axt r1"><span>Metric</span><span>September</span><span>October</span></div>
+      <div className="axt r2"><span>Revenue</span><b>S$120k</b><b className="up">S$128k</b></div>
+      <div className="axt r3 on"><span>Days to pay · Customer B</span><b>36</b><b className="dn">48</b></div>
+      <div className="axt r4 on"><span>Marketing spend</span><b>S$8k</b><b className="dn">S$11k</b></div>
+      <div className="axfoot r5">Reviewed by a Chartered Accountant <Tk /></div>
+    </>
+  ),
   "Systems integration": (
     <>
       <div className="axc-h"><span>Connections</span><span className="syn">Synced</span></div>
