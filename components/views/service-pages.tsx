@@ -1,68 +1,96 @@
 // Page templates for services and solutions, filled from lib/content-data.
 import Link from "next/link";
 
-import { Acts, Benefits, Credentials, EvGrid, ExploreLinks, Faq, FlankCards, Help, Icon, PageHero, PhotoHero, WaButton } from "@/components/ui";
-import { MAIN_PAGES, SEGMENT_PAGES, SUB_PAGES, TILES, type Parent, type Product } from "@/lib/content-data";
-import { PRODUCTS } from "@/lib/products";
-import { DeliverPanels, IncorporationBand } from "@/components/deliver-panels";
-import { HowItWorks } from "@/components/how-it-works";
+import { Acts, Credentials, EvGrid, Help, Icon, PageHero, WaButton } from "@/components/ui";
+import { MAIN_PAGES, REVIEWS, SEGMENT_PAGES, SUB_PAGES, TILES, type Parent, type Product } from "@/lib/content-data";
 import { JsonLd } from "@/components/json-ld";
-import { AiAnalysis, CardGrid, CompareTable, DoesTable, PlanCard, RulesTable, StepRow, TrustRow } from "@/components/product-sections";
 import { ComplianceCalendar } from "@/components/widgets";
 import { site, talkLabel, whatsappUrl } from "@/lib/site";
 import { SUB_TEMPLATE } from "@/lib/sub-template";
+import { PRODUCT_TEMPLATE } from "@/lib/product-template";
+import { DocCard } from "@/components/doc-card";
+import { FeatureTabs } from "@/components/feature-tabs";
 
-const CALC: [string, string] = ["Compliance deadline calculator", "/compliance-deadline-calculator"];
-const INC: [string, string] = ["Incorporation", "/start-a-business-in-singapore"];
 
 /** A product page: photo hero, benefits, services, FAQ. */
 const LINES: Record<Parent, [string, string]> = { accounting: ["Accounting", "/services/accounting"], tax: ["Tax", "/services/tax"], "corporate-secretarial": ["Corporate Secretarial", "/services/corporate-secretarial"] };
 export const subPath = (slug: string) => `/services/${SUB_PAGES[slug].par}/${slug}`;
 
+/** A product page (24 Oct 2026): legora.com/product/word-add-in order in
+ * the sub pages' juliusbaer.com look. Painted hero in this product's blue,
+ * statement, feature tabs, how it works, cards, requirements, review,
+ * questions, closing bar. Incorporation and BlazeOS have their own pages. */
 export function MainServiceView({ slug }: { slug: Product }) {
   const p = MAIN_PAGES[slug];
-  const entry = PRODUCTS.find((x) => x.key === slug);
-  const group = entry?.group;
-  const skip = new Set(p.skip ?? []);
-  const links: [string, string][] = [...PRODUCTS.filter((x) => x.key !== slug && x.group === group && x.key !== "incorporation").map((x): [string, string] => [x.name, x.href]), group === "set-up" ? INC : CALC];
-  const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  const t = PRODUCT_TEMPLATE[slug];
   const talk = talkLabel(slug);
+  const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  const req = p.rules ?? t.req;
+  const steps = p.steps?.items ?? t.steps ?? [];
+  const links = p.cards.filter((c) => c[4]).length >= 4;
+  const cards = (links ? p.cards.filter((c) => c[4]) : p.cards).slice(0, 4);
+  const [c1, c2, c3, glow] = t.hue;
+  const review = REVIEWS[0];
   return (
-    <main className="view" id="view-company">
+    <main className="view ptp" id="view-company">
       <JsonLd data={faqLd} />
-      <PhotoHero className="rh-main" img={p.img} title={p.h1 ?? p.heading} sub={p.h1 ? `${/[.!?]$/.test(p.heading) ? p.heading : `${p.heading}.`} ${p.sub}` : p.sub} wa={p.wa} label={talk}>
-        {p.chips && <ul className="rh-chips">{p.chips.map((c) => <li key={c}>{c}</li>)}</ul>}
-      </PhotoHero>
-      {p.h1 && <TrustRow />}
-      {slug === "corporate-secretarial" && <IncorporationBand />}
-      {p.who && <CardGrid h={p.who.h} items={p.who.items} />}
-      {p.rules && <RulesTable h={p.rules.h} rows={p.rules.rows} />}
-      {p.delivers && <DeliverPanels h={p.delivers.h} items={p.delivers.items} />}
-      {p.does && <DoesTable {...p.does} />}
-      {p.safeguards && <CardGrid h={p.safeguards.h} items={p.safeguards.items} tone="white" />}
-      {p.plans && <PlanCard {...p.plans} wa={p.wa} />}
-      {p.steps && <StepRow h={p.steps.h} items={p.steps.items} />}
-      {!skip.has("benefits") && <Benefits rows={p.benefits} />}
-      {p.calendar && <section className="cal2" aria-labelledby="cal2-title"><div className="wide"><ComplianceCalendar /></div></section>}
-      {p.ai && entry && <AiAnalysis product={entry.name} q={p.ai.q} metrics={p.ai.metrics} />}
-      {!skip.has("how") && <HowItWorks />}
-      {!skip.has("grid") && (
-        <section className="fk fk-top"><div className="wide">
-          <h2 className="fk-h">{p.gridHeading}</h2>
-          <div className="fk-grid">
-            <div className="fk-side"><Acts wa={p.wa} label={talk} /><ExploreLinks links={links} /></div>
-            <FlankCards cards={p.cards} />
-          </div>
+      <section className="pt-hero" style={{ "--c1": c1, "--c2": c2, "--c3": c3, "--glow": glow } as React.CSSProperties}><div className="wrap">
+        <nav className="pt-crumb" aria-label="Breadcrumb"><Link href="/services">Services</Link><i aria-hidden="true">·</i><span aria-current="page">{p.h1?.replace(/ Services in Singapore$/, "").replace(/ in Singapore$/, "") ?? p.heading}</span></nav>
+        <h1 className="pt-eyebrow">{p.h1 ?? p.heading}</h1>
+        <p className="pt-title">{p.heading}</p>
+        <p className="pt-lede">{p.sub}</p>
+        <div className="pt-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div>
+        <div className="pt-stage"><DocCard d={t.hero} /></div>
+      </div></section>
+
+      <section className="pt-sec pt-stmt"><div className="wrap"><p>{t.statement}</p></div></section>
+
+      <section className="pt-sec" aria-labelledby="pt-fh"><div className="wide">
+        <div className="pt-head"><h2 className="pt-h2" id="pt-fh">{t.features.h}</h2><p className="pt-sub">{t.features.sub}</p></div>
+        <FeatureTabs label={t.features.h} items={t.features.items} />
+      </div></section>
+
+      {steps.length > 0 && (
+        <section className="pt-sec" aria-labelledby="pt-hw"><div className="wide">
+          <div className="pt-head"><h2 className="pt-h2" id="pt-hw">How it works</h2></div>
+          <ol className="pt-steps" style={{ "--n": steps.length } as React.CSSProperties}>{steps.map(([h, d], i) => <li key={h}><small>Step {i + 1}</small><h3>{h}</h3><p>{d}</p></li>)}</ol>
         </div></section>
       )}
-      {p.compare && <CompareTable {...p.compare} />}
-      <Faq items={p.faq} />
-      <Credentials />
-      <Help wa={p.wa} chat={p.chat} label={talk} />
+
+      <section className="pt-sec" aria-labelledby="pt-cc"><div className="wide">
+        <div className="pt-head"><h2 className="pt-h2" id="pt-cc">{t.cardsHeading}</h2></div>
+        <div className="pt-cards">{cards.map(([h, d, , , href]) => links && href
+          ? <Link className="pt-cd" key={h} href={href}><h3>{h}</h3><p>{d}</p><span className="pt-go">Discover more</span></Link>
+          : <div className="pt-cd" key={h}><h3>{h}</h3><p>{d}</p></div>)}</div>
+      </div></section>
+
+      {req && (
+        <section className="pt-sec" aria-labelledby="pt-rq"><div className="wrap pt-narrow">
+          <div className="pt-head pt-c"><h2 className="pt-h2" id="pt-rq">{req.h}</h2></div>
+          <dl className="pt-req">{req.rows.map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}</dl>
+        </div></section>
+      )}
+
+      {p.calendar && <section className="pt-sec" aria-labelledby="cal2-title"><div className="wide pt-cal"><ComplianceCalendar /></div></section>}
+
+      <section className="pt-sec pt-quote" aria-label="Client review"><div className="wrap">
+        <blockquote>&ldquo;{review.head}&rdquo;</blockquote>
+        <p className="pt-cite"><b>{review.n}</b>{review.role}</p>
+      </div></section>
+
+      <section className="pt-sec" aria-labelledby="pt-fq"><div className="wrap pt-narrow">
+        <div className="pt-head pt-c"><h2 className="pt-h2" id="pt-fq">Frequently asked questions</h2></div>
+        <div className="pt-faq">{p.faq.map(([q, a]) => <details key={q}><summary>{q}<i aria-hidden="true">+</i></summary><p>{a}</p></details>)}</div>
+      </div></section>
+
+      <section className="pt-sec pt-end" aria-labelledby="pt-ct"><div className="wide">
+        <div className="pt-band"><h2 id="pt-ct">{t.cta[0]}</h2><p>{t.cta[1]}</p>
+          <div className="pt-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div></div>
+        <ul className="jb-creds"><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>Chartered Accountants Worldwide</b> member</li><li><b>OCBC</b> Qualified Introducer and Channel Partner</li></ul>
+      </div></section>
     </main>
   );
 }
-
 
 /** A sub page (juliusbaer.com structure, 24 Oct 2026): breadcrumb and title,
  * what's included, introduction, what sets us apart, requirements, how we
