@@ -129,7 +129,7 @@ export const DIGITAL_PAGE: MainPage = {
   slug: "blazeos",
   img: "radial",
   heading: "BlazeOS: your business, connected. Your numbers, explained.",
-  sub: "All your data in one clear view. Financial and operational data from Xero, spreadsheets and your CRM, in interactive dashboards. Powered by technology, backed by financial expertise.",
+  sub: "We bring your business data together and turn it into insights you can use. Xero, spreadsheets and your CRM in one clear view, backed by financial expertise.",
   gridHeading: "What BlazeOS shows",
   wa: "Hello Blaze Global, I would like to see a BlazeOS demo.",
   cards: [],

@@ -12,10 +12,11 @@ import { whatsappUrl } from "@/lib/site";
 // set-up, fees, data and security.
 const p = MAIN_PAGES.blazeos;
 
-const PIPE: [string, string, string, string[]][] = [
-  ["Connect", "Your data, together", "Xero, spreadsheets, your CRM and other platforms, brought into one secure database for your company alone.", ["Xero", "Google Sheets", "CRM"]],
-  ["Visualise", "Interactive dashboards", "Raw data turned into dashboards on performance, customers and cash, refreshed daily.", []],
-  ["Understand", "Insights for decisions", "AI-assisted analysis surfaces trends and anomalies. A Chartered Accountant reviews them with you.", []],
+// Three pillars, as agreed with Blaze (24 Oct 2026). Icons: database, chart, bulb.
+const PIPE: [string, string, string][] = [
+  ["Connect", "Bring your business data together", '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>'],
+  ["Visualise", "Turn raw data into clear dashboards", '<path d="M4 4v16h16"/><path d="M9 16v-4M13 16V9M17 16v-6"/>'],
+  ["Understand", "Discover insights that guide decisions", '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/>'],
 ];
 const SEE = ["Sales and customers", "Margin by product", "Cash and forecast", "Connected sources"];
 const SEE_TXT: Record<string, string> = {
@@ -70,7 +71,7 @@ export function BlazeOSView() {
 
       <section className="ps ps-alt"><div className="wide">
         <h2 className="ps-h">How BlazeOS works</h2>
-        <ol className="bos-pipe">{PIPE.map(([k, t, d, chips], i) => <li key={k}><small>{i + 1} · {k}</small><b>{t}</b><p>{d}</p>{chips.length > 0 && <div className="bos-chips">{chips.map((c) => <span key={c}>{c}</span>)}</div>}{i < PIPE.length - 1 && <i className="bos-flow" aria-hidden="true" />}</li>)}</ol>
+        <ol className="bos-pipe bos-pillars">{PIPE.map(([k, d, icon], i) => <li key={k}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: icon }} /><b>{k}</b><p>{d}</p>{i < PIPE.length - 1 && <i className="bos-flow" aria-hidden="true" />}</li>)}</ol>
       </div></section>
 
       <section className="ax-sec ax-dlv" aria-labelledby="see-h">

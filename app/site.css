@@ -2568,3 +2568,9 @@ button.gs-link{background:none;border:0;padding:0;cursor:pointer;font-family:var
 .mc-w,.mc-g{gap:6px}
 .mc-g button{font-size:17px;border-radius:10px}
 .mc-sel{margin-top:18px;font-size:15px}
+/* BlazeOS pillars: icon, name, one line, centred */
+.bos-pillars li{align-items:center;text-align:center;padding:36px 28px;gap:10px}
+.bos-pillars svg{width:32px;height:32px;color:var(--ink);margin-bottom:6px}
+.bos-pillars b{font-size:24px}
+@media (max-width:640px){.ps .bos-pillars li,.ps .bos-pillars li *{text-align:center!important}}
+.ps .bos-pillars li{align-items:center!important}.ps .bos-pillars li p{margin-inline:auto!important}
