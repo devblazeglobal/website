@@ -2560,3 +2560,11 @@ button.gs-link{background:none;border:0;padding:0;cursor:pointer;font-family:var
 @media (max-width:900px){.rv-cards.rv-n4{grid-template-columns:minmax(0,1fr)}}
 .rv-n4 .rv-card .rv-mid{margin-top:auto;margin-bottom:16px}
 .rv-n4 .rv-skills{min-height:88px;align-content:center}
+/* Compliance calendar: full width of its column, larger dates */
+.mc{max-width:none;padding:24px 26px;border-radius:20px;margin-top:32px}
+.mc-h b{font-size:18px}
+.mc-h button{width:40px;height:40px;font-size:20px}
+.mc-w{margin:18px 0 8px;font-size:13px}
+.mc-w,.mc-g{gap:6px}
+.mc-g button{font-size:17px;border-radius:10px}
+.mc-sel{margin-top:18px;font-size:15px}
