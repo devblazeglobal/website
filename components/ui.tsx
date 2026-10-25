@@ -86,10 +86,11 @@ const CREDENTIALS: { logo: string; alt: string; name: string; meta: string; text
   { logo: "/logos/ocbc.png", alt: "OCBC", name: "OCBC", meta: "Qualified Introducer and Channel Partner", text: "We can introduce your company to OCBC business banking." },
 ];
 
-export function Credentials({ id }: { id?: string }) {
+/** `about={false}` on the About page itself, where the link would go nowhere. */
+export function Credentials({ id, about = true }: { id?: string; about?: boolean }) {
   return (
     <section className="creds" id={id} aria-labelledby={id ? "cred-title" : undefined} aria-label={id ? undefined : "Credentials and partnerships"}>
-      <div className="wide creds-top"><h2 className="h2" id={id ? "cred-title" : undefined}>Credentials &amp; Partnerships</h2><Link className="btn btn-ghost" href="/about-us">About Blaze Global</Link></div>
+      <div className="wide creds-top"><h2 className="h2" id={id ? "cred-title" : undefined}>Credentials &amp; Partnerships</h2>{about && <Link className="btn btn-ghost" href="/about-us">About Blaze Global</Link>}</div>
       <Rail variant="creds">
         {CREDENTIALS.map((c) => (
           <article className="crc" key={c.name}>

@@ -31,7 +31,7 @@ export function AboutView() {
     <TeamCards />
   </div></section>
   <section className="seg-cta"><div className="wrap"><div className="band"><p>Work with Blaze Global</p><div className="actions"><button className="btn btn-start-light" type="button" data-open-start>Get started</button><a className="btn btn-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div></div></div></section>
-  <Credentials /><Help wa="Hello Blaze Global, I would like to speak to your team." chat={["Who will look after our account?", "A Chartered Accountant from our team, who you can reach here on WhatsApp."]} />
+  <Credentials about={false} /><Help wa="Hello Blaze Global, I would like to speak to your team." chat={["Who will look after our account?", "A Chartered Accountant from our team, who you can reach here on WhatsApp."]} />
 </main>
   );
 }
