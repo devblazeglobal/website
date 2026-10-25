@@ -2981,3 +2981,8 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
   .pt-r{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){.pt-hero::before,.pt-r{animation:none}}
+
+/* Registered trade mark beside the navbar wordmark (Singapore TM 40202320266T).
+   The logo link is already absolute (centred), so the mark does not move it. */
+.nav .logo .logo-r{position:absolute;top:-.15em;right:-1.05em;font:400 11px/1 var(--sans);color:#fad081;letter-spacing:0}
+@media (max-width:560px){.nav .logo .logo-r{font-size:9px;right:-.95em}}

@@ -40,7 +40,7 @@ export function SiteHeader() {
 <header className="topbar wide">
   <div className={`navwrap${menu ? " open" : ""}`} ref={wrap} onMouseLeave={leave} onMouseEnter={() => clearTimeout(timer.current)}>
     <div className="nav">
-      <Link className="logo" href="/" aria-label="Blaze Global home"><Image src="/logos/blaze-global-gold.png" alt="Blaze Global" width={1200} height={100} priority /></Link>
+      <Link className="logo" href="/" aria-label="Blaze Global home"><Image src="/logos/blaze-global-gold.png" alt="Blaze Global" width={1200} height={100} priority /><sup className="logo-r" aria-label="registered trade mark">®</sup></Link>
       <div className="tabs">
         <Link className="tab" href="/about-us">About</Link>
         <button className="tab" type="button" aria-expanded={menu === "products"} aria-controls="drop" onClick={() => toggle("products")} onMouseEnter={() => hover("products")}>Products <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
