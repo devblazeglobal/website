@@ -2986,3 +2986,12 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
    The logo link is already absolute (centred), so the mark does not move it. */
 .nav .logo .logo-r{position:absolute;top:-.15em;right:-1.05em;font:400 11px/1 var(--sans);color:#fad081;letter-spacing:0}
 @media (max-width:560px){.nav .logo .logo-r{font-size:9px;right:-.95em}}
+
+/* Room between the navbar and each hero (26 Oct 2026). Measured on every
+   route: first text sits at least ~90px below the navbar on desktop and
+   ~64px on phones. The ID selectors beat the old #view-company>section padding rule. */
+#view-company.ptp>section.pt-hero{padding-top:calc(var(--topbar-h) + clamp(72px,9vw,150px))!important}
+.jb .jb-crumb{padding-top:clamp(72px,8.5vw,140px)}
+.stage .hero-body{padding-top:clamp(80px,8vw,140px)!important}
+#view-company>section.sp-hero.pull-under{padding-top:calc(var(--topbar-h) + clamp(64px,8vw,132px))!important}
+@media (max-width:700px){.stage .hero-body{padding-top:72px!important}}
