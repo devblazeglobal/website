@@ -86,7 +86,7 @@ export function MainServiceView({ slug }: { slug: Product }) {
       <section className="pt-sec pt-end" aria-labelledby="pt-ct"><div className="wide">
         <div className="pt-band"><h2 id="pt-ct">{t.cta[0]}</h2><p>{t.cta[1]}</p>
           <div className="pt-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div></div>
-        <ul className="jb-creds"><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>Chartered Accountants Worldwide</b> member</li><li><b>OCBC</b> Qualified Introducer and Channel Partner</li></ul>
+        <ul className="jb-creds"><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>Chartered Accountants Worldwide</b> member</li></ul>
       </div></section>
     </main>
   );
@@ -149,7 +149,7 @@ export function SubServiceView({ slug }: { slug: string }) {
 
       <section className="jb-blk" aria-label="Work with Blaze Global"><div className="wide">
         <div className="jb-close"><p>Work with Blaze Global</p><div className="jb-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={wa} label={talk} className="btn btn-wa btn-lg" /></div></div>
-        <ul className="jb-creds"><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>120+</b> businesses served</li></ul>
+        <ul className="jb-creds"><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>120+</b> businesses served</li></ul>
       </div></section>
     </main>
   );
@@ -201,7 +201,7 @@ export function SegmentView({ slug }: { slug: string }) {
 
       <section className="jb-blk" aria-label="Work with Blaze Global"><div className="wide">
         <div className="jb-close"><p>Work with Blaze Global</p><div className="jb-acts"><button className="btn btn-white btn-lg" type="button" data-open-start>Get started</button><WaButton text={p.wa} label={talk} className="btn btn-wa btn-lg" /></div></div>
-        <ul className="jb-creds"><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>120+</b> businesses served</li></ul>
+        <ul className="jb-creds"><li><b>OCBC</b> Qualified Introducer and Channel Partner</li><li><b>ACRA</b> Registered Filing Agent {site.filingAgent}</li><li><b>ISCA</b> Chartered Accountants</li><li><b>120+</b> businesses served</li></ul>
       </div></section>
     </main>
   );

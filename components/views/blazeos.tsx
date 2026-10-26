@@ -40,7 +40,7 @@ export function BlazeOSView() {
       </div></section>
 
       <section className="b2-trust" aria-label="Credentials"><div className="b2-in">
-        <ul><li><b>ACRA Registered Filing Agent</b><span>FA20210247</span></li><li><b>Chartered Accountants</b><span>Members of ISCA</span></li><li><b>120+</b><span>Businesses served</span></li><li><b>OCBC</b><span>Qualified Introducer and Channel Partner</span></li></ul>
+        <ul><li><b>OCBC</b><span>Qualified Introducer and Channel Partner</span></li><li><b>ACRA Registered Filing Agent</b><span>FA20210247</span></li><li><b>Chartered Accountants</b><span>Members of ISCA</span></li><li><b>120+</b><span>Businesses served</span></li></ul>
       </div></section>
 
       <section className="b2-sec" aria-labelledby="how-h"><div className="b2-in">
