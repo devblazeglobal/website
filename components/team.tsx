@@ -5,13 +5,14 @@ import Image from "next/image";
 // LinkedIn and areas not supplied yet.
 // `zoom` < 1 shrinks a tight headshot onto its own studio grey (`ground`)
 // so every face sits at the same size as the others.
-type Member = { name: string; role?: string; photo?: string; zoom?: number; ground?: string; linkedin?: string; skills: string[] };
+type Member = { name: string; role?: string; photo?: string; zoom?: number; ground?: string; linkedin?: string; linkedinSoon?: boolean; skills: string[] };
 
 const TEAM: Member[] = [
   { name: "Emelia Long", role: "Chartered Accountant", photo: "/team/emelia-long.jpg", linkedin: "https://www.linkedin.com/in/emelia-long-839a5a72/", skills: ["CFO", "Corporate Secretary", "Digitalisation", "Tax"] },
   { name: "Benjamin Long", role: "Company Secretary", photo: "/team/benjamin-long.jpg", linkedin: "https://www.linkedin.com/in/benjaminltf/", skills: ["Strategy", "Treasury", "Processes"] },
   { name: "Benedict Long", role: "Accountant", photo: "/team/benedict-long.jpg", linkedin: "https://www.linkedin.com/in/benedict-long-511929b3/", skills: ["Accounting", "Corporate Secretary"] },
-  { name: "Bernie", photo: "/team/bernie-long.jpg", zoom: 0.8, ground: "#7a7c80", skills: [] },
+  // Placeholders until the client sends Bernie's role, LinkedIn and areas.
+  { name: "Bernie", role: "Role to be confirmed", photo: "/team/bernie-long.jpg", zoom: 0.8, ground: "#7a7c80", linkedinSoon: true, skills: ["Area to be confirmed", "Area to be confirmed"] },
 ];
 
 // Soft side and top edges, so a shrunken photo melts into its grey ground.
@@ -28,10 +29,10 @@ function Card({ m, i }: { m: Member; i: number }) {
       <div className="rv-mid">
         {m.role && <span className="rv-role">{m.role}</span>}
         <b className="rv-name">{m.name}</b>
-        {m.linkedin && <span className="rv-pill"><LinkedIn />LinkedIn</span>}
+        {(m.linkedin || m.linkedinSoon) && <span className="rv-pill"><LinkedIn />LinkedIn</span>}
       </div>
       {m.skills.length > 0 && (
-        <ul className="rv-skills" aria-label={`${m.name}: areas covered`}>{m.skills.map((s) => <li key={s}>{s}</li>)}</ul>
+        <ul className="rv-skills" aria-label={`${m.name}: areas covered`}>{m.skills.map((s, i) => <li key={`${s}-${i}`}>{s}</li>)}</ul>
       )}
     </>
   );
