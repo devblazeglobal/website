@@ -48,10 +48,11 @@ export function HomeView() {
     <div className="xs-copy">
       <h2 className="h2" id="sab-title">Start a business in Singapore</h2>
       <p className="xs-p">We register your company with ACRA, appoint your company secretary and set up your books on Xero, so you can start trading with confidence.</p>
-      <div className="xs-btns"><Link className="btn btn-navy btn-lg" href="/start-a-business-in-singapore">Start your company</Link><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20start%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
+      <div className="xs-btns xs-btns-top"><Link className="btn btn-navy btn-lg" href="/start-a-business-in-singapore">Start your company</Link><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20start%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
       <dl className="xs-facts"><div><dt>S$1</dt><dd>Minimum paid-up capital</dd></div><div><dt>1</dt><dd>Resident director</dd></div><div><dt>6 months</dt><dd>To appoint a secretary</dd></div></dl>
     </div>
     <StructureChecklist />
+    <div className="xs-btns xs-btns-end"><Link className="btn btn-navy btn-lg" href="/start-a-business-in-singapore">Start your company</Link><a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20start%20a%20company%20in%20Singapore." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a></div>
   </div></section>
 
   <section className="cal2" aria-labelledby="cal2-title"><div className="wide"><ComplianceCalendar /></div></section>

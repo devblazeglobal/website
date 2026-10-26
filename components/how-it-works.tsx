@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // How it works: three tinted panels with a live card each. Cards play once
 // when they scroll into view and replay on hover; at rest every row shows.
 export function HowItWorks() {
   const root = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const [at, setAt] = useState(0);
+  // Phones: the three panels sit in a row; swipe or use the arrows and dots.
+  useEffect(() => {
+    const t = track.current; if (!t) return;
+    const on = () => { const w = t.firstElementChild ? (t.firstElementChild as HTMLElement).offsetWidth + 16 : 1; setAt(Math.round(t.scrollLeft / w)); };
+    t.addEventListener("scroll", on, { passive: true }); return () => t.removeEventListener("scroll", on);
+  }, []);
+  const go = (i: number) => { const t = track.current; if (!t) return; const n = Math.max(0, Math.min(2, i)); const c = t.children[n] as HTMLElement | undefined; if (c) t.scrollTo({ left: c.offsetLeft - t.offsetLeft, behavior: "smooth" }); };
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || !root.current) return;
     const panels = [...root.current.querySelectorAll<HTMLElement>(".axp")];
@@ -18,7 +27,7 @@ export function HowItWorks() {
     <section className="ax-sec" aria-labelledby="ax-h"><div className="wide" ref={root}>
       <p className="ax-k">How it works</p>
       <h2 className="ax-h" id="ax-h">One team, from your first call to every filing</h2>
-      <div className="ax">
+      <div className="ax ax-track" ref={track}>
         <article className="axp a1">
           <span className="ax-n" aria-hidden="true">1</span><h3>Book a call</h3><p>Message us on WhatsApp or choose a time that suits you. A Chartered Accountant is assigned to your business from your first message.</p>
           <div className="axc" aria-hidden="true">
@@ -54,6 +63,11 @@ export function HowItWorks() {
             <div className="axfoot r5">Recorded in Xero <span className="tk">✓</span></div>
           </div>
         </article>
+      </div>
+      <div className="ax-nav" aria-label="How it works steps">
+        <button type="button" className="ax-arrow" aria-label="Previous step" onClick={() => go(at - 1)} disabled={at === 0}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+        <span className="ax-dots">{[0, 1, 2].map((i) => <button key={i} type="button" aria-label={`Step ${i + 1}`} aria-current={i === at ? "step" : undefined} onClick={() => go(i)} />)}</span>
+        <button type="button" className="ax-arrow" aria-label="Next step" onClick={() => go(at + 1)} disabled={at === 2}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 4l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
       </div>
       <div className="ax-acts">
         <button className="btn btn-navy btn-lg" type="button" data-open-start>Book a free consultation</button>
