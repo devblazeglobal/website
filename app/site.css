@@ -2984,8 +2984,8 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
 
 /* Registered trade mark beside the navbar wordmark (Singapore TM 40202320266T).
    The logo link is already absolute (centred), so the mark does not move it. */
-.nav .logo .logo-r{position:absolute;top:-.15em;right:-1.05em;font:400 11px/1 var(--sans);color:#fad081;letter-spacing:0}
-@media (max-width:560px){.nav .logo .logo-r{font-size:9px;right:-.95em}}
+.nav .logo .logo-r{position:absolute;top:-.2em;right:-1.15em;font:400 13px/1 var(--sans);color:#fad081;letter-spacing:0}
+@media (max-width:560px){.nav .logo .logo-r{font-size:11px;right:-1em}}
 
 /* Room between the navbar and each hero (26 Oct 2026). Measured on every
    route: first text sits at least ~90px below the navbar on desktop and
