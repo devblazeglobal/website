@@ -7,9 +7,9 @@ import Image from "next/image";
 type Member = { name: string; photo: string; skills: string[] };
 
 const TEAM: Member[] = [
-  { name: "Emelia Long", photo: "/team/emelia-long-c2.jpg", skills: ["CFO", "Corporate Secretary", "Digitalisation", "Tax"] },
-  { name: "Benjamin Long", photo: "/team/benjamin-long-c2.jpg", skills: ["Strategy", "Treasury", "Processes"] },
-  { name: "Benedict Long", photo: "/team/benedict-long-c2.jpg", skills: ["Accounting", "Corporate Secretary"] },
+  { name: "Emelia", photo: "/team/emelia-long-c2.jpg", skills: ["CFO", "Corporate Secretary", "Digitalisation", "Tax"] },
+  { name: "Benjamin", photo: "/team/benjamin-long-c2.jpg", skills: ["Strategy", "Treasury", "Processes"] },
+  { name: "Benedict", photo: "/team/benedict-long-c2.jpg", skills: ["Accounting", "Corporate Secretary"] },
   { name: "Bernie", photo: "/team/bernie-long-c4.jpg", skills: ["CFO", "Strategy", "Management consulting"] },
 ];
 
