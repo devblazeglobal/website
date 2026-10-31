@@ -20,8 +20,27 @@ export function Rail({ variant, children }: { variant: "reviews" | "creds"; chil
     t.addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", sync);
     sync();
-    return () => { t.removeEventListener("scroll", onScroll); removeEventListener("resize", sync); };
-  }, []);
+    // Reviews advance on their own every 5 s; paused while hovered, focused or touched.
+    let paused = false;
+    const hold = () => { paused = true; };
+    const free = () => { paused = false; };
+    const auto = variant === "reviews" && !prefersStill() ? setInterval(() => {
+      if (paused || document.hidden) return;
+      const w = (t.querySelector(item) as HTMLElement | null)?.getBoundingClientRect().width ?? 300;
+      const end = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
+      t.scrollTo({ left: end ? 0 : t.scrollLeft + w + 20, behavior: "smooth" });
+    }, 5000) : undefined;
+    t.addEventListener("pointerenter", hold); t.addEventListener("pointerleave", free);
+    t.addEventListener("focusin", hold); t.addEventListener("focusout", free);
+    t.addEventListener("touchstart", hold, { passive: true });
+    return () => {
+      clearInterval(auto);
+      t.removeEventListener("scroll", onScroll); removeEventListener("resize", sync);
+      t.removeEventListener("pointerenter", hold); t.removeEventListener("pointerleave", free);
+      t.removeEventListener("focusin", hold); t.removeEventListener("focusout", free);
+      t.removeEventListener("touchstart", hold);
+    };
+  }, [variant, item]);
   const move = (dir: number) => {
     const t = track.current!;
     const w = (t.querySelector(item) as HTMLElement | null)?.getBoundingClientRect().width ?? 300;
@@ -87,23 +106,35 @@ export function Reveal() {
   return null;
 }
 
-// ---------- Hero ask bar: the request opens in WhatsApp ----------
+// ---------- Hero ask bar: tick what you need, add a note, send on WhatsApp ----------
 const EXAMPLES = ["XBRL filing for my company", "A company secretary for a new Pte Ltd", "Monthly bookkeeping on Xero", "Help with my GST registration", "Annual return and AGM documents"];
+const NEEDS = ["Incorporation", "Company secretary", "Bookkeeping", "GST", "Corporate tax", "Payroll", "XBRL and annual return", "Outsourced CFO"];
 export function AskBar() {
   const [i, setI] = useState(0);
   const [q, setQ] = useState("");
+  const [picked, setPicked] = useState<string[]>([]);
   const [focus, setFocus] = useState(false);
   useEffect(() => {
     if (prefersStill() || focus || q) return;
     const t = setInterval(() => setI((n) => (n + 1) % EXAMPLES.length), 2800);
     return () => clearInterval(t);
   }, [focus, q]);
+  const flip = (n: string) => setPicked((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
+  const send = () => {
+    const need = [picked.join(", "), q.trim()].filter(Boolean).join(". ") || EXAMPLES[i];
+    window.open(whatsappUrl(`Hello Blaze Global, I need help with: ${need}`), "_blank", "noopener");
+  };
   return (
-    <form className="askbar" onSubmit={(e) => { e.preventDefault(); window.open(whatsappUrl(`Hello Blaze Global, I need help with: ${q.trim() || EXAMPLES[i]}`), "_blank", "noopener"); }}>
-      <label className="sr" htmlFor="ask">Tell us what you need</label>
-      <input id="ask" name="ask" autoComplete="off" maxLength={300} value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} placeholder={`Tell us what you need, e.g. ${EXAMPLES[i]}`} />
-      <button className="btn btn-wa" type="submit"><svg><use href="#wa" /></svg>Send on WhatsApp</button>
-    </form>
+    <div className="ask-wrap">
+      <ul className="ask-ticks" aria-label="What you need">
+        {NEEDS.map((n) => <li key={n}><button type="button" aria-pressed={picked.includes(n)} onClick={() => flip(n)}><i aria-hidden="true" />{n}</button></li>)}
+      </ul>
+      <form className="askbar" onSubmit={(e) => { e.preventDefault(); send(); }}>
+        <label className="sr" htmlFor="ask">Anything else</label>
+        <input id="ask" name="ask" autoComplete="off" maxLength={300} value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} placeholder={picked.length ? "Anything else (optional)" : `Tick above or type, e.g. ${EXAMPLES[i]}`} />
+        <button className="btn btn-wa" type="submit"><svg><use href="#wa" /></svg>Send on WhatsApp</button>
+      </form>
+    </div>
   );
 }
 

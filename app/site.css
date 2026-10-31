@@ -3038,3 +3038,39 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
   .site-footer .xf-cols,.site-footer .xf-cols *,.site-footer .xf-base,.site-footer .xf-base *{text-align:left!important}
   .xf-base{align-items:flex-start!important;gap:6px!important;font-size:12px!important;padding-block:20px 32px!important}
 }
+
+/* ---------- 31 Oct 2026 client round ---------- */
+/* Desktop type larger (was zoom .77) */
+@media (min-width:1025px){html{zoom:.85}}
+
+/* Mobile menu: icon beside each main row; open sub list on a light-blue panel */
+@media (max-width:1100px){
+  .mnav .mn-lab{display:inline-flex;align-items:center;gap:12px}
+  .mnav .mn-ic{flex:none;color:var(--gold)}
+  .mn-grp.on .mn-sub>div{background:#e6eefb;border-radius:12px;padding:8px;margin:10px 0 12px;border-bottom:0}
+  .mnav .mn-sub a{color:#3a4668}
+  .mnav .mn-sub a:hover{background:rgba(5,16,56,.06);color:var(--navy)}
+  .mnav .mn-sub a.mn-head{color:var(--navy)}
+  .mnav .mn-sub .mn-head span{color:var(--navy)}
+  .mnav .mn-sub .mn-grp-l{color:#4a5a86;padding-inline:14px}
+}
+
+/* Start a business facts: three boxes in one row on every screen */
+.xs-facts.xs-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.xs-facts>div{background:#f2f4f8;border-radius:12px;padding:18px 16px;text-align:center}
+@media (max-width:560px){.xs-facts.xs-facts{gap:8px}.xs-facts>div{padding:14px 8px}.xs-facts dt{font-size:17px}.xs-facts dd{font-size:12.5px;line-height:1.35}}
+
+/* About: titles only */
+.ab-why li b{font-size:19px}
+
+/* Hero ask bar: tick what you need, then send */
+.ask-wrap{width:min(720px,100%);margin-inline:auto}
+.ask-wrap .askbar{width:100%}
+.ask-ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:40px 0 0;padding:0;list-style:none}
+.ask-ticks+.askbar{margin-top:14px!important}
+.ask-ticks button{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);color:#fff;font:400 15px/1.2 var(--sans);cursor:pointer;backdrop-filter:blur(6px)}
+.ask-ticks button i{width:16px;height:16px;border-radius:4px;border:1.5px solid currentColor;display:grid;place-items:center;flex:none}
+.ask-ticks button[aria-pressed="true"]{background:#fff;color:var(--navy);border-color:#fff}
+.ask-ticks button[aria-pressed="true"] i{background:var(--navy);border-color:var(--navy)}
+.ask-ticks button[aria-pressed="true"] i::after{content:"";width:8px;height:4px;border-left:1.6px solid var(--gold);border-bottom:1.6px solid var(--gold);transform:rotate(-45deg) translate(1px,-1px)}
+@media (max-width:560px){.ask-ticks{margin-top:28px;gap:6px}.ask-ticks button{font-size:14px;padding:8px 12px}}

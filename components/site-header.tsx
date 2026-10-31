@@ -13,6 +13,19 @@ import { GROUPS, inGroup } from "@/lib/products";
 
 type Menu = "products" | "solutions" | null;
 
+// Line icons beside each main row of the mobile menu.
+const MN_ICONS: Record<string, string> = {
+  about: "M10 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM3 17.5c.8-3.2 3.6-5 7-5s6.2 1.8 7 5",
+  products: "M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z",
+  solutions: "M3 7h14v10H3zM7 7V4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5V7M3 11.5h14",
+  blazeos: "M3 17V9M8 17V5M13 17v-6M18 17V3",
+  blog: "M5 2.5h7l4 4V17.5H5zM12 2.5v4h4M8 10.5h5M8 13.5h5",
+  contact: "M3 4.5h14v9H8l-4 3v-3H3z",
+};
+function MnIcon({ k }: { k: string }) {
+  return <svg className="mn-ic" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d={MN_ICONS[k]} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
 export function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobile, setMobile] = useState(false);
@@ -88,9 +101,9 @@ export function SiteHeader() {
     <div className={`mnav${mobile ? " open" : ""}`} id="mnav" onClick={(e) => { if ((e.target as HTMLElement).closest("a, [data-open-start]")) setMobile(false); }}>
       <div className="mn-in">
         <nav className="mn-list" aria-label="Mobile">
-          <Link className="mn-row" href="/about-us">About</Link>
+          <Link className="mn-row" href="/about-us"><span className="mn-lab"><MnIcon k="about" />About</span></Link>
           <div className={`mn-grp${group === "p" ? " on" : ""}`}>
-            <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}>Products<i aria-hidden="true" /></button>
+            <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}><span className="mn-lab"><MnIcon k="products" />Products</span><i aria-hidden="true" /></button>
             <div className="mn-sub"><div>
               {GROUPS.map((g) => (
                 <Fragment key={g.key}>
@@ -101,7 +114,7 @@ export function SiteHeader() {
             </div></div>
           </div>
           <div className={`mn-grp${group === "s" ? " on" : ""}`}>
-            <button type="button" className="mn-row" aria-expanded={group === "s"} onClick={() => setGroup((g) => (g === "s" ? null : "s"))}>Solutions<i aria-hidden="true" /></button>
+            <button type="button" className="mn-row" aria-expanded={group === "s"} onClick={() => setGroup((g) => (g === "s" ? null : "s"))}><span className="mn-lab"><MnIcon k="solutions" />Solutions</span><i aria-hidden="true" /></button>
             <div className="mn-sub"><div>
               <Link className="mn-head" href="/start-a-business-in-singapore">Start a business in Singapore <span aria-hidden="true">→</span></Link>
               <Link href="/solutions/startups">Start-ups</Link>
@@ -110,9 +123,9 @@ export function SiteHeader() {
               <Link className="mn-head" href="/compliance-deadline-calculator">Compliance deadline calculator <span aria-hidden="true">→</span></Link>
             </div></div>
           </div>
-          <Link className="mn-row" href="/services/blazeos">BlazeOS</Link>
-          <Link className="mn-row" href="/blog">Blog</Link>
-          <Link className="mn-row" href="/contact">Contact</Link>
+          <Link className="mn-row" href="/services/blazeos"><span className="mn-lab"><MnIcon k="blazeos" />BlazeOS</span></Link>
+          <Link className="mn-row" href="/blog"><span className="mn-lab"><MnIcon k="blog" />Blog</span></Link>
+          <Link className="mn-row" href="/contact"><span className="mn-lab"><MnIcon k="contact" />Contact</span></Link>
         </nav>
         <div className="mn-acts">
           <button className="btn mstart" type="button" data-open-start>Get started</button>

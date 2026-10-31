@@ -5,7 +5,7 @@ export interface ProductEntry { key: string; group: Group; name: string; href: s
 
 export const GROUPS: { key: Group; name: string; line: string }[] = [
   { key: "set-up", name: "Set Up", line: "Register your company and set it up properly" },
-  { key: "finance", name: "Finance", line: "Books, tax and payroll, handled every month" },
+  { key: "finance", name: "Build", line: "Books, tax and payroll, handled every month" },
   { key: "scale", name: "Scale", line: "Financial leadership and business insight" },
 ];
 
