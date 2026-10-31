@@ -70,7 +70,9 @@ export function renderMarkdown(md: string): string {
     }
     list = null;
   };
-  for (const block of md.split(/\n{2,}/)) {
+  // A list written one item per line (no blank lines) is split into items.
+  const blocks = md.split(/\n{2,}/).flatMap((b) => (/^(- |\d+\. )/m.test(b) && b.trim().split("\n").every((l) => /^(- |\d+\. )/.test(l)) ? b.trim().split("\n") : [b]));
+  for (const block of blocks) {
     const line = block.trim();
     if (!line) continue;
     const bullet = /^- ([\s\S]*)$/.exec(line);

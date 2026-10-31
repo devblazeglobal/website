@@ -13,7 +13,7 @@ export const metadata = pageMetadata({
 });
 
 const fmt = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-SG", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
-const topic = (title: string) => (/tax/i.test(title) ? "Tax" : /book/i.test(title) ? "Accounting" : "Company");
+const topic = (title: string) => (/tax|gst/i.test(title) ? "Tax" : /book|record/i.test(title) ? "Accounting" : "Company");
 
 export default function BlogIndex() {
   const [feat, ...rest] = getPosts();

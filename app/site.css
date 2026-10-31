@@ -3040,8 +3040,9 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
 }
 
 /* ---------- 31 Oct 2026 client round ---------- */
-/* Desktop type larger (was zoom .77) */
-@media (min-width:1025px){html{zoom:.85}}
+/* Type larger on desktop and tablet (was zoom .77 and .935) */
+@media (min-width:1025px){html{zoom:.92}}
+@media (min-width:700px) and (max-width:1024px){html{zoom:1}}
 
 /* Mobile menu: icon beside each main row; open sub list on a light-blue panel */
 @media (max-width:1100px){

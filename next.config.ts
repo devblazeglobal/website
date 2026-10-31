@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/home", destination: "/", permanent: true },
+      { source: "/post-1/how-do-taxes-affect-business-decisions", destination: "/post-1/late-form-cs-filing-penalties", permanent: true },
+      { source: "/post-1/importance-of-bookkeeping-in-your-business", destination: "/post-1/accounting-records-requirements-singapore", permanent: true },
       { source: "/blog1", destination: "/blog", permanent: true },
       { source: "/post", destination: "/blog", permanent: true },
       { source: "/post-1", destination: "/blog", permanent: true },
