@@ -20,11 +20,11 @@ export function Rail({ variant, children }: { variant: "reviews" | "creds"; chil
     t.addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", sync);
     sync();
-    // Reviews advance on their own every 5 s; paused while hovered, focused or touched.
+    // Both rails advance on their own every 5 s; paused while hovered, focused or touched.
     let paused = false;
     const hold = () => { paused = true; };
     const free = () => { paused = false; };
-    const auto = variant === "reviews" && !prefersStill() ? setInterval(() => {
+    const auto = !prefersStill() ? setInterval(() => {
       if (paused || document.hidden) return;
       const w = (t.querySelector(item) as HTMLElement | null)?.getBoundingClientRect().width ?? 300;
       const end = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;

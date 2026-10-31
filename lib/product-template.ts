@@ -71,11 +71,12 @@ export const PRODUCT_TEMPLATE: Record<string, ProductTemplate> = {
   "corporate-secretarial": {
     hue: ["#22407c", "#5576bf", "#a6bbe4", "rgba(233,211,180,.65)"],
     hero: ["Company register", "Example Pte Ltd", [["Company secretary", "Appointed", "ok"], ["Registered address", "14 Robinson Road", ""], ["AGM · FY 2026", "Due 30 Jun 2027", ""], ["Annual return", "Due 31 Jul 2027", ""]], "Example company"],
-    statement: "Every statutory duty handled and every filing on time, so your company stays in good standing.",
+    statement: "From incorporation to every annual filing, your company secretary keeps the company in good standing.",
     features: {
       h: "Every statutory duty, handled",
       sub: "A company secretary who knows the Companies Act, with your registers and filings kept current on your behalf.",
       items: [
+        ["Company incorporation", "New company? We register it on Bizfile as an ACRA Registered Filing Agent, then act as your company secretary from day one.", ["Incorporation · Bizfile", "Example Pte Ltd", [["Company name", "Approved", "ok"], ["Registration", "Filed on Bizfile", "ok"], ["Company secretary", "Appointed", "ok"]], "Example company"]],
         ["A qualified company secretary", "Appointed within 6 months of incorporation and ordinarily resident in Singapore, as the law requires.", ["Appointment check", "Companies Act, section 171", [["Appointed within 6 months", "Yes", "ok"], ["Resident in Singapore", "Yes", "ok"], ["Separate from a sole director", "Yes", "ok"]], "Example company"]],
         ["Registers kept current", "Members, directors and controllers updated after every change, with resolutions drafted for you to sign online.", ["Statutory registers", "Example Pte Ltd", [["Register of members", "Updated", "ok"], ["Register of directors", "Updated", "ok"], ["Register of controllers", "Updated", "ok"], ["Resolutions", "Signed online", "ok"]], "Example company"]],
         ["AGM and annual return on time", "AGM documents prepared and your annual return filed on Bizfile, with reminders from your financial year end.", ["Annual filings · FYE 31 Dec 2026", "Example Pte Ltd", [["AGM", "30 Jun 2027", ""], ["Annual return", "31 Jul 2027", ""], ["Late fee avoided", "S$300 to S$600", "gd"]], "Dates from the financial year end"]],
@@ -116,6 +117,7 @@ export const PRODUCT_TEMPLATE: Record<string, ProductTemplate> = {
         ["Financial models", "Hiring plans, pricing and expansion modelled before you commit.", ["Scenario model · 2027", "Example Pte Ltd", [["Base case · revenue", "S$1.6m", ""], ["Two sales hires", "+S$140k cost", "gd"], ["Expansion to Malaysia", "Modelled", "ok"]], "Example figures"]],
         ["Cash flow visibility", "A rolling cash forecast from receivables, bills and payroll, so any shortfall shows months ahead.", ["13-week cash forecast", "Updated weekly", [["Opening cash", "S$212k", ""], ["Receivables over 60 days", "S$24k", "gd"], ["Lowest point", "Feb · S$148k", ""]], "Example figures"]],
         ["Budgets and forecasts", "Budget against actual every month, with each variance explained in your monthly review.", ["Budget vs actual · October", "Example Pte Ltd", [["Revenue", "+6.7%", "ok"], ["Staff costs", "−1.8%", "ok"], ["Marketing", "+37.5%", "gd"]], "Example figures"]],
+        ["Streamlined processes", "Month-end close, approvals and reporting reviewed and simplified, so the numbers arrive sooner with less manual work.", ["Month-end close", "Example Pte Ltd", [["Close completed", "Day 5", "ok"], ["Approvals", "Online", "ok"], ["Manual journals", "−60%", "ok"]], "Example figures"]],
       ],
     },
     cardsHeading: "Where an outsourced CFO helps",

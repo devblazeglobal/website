@@ -59,7 +59,7 @@ export function HomeView() {
 
   <section className="team" id="team" aria-labelledby="team-title">
     <div className="wide">
-      <h2 className="team-h" id="team-title">Our leadership team</h2>
+      <h2 className="team-h" id="team-title">The leadership team</h2>
       <p className="team-p">With over 60 years of combined experience spanning Big Four firms, high-growth startups and multinational corporations, we understand what it takes to build, operate and grow a business.</p>
       <TeamCards />
     </div>
