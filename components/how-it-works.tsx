@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 // How it works: three tinted panels with a live card each. Cards play once
@@ -71,6 +72,7 @@ export function HowItWorks() {
       </div>
       <div className="ax-acts">
         <button className="btn btn-navy btn-lg" type="button" data-open-start>Book a free consultation</button>
+        <Link className="btn btn-line btn-lg" href="/tools/expense-checker">Have your expense checked</Link>
         <a className="btn btn-wa btn-lg" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20book%20a%20call." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
       </div>
     </div></section>

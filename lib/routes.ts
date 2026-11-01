@@ -24,6 +24,7 @@ export function publicRoutes(): PublicRoute[] {
     ...accountingPages.map((p) => m(p.path, 0.8)),
     ...solutionPages.map((p) => m(p.path, 0.8)),
     ...guides.map((p) => m(p.path, 0.9)),
+    m("/tools/expense-checker", 0.8),
     { path: "/blog", changeFrequency: "weekly", priority: 0.6, legacy: true },
     ...getPosts().map((p) => ({ path: p.path, changeFrequency: "yearly" as const, priority: 0.5, legacy: true })),
     { path: "/contact", changeFrequency: "yearly", priority: 0.7, legacy: false },

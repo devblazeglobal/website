@@ -19,6 +19,7 @@ const MN_ICONS: Record<string, string> = {
   products: "M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z",
   solutions: "M3 7h14v10H3zM7 7V4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5V7M3 11.5h14",
   blazeos: "M3 17V9M8 17V5M13 17v-6M18 17V3",
+  checker: "M4 2.5h12v15H4zM7 7l1.5 1.5L11 6M7 12.5l1.5 1.5L11 11.5M13 7.5h1M13 13h1",
   blog: "M5 2.5h7l4 4V17.5H5zM12 2.5v4h4M8 10.5h5M8 13.5h5",
   contact: "M3 4.5h14v9H8l-4 3v-3H3z",
 };
@@ -92,8 +93,9 @@ export function SiteHeader() {
           </ul>
         </div>
         <div className="dcard">
-          <h4>Compliance</h4>
+          <h4>Tools</h4>
           <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>See your ECI, AGM, annual return, IR8A and corporate tax dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
+          <Link className="ov" href="/tools/expense-checker"><b>Expense checker</b><span>IRAS guidance on 55 business expense types, and a four-question check for any other expense.</span><i aria-hidden="true">→</i></Link>
         </div>
       </div>
     </div></div>
@@ -124,6 +126,7 @@ export function SiteHeader() {
             </div></div>
           </div>
           <Link className="mn-row" href="/services/blazeos"><span className="mn-lab"><MnIcon k="blazeos" />BlazeOS</span></Link>
+          <Link className="mn-row" href="/tools/expense-checker"><span className="mn-lab"><MnIcon k="checker" />Expense checker</span></Link>
           <Link className="mn-row" href="/blog"><span className="mn-lab"><MnIcon k="blog" />Blog</span></Link>
           <Link className="mn-row" href="/contact"><span className="mn-lab"><MnIcon k="contact" />Contact</span></Link>
         </nav>
