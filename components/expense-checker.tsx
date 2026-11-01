@@ -122,6 +122,7 @@ export function ExpenseChecker({ items, conditions, after }: { items: Expense[];
 
       <p className="xc-hint">Search or browse to see whether a business expense is tax-deductible.</p>
 
+      <div className="xc-card xc-find">
       <div className="xc-combo">
         <div className="xc-input">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
@@ -155,8 +156,8 @@ export function ExpenseChecker({ items, conditions, after }: { items: Expense[];
         )}
       </div>
 
-      <details className="xc-card xc-browse" open={browse} onToggle={(e) => setBrowse(e.currentTarget.open)}>
-        <summary>Or browse by expense type<i aria-hidden="true">+</i></summary>
+      <details className="xc-browse" open={browse} onToggle={(e) => setBrowse(e.currentTarget.open)}>
+        <summary><i aria-hidden="true">{browse ? "–" : "+"}</i>Or browse by expense type</summary>
         <div className="xc-browse-body">
           <label htmlFor="xc-type">Type of expense</label>
           <div className="xc-select">
@@ -168,6 +169,7 @@ export function ExpenseChecker({ items, conditions, after }: { items: Expense[];
           </div>
         </div>
       </details>
+      </div>
 
       <div className="xc-card xc-result" id="xc-result" aria-live="polite">
         {expense ? (

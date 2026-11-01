@@ -10,9 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 // IRAS Business Expense Deductibility Checker, same flow, rebuilt for Blaze (Emelia, 1 Nov 2026).
 // content/iras-expenses.json is IRAS's own data.json, unedited (IRAS last
 // updated 13 Oct 2026). To refresh: download
-// https://expense-checker.app.tc1.airbase.sg/data.json over it and update IRAS_UPDATED.
-const IRAS_TOOL = "https://expense-checker.app.tc1.airbase.sg";
-const IRAS_UPDATED = "13 October 2026";
+// https://expense-checker.app.tc1.airbase.sg/data.json over it.
 const PATH = "/tools/expense-checker";
 
 const ITEMS: Expense[] = (data as Record<string, string>[])
@@ -49,7 +47,6 @@ export default function ExpenseCheckerPage() {
           <div className="xc-card xc-cta"><p>Not sure how this applies to your company?</p><WaButton text="Hello Blaze Global, I would like to check whether an expense is tax-deductible." /></div>
         } />
         <div className="xc-source">
-          <p>Source: <a href={IRAS_TOOL} target="_blank" rel="noopener noreferrer">IRAS Business Expense Deductibility Checker</a>, updated {IRAS_UPDATED}.</p>
           <p>This tool is for general understanding and is not meant to comprehensively address all possible issues that arise. The application of tax treatment depends on the totality of facts and circumstances of each case.</p>
         </div>
       </div></section>
