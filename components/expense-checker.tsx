@@ -3,17 +3,21 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 // IRAS's Business Expense Deductibility Checker (expense-checker.app.tc1.airbase.sg),
-// rebuilt from its own data.json with the wording unchanged. Every entry is in
-// the HTML so the page reads without JavaScript; the search only filters.
+// same flow in Blaze's design: what makes an expense deductible → search or
+// browse by expense type → one result card → Start over. Wording is IRAS's.
 
 export interface Expense { name: string; treatment: string; url?: string }
 
 export const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
 
+const OTHERS = "others";
+const OTHERS_LABEL = "Others / Expenses not in the list";
+// IRAS's quick examples. IRAS lists "Fines/Penalties"; the data spells it "Fines/penalties".
+const EXAMPLES = ["Motor vehicle expenses", "Rental of business premises", "Fines/penalties"];
 const LIST = /^(\(?([ivx]+|\d+|[a-z])\)|[-•])\s*/i;
 
 // Blank lines split paragraphs; "(i)" / "(1)" lines become a numbered list,
-// "-" / "•" lines a bulleted one, as on IRAS's page.
+// "-" / "•" lines a bulleted one.
 function Treatment({ text }: { text: string }) {
   const out: ReactNode[] = [];
   let list: { ordered: boolean; items: string[] } | null = null;
@@ -40,125 +44,186 @@ function Treatment({ text }: { text: string }) {
   return <>{out}</>;
 }
 
-export function ExpenseChecker({ items }: { items: Expense[] }) {
+export function ExpenseChecker({ items, conditions, after }: { items: Expense[]; conditions: string[]; after?: ReactNode }) {
   const [query, setQuery] = useState("");
-  const [open, setOpen] = useState<string | null>(null);
+  const [focused, setFocused] = useState(false);
+  const [active, setActive] = useState(-1);
+  const [picked, setPicked] = useState(""); // expense slug or OTHERS
+  const [browse, setBrowse] = useState(false);
 
-  // #<slug> opens that entry.
+  const bySlug = useMemo(() => new Map(items.map((e) => [slugOf(e.name), e])), [items]);
+
+  // The conditions fill a phone screen; start them closed there.
   useEffect(() => {
-    const pick = () => {
+    const what = document.getElementById("xc-what") as HTMLDetailsElement | null;
+    if (what && matchMedia("(max-width: 640px)").matches) what.open = false;
+  }, []);
+
+  // #<slug> or #others opens that result.
+  useEffect(() => {
+    const read = () => {
       const id = decodeURIComponent(location.hash.slice(1));
-      if (!id || !items.some((e) => slugOf(e.name) === id)) return;
-      setOpen(id);
-      requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start" }));
+      if (id === OTHERS || bySlug.has(id)) setPicked(id);
     };
-    pick();
-    addEventListener("hashchange", pick);
-    return () => removeEventListener("hashchange", pick);
-  }, [items]);
+    read();
+    addEventListener("hashchange", read);
+    return () => removeEventListener("hashchange", read);
+  }, [bySlug]);
 
   const q = query.trim().toLowerCase();
-  const shown = useMemo(() => {
-    if (!q) return items;
-    // Names first, then entries that mention it in the guidance.
-    const byName = items.filter((e) => e.name.toLowerCase().includes(q));
+  const suggestions = useMemo(() => {
+    if (!q) return [];
+    // Names first (earliest match first), then entries that mention it in the guidance.
+    const byName = items.filter((e) => e.name.toLowerCase().includes(q)).sort((a, b) => a.name.toLowerCase().indexOf(q) - b.name.toLowerCase().indexOf(q));
     const byText = items.filter((e) => !byName.includes(e) && e.treatment.toLowerCase().includes(q));
-    return [...byName, ...byText];
+    return [...byName, ...byText].slice(0, 12);
   }, [items, q]);
 
-  const groups = useMemo(() => {
-    if (q) return [{ letter: "", list: shown }];
-    const map = new Map<string, Expense[]>();
-    for (const e of shown) {
-      const letter = e.name[0].toUpperCase();
-      map.set(letter, [...(map.get(letter) ?? []), e]);
+  function pick(id: string, label?: string) {
+    setPicked(id);
+    setQuery(label ?? "");
+    setFocused(false);
+    setActive(-1);
+    // Keep history.state: the Next router stores its own entry there, and a
+    // null state makes it restore the previous hash on the next navigation.
+    history.replaceState(history.state, "", id ? `#${id}` : location.pathname);
+    requestAnimationFrame(() => document.getElementById("xc-result")?.scrollIntoView({ block: "nearest", behavior: "smooth" }));
+  }
+
+  function onKey(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "ArrowDown") { e.preventDefault(); setFocused(true); setActive((a) => Math.min(a + 1, suggestions.length - 1)); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
+    else if (e.key === "Escape") setFocused(false);
+    else if (e.key === "Enter") {
+      e.preventDefault();
+      const s = suggestions[active >= 0 ? active : 0];
+      if (s) pick(slugOf(s.name), s.name);
+      else if (q) pick(OTHERS, query);
     }
-    return [...map].map(([letter, list]) => ({ letter, list }));
-  }, [shown, q]);
+  }
+
+  function startOver() {
+    setBrowse(false);
+    pick("");
+  }
+
+  const expense = picked && picked !== OTHERS ? bySlug.get(picked) : undefined;
+  const showList = focused && q.length > 0;
 
   return (
     <div className="xc">
-      <div className="xc-search">
-        <label htmlFor="xc-q" className="xc-label">Search an expense</label>
+      <details className="xc-card xc-what" id="xc-what" open>
+        <summary>What makes a business expense deductible?<i aria-hidden="true">+</i></summary>
+        <div className="xc-what-body">
+          <p>Generally, deductible business expenses are those &lsquo;wholly and exclusively incurred in the production of income&rsquo;. In other words, they must satisfy all these conditions:</p>
+          <ul>{conditions.map((c) => <li key={c}>{c}</li>)}</ul>
+        </div>
+      </details>
+
+      <p className="xc-hint">Search or browse to see whether a business expense is tax-deductible.</p>
+
+      <div className="xc-combo">
         <div className="xc-input">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-          <input id="xc-q" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. motor vehicle, club fee, renovation" autoComplete="off" />
-          {query && <button type="button" className="xc-clear" onClick={() => setQuery("")} aria-label="Clear search">×</button>}
+          <input
+            id="xc-q"
+            type="text"
+            role="combobox"
+            aria-expanded={showList}
+            aria-controls="xc-suggest"
+            aria-autocomplete="list"
+            aria-activedescendant={showList && active >= 0 ? `xc-opt-${active}` : undefined}
+            aria-label="Search an expense"
+            value={query}
+            onChange={(e) => { setQuery(e.target.value); setFocused(true); setActive(-1); }}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setTimeout(() => setFocused(false), 150)}
+            onKeyDown={onKey}
+            placeholder="Search an expense"
+            autoComplete="off"
+          />
+          {query && <button type="button" className="xc-clear" onClick={() => { setQuery(""); setActive(-1); }} aria-label="Clear search">×</button>}
         </div>
-        <p className="xc-count" aria-live="polite">{q ? `${shown.length} of ${items.length} expense types` : `${items.length} expense types, A–Z`}</p>
-        {!q && (
-          <nav className="xc-letters" aria-label="Jump to letter">
-            {groups.map((g) => <a key={g.letter} href={`#xc-${g.letter}`}>{g.letter}</a>)}
-          </nav>
+        {showList && (
+          <ul id="xc-suggest" className="xc-suggest" role="listbox" aria-label="Expense types">
+            {suggestions.length ? suggestions.map((s, i) => (
+              <li key={s.name} id={`xc-opt-${i}`} role="option" aria-selected={i === active} className={i === active ? "on" : undefined} onMouseDown={(e) => { e.preventDefault(); pick(slugOf(s.name), s.name); }}>{s.name}</li>
+            )) : (
+              <li id="xc-opt-0" role="option" aria-selected={false} className="xc-suggest-none" onMouseDown={(e) => { e.preventDefault(); pick(OTHERS, query); }}>{OTHERS_LABEL} →</li>
+            )}
+          </ul>
         )}
       </div>
 
-      {shown.length === 0 ? (
-        <div className="xc-none">
-          <p>No expense type matches &ldquo;{query}&rdquo;.</p>
-          <a href="#not-listed" className="btn btn-line">Check an expense not in the list</a>
+      <details className="xc-card xc-browse" open={browse} onToggle={(e) => setBrowse(e.currentTarget.open)}>
+        <summary>Or browse by expense type<i aria-hidden="true">+</i></summary>
+        <div className="xc-browse-body">
+          <label htmlFor="xc-type">Type of expense</label>
+          <div className="xc-select">
+            <select id="xc-type" value={picked} onChange={(e) => { const id = e.target.value; pick(id, id === OTHERS ? "" : bySlug.get(id)?.name); }}>
+              <option value="">Select an expense type</option>
+              {items.map((e) => <option key={e.name} value={slugOf(e.name)}>{e.name}</option>)}
+              <option value={OTHERS}>{OTHERS_LABEL}</option>
+            </select>
+          </div>
         </div>
-      ) : (
-        <div className="xc-list">
-          {groups.map((g) => (
-            <section key={g.letter || "results"} className="xc-group" id={g.letter ? `xc-${g.letter}` : undefined} aria-label={g.letter || "Results"}>
-              {g.letter && <h3 className="xc-letter">{g.letter}</h3>}
-              {g.list.map((e) => {
-                const id = slugOf(e.name);
-                return (
-                  <details key={id} id={id} open={open === id} onToggle={(ev) => { const d = ev.currentTarget; if (d.open) setOpen(id); else if (open === id) setOpen(null); }}>
-                    <summary>{e.name}<i aria-hidden="true">+</i></summary>
-                    <div className="xc-body">
-                      <Treatment text={e.treatment} />
-                      {e.url && <a className="xc-iras" href={e.url} target="_blank" rel="noopener noreferrer">More details on the IRAS website ↗</a>}
-                    </div>
-                  </details>
-                );
-              })}
-            </section>
-          ))}
-        </div>
-      )}
+      </details>
+
+      <div className="xc-card xc-result" id="xc-result" aria-live="polite">
+        {expense ? (
+          <>
+            <h2 className="xc-title">{expense.name}</h2>
+            <div className="xc-text"><Treatment text={expense.treatment} /></div>
+            {expense.url && <a className="xc-iras" href={expense.url} target="_blank" rel="noopener noreferrer">More details on the IRAS website ↗</a>}
+          </>
+        ) : picked === OTHERS ? (
+          <Others key="others" conditions={conditions} />
+        ) : (
+          <div className="xc-empty">
+            <p>Try one of these to get started:</p>
+            <div className="xc-chips">
+              {EXAMPLES.filter((n) => bySlug.has(slugOf(n))).map((n) => <button key={n} type="button" className="xc-chip" onClick={() => pick(slugOf(n), n)}>{n}</button>)}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {picked && <div className="xc-again"><button type="button" className="btn btn-line" onClick={startOver}>Start over</button></div>}
+      {after}
     </div>
   );
 }
 
 type Answer = "yes" | "no" | undefined;
 
-// IRAS's "Expenses not in the list": four conditions, all must be Yes.
-// Result wording is IRAS's.
-export function NotListedCheck({ conditions }: { conditions: string[] }) {
+// IRAS's "Others / Expenses not in the list": all four must be Yes. Result wording is IRAS's.
+function Others({ conditions }: { conditions: string[] }) {
   const [answers, setAnswers] = useState<Answer[]>(() => conditions.map(() => undefined));
   const done = answers.every(Boolean);
   const ok = done && answers.every((a) => a === "yes");
-  const set = (i: number, a: Answer) => setAnswers((prev) => prev.map((x, j) => (j === i ? a : x)));
   return (
-    <div className="xc-check">
-      <p className="xc-check-lead">Deductible business expenses are those &lsquo;wholly and exclusively incurred in the production of income&rsquo;. All four must be Yes.</p>
+    <>
+      <h2 className="xc-title">{OTHERS_LABEL}</h2>
       <ol className="xc-conds">
         {conditions.map((c, i) => (
           <li key={i}>
             <p id={`xc-cond-${i}`}>{c}</p>
             <div className="xc-yn" role="radiogroup" aria-labelledby={`xc-cond-${i}`}>
               {(["yes", "no"] as const).map((a) => (
-                <button key={a} type="button" role="radio" aria-checked={answers[i] === a} className="xc-yn-btn" onClick={() => set(i, a)}>{a === "yes" ? "Yes" : "No"}</button>
+                <button key={a} type="button" role="radio" aria-checked={answers[i] === a} className="xc-yn-btn" onClick={() => setAnswers((prev) => prev.map((x, j) => (j === i ? a : x)))}>{a === "yes" ? "Yes" : "No"}</button>
               ))}
             </div>
           </li>
         ))}
       </ol>
-      <div className={`xc-result${done ? (ok ? " is-yes" : " is-no") : ""}`} aria-live="polite">
-        {done ? (
-          ok ? (
-            <><h3>Deductible</h3><p>This expense is likely deductible. It satisfies all the conditions required for business expenses that are &lsquo;wholly and exclusively incurred in the production of income&rsquo;.</p></>
-          ) : (
-            <><h3>Not deductible</h3><p>This expense is not deductible. Business expenses are deductible only when they are &lsquo;wholly and exclusively incurred in the production of income&rsquo;, meaning every condition must be met. As not all conditions are satisfied, this expense cannot be deducted.</p></>
-          )
-        ) : (
-          <p className="xc-wait">{answers.filter(Boolean).length} of {conditions.length} answered</p>
-        )}
-        {answers.some(Boolean) && <button type="button" className="xc-reset" onClick={() => setAnswers(conditions.map(() => undefined))}>Start over</button>}
-      </div>
-    </div>
+      {done && (
+        <div className={`xc-verdict ${ok ? "is-yes" : "is-no"}`}>
+          <h3>{ok ? "Deductible" : "Not deductible"}</h3>
+          <p>{ok
+            ? "This expense is likely deductible. It satisfies all the conditions required for business expenses that are ‘wholly and exclusively incurred in the production of income’."
+            : "This expense is not deductible. Business expenses are deductible only when they are ‘wholly and exclusively incurred in the production of income’, meaning every condition must be met. As not all conditions are satisfied, this expense cannot be deducted."}</p>
+        </div>
+      )}
+    </>
   );
 }
