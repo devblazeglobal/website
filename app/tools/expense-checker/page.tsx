@@ -47,6 +47,7 @@ export default function ExpenseCheckerPage() {
           <div className="xc-card xc-cta"><p>Not sure how this applies to your company?</p><WaButton text="Hello Blaze Global, I would like to check whether an expense is tax-deductible." /></div>
         } />
         <div className="xc-source">
+          <p>Source: <a href="https://expense-checker.app.tc1.airbase.sg" target="_blank" rel="noopener noreferrer">IRAS</a></p>
           <p>This tool is for general understanding and is not meant to comprehensively address all possible issues that arise. The application of tax treatment depends on the totality of facts and circumstances of each case.</p>
         </div>
       </div></section>
