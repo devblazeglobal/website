@@ -114,6 +114,7 @@ export function AskBar() {
   const [q, setQ] = useState("");
   const [picked, setPicked] = useState<string[]>([]);
   const [focus, setFocus] = useState(false);
+  const [more, setMore] = useState(false); // phones and small tablets: options behind (+)
   useEffect(() => {
     if (prefersStill() || focus || q) return;
     const t = setInterval(() => setI((n) => (n + 1) % EXAMPLES.length), 2800);
@@ -125,13 +126,14 @@ export function AskBar() {
     window.open(whatsappUrl(`Hello Blaze Global, I need help with: ${need}`), "_blank", "noopener");
   };
   return (
-    <div className="ask-wrap">
-      <ul className="ask-ticks" aria-label="What you need">
+    <div className={more ? "ask-wrap is-open" : "ask-wrap"}>
+      <button type="button" className="ask-more" aria-expanded={more} aria-controls="ask-ticks" onClick={() => setMore((m) => !m)}><i aria-hidden="true">{more ? "–" : "+"}</i>Choose services{picked.length ? ` (${picked.length})` : ""}</button>
+      <ul className="ask-ticks" id="ask-ticks" aria-label="What you need">
         {NEEDS.map((n) => <li key={n}><button type="button" aria-pressed={picked.includes(n)} onClick={() => flip(n)}><i aria-hidden="true" />{n}</button></li>)}
       </ul>
       <form className="askbar" onSubmit={(e) => { e.preventDefault(); send(); }}>
         <label className="sr" htmlFor="ask">Anything else</label>
-        <input id="ask" name="ask" autoComplete="off" maxLength={300} value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} placeholder={picked.length ? "Anything else (optional)" : `Tick above or type, e.g. ${EXAMPLES[i]}`} />
+        <input id="ask" name="ask" autoComplete="off" maxLength={300} value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} placeholder={picked.length ? "Anything else (optional)" : `Type what you need, e.g. ${EXAMPLES[i]}`} />
         <button className="btn btn-wa" type="submit"><svg><use href="#wa" /></svg>Send on WhatsApp</button>
       </form>
     </div>

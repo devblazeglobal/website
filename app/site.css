@@ -3174,19 +3174,27 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
 .view>section:has(+section.creds){padding-bottom:var(--sec)!important}
 
 /* Mobile audit 2 Nov 2026 (Benjamin: hero messy on mobile, not eye-catching) */
-@media (max-width:560px){
-  /* Hero: bigger headline; tick options on one swipeable row; the arrow-link row repeats them, so it goes */
-  .stage .hero h1{font-size:46px;line-height:1.02}
-  .stage .hero-sub{font-size:16px;margin-top:16px}
+.ask-more{display:none}
+@media (max-width:820px){
+  /* Hero: bigger headline, options behind (+), the arrow-link row repeats them so it goes */
+  .stage .hero h1{font-size:clamp(44px,9vw,60px);line-height:1.02}
+  .stage .hero-sub{font-size:16px;margin-top:20px;max-width:30em}
   .stage .hero-pts{display:none}
-  .stage .ask-ticks{flex-wrap:nowrap;justify-content:flex-start!important;overflow-x:auto;scrollbar-width:none;margin:32px -16px 0;padding:0 16px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 32px),transparent)}
-  .stage .ask-ticks::-webkit-scrollbar{display:none}
-  .stage .ask-ticks li{flex:none}
+  .ask-more{display:inline-flex;align-items:center;gap:10px;margin:36px auto 0;padding:4px 0;background:none;border:0;color:#fff;font:500 15px/1.2 var(--sans);cursor:pointer}
+  .ask-more i{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font:500 18px/1 var(--sans);font-style:normal}
+  .ask-wrap{display:flex;flex-direction:column;align-items:center}
+  .ask-wrap>.askbar{align-self:stretch}
+  .stage .ask-ticks{display:none;margin-top:16px}
+  .stage .is-open .ask-ticks{display:flex}
+  .stage .ask-wrap .askbar{margin-top:16px!important}
   .stage .askbar+.hero-ctas{margin-top:12px}
   /* Trust lines: the bold claim only */
-  .stage .trust .ticks{gap:10px}
+  .stage .trust{padding-top:48px}
+  .stage .trust .ticks{gap:12px}
   .stage .trust .ticks li span{font-size:0}
   .stage .trust .ticks li b{font-size:15px;font-weight:500}
+}
+@media (max-width:560px){
   /* About */
   .ab-hero .wrap{min-height:0;padding-block:72px 48px}
   .ab-hero h1{font-size:46px}
