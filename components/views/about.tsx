@@ -14,7 +14,7 @@ export function AboutView() {
   return (
 <main className="view" id="view-about">
   <section className="ab-hero pull-under"><div className="wrap">
-    <h1>Beyond accounting. Built for business.</h1>
+    <h1>About Blaze Global</h1>
     <p>Expert accounting, tax and corporate services, powered by technology and grounded in real business experience.</p>
   </div></section>
   <section className="ab-who"><div className="wide ab-who-grid">

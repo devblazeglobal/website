@@ -3172,3 +3172,29 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
 .ask-ticks button[aria-pressed="true"]::before{content:"";width:9px;height:5px;border-left:1.8px solid var(--navy);border-bottom:1.8px solid var(--navy);transform:rotate(-45deg) translateY(-2px);margin-right:2px}
 /* The section above the grey Credentials band needs its full bottom padding */
 .view>section:has(+section.creds){padding-bottom:var(--sec)!important}
+
+/* Mobile audit 2 Nov 2026 (Benjamin: hero messy on mobile, not eye-catching) */
+@media (max-width:560px){
+  /* Hero: bigger headline; tick options on one swipeable row; the arrow-link row repeats them, so it goes */
+  .stage .hero h1{font-size:46px;line-height:1.02}
+  .stage .hero-sub{font-size:16px;margin-top:16px}
+  .stage .hero-pts{display:none}
+  .stage .ask-ticks{flex-wrap:nowrap;justify-content:flex-start!important;overflow-x:auto;scrollbar-width:none;margin:32px -16px 0;padding:0 16px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 32px),transparent)}
+  .stage .ask-ticks::-webkit-scrollbar{display:none}
+  .stage .ask-ticks li{flex:none}
+  .stage .askbar+.hero-ctas{margin-top:12px}
+  /* Trust lines: the bold claim only */
+  .stage .trust .ticks{gap:10px}
+  .stage .trust .ticks li span{font-size:0}
+  .stage .trust .ticks li b{font-size:15px;font-weight:500}
+  /* About */
+  .ab-hero .wrap{min-height:0;padding-block:72px 48px}
+  .ab-hero h1{font-size:46px}
+  .ab-hero p{font-size:17px;margin-top:20px}
+  .ab-why{max-width:22rem;margin-inline:auto!important}
+  .ab-why li,.ab-why li *{text-align:left!important}
+  .ab-why li b{font-size:17px}
+  /* Team cards: readable skill chips */
+  .rv-skills li{font-size:12.5px!important}
+}
+@media (max-width:560px){#view-about>section.ab-who.ab-who{padding-top:8px}#view-about>section.ab-hero.ab-hero{padding-bottom:0}}
