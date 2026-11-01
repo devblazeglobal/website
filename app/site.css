@@ -3181,7 +3181,7 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
   .stage .hero-sub{font-size:16px;margin-top:20px;max-width:30em}
   .stage .hero-pts{display:none}
   .ask-more{display:inline-flex;align-items:center;gap:10px;margin:36px auto 0;padding:4px 0;background:none;border:0;color:#fff;font:500 15px/1.2 var(--sans);cursor:pointer}
-  .ask-more i{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font:500 18px/1 var(--sans);font-style:normal}
+  .ask-more i{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font:500 18px/1 var(--sans);font-style:normal}
   .ask-wrap{display:flex;flex-direction:column;align-items:center}
   .ask-wrap>.askbar{align-self:stretch}
   .stage .ask-ticks{display:none;margin-top:16px}
