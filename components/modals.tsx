@@ -222,7 +222,7 @@ export function ReviewModal() {
             <p className="gs-label">{r.n} · {r.role}</p>
             <h2 className="gs-q" id="rvm-h">{r.head}</h2>
             <div className="rvm-text">{r.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
-            <div className="rvm-src"><svg className="gl" aria-label="Google"><use href="#g" /></svg><Stars /></div>
+            <div className="rvm-src"><Stars /></div>
           </div>
         )}
       </div>

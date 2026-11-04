@@ -104,26 +104,32 @@ export function Credentials({ id, about = true }: { id?: string; about?: boolean
   );
 }
 
+// Client reviews flow right to left on their own (Emelia, 3 Nov 2026: no
+// Google branding; Blaze will supply the reviews). The list is drawn twice so
+// the loop is seamless; the copy is hidden from screen readers. Hover or
+// focus pauses it; reduced motion stops it.
 export function Reviews({ heading, id }: { heading?: string; id?: string }) {
-  const placeholder = { n: "Reviewer", role: "Google review", head: "Review headline appears here.", body: ["Google review text appears here once the Business Profile is connected."] };
+  const placeholder = { n: "Client", role: "Review", head: "Review headline appears here.", body: ["Client review text appears here."] };
   const items = [REVIEWS[0], ...Array.from({ length: 5 }, () => placeholder)];
+  const card = (r: (typeof items)[number], k: number, copy: boolean) => (
+    <article className="rvc" key={`${copy ? "c" : "o"}${k}`} aria-hidden={copy || undefined}>
+      <p className="rvc-who">{r.n} <span>· {r.role}</span></p>
+      <h3>{r.head}</h3>
+      <p className="rvc-t">{r.body[0]}</p>
+      <div className="rvc-foot"><Stars />
+        {r !== placeholder && (
+          <button className="rvc-plus" type="button" tabIndex={copy ? -1 : undefined} aria-label={`Read the full review from ${r.n}`} data-rv={k}><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg></button>
+        )}
+      </div>
+    </article>
+  );
   return (
-    <section className="reviews" id={id} aria-label="Google reviews">
+    <section className="reviews" id={id} aria-label="Client reviews">
       {heading && <div className="wide rv-head"><h2 className="h2">{heading}</h2></div>}
-      <Rail variant="reviews">
-        {items.map((r, k) => (
-          <article className="rvc" key={k}>
-            <p className="rvc-who">{r.n} <span>· {r.role}</span></p>
-            <h3>{r.head}</h3>
-            <p className="rvc-t">{r.body[0]}</p>
-            <div className="rvc-foot"><svg className="gl" aria-label="Google"><use href="#g" /></svg><Stars />
-              {k < REVIEWS.length && (
-                <button className="rvc-plus" type="button" aria-label={`Read the full review from ${r.n}`} data-rv={k}><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg></button>
-              )}
-            </div>
-          </article>
-        ))}
-      </Rail>
+      <div className="rv-marq"><div className="rv-flow">
+        {items.map((r, k) => card(r, k, false))}
+        {items.map((r, k) => card(r, k, true))}
+      </div></div>
     </section>
   );
 }

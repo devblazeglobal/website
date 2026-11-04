@@ -3206,3 +3206,44 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
   .rv-skills li{font-size:12.5px!important}
 }
 @media (max-width:560px){#view-about>section.ab-who.ab-who{padding-top:8px}#view-about>section.ab-hero.ab-hero{padding-bottom:0}}
+
+/* Emelia 4 Nov: Services group labels stand out; Solutions without the duplicate box; Resources panel */
+.dp-products .dcard h4{font:600 14px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.mnav .mn-sub .mn-grp-l{font:600 13px/1.2 var(--sans);letter-spacing:.12em;color:var(--navy)}
+.dpanel.dp-solutions{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+.dfeat{gap:16px}
+.dfeat p{margin:0;font-size:15px;line-height:1.5;color:var(--on-navy-muted)}
+.dfeat .btn{margin-top:auto}
+.dpanel.dp-resources{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.dp-resources .dcard:first-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
+.dp-resources .dcard:first-child h4{grid-column:1/-1;margin-bottom:0}
+.dp-resources .dcard:first-child .ov{margin:0}
+/* Reviews flow right to left (Emelia 3 Nov) */
+.rv-marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.rv-flow{display:flex;gap:20px;width:max-content;animation:rvflow 70s linear infinite}
+.rv-flow .rvc{scroll-snap-align:none}
+.rv-marq:hover .rv-flow,.rv-marq:focus-within .rv-flow{animation-play-state:paused}
+@keyframes rvflow{to{transform:translateX(calc(-50% - 10px))}}
+@media (prefers-reduced-motion:reduce){.rv-flow{animation:none}.rv-marq{overflow-x:auto}}
+@media (max-width:640px){.rv-flow{animation-duration:45s}}
+/* Segment needs in numbered stages (Emelia 4 Nov) */
+.jb-stages{border-top:1px solid var(--line)}
+.jb-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:32px;padding-block:40px;border-bottom:1px solid var(--line)}
+.jb-stage-h span{display:block;font:400 15px/1 var(--sans);color:var(--muted);margin-bottom:10px}
+.jb-stage-h h3{font:400 clamp(28px,2.6vw,36px)/1.1 var(--serif);color:var(--ink)}
+.jb-stage-c{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.jb-n{position:relative;display:flex;flex-direction:column;gap:8px;height:100%;background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px 24px 26px;text-decoration:none;color:var(--ink);transition:box-shadow .25s}
+a.jb-n:hover{box-shadow:0 18px 40px -24px rgba(5,16,56,.35)}
+.jb-n i{width:40px;height:40px;border-radius:8px;background:#eff1f4;display:grid;place-items:center;margin-bottom:10px;color:var(--navy)}
+.jb-n i svg{width:20px;height:20px}
+.jb-n b{font:400 22px/1.25 var(--serif)}
+.jb-n span{font-size:15px;line-height:1.55;color:var(--muted)}
+.jb-n em{position:absolute;top:22px;right:22px;font-style:normal;color:var(--muted);transition:transform .2s,color .2s}
+a.jb-n:hover em{transform:translateX(4px);color:var(--ink)}
+@media (max-width:900px){.jb-stage{grid-template-columns:minmax(0,1fr);gap:20px;padding-block:32px}}
+@media (max-width:560px){.jb-stage-c{grid-template-columns:minmax(0,1fr);gap:12px}.jb-n{padding:20px}.jb-stage-h,.jb-stage-h *{text-align:left!important}}
+/* Five tabs clear the centred logo down to 1101px */
+@media (min-width:1101px) and (max-width:1299px){.nav .tabs{gap:18px!important}.nav .tab{font-size:14px}}
+.dp-solutions .dimg{aspect-ratio:16/8}
+@media (min-width:1101px) and (max-width:1179px){.nav .tabs>a.tab[href="/services/blazeos"]{display:none}}
+@media (max-width:560px){.jb-n,.jb-n *{text-align:left!important}.jb-n i{margin-inline:0!important}}

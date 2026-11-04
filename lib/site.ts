@@ -40,7 +40,7 @@ const TALK: Record<string, string> = {
   accounting: "Talk to an accountant",
   payroll: "Talk to an accountant",
   tax: "Talk to a tax specialist",
-  "outsourced-cfo": "Talk to a tax specialist",
+  "outsourced-cfo": "Talk to a CFO",
 };
 
 /** WhatsApp button label for a product or parent slug; "WhatsApp us" elsewhere. */

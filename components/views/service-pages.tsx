@@ -1,16 +1,51 @@
 // Page templates for services and solutions, filled from lib/content-data.
 import Link from "next/link";
 
-import { WaButton } from "@/components/ui";
-import { MAIN_PAGES, REVIEWS, SEGMENT_PAGES, SUB_PAGES, TILES, type Parent, type Product } from "@/lib/content-data";
+import { Icon, WaButton } from "@/components/ui";
+import { MAIN_PAGES, REVIEWS, SEGMENT_PAGES, SUB_PAGES, TILES, type Parent, type Product, type SegmentPage } from "@/lib/content-data";
 import { JsonLd } from "@/components/json-ld";
 import { ComplianceCalendar } from "@/components/widgets";
-import { site, talkLabel, whatsappUrl } from "@/lib/site";
+import { site, talkLabel } from "@/lib/site";
 import { SUB_TEMPLATE } from "@/lib/sub-template";
 import { PRODUCT_TEMPLATE } from "@/lib/product-template";
 import { DocCard } from "@/components/doc-card";
 import { FeatureTabs } from "@/components/feature-tabs";
 
+
+// Segment needs in numbered stages, so the page is not one wall of boxes
+// (Emelia, 4 Nov 2026). Names match lib/content-data; WhatsApp support is left
+// out because the closing band carries the WhatsApp button. Anything not
+// listed falls into the last stage so no item is lost.
+type Need = SegmentPage["needs"][number];
+const STAGES: Record<string, [string, string[]][]> = {
+  startups: [
+    ["Set up", ["Incorporation", "Company secretary", "Nominee director", "Share allotments"]],
+    ["Run", ["Xero from day one", "Receipts and claims", "Registers", "GST threshold watch"]],
+    ["File", ["Financial statements", "XBRL", "ECI and Form C-S", "Start-up tax exemption"]],
+    ["Stay ahead", ["Deadline calendar", "Investor-ready records"]],
+  ],
+  smes: [
+    ["Every month", ["Monthly bookkeeping", "Payroll", "Receipts and bills", "Management reports", "Cash forecast"]],
+    ["GST", ["GST registration", "GST F5 returns"]],
+    ["Year end", ["ECI", "Form C-S", "Capital allowances", "Financial statements and XBRL"]],
+    ["Company", ["Company secretary", "Annual return", "Deadline calendar"]],
+  ],
+  "large-companies": [
+    ["Report", ["Multi-entity close", "Consolidation", "Financial statements and XBRL"]],
+    ["Plan", ["Outsourced CFO", "Cash forecast", "Scenario models"]],
+    ["Tax", ["Tax advisory", "Group relief", "Form C", "GST"]],
+    ["Govern", ["Company secretary", "Director and shareholder changes", "Key person insurance", "Deadline calendar"]],
+  ],
+};
+function stagesOf(slug: string, needs: Need[]): [string, Need[]][] {
+  const rest = needs.filter(([, h]) => h !== "WhatsApp support");
+  const plan = STAGES[slug];
+  if (!plan) return [["Services", rest]];
+  const used = new Set(plan.flatMap(([, names]) => names));
+  const out = plan.map(([t, names]) => [t, names.map((n) => rest.find(([, h]) => h === n)).filter((x): x is Need => !!x)] as [string, Need[]]);
+  out[out.length - 1][1].push(...rest.filter(([, h]) => !used.has(h)));
+  return out;
+}
 
 /** A product page: photo hero, benefits, services, FAQ. */
 const LINES: Record<Parent, [string, string]> = { accounting: ["Accounting", "/services/accounting"], tax: ["Tax", "/services/tax"], "corporate-secretarial": ["Corporate Secretarial", "/services/corporate-secretarial"] };
@@ -185,13 +220,16 @@ export function SegmentView({ slug }: { slug: string }) {
 
       <section className="jb-blk" aria-labelledby="jb-need"><div className="wide">
         <h2 className="jb-h2" id="jb-need">{p.needHeading}</h2>
-        <div className="jb-cards">{p.needs.map(([, h, d, href]) => {
-          const to = href || (h === "WhatsApp support" ? whatsappUrl(p.wa) : "");
-          if (!to) return <div className="jb-c" key={h}><h3>{h}</h3><p>{d}</p></div>;
-          return to.startsWith("/")
-            ? <Link className="jb-c" key={h} href={to}><h3>{h}</h3><p>{d}</p><span className="jb-go">Discover more</span></Link>
-            : <a className="jb-c" key={h} href={to} target="_blank" rel="noopener"><h3>{h}</h3><p>{d}</p><span className="jb-go">Message us</span></a>;
-        })}</div>
+        <div className="jb-stages">{stagesOf(p.slug, p.needs).map(([title, items], n) => (
+          <div className="jb-stage" key={title}>
+            <div className="jb-stage-h"><span>{String(n + 1).padStart(2, "0")}</span><h3>{title}</h3></div>
+            <ul className="jb-stage-c">{items.map(([icon, h, d, href]) => (
+              <li key={h}>{href
+                ? <Link className="jb-n" href={href}><i aria-hidden="true"><Icon k={icon} /></i><b>{h}</b><span>{d}</span><em aria-hidden="true">→</em></Link>
+                : <div className="jb-n"><i aria-hidden="true"><Icon k={icon} /></i><b>{h}</b><span>{d}</span></div>}</li>
+            ))}</ul>
+          </div>
+        ))}</div>
       </div></section>
 
       <section className="jb-blk" aria-labelledby="jb-apart"><div className="wide">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AskBar, CountUp } from "@/components/interactive";
 import { ProductCards } from "@/components/product-cards";
 import { HowItWorks } from "@/components/how-it-works";
-import { Credentials, Reviews, Stars } from "@/components/ui";
+import { Credentials, Reviews } from "@/components/ui";
 import { ComplianceCalendar, StructureChecklist } from "@/components/widgets";
 import { TeamCards } from "@/components/team";
 
@@ -29,7 +29,7 @@ export function HomeView() {
             <li><span><b>ACRA Registered Filing Agent FA20210247</b>, supporting your annual returns, XBRL and filings with ACRA and IRAS</span></li>
             <li><span><b>Cloud accounting</b> on Xero and Aspire, so your books stay up to date and your numbers stay clear</span></li>
           </ul>
-          <div className="proof"><div className="stat"><b><CountUp to={120} />+</b><span>Businesses served</span></div><div className="rating"><svg className="gl" aria-label="Google"><use href="#g" /></svg><span>Google reviews</span><Stars /></div></div>
+          <div className="proof"><div className="stat"><b><CountUp to={120} />+</b><span>Businesses served</span></div></div>
         </div>
       </div>
     </div>

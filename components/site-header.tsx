@@ -7,11 +7,11 @@ import { Fragment, useEffect, useRef, useState } from "react";
 
 import { GROUPS, inGroup } from "@/lib/products";
 
-// Navy bar that follows the scroll. Products and Solutions open a panel
+// Navy bar that follows the scroll. Services, Solutions and Resources open a panel
 // over the page: hover on desktop, click anywhere. The burger opens the
 // mobile menu. Markup ported from the approved mock-up (scripts/port).
 
-type Menu = "products" | "solutions" | null;
+type Menu = "products" | "solutions" | "resources" | null;
 
 // Line icons beside each main row of the mobile menu.
 const MN_ICONS: Record<string, string> = {
@@ -19,8 +19,7 @@ const MN_ICONS: Record<string, string> = {
   products: "M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z",
   solutions: "M3 7h14v10H3zM7 7V4.5A1.5 1.5 0 0 1 8.5 3h3A1.5 1.5 0 0 1 13 4.5V7M3 11.5h14",
   blazeos: "M3 17V9M8 17V5M13 17v-6M18 17V3",
-  checker: "M4 2.5h12v15H4zM7 7l1.5 1.5L11 6M7 12.5l1.5 1.5L11 11.5M13 7.5h1M13 13h1",
-  blog: "M5 2.5h7l4 4V17.5H5zM12 2.5v4h4M8 10.5h5M8 13.5h5",
+  resources: "M4 2.5h12v15H4zM7 7l1.5 1.5L11 6M7 12.5l1.5 1.5L11 11.5M13 7.5h1M13 13h1",
   contact: "M3 4.5h14v9H8l-4 3v-3H3z",
 };
 function MnIcon({ k }: { k: string }) {
@@ -30,7 +29,7 @@ function MnIcon({ k }: { k: string }) {
 export function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobile, setMobile] = useState(false);
-  const [group, setGroup] = useState<"p" | "s" | null>(null);
+  const [group, setGroup] = useState<"p" | "s" | "r" | null>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const pathname = usePathname();
@@ -57,10 +56,10 @@ export function SiteHeader() {
       <Link className="logo" href="/" aria-label="Blaze Global home"><Image src="/logos/blaze-global-gold.png" alt="Blaze Global" width={1200} height={100} priority /><sup className="logo-r" aria-label="registered trade mark">®</sup></Link>
       <div className="tabs">
         <Link className="tab" href="/about-us">About</Link>
-        <button className="tab" type="button" aria-expanded={menu === "products"} aria-controls="drop" onClick={() => toggle("products")} onMouseEnter={() => hover("products")}>Products <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
+        <button className="tab" type="button" aria-expanded={menu === "products"} aria-controls="drop" onClick={() => toggle("products")} onMouseEnter={() => hover("products")}>Services <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
         <button className="tab" type="button" aria-expanded={menu === "solutions"} aria-controls="drop" onClick={() => toggle("solutions")} onMouseEnter={() => hover("solutions")}>Solutions <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
+        <button className="tab" type="button" aria-expanded={menu === "resources"} aria-controls="drop" onClick={() => toggle("resources")} onMouseEnter={() => hover("resources")}>Resources <svg width="10" height="10" aria-hidden="true"><use href="#chev" /></svg></button>
         <Link className="tab" href="/services/blazeos">BlazeOS</Link>
-        <Link className="tab" href="/blog">Blog</Link>
       </div>
       <button className="btn btn-start" type="button" data-open-start>Get started</button>
       <a className="btn btn-wa right-wa" href="https://wa.me/6598199108?text=Hello%20Blaze%20Global%2C%20I%20would%20like%20to%20find%20out%20more%20about%20your%20services." target="_blank" rel="noopener"><svg><use href="#wa" /></svg>WhatsApp us</a>
@@ -77,14 +76,14 @@ export function SiteHeader() {
         ))}
       </div>
 
-      <div className={`dpanel${menu === "solutions" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
+      <div className={`dpanel dp-solutions${menu === "solutions" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
         <div className="dcard dfeat">
           <Image className="dimg" src="/images/sg-3.jpg" alt="Shophouses in Joo Chiat, Singapore" width={960} height={600} />
           <h3>Start a business in Singapore</h3>
+          <p>Choose your business structure, register on Bizfile and plan your first year.</p>
           <Link className="btn btn-navy" href="/start-a-business-in-singapore">Start your company</Link>
         </div>
         <div className="dcard">
-          <Link className="ov" href="/start-a-business-in-singapore"><b>Start a business in Singapore</b><span>Choose your business structure, register on Bizfile and plan your first year.</span><i aria-hidden="true">→</i></Link>
           <h4>By company</h4>
           <ul>
             <li><Link className="it" href="/solutions/startups"><b>Start-ups</b><span>Incorporate, appoint a company secretary and set up your first books.</span></Link></li>
@@ -92,10 +91,17 @@ export function SiteHeader() {
             <li><Link className="it" href="/solutions/large-companies"><b>Large companies</b><span>Group reporting, forecasting and tax advice for growing businesses.</span></Link></li>
           </ul>
         </div>
+      </div>
+
+      <div className={`dpanel dp-resources${menu === "resources" ? " on" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMenu(null); }}>
         <div className="dcard">
           <h4>Tools</h4>
           <Link className="ov" href="/compliance-deadline-calculator"><b>Compliance deadline calculator</b><span>See your ECI, AGM, annual return, IR8A and corporate tax dates from your financial year end.</span><i aria-hidden="true">→</i></Link>
           <Link className="ov" href="/tools/expense-checker"><b>Expense checker</b><span>IRAS guidance on 55 business expense types, and a four-question check for any other expense.</span><i aria-hidden="true">→</i></Link>
+        </div>
+        <div className="dcard">
+          <h4>Articles</h4>
+          <Link className="ov" href="/blog"><b>Blog</b><span>Penalties, deadlines and record-keeping rules for Singapore companies.</span><i aria-hidden="true">→</i></Link>
         </div>
       </div>
     </div></div>
@@ -105,7 +111,7 @@ export function SiteHeader() {
         <nav className="mn-list" aria-label="Mobile">
           <Link className="mn-row" href="/about-us"><span className="mn-lab"><MnIcon k="about" />About</span></Link>
           <div className={`mn-grp${group === "p" ? " on" : ""}`}>
-            <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}><span className="mn-lab"><MnIcon k="products" />Products</span><i aria-hidden="true" /></button>
+            <button type="button" className="mn-row" aria-expanded={group === "p"} onClick={() => setGroup((g) => (g === "p" ? null : "p"))}><span className="mn-lab"><MnIcon k="products" />Services</span><i aria-hidden="true" /></button>
             <div className="mn-sub"><div>
               {GROUPS.map((g) => (
                 <Fragment key={g.key}>
@@ -122,12 +128,17 @@ export function SiteHeader() {
               <Link href="/solutions/startups">Start-ups</Link>
               <Link href="/solutions/smes">SMEs</Link>
               <Link href="/solutions/large-companies">Large companies</Link>
+            </div></div>
+          </div>
+          <div className={`mn-grp${group === "r" ? " on" : ""}`}>
+            <button type="button" className="mn-row" aria-expanded={group === "r"} onClick={() => setGroup((g) => (g === "r" ? null : "r"))}><span className="mn-lab"><MnIcon k="resources" />Resources</span><i aria-hidden="true" /></button>
+            <div className="mn-sub"><div>
               <Link className="mn-head" href="/compliance-deadline-calculator">Compliance deadline calculator <span aria-hidden="true">→</span></Link>
+              <Link className="mn-head" href="/tools/expense-checker">Expense checker <span aria-hidden="true">→</span></Link>
+              <Link className="mn-head" href="/blog">Blog <span aria-hidden="true">→</span></Link>
             </div></div>
           </div>
           <Link className="mn-row" href="/services/blazeos"><span className="mn-lab"><MnIcon k="blazeos" />BlazeOS</span></Link>
-          <Link className="mn-row" href="/tools/expense-checker"><span className="mn-lab"><MnIcon k="checker" />Expense checker</span></Link>
-          <Link className="mn-row" href="/blog"><span className="mn-lab"><MnIcon k="blog" />Blog</span></Link>
           <Link className="mn-row" href="/contact"><span className="mn-lab"><MnIcon k="contact" />Contact</span></Link>
         </nav>
         <div className="mn-acts">
