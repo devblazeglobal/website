@@ -3247,3 +3247,43 @@ a.jb-n:hover em{transform:translateX(4px);color:var(--ink)}
 .dp-solutions .dimg{aspect-ratio:16/8}
 @media (min-width:1101px) and (max-width:1179px){.nav .tabs>a.tab[href="/services/blazeos"]{display:none}}
 @media (max-width:560px){.jb-n,.jb-n *{text-align:left!important}.jb-n i{margin-inline:0!important}}
+
+/* Design audit 23 Nov: nested shapes follow their container; chips align with their label */
+.cx-field .cx-go{border-radius:999px!important}
+@media (max-width:520px){.cx-field .cx-go{border-radius:18px!important}}
+@media (min-width:821px){.cx-quick{justify-content:flex-start;margin:12px 0 0 6px}}
+@media (min-width:641px){.screen{padding-right:44px}}
+/* Accordion: only the text row animates; the link keeps its natural height (1fr 1fr stretched it to the paragraph) */
+.hv-body{grid-template-rows:0fr auto}
+.hv-list li.on .hv-body{grid-template-rows:1fr auto}
+.hv-body a{align-self:start}
+@media (max-width:640px){
+  .pt-cd h3,.pt-cd p,.pt-tab h3,.pt-tab p,.pt-steps li h3,.pt-steps li p,.axc .ex,.req-card .req-src{margin-inline:0!important}
+}
+/* Chat avatars: the generic .av (how-it-works mock) was turning these pale */
+.bb .av{width:34px;height:34px;background:var(--navy);color:var(--gold);font:500 15px var(--serif);border:2px solid #fff}
+/* Blog cover 4 had no gradient, so its label was white on white */
+.bl-img.g3{background:radial-gradient(60% 45% at 70% 25%,rgba(170,190,240,.55),rgba(170,190,240,0) 70%),linear-gradient(165deg,#2b3f7c,#16245a 60%,#0b1238)}
+/* Solutions menu: navy button on a navy panel */
+.dp-solutions .btn-navy{background:#fff;color:var(--navy)}
+.dp-solutions .btn-navy:hover{background:#e9edf5}
+/* One card radius and one CTA band radius across templates */
+.jb-c,.pt-cd,.pt-tab{border-radius:12px}
+.jb-close,.pt-band{border-radius:24px}
+/* Product heroes: small white text on the light sky gradient */
+.pt-eyebrow,.pt-crumb,.pt-lede{text-shadow:0 1px 14px rgba(5,16,56,.35)}
+.pt-eyebrow{color:#fff!important;font-weight:500!important}
+.pt-crumb{color:rgba(255,255,255,.92)}
+/* Deadline rows: "Due" label readable */
+.ce-d small{font-size:12px;color:var(--muted)}
+/* No single-word last lines in body copy */
+main p,main li,main dd{text-wrap:pretty}
+@media (max-width:640px){
+  /* Structure tabs: 2 x 2 instead of spilling past the pill */
+  .lg-tabs{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;border-radius:18px;overflow:visible}
+  .lg-tabs button{white-space:normal;text-align:center!important;justify-content:center}
+}
+@media (max-width:1100px){
+  /* Mobile menu: dim the page behind it so nothing peeks out under the panel */
+  body:has(.mnav.open)::after{content:"";position:fixed;inset:0;z-index:55;background:rgba(5,16,56,.55)}
+}
