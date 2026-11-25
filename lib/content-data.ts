@@ -1202,7 +1202,7 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
 
 export const REVIEWS: Review[] = [
  {
-  "n": "J.",
+  "n": "Joel",
   "role": "Founder, Medical Clinics",
   "head": "I now have greater understanding and insights into my business performance.",
   "body": [
@@ -1211,7 +1211,7 @@ export const REVIEWS: Review[] = [
   ]
  },
  {
-  "n": "L.",
+  "n": "Lorencia",
   "role": "Founder, Dance Studio",
   "head": "Truly a lifesaver.",
   "body": [
@@ -1219,7 +1219,7 @@ export const REVIEWS: Review[] = [
   ]
  },
  {
-  "n": "W.",
+  "n": "Wei Wu",
   "role": "Founder, Education",
   "head": "Blaze Global has been instrumental in smoothening the starting out process.",
   "body": [
@@ -1228,7 +1228,7 @@ export const REVIEWS: Review[] = [
   ]
  },
  {
-  "n": "J.",
+  "n": "Jolyn",
   "role": "Physio Clinic",
   "head": "Our accounting and corporate secretarial matters are hassle-free.",
   "body": [
@@ -1236,7 +1236,7 @@ export const REVIEWS: Review[] = [
   ]
  },
  {
-  "n": "C.",
+  "n": "Cat and Piller",
   "role": "Accounting and tax client",
   "head": "They\u2019re fast, accurate, and truly take ownership of our accounts.",
   "body": [
