@@ -29,7 +29,7 @@ export function HomeView() {
             <li><span><b>ACRA Registered Filing Agent FA20210247</b>, supporting your annual returns, XBRL and filings with ACRA and IRAS</span></li>
             <li><span><b>Cloud accounting</b> on Xero and Aspire, so your books stay up to date and your numbers stay clear</span></li>
           </ul>
-          <div className="proof"><div className="stat"><b><CountUp to={120} />+</b><span>Businesses served</span></div></div>
+          <div className="proof"><div className="stat"><b>2021</b><span>Serving Singapore since</span></div><div className="stat"><b><CountUp to={120} />+</b><span>Businesses served</span></div><div className="stat"><b>Same day</b><span>Typical response time</span></div></div>
         </div>
       </div>
     </div>
