@@ -1202,7 +1202,7 @@ export const SEGMENT_PAGES: Record<string, SegmentPage> = {
 
 export const REVIEWS: Review[] = [
  {
-  "n": "Joel",
+  "n": "J.",
   "role": "Founder, Medical Clinics",
   "head": "I now have greater understanding and insights into my business performance.",
   "body": [
@@ -1211,43 +1211,36 @@ export const REVIEWS: Review[] = [
   ]
  },
  {
-  "n": "Reviewer",
-  "role": "Google review",
-  "head": "Review headline appears here.",
+  "n": "L.",
+  "role": "Founder, Dance Studio",
+  "head": "Truly a lifesaver.",
   "body": [
-   "Google review text appears here once the Business Profile is connected."
+   "Ben and Emelia at Blaze Global Pte Ltd were a huge help to my business. I was struggling to keep my finances, accounting and IRAS corporate tax filings on time while running my dance studio. When I came to them with a big backlog and a lot of mess, they never judged. They just helped me clear it all. They\u2019re patient, encouraging and very professional, and once I engaged them I didn\u2019t have to worry anymore. Truly a lifesaver. Thank you!"
   ]
  },
  {
-  "n": "Reviewer",
-  "role": "Google review",
-  "head": "Review headline appears here.",
+  "n": "W.",
+  "role": "Founder, Education",
+  "head": "Blaze Global has been instrumental in smoothening the starting out process.",
   "body": [
-   "Google review text appears here once the Business Profile is connected."
+   "As a new business owner navigating Singapore\u2019s business environment, Blaze Global has been instrumental in smoothening the starting out process. I know I can trust their team in advising banking solutions, best practices, handling taxes, financial statements, and many more!",
+   "I am grateful for the team in being so professional, resourceful, and yet maintaining an approachable attitude. Two thumbs up and highly recommended! Thank you!"
   ]
  },
  {
-  "n": "Reviewer",
-  "role": "Google review",
-  "head": "Review headline appears here.",
+  "n": "J.",
+  "role": "Physio Clinic",
+  "head": "Our accounting and corporate secretarial matters are hassle-free.",
   "body": [
-   "Google review text appears here once the Business Profile is connected."
+   "We\u2019ve had a great experience with Blaze Global. Their team is friendly, helpful and responsive, making our accounting and corporate secretarial matters hassle-free. It\u2019s a pleasure working with them, and we\u2019re happy to recommend their services!"
   ]
  },
  {
-  "n": "Reviewer",
-  "role": "Google review",
-  "head": "Review headline appears here.",
+  "n": "C.",
+  "role": "Accounting and tax client",
+  "head": "They\u2019re fast, accurate, and truly take ownership of our accounts.",
   "body": [
-   "Google review text appears here once the Business Profile is connected."
-  ]
- },
- {
-  "n": "Reviewer",
-  "role": "Google review",
-  "head": "Review headline appears here.",
-  "body": [
-   "Google review text appears here once the Business Profile is connected."
+   "We engaged Blaze Global to assist with our accounting and tax needs. Emelia, Pam and JS have been a great support to us. They\u2019re fast, accurate, and truly take ownership of our accounts. We also really appreciate how quick and clear they are whenever we reach out for advice. Would definitely recommend Blaze Global to any business looking for reliable support!"
   ]
  }
 ];
