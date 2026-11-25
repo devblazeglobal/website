@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { Rail } from "@/components/interactive";
 import { ICONS, REVIEWS, type ArtKind, type Benefit, type Card, type IconKey, type Pair } from "@/lib/content-data";
+import { ReviewFlow } from "@/components/review-flow";
 import { site, whatsappUrl } from "@/lib/site";
 
 export const Stars = () => (
@@ -110,23 +111,25 @@ export function Credentials({ id, about = true }: { id?: string; about?: boolean
 // focus pauses it; reduced motion stops it.
 export function Reviews({ heading, id }: { heading?: string; id?: string }) {
   const items = REVIEWS;
-  const card = (r: (typeof items)[number], k: number, copy: boolean) => (
-    <article className="rvc" key={`${copy ? "c" : "o"}${k}`} aria-hidden={copy || undefined}>
+  const card = (r: (typeof items)[number], k: number, set: number) => {
+    const copy = set !== 1;
+    return (
+    <article className="rvc" key={`${set}-${k}`} aria-hidden={copy || undefined}>
       <h3>{r.head}</h3>
-      <p className="rvc-t">{r.body[0]}</p>
+      <div className="rvc-tw"><p className="rvc-t">{r.body.join(" ")}</p></div>
       <p className="rvc-who">{r.n}{r.role && <span> · {r.role}</span>}</p>
       <div className="rvc-foot"><Stars />
         <button className="rvc-plus" type="button" tabIndex={copy ? -1 : undefined} aria-label={`Read the full review from ${r.n}`} data-rv={k}><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg></button>
       </div>
     </article>
-  );
+    );
+  };
   return (
     <section className="reviews" id={id} aria-label="Client reviews">
       {heading && <div className="wide rv-head"><h2 className="h2">{heading}</h2></div>}
-      <div className="rv-marq"><div className="rv-flow">
-        {items.map((r, k) => card(r, k, false))}
-        {items.map((r, k) => card(r, k, true))}
-      </div></div>
+      <ReviewFlow>
+        {[0, 1, 2].map((set) => items.map((r, k) => card(r, k, set)))}
+      </ReviewFlow>
     </section>
   );
 }

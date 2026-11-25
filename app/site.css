@@ -3219,13 +3219,15 @@ a.pt-cd:hover .pt-go::after{transform:translateX(4px)}
 .dp-resources .dcard:first-child h4{grid-column:1/-1;margin-bottom:0}
 .dp-resources .dcard:first-child .ov{margin:0}
 /* Reviews flow right to left (Emelia 3 Nov) */
-.rv-marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
-.rv-flow{display:flex;gap:20px;width:max-content;animation:rvflow 70s linear infinite}
+.rv-marq{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab;touch-action:pan-x pan-y;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.rv-flow{display:flex;gap:20px;width:max-content}
 .rv-flow .rvc{scroll-snap-align:none}
-.rv-marq:hover .rv-flow,.rv-marq:focus-within .rv-flow{animation-play-state:paused}
-@keyframes rvflow{to{transform:translateX(calc(-50% - 10px))}}
-@media (prefers-reduced-motion:reduce){.rv-flow{animation:none}.rv-marq{overflow-x:auto}}
-@media (max-width:640px){.rv-flow{animation-duration:45s}}
+.rv-marq::-webkit-scrollbar{display:none}
+.rv-marq.drag{cursor:grabbing;user-select:none}
+.rv-marq:focus-visible{outline:2px solid var(--navy);outline-offset:-2px}
+/* Review text fills the space the headline leaves; review-flow.tsx sets --lines */
+.rvc-tw{flex:1 1 0;min-height:7.5em;margin-top:14px;font-size:17px;line-height:1.5;overflow:hidden}
+.rvc-tw .rvc-t{margin-top:0;font-size:inherit;line-height:inherit;-webkit-line-clamp:var(--lines,5)}
 /* Segment needs in numbered stages (Emelia 4 Nov) */
 .jb-stages{border-top:1px solid var(--line)}
 .jb-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:32px;padding-block:40px;border-bottom:1px solid var(--line)}
