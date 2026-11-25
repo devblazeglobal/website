@@ -114,7 +114,7 @@ export function Reviews({ heading, id }: { heading?: string; id?: string }) {
   const card = (r: (typeof items)[number], k: number, set: number) => {
     const copy = set !== 1;
     return (
-    <article className="rvc" key={`${set}-${k}`} aria-hidden={copy || undefined}>
+    <article className="rvc" data-rv={k} key={`${set}-${k}`} aria-hidden={copy || undefined}>
       <h3>{r.head}</h3>
       <div className="rvc-tw"><p className="rvc-t">{r.body.join(" ")}</p></div>
       <p className="rvc-who">{r.n}{r.role && <span> · {r.role}</span>}</p>

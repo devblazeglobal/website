@@ -3311,3 +3311,7 @@ main p,main li,main dd{text-wrap:pretty}
   .stage .proof .stat>span{font-size:12px!important;line-height:1.3;margin-top:6px}
 }
 @media (max-width:700px){.stage .proof{align-items:start!important}.stage .proof .stat b{font-variant-numeric:lining-nums tabular-nums}}
+/* The whole review card opens the full review */
+.rv-flow .rvc{cursor:pointer}
+.rv-marq.drag .rvc{cursor:grabbing}
+.rv-flow .rvc:hover .rvc-plus{background:#d9dce6}

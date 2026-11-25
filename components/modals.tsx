@@ -203,14 +203,14 @@ export function ReviewModal() {
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const t = (e.target as HTMLElement).closest<HTMLElement>("[data-rv]");
-      if (t) { last.current = t; setK(+t.dataset.rv!); }
+      if (t) { last.current = t.querySelector<HTMLElement>("button") ?? t; setK(+t.dataset.rv!); }
     };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setK(null); };
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     return () => { document.removeEventListener("click", onClick); document.removeEventListener("keydown", onKey); };
   }, []);
-  const close = () => { setK(null); last.current?.focus?.(); };
+  const close = () => { setK(null); last.current?.focus?.({ preventScroll: true }); };
   const r = k !== null ? REVIEWS[k] : null;
   return (
     <div className={`gs rvm${r ? " open" : ""}`} role="dialog" aria-modal="true" aria-labelledby="rvm-h" aria-hidden={!r}>
