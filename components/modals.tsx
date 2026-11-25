@@ -219,7 +219,7 @@ export function ReviewModal() {
         <Close onClick={close} />
         {r && (
           <div>
-            <p className="gs-label">{r.n} · {r.role}</p>
+            <p className="gs-label">{r.n}{r.role && ` · ${r.role}`}</p>
             <h2 className="gs-q" id="rvm-h">{r.head}</h2>
             <div className="rvm-text">{r.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
             <div className="rvm-src"><Stars /></div>

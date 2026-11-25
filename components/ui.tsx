@@ -114,7 +114,7 @@ export function Reviews({ heading, id }: { heading?: string; id?: string }) {
     <article className="rvc" key={`${copy ? "c" : "o"}${k}`} aria-hidden={copy || undefined}>
       <h3>{r.head}</h3>
       <p className="rvc-t">{r.body[0]}</p>
-      <p className="rvc-who">{r.n} <span>· {r.role}</span></p>
+      <p className="rvc-who">{r.n}{r.role && <span> · {r.role}</span>}</p>
       <div className="rvc-foot"><Stars />
         <button className="rvc-plus" type="button" tabIndex={copy ? -1 : undefined} aria-label={`Read the full review from ${r.n}`} data-rv={k}><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg></button>
       </div>
