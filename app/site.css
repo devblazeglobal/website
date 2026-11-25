@@ -3287,3 +3287,8 @@ main p,main li,main dd{text-wrap:pretty}
   /* Mobile menu: dim the page behind it so nothing peeks out under the panel */
   body:has(.mnav.open)::after{content:"";position:fixed;inset:0;z-index:55;background:rgba(5,16,56,.55)}
 }
+/* Review cards: name and title sit above the stars */
+.rvc h3{margin-top:0}
+.rvc-who{margin-top:auto;padding-top:24px}
+.rvc-foot{margin-top:0;padding-top:12px}
+@media (max-width:640px){.rvc h3,.rvc p{text-align:left!important;margin-inline:0!important}}
