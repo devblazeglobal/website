@@ -1242,6 +1242,14 @@ export const REVIEWS: Review[] = [
   "body": [
    "We engaged Blaze Global to assist with our accounting and tax needs. Emelia, Pam and JS have been a great support to us. They\u2019re fast, accurate, and truly take ownership of our accounts. We also really appreciate how quick and clear they are whenever we reach out for advice. Would definitely recommend Blaze Global to any business looking for reliable support!"
   ]
+ },
+ {
+  "n": "Jarod",
+  "role": "AI Tech Business",
+  "head": "Growing with our business.",
+  "body": [
+   "Blaze Global\u2019s business philosophy of \u201cgrowing with our business\u201d sits right with us. We appreciate the advice that they provide as we just started and are unfamiliar with the scene. The first call with Emelia impressed me with her knowledge and how much she is willing to share, even to a prospect."
+  ]
  }
 ];
 
